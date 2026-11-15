@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Die Insel von Kapitän Rechenbart</title>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:Andika,"Trebuchet MS",Verdana,sans-serif;color:#2b2a33}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:800px;transform-origin:center;overflow:hidden;background:#fbeed3}
+#scene,#panel,#title,#eltern{position:absolute;left:0;top:0;width:1280px}
+#scene{height:620px}
+#scene svg{display:block;width:1280px;height:620px}
+.hot{cursor:pointer;fill:transparent}
+.mark{transform-box:fill-box;transform-origin:center;animation:pulse 1.2s ease-in-out infinite}
+.mark.done{animation:none}
+@keyframes pulse{50%{transform:scale(1.25)}}
+.walk .bob{animation:bob .3s linear infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+#hud{position:absolute;right:14px;top:12px;display:flex;gap:10px;z-index:6}
+#hud button{font:inherit;font-size:20px;padding:8px 14px;border-radius:12px;border:2px solid #2b2a33;background:#fbeed3cc}
+#bar{position:absolute;left:0;top:620px;width:1280px;height:180px;background:#3a2c20;border-top:6px solid #2b2a33;display:flex;align-items:center;gap:18px;padding:12px 18px;color:#fbeed3;z-index:5}
+.port{width:150px;height:150px;border-radius:18px;background:#fbeed3;border:4px solid #2b2a33;flex:none;overflow:hidden}
+.port svg{width:100%;height:100%}
+.say{flex:1;min-width:0}
+.nm{font-size:20px;color:#f6c84a;font-weight:700;margin-bottom:2px}
+.tx{font-size:31px;line-height:1.28}
+.tx span.hl{background:#f6c84a;color:#2b2a33;border-radius:6px}
+.bb{display:flex;flex-direction:column;gap:12px;flex:none}
+.btn{font:inherit;font-weight:700;font-size:28px;padding:12px 24px;border-radius:16px;border:3px solid #2b2a33;background:#f6c84a;color:#2b2a33;box-shadow:0 5px 0 #2b2a33;cursor:pointer}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #2b2a33}
+.btn.sec{background:#fbeed3}
+.btn.small{font-size:22px;padding:8px 16px;background:#fbeed3}
+.idle{display:flex;gap:26px;align-items:center;font-size:28px}
+.coin{display:inline-block;width:34px;height:34px;border-radius:50%;background:#f6c84a;border:3px solid #a9793f;vertical-align:-7px;margin-right:8px}
+.stat{background:#2b2118;border-radius:14px;padding:10px 16px;white-space:nowrap}
+#panel{height:620px;background:#fbeed3;display:none;padding:22px 36px;z-index:4}
+.ptitle{padding-right:190px;font-size:30px;font-weight:700;color:#8e3b3b;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.dots{letter-spacing:6px;color:#a9793f;font-size:26px}
+.num{display:flex;gap:30px;height:100%}
+.numl{flex:1}
+.story{font-size:34px;line-height:1.35;margin:10px 0 18px}
+.eq{font-size:66px;font-weight:700;margin-bottom:12px}
+.ans{display:inline-block;min-width:150px;text-align:center;border:4px dashed #a9793f;border-radius:14px;padding:0 12px;background:#fff}
+.ans.good{background:#bfe6b0;border-style:solid;border-color:#4f9a4a}
+.ans.bad{background:#f3c0bb}
+.hint{min-height:110px;font-size:26px;color:#3a2c20}
+.blk{display:inline-flex;align-items:flex-end;gap:5px;margin-right:34px;vertical-align:bottom}
+.ten{width:15px;height:90px;background:repeating-linear-gradient(#3b78c4 0 8px,#2c5f9e 8px 9px);border-radius:3px}
+.one{width:15px;height:15px;background:#d24a43;border-radius:3px}
+.pad{display:grid;grid-template-columns:repeat(3,116px);grid-auto-rows:116px;gap:14px;align-content:center;flex:none}
+.key{font:inherit;font-size:48px;font-weight:700;border-radius:18px;border:3px solid #2b2a33;background:#fff;box-shadow:0 5px 0 #2b2a33}
+.key:active{transform:translateY(4px);box-shadow:0 1px 0 #2b2a33}
+.key.ok{background:#8fc640;font-size:36px}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.kan{position:relative;height:500px}
+.ball{position:absolute;left:40px;top:150px;width:300px;height:200px;border-radius:100px;background:#2b2a33;color:#fff;font-size:46px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:transform .5s ease-in,background .2s;z-index:2}
+.faesser{position:absolute;right:20px;top:110px;display:flex;gap:26px}
+.fass{font:inherit;font-size:54px;font-weight:700;color:#fff;width:210px;height:280px;border-radius:40px/60px;border:5px solid #2b2a33;box-shadow:0 7px 0 #2b2a33}
+.fass:disabled{opacity:.35}
+.sign{margin:50px auto 40px;width:max-content;background:#a9793f;border:6px solid #6d4a26;border-radius:18px;padding:16px 50px;font-size:110px;font-weight:700;color:#fff8e6;display:flex;align-items:center}
+.gap{display:inline-block;min-width:110px;text-align:center;border-bottom:8px solid #fff8e6;margin:0 8px;padding:0 6px}
+.gap.good{color:#d3f5b5;border-color:transparent}
+.opts{display:flex;gap:34px;justify-content:center;margin-bottom:26px}
+.plank{font-size:60px;min-width:190px;padding:18px 30px}
+.plank:disabled{opacity:.3}
+.center{text-align:center}
+.kwrap{display:flex;gap:40px;align-items:center;justify-content:center}
+.merk{font-size:34px;line-height:1.5;background:#fff;border:4px solid #a9793f;border-radius:18px;padding:20px 28px}
+.merk b{color:#d24a43;font-size:44px}
+.komp{position:relative;width:480px;height:480px;flex:none}
+.komp svg{position:absolute;left:80px;top:80px;width:320px;height:320px}
+.slot{position:absolute;width:88px;height:88px;border-radius:50%;font:inherit;font-size:44px;font-weight:700;border:4px solid #2b2a33;background:#fff;box-shadow:0 5px 0 #2b2a33}
+.slot.ok{background:#f6c84a}
+.orderwrap{display:flex;gap:36px;height:100%;align-items:center}
+.zettel{flex:1;background:#fff8e6;border:3px solid #a9793f;border-radius:6px;padding:26px 30px;transform:rotate(-2deg);box-shadow:4px 6px 0 #0002}
+.zt{font-size:24px;color:#8e3b3b;font-weight:700}
+.zettel p{font-size:40px;line-height:1.4;margin:14px 0}
+.zettel .sig{font-size:28px;text-align:right;font-style:italic}
+.board{width:560px;flex:none;background:#2f3b3a;border:12px solid #6d4a26;border-radius:10px;padding:14px 20px 18px;color:#f4efe4}
+.bt{font-size:32px;font-weight:700;text-align:center;margin-bottom:8px;color:#f6c84a}
+.row{font:inherit;font-size:31px;color:inherit;display:flex;justify-content:space-between;width:100%;background:transparent;border:3px solid transparent;border-radius:12px;padding:9px 14px;margin:3px 0}
+.row.sel{border-color:#f6c84a;background:#ffffff18}
+.row.good{background:#4f9a4a}
+.log{display:flex;flex-direction:column;align-items:center;justify-content:center;height:500px;gap:26px;text-align:center}
+.lword{font-size:120px;font-weight:700}
+.ltext{font-size:38px}
+.timer{width:520px;height:16px;background:#e5d3ae;border-radius:8px;overflow:hidden}
+.timer i{display:block;height:100%;background:#8e3b3b;width:100%;transition:width 5s linear}
+.lrow{display:flex;gap:30px}
+.bigmsg{font-size:52px;font-weight:700;color:#8e3b3b;margin:6px 0}
+#title{height:800px;z-index:8;background:linear-gradient(#bfe3ee 0,#fbeed3 55%,#4a9aa6 55%,#3f8f9c 100%)}
+#title h1{position:absolute;left:0;right:0;top:54px;margin:0;text-align:center;font-size:70px;line-height:1.1;color:#8e3b3b}
+#title h1 small{display:block;font-size:34px;color:#2b2a33;font-weight:400}
+#title svg{position:absolute;left:0;top:0;width:1280px;height:800px}
+.tbtns{position:absolute;left:0;right:0;top:330px;display:flex;flex-direction:column;align-items:center;gap:22px}
+.tbtns .btn.big{font-size:52px;padding:20px 70px}
+#pbtn{position:absolute;right:20px;bottom:18px;font-size:18px;padding:6px 12px}
+#eltern{height:800px;z-index:9;background:#22313aee;display:none;align-items:center;justify-content:center}
+.ecard{background:#fbeed3;border-radius:20px;padding:26px 38px;width:820px;font-size:24px}
+.ecard h2{margin:0 0 10px;color:#8e3b3b}
+.ecard label{display:block;margin:8px 0}
+.ecard input{width:26px;height:26px;vertical-align:-4px;margin-right:10px}
+.ecard .lrow{margin-top:16px;gap:14px;flex-wrap:wrap}
+#rot{position:fixed;inset:0;background:#22313a;color:#fbeed3;font-size:30px;display:none;align-items:center;justify-content:center;text-align:center;z-index:20;padding:30px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="scene"></div>
+  <div id="hud"><button id="b-ton">Vorlesen: an</button><button id="b-home">Start</button></div>
+  <div id="panel"></div>
+  <div id="bar"></div>
+  <div id="title"></div>
+  <div id="eltern"></div>
+</div>
+<div id="rot">Bitte dreh das Tablet quer.</div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[rand(0,a.length-1)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rand(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- Spielstand ---------- */
+const KEY='rechenbart-k1';
+let S={coins:0,done:{},lists:[1,2,3],speak:true,log:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ---------- Lernwörter ---------- */
+const X=['x','ks','chs'],SP=['Sp','Schp','Sb'],ST=['St','Scht','Sd'],SZ=['ß','s','ss'];
+const WORDS=[
+ [1,'Axt','die',['A','x','t'],X],[1,'boxen',0,['bo','x','en'],X],[1,'extra',0,['e','x','tra'],X],
+ [1,'Hexe','die',['He','x','e'],X],[1,'Mixer','der',['Mi','x','er'],X],[1,'Text','der',['Te','x','t'],X],
+ [1,'Keks','der',['Ke','ks',''],X],[1,'Dachs','der',['Da','chs',''],X],[1,'Fuchs','der',['Fu','chs',''],X],
+ [1,'Ochse','der',['O','chs','e'],X],[1,'sechs',0,['se','chs',''],X],
+ [2,'Spiel','das',['','Sp','iel'],SP],[2,'Spur','die',['','Sp','ur'],SP],[2,'Spitze','die',['Spi','tz','e'],['tz','z','ts']],
+ [2,'Spaß','der',['Spa','ß',''],SZ],[2,'Spiegel','der',['Sp','ie','gel'],['ie','i','ih']],[2,'Stein','der',['','St','ein'],ST],
+ [2,'Stunde','die',['','St','unde'],ST],[2,'Strahl','der',['Stra','h','l'],['h','hh','ch']],[2,'Stuhl','der',['','St','uhl'],ST],
+ [2,'Stier','der',['St','ie','r'],['ie','i','ih']],[2,'Stiefel','der',['','St','iefel'],ST],
+ [3,'grün',0,['gr','ü','n'],['ü','u','ö']],[3,'gelb',0,['gel','b',''],['b','p','d']],[3,'rot',0,['r','o','t'],['o','oo','oh']],
+ [3,'blau',0,['bl','au',''],['au','ao','ou']],[3,'weiß',0,['wei','ß',''],SZ],[3,'schwarz',0,['schwar','z',''],['z','tz','ts']],
+ [3,'Farbe','die',['Far','b','e'],['b','p','w']],[3,'Fuß','der',['Fu','ß',''],SZ],[3,'Ohr','das',['O','h','r'],['h','hh','ch']],
+ [3,'Rüssel','der',['Rü','ss','el'],['ss','s','ß']],[3,'rennen',0,['re','nn','en'],['nn','n','mm']]
+].map(a=>({l:a[0],w:a[1],a:a[2],g:a[3],o:a[4]}));
+const pool=()=>WORDS.filter(w=>S.lists.includes(w.l));
+/* Faltblatt 1 (x/chs) etwas häufiger */
+const pickWords=(n,f)=>pool().filter(f||(()=>true)).map(w=>[Math.random()*(w.l===1?.6:1),w]).sort((a,b)=>a[0]-b[0]).slice(0,n).map(x=>x[1]);
+const ART={der:'#3b78c4',die:'#d24a43',das:'#4f9a4a'};
+
+/* ---------- Figuren (SVG) ---------- */
+function moritz(){const h='#a98455',h2='#c4a070';return `
+<ellipse cx="0" cy="2" rx="46" ry="8" fill="#0002"/>
+<g fill="${h}"><circle cx="-31" cy="-218" r="19"/><circle cx="-37" cy="-197" r="18"/><circle cx="-34" cy="-177" r="16"/><circle cx="31" cy="-218" r="19"/><circle cx="37" cy="-197" r="18"/><circle cx="34" cy="-177" r="16"/><circle cx="0" cy="-236" r="24"/></g>
+<rect x="-27" y="-92" width="23" height="80" rx="9" fill="#2f5fa8"/><rect x="4" y="-92" width="23" height="80" rx="9" fill="#2f5fa8"/>
+<ellipse cx="-18" cy="-9" rx="20" ry="11" fill="#8fc640"/><ellipse cx="18" cy="-9" rx="20" ry="11" fill="#8fc640"/>
+<path d="M-38 -9h40M-2 -9h40" stroke="#27335a" stroke-width="6" stroke-linecap="round"/>
+<rect x="-56" y="-166" width="20" height="74" rx="10" fill="#5673a6" transform="rotate(8 -46 -166)"/>
+<rect x="36" y="-166" width="20" height="74" rx="10" fill="#5673a6" transform="rotate(-8 46 -166)"/>
+<circle cx="-54" cy="-94" r="10" fill="#f2c9a5"/><circle cx="54" cy="-94" r="10" fill="#f2c9a5"/>
+<path d="M-38 -170q38 -16 76 0l6 86q-44 12 -88 0z" fill="#5673a6"/>
+<path d="M-40 -140q40 12 80 0M-42 -112q42 12 84 0M0 -176v94" stroke="#445d8c" stroke-width="2.5" fill="none"/>
+<path d="M-20 -174q20 16 40 0l-6 -10h-28z" fill="#27335a"/>
+<path d="M-16 -172l16 22l16 -22z" fill="#d24a43"/>
+<circle cx="0" cy="-208" r="34" fill="#f2c9a5"/>
+<g fill="${h}"><circle cx="-22" cy="-232" r="13"/><circle cx="-5" cy="-239" r="14"/><circle cx="14" cy="-236" r="13"/><circle cx="28" cy="-225" r="11"/><circle cx="-32" cy="-220" r="11"/></g>
+<g fill="none" stroke="${h2}" stroke-width="3" stroke-linecap="round"><path d="M-28 -236q6 -8 12 0"/><path d="M-4 -246q7 -7 13 1"/><path d="M18 -240q6 -5 10 3"/><path d="M-42 -200q-5 8 2 14"/><path d="M42 -200q5 8 -2 14"/><path d="M-38 -178q-3 8 4 10"/><path d="M38 -178q3 8 -4 10"/></g>
+<circle cx="-12" cy="-206" r="4.5" fill="#3d4a3a"/><circle cx="12" cy="-206" r="4.5" fill="#3d4a3a"/>
+<path d="M-19 -216q7 -4 13 0M6 -216q7 -4 13 0" stroke="#8a6a44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M-10 -192q10 9 20 0" stroke="#a5553f" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="-22" cy="-196" r="6" fill="#f0a58e" opacity=".55"/><circle cx="22" cy="-196" r="6" fill="#f0a58e" opacity=".55"/>`}
+function kapitaen(){return `
+<ellipse cx="0" cy="2" rx="62" ry="9" fill="#0002"/>
+<rect x="-36" y="-72" width="28" height="72" rx="6" fill="#2b2a33"/><rect x="14" y="-72" width="11" height="72" fill="#a9793f"/>
+<ellipse cx="-66" cy="-160" rx="15" ry="46" fill="#7c3232"/><ellipse cx="66" cy="-160" rx="15" ry="46" fill="#7c3232"/>
+<circle cx="-68" cy="-114" r="11" fill="#e9b990"/><circle cx="68" cy="-114" r="11" fill="#e9b990"/>
+<path d="M-62 -68L-52 -212Q0 -238 52 -212L62 -68Z" fill="#8e3b3b"/>
+<rect x="-58" y="-122" width="116" height="15" fill="#2b2a33"/><rect x="-11" y="-126" width="22" height="23" rx="3" fill="#f6c84a"/>
+<circle cx="0" cy="-252" r="40" fill="#e9b990"/>
+<path d="M-43 -256Q-60 -170 0 -138Q60 -170 43 -256Q22 -226 0 -230Q-22 -226 -43 -256Z" fill="#ece8dd"/>
+<g fill="#a9793f"><circle cx="-18" cy="-196" r="3"/><circle cx="10" cy="-178" r="3.5"/><circle cx="22" cy="-204" r="2.5"/><circle cx="-6" cy="-160" r="3"/></g>
+<ellipse cx="-15" cy="-234" rx="17" ry="8" fill="#fff"/><ellipse cx="15" cy="-234" rx="17" ry="8" fill="#fff"/>
+<circle cx="0" cy="-246" r="11" fill="#dc9f78"/>
+<circle cx="-16" cy="-264" r="4.5" fill="#2b2a33"/><circle cx="17" cy="-264" r="10" fill="#2b2a33"/><path d="M-40 -276L40 -258" stroke="#2b2a33" stroke-width="3"/>
+<path d="M-68 -284Q0 -302 68 -284Q42 -342 0 -346Q-42 -342 -68 -284Z" fill="#2b2a33"/><ellipse cx="0" cy="-284" rx="72" ry="10" fill="#2b2a33"/>
+<text x="0" y="-302" text-anchor="middle" font-size="30" font-weight="700" fill="#f6c84a">+ −</text>`}
+function kruemel(){return `
+<path d="M-8 -22L-38 30L-20 32L2 -10Z" fill="#2a8f8f"/>
+<ellipse cx="0" cy="-45" rx="26" ry="36" fill="#e2572b"/><ellipse cx="7" cy="-38" rx="14" ry="23" fill="#f6c84a"/>
+<ellipse cx="-12" cy="-42" rx="13" ry="25" fill="#2a8f8f" transform="rotate(12 -12 -42)"/>
+<circle cx="8" cy="-88" r="22" fill="#e2572b"/>
+<path d="M-2 -108q-4 -16 6 -12q2 -12 10 -2q8 -6 6 8z" fill="#f6c84a"/>
+<circle cx="14" cy="-92" r="7.5" fill="#fff"/><circle cx="16" cy="-92" r="3.8" fill="#2b2a33"/>
+<path d="M26 -94Q48 -88 30 -68Q23 -78 26 -94Z" fill="#f6c84a" stroke="#c98f1f" stroke-width="2"/>
+<path d="M-6 -10v10M8 -10v10" stroke="#c98f1f" stroke-width="4" stroke-linecap="round"/>`}
+function olga(){return `
+<ellipse cx="-78" cy="-62" rx="15" ry="40" fill="#3f7f6b" transform="rotate(14 -78 -62)"/><ellipse cx="78" cy="-62" rx="15" ry="40" fill="#3f7f6b" transform="rotate(-14 78 -62)"/>
+<path d="M-70 0L-60 -112Q0 -132 60 -112L70 0Z" fill="#3f7f6b"/><path d="M-36 0L-30 -94H30L36 0Z" fill="#f4efe4"/>
+<circle cx="0" cy="-214" r="20" fill="#c0542f"/>
+<g fill="#c0542f"><circle cx="-34" cy="-176" r="18"/><circle cx="34" cy="-176" r="18"/><circle cx="-18" cy="-194" r="20"/><circle cx="18" cy="-194" r="20"/></g>
+<circle cx="0" cy="-160" r="42" fill="#f0c4a2"/>
+<circle cx="-14" cy="-166" r="4.5" fill="#2b2a33"/><circle cx="14" cy="-166" r="4.5" fill="#2b2a33"/>
+<path d="M-16 -146q16 16 32 0" stroke="#a5553f" stroke-width="4" fill="none" stroke-linecap="round"/>
+<circle cx="-26" cy="-150" r="8" fill="#f0a58e" opacity=".6"/><circle cx="26" cy="-150" r="8" fill="#f0a58e" opacity=".6"/>`}
+const PORT={moritz:`<svg viewBox="-62 -268 124 124">${moritz()}</svg>`,kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
+ kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
+const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga'};
+const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,moritz:1};
+
+/* ---------- Szenen ---------- */
+const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g>`;
+const HARBOR=`<svg id="harbor" viewBox="0 0 1280 620">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ee"/><stop offset="1" stop-color="#fbeed3"/></linearGradient></defs>
+<rect width="1280" height="320" fill="url(#sky)"/><circle cx="880" cy="90" r="50" fill="#f8d66b"/>
+<g fill="#fff" opacity=".85"><ellipse cx="420" cy="80" rx="90" ry="22"/><ellipse cx="480" cy="62" rx="60" ry="20"/><ellipse cx="720" cy="150" rx="70" ry="16"/></g>
+<path d="M500 302Q640 205 800 302Z" fill="#7fb07a"/><path d="M660 252q8 -36 0 -62" stroke="#8c6234" stroke-width="7" fill="none"/>
+<g fill="#4f8f55"><ellipse cx="640" cy="186" rx="26" ry="8" transform="rotate(-20 640 186)"/><ellipse cx="682" cy="186" rx="26" ry="8" transform="rotate(20 682 186)"/><ellipse cx="660" cy="176" rx="8" ry="22"/></g>
+<rect y="300" width="1280" height="320" fill="#4a9aa6"/>
+<g stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none"><path d="M430 340q15 -8 30 0t30 0"/><path d="M620 380q15 -8 30 0t30 0"/><path d="M840 335q15 -8 30 0t30 0"/><path d="M500 410q15 -8 30 0t30 0"/></g>
+<g transform="translate(30,0)"><rect x="150" y="80" width="10" height="250" fill="#6d4a26"/>
+<path d="M166 105Q262 170 166 245Z" fill="#f4efe4"/><path d="M144 118Q66 180 144 252Z" fill="#f4efe4"/>
+<path d="M160 78h62l-12 16l12 16h-62Z" fill="#2b2a33"/><circle cx="185" cy="94" r="10" fill="#d9a55a"/><g fill="#6d4a26"><circle cx="182" cy="91" r="2"/><circle cx="189" cy="96" r="2"/><circle cx="183" cy="98" r="1.6"/></g>
+<path d="M0 330H330L292 425H40Z" fill="#8c6234"/><path d="M0 330H330l-6 15H6Z" fill="#6d4a26"/>
+<g fill="#f8d66b" stroke="#6d4a26" stroke-width="4"><circle cx="90" cy="375" r="11"/><circle cx="165" cy="375" r="11"/><circle cx="240" cy="375" r="11"/></g></g>
+<rect y="440" width="1280" height="180" fill="#c2935a"/><rect y="440" width="1280" height="10" fill="#9c7040"/>
+<g stroke="#9c7040" stroke-width="3"><path d="M0 490H1280M0 535H1280M0 580H1280M150 450V490M520 450V490M900 450V490M330 490V535M760 490V535M1100 490V535M200 535V580M640 535V580M1000 535V580"/></g>
+<rect x="327" y="400" width="16" height="64" fill="#6d4a26"/>
+<g transform="translate(960,0)"><rect y="212" width="300" height="240" fill="#ecd9b0"/><path d="M-22 216L150 108L322 216Z" fill="#8e3b3b"/>
+<path d="M0 214V452M300 214V452M0 302H300" stroke="#8c6234" stroke-width="8" fill="none"/>
+<path d="M105 452V367a45 45 0 0 1 90 0V452Z" fill="#6d4a26"/><circle cx="180" cy="398" r="5" fill="#f6c84a"/>
+<g fill="#f8d66b" stroke="#8c6234" stroke-width="6"><rect x="24" y="332" width="56" height="56"/><rect x="220" y="332" width="56" height="56"/></g>
+<rect x="55" y="228" width="190" height="62" rx="8" fill="#6d4a26"/><text x="150" y="253" text-anchor="middle" font-size="18" fill="#f4efe4">Zum rostigen</text><text x="150" y="280" text-anchor="middle" font-size="24" font-weight="700" fill="#f6c84a">Stiefel</text></g>
+<g transform="translate(415,0)" stroke="#8c6234" stroke-width="5" fill="#d9a55a"><rect x="0" y="392" width="78" height="70"/><rect x="74" y="402" width="66" height="60"/><rect x="30" y="330" width="72" height="64"/>
+<text x="66" y="370" text-anchor="middle" font-size="18" font-weight="700" fill="#6d4a26" stroke="none">KEKSE</text></g>
+<g transform="translate(640,0)"><rect x="0" y="400" width="118" height="36" rx="15" fill="#2b2a33" transform="rotate(-14 20 420)"/><circle cx="34" cy="440" r="24" fill="#6d4a26" stroke="#2b2a33" stroke-width="5"/>
+<g stroke="#2b2a33" stroke-width="3"><rect x="130" y="418" width="30" height="44" rx="8" fill="#3b78c4"/><rect x="166" y="418" width="30" height="44" rx="8" fill="#d24a43"/><rect x="202" y="418" width="30" height="44" rx="8" fill="#4f9a4a"/></g></g>
+<g transform="translate(880,0)"><path d="M0 398q30 -10 60 0l6 64h-72Z" fill="#a9793f"/><path d="M-3 418h66M-5 444h70" stroke="#6d4a26" stroke-width="4"/>
+<circle cx="30" cy="384" r="26" fill="#f4efe4" stroke="#2b2a33" stroke-width="4"/><path d="M30 364l7 20l-7 20l-7 -20Z" fill="#d24a43"/></g>
+<g transform="translate(215,505) scale(.8)">${kapitaen()}</g>
+<g transform="translate(335,400) scale(.9)">${kruemel()}</g>
+${mark('kapitaen',215,190)}${mark('kisten',482,296)}${mark('kanonen',756,370)}${mark('kompass',910,326)}${mark('tuer',1110,405)}
+<g id="mor" style="transform:translate(600px,588px)"><g id="morflip" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>
+<rect class="hot" data-act="kapitaen" x="135" y="160" width="160" height="350"/><rect class="hot" data-act="kruemel" x="296" y="280" width="90" height="140"/>
+<rect class="hot" data-act="kisten" x="400" y="266" width="170" height="204"/><rect class="hot" data-act="kanonen" x="625" y="340" width="230" height="130"/>
+<rect class="hot" data-act="kompass" x="860" y="296" width="100" height="174"/><rect class="hot" data-act="tuer" x="1030" y="300" width="170" height="160"/></svg>`;
+const PUB=`<svg id="pub" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#8a6038"/>
+<g stroke="#76502c" stroke-width="4">${[...Array(15)].map((_,i)=>`<path d="M${(i+1)*82} 0V430"/>`).join('')}</g>
+<circle cx="560" cy="70" r="60" fill="#f8d66b" opacity=".25"/><circle cx="560" cy="70" r="22" fill="#f8d66b"/><path d="M560 0V48" stroke="#2b2a33" stroke-width="4"/>
+<rect x="450" y="190" width="210" height="12" fill="#5c3d1f"/><g stroke="#2b2a33" stroke-width="3"><rect x="470" y="140" width="26" height="50" rx="6" fill="#4f9a4a"/><rect x="520" y="130" width="26" height="60" rx="6" fill="#d24a43"/><rect x="570" y="146" width="26" height="44" rx="6" fill="#3b78c4"/><rect x="616" y="136" width="26" height="54" rx="6" fill="#f6c84a"/></g>
+<rect x="720" y="60" width="480" height="320" rx="8" fill="#2f3b3a" stroke="#5c3d1f" stroke-width="14"/>
+<text x="960" y="120" text-anchor="middle" font-size="40" font-weight="700" fill="#f6c84a">Speisekarte</text>
+<g stroke="#f4efe4" stroke-width="6" stroke-linecap="round" opacity=".8"><path d="M770 170H1010M1090 170H1150M770 215H960M1090 215H1150M770 260H1030M1090 260H1150M770 305H980M1090 305H1150"/></g>
+<g fill="#8a6038"><circle cx="880" cy="170" r="13"/><circle cx="820" cy="260" r="12"/><circle cx="940" cy="305" r="13"/></g>
+<g transform="translate(300,428) scale(1.2)">${olga()}</g>
+<rect y="430" width="1280" height="190" fill="#b98a4e"/><rect y="420" width="1280" height="24" fill="#d9a55a"/>
+<g transform="translate(620,420)">${kruemel()}</g></svg>`;
+const MAP=`<svg viewBox="0 0 400 260" width="400" height="260"><rect x="6" y="6" width="388" height="248" rx="10" fill="#f1dfb4" stroke="#a9793f" stroke-width="5" stroke-dasharray="14 8"/>
+<path d="M150 6L132 100L170 254M150 100L260 80L394 110M260 80L250 6M210 254L232 160L394 180M232 160L170 140" stroke="#a9793f" stroke-width="3" stroke-dasharray="8 6" fill="none"/>
+<path d="M8 8H150L132 100L170 252H8Z" fill="#e7c98a" stroke="#6d4a26" stroke-width="4"/>
+<path d="M30 220q30 -60 60 -40t40 -70" stroke="#8e3b3b" stroke-width="5" stroke-dasharray="10 8" fill="none"/>
+<path d="M40 60q8 -30 0 -44" stroke="#8c6234" stroke-width="5" fill="none"/><ellipse cx="28" cy="20" rx="18" ry="6" fill="#4f8f55"/><ellipse cx="54" cy="20" rx="18" ry="6" fill="#4f8f55"/>
+<g font-size="46" font-weight="700" fill="#b9a377" text-anchor="middle"><text x="200" y="66">?</text><text x="320" y="70">?</text><text x="310" y="160">?</text><text x="290" y="235">?</text></g></svg>`;
+
+/* ---------- Sprache ---------- */
+let voice=null;const hasTTS='speechSynthesis' in window;
+function loadVoice(){try{voice=speechSynthesis.getVoices().find(v=>/^de/i.test(v.lang))||null}catch(e){}}
+if(hasTTS){loadVoice();try{speechSynthesis.onvoiceschanged=loadVoice}catch(e){}}
+function hush(){if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
+function speak(text,who,onword){hush();if(!S.speak||!hasTTS)return;
+ try{const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';if(voice)u.voice=voice;u.rate=.9;u.pitch=PITCH[who]||1;
+ if(onword)u.onboundary=e=>onword(e.charIndex);speechSynthesis.speak(u)}catch(e){}}
+
+/* ---------- Leiste unten ---------- */
+function spans(t){let i=0;return t.split(' ').map(w=>{const s=`<span data-c="${i}">${w}</span>`;i+=w.length+1;return s}).join(' ')}
+function hl(ci){let cur=null;$$('#bar .tx span').forEach(s=>{s.classList.remove('hl');if(+s.dataset.c<=ci)cur=s});if(cur)cur.classList.add('hl')}
+function barHtml(who,text,btns){$('#bar').innerHTML=`<div class="port">${PORT[who]}</div><div class="say"><div class="nm">${NAME[who]}</div><div class="tx">${spans(text)}</div></div><div class="bb">${btns.map((b,i)=>`<button class="btn${i?' sec':''}" data-b="${i}">${b}</button>`).join('')}</div>`}
+function talk(who,text,btns){btns=btns||['Weiter'];return new Promise(res=>{barHtml(who,text,btns);speak(text,who,hl);
+ $$('#bar .btn').forEach(b=>b.onclick=()=>{hush();res(+b.dataset.b)})})}
+function note(who,text){barHtml(who,text,[]);speak(text,who,hl)}
+async function brief(text){while(await talk('kruemel',text+' Alles klar, Käpt’n?',['Ja!','Nochmal hören']));}
+function idle(){const d=S.done,n=['kisten','kanonen','kompass'].filter(k=>d[k]).length;
+ const t=!d.intro?'':n<3?'Tippe auf ein Ausrufezeichen im Hafen!':!d.karte?'Geh zur Kneipe!':!d.logbuch?'Bring das Essen zum Kapitän!':'Kapitel 1 geschafft! Du kannst alles nochmal üben.';
+ $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${d.karte?1:0} von 5</span></div><div class="tx" style="margin-top:10px">${t}</div></div>`;
+ [['kisten',d.kisten],['kanonen',d.kanonen],['kompass',d.kompass],['tuer',d.karte]].forEach(([k,ok])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';
+  m.style.display=(k==='tuer'&&n<3)?'none':''});
+ const mk=$('#m-kapitaen');if(mk)mk.style.display=(d.karte&&!d.logbuch)?'':'none';
+ $('#b-home').style.display='';save()}
+const WRONG=['Kräh! Knapp daneben. Versuch es nochmal!','Hoppla! Da ist ein Krümel verrutscht. Nochmal!','Fast! Probier es noch einmal.'];
+const RIGHT=['Kräh! Richtig!','Volltreffer, Käpt’n!','Stark gemacht!'];
+const panel=h=>{const p=$('#panel');p.innerHTML=h;p.style.display='block'};
+const closePanel=()=>{$('#panel').style.display='none';$('#panel').innerHTML=''};
+const dots=(i,n)=>`<span class="dots">${'●'.repeat(i)}${'○'.repeat(n-i)}</span>`;
+
+/* ---------- Rechnen ---------- */
+const blocks=n=>`<span class="blk">${'<i class="ten"></i>'.repeat(Math.floor(n/10))}${'<i class="one"></i>'.repeat(n%10)}</span>`;
+function stepHint(a,op,b){const t=Math.floor(b/10)*10,o=b%10;
+ if(op==='+'){if(!t){const f=10-a%10;return `Tipp: ${a} + ${f} = ${a+f}. Dann noch + ${b-f}.`}return `Tipp: Rechne erst ${a} + ${t} = ${a+t}. Dann noch + ${o}.`}
+ if(!t){const f=a%10;return f?`Tipp: ${a} − ${f} = ${a-f}. Dann noch − ${b-f}.`:`Tipp: Zähle von ${a} rückwärts.`}
+ return o?`Tipp: Rechne erst ${a} − ${t} = ${a-t}. Dann noch − ${o}.`:`Tipp: Nimm ${t/10} Zehner weg.`}
+function askNumber(title,text,a,op,b){return new Promise(res=>{const ans=op==='+'?a+b:a-b;let val='',tries=0,lock=false;
+ panel(`<div class="num"><div class="numl"><div class="ptitle">${title}</div><p class="story">${text}</p><div class="eq">${a} ${op==='+'?'+':'−'} ${b} = <span id="ans" class="ans">?</span></div><div id="hint" class="hint"></div><button class="btn small" id="again">Nochmal hören</button></div>
+ <div class="pad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'OK'].map(k=>`<button class="key${k==='OK'?' ok':''}" data-k="${k}">${k}</button>`).join('')}</div></div>`);
+ note('kruemel','Tippe die Zahl ein. Dann drücke OK.');speak(text,'kruemel');
+ $('#again').onclick=()=>speak(text,'kruemel');const A=$('#ans');
+ $$('.key').forEach(k=>k.onclick=()=>{if(lock)return;const c=k.dataset.k;A.classList.remove('bad');
+  if(c==='⌫')val=val.slice(0,-1);else if(c==='OK'){if(!val)return;
+   if(+val===ans){lock=true;A.classList.add('good');note('kruemel',pick(RIGHT));setTimeout(res,1400)}
+   else{tries++;A.classList.add('bad');val='';note('kruemel',pick(WRONG));
+    $('#hint').innerHTML=tries===1?(op==='+'?blocks(a)+blocks(b):blocks(a)+`<span>Nimm ${b} weg.</span>`):stepHint(a,op,b);
+    setTimeout(()=>{A.textContent='?';A.classList.remove('bad')},700);return}}
+  else if(val.length<3)val+=c;A.textContent=val||'?'})})}
+async function kisten(){await brief('Der Kapitän will wissen, wie viele Kekse er hat. Rechne aus. Tippe die Zahl ein und drücke OK.');
+ for(let i=0;i<3;i++){let a,b;if(i<2){do{a=rand(13,69);b=rand(6,29)}while(a+b>100||a%10+b%10<10);
+   await askNumber('Kekskisten '+dots(i,3),`In der ersten Kiste sind ${a} Kekse. In der zweiten Kiste sind ${b} Kekse. Wie viele Kekse sind es zusammen?`,a,'+',b)}
+  else{do{a=rand(31,95);b=rand(6,28)}while(a%10>=b%10);
+   await askNumber('Kekskisten '+dots(i,3),`In der Kiste waren ${a} Kekse. Krümel hat heimlich ${b} Kekse gefressen! Wie viele Kekse sind noch da?`,a,'-',b)}}
+ closePanel();await reward('kisten',30)}
+async function reward(k,n){if(!S.done[k]){S.done[k]=1;S.coins+=n;save();await talk('kruemel',`Geschafft! Du bekommst ${n} Dublonen.`)}else await talk('kruemel','Super geübt, Käpt’n!')}
+
+/* ---------- Artikel-Kanone ---------- */
+async function kanonen(){await brief('Jedes Wort gehört in ein Fass. Der ist blau. Die ist rot. Das ist grün. Tippe auf das richtige Fass.');
+ let ns=pickWords(8,w=>w.a);const das=pool().filter(w=>w.a==='das'&&!ns.includes(w));das.forEach((w,i)=>{if(ns.length>i+1)ns[ns.length-1-i]=w});ns=shuffle(ns);
+ for(let i=0;i<ns.length;i++)await new Promise(res=>{const w=ns[i];let lock=false;
+  panel(`<div class="ptitle">Artikel-Kanone ${dots(i,ns.length)}</div><div class="kan"><div class="ball" id="ball">${w.w}</div><div class="faesser">${['der','die','das'].map(a=>`<button class="fass" data-a="${a}" style="background:${ART[a]}">${a}</button>`).join('')}</div></div>`);
+  note('kruemel','Der, die oder das?');speak(w.w,'kruemel');
+  $$('.fass').forEach(b=>b.onclick=()=>{if(lock)return;const ball=$('#ball');
+   if(b.dataset.a===w.a){lock=true;ball.textContent=w.a+' '+w.w;ball.style.background=ART[w.a];
+    const f=b.parentNode,dx=f.offsetLeft+b.offsetLeft+b.offsetWidth/2-(ball.offsetLeft+ball.offsetWidth/2);
+    ball.style.transform=`translate(${dx}px,-150px) scale(.72)`;speak(w.a+' '+w.w,'kruemel');setTimeout(res,1700)}
+   else{b.classList.add('shake');b.disabled=true;note('kruemel',pick(WRONG))}})});
+ closePanel();await reward('kanonen',20)}
+
+/* ---------- Wortlücken ---------- */
+async function gaps(n,title){const ws=pickWords(n);
+ for(let i=0;i<ws.length;i++)await new Promise(res=>{const w=ws[i];let lock=false;
+  panel(`<div class="ptitle">${title} ${dots(i,ws.length)}</div><div class="sign"><span>${w.g[0]}</span><span class="gap" id="gap">&nbsp;</span><span>${w.g[2]}</span></div>
+  <div class="opts">${shuffle(w.o).map(o=>`<button class="btn plank" data-o="${o}">${o}</button>`).join('')}</div><div class="center"><button class="btn small" id="again">Wort hören</button></div>`);
+  note('kruemel','Welches Stück fehlt?');speak(w.w,'kruemel');$('#again').onclick=()=>speak(w.w,'kruemel');
+  $$('.plank').forEach(b=>b.onclick=()=>{if(lock)return;
+   if(b.dataset.o===w.g[1]){lock=true;const g=$('#gap');g.textContent=w.g[1];g.classList.add('good');speak(w.w,'kruemel');setTimeout(res,1500)}
+   else{b.classList.add('shake');b.disabled=true;note('kruemel',pick(WRONG))}})});
+ closePanel()}
+
+/* ---------- Kompass ---------- */
+async function kompass(){await brief('Der Kompass hat seine Buchstaben verloren. Norden ist immer oben. Dann geht es im Kreis herum: Norden, Osten, Süden, Westen.');
+ await new Promise(res=>{const P={N:[196,0],O:[392,196],S:[196,392],W:[0,196]};
+  const qs=[['N','Wo ist Norden? Tippe auf den Kreis.',1],['O','Wo ist Osten?',1],['S','Wo ist Süden?',1],['W','Wo ist Westen?',1],['O','Die Sonne geht im Osten auf. Tippe auf Osten!'],['W','Die Sonne geht im Westen unter. Tippe auf Westen!']];
+  panel(`<div class="ptitle"><span id="kq"></span></div><div class="kwrap"><div class="merk">Merksatz:<br><b>N</b>ie <b>O</b>hne <b>S</b>eife <b>W</b>aschen</div>
+  <div class="komp"><svg viewBox="-110 -110 220 220"><circle r="104" fill="#f4efe4" stroke="#2b2a33" stroke-width="6"/><circle r="84" fill="none" stroke="#a9793f" stroke-width="2"/>
+  <path d="M0 -84L16 0L0 84L-16 0Z" fill="#d9a55a"/><path d="M-84 0L0 -16L84 0L0 16Z" fill="#d9a55a"/><path d="M0 -84L16 0H-16Z" fill="#d24a43"/><circle r="9" fill="#2b2a33"/></svg>
+  ${Object.keys(P).map(d=>`<button class="slot" data-d="${d}" style="left:${P[d][0]}px;top:${P[d][1]}px">?</button>`).join('')}</div></div>`);
+  let qi=0,lock=false;const ask=()=>{$('#kq').textContent=qs[qi][1];note('kruemel',qs[qi][1])};ask();
+  $$('.slot').forEach(b=>b.onclick=()=>{if(lock)return;const q=qs[qi];
+   if(b.dataset.d===q[0]){if(q[2]){b.textContent=q[0];b.classList.add('ok')}lock=true;speak(pick(RIGHT),'kruemel');
+    setTimeout(()=>{lock=false;qi++;qi<qs.length?ask():res()},1300)}
+   else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);note('kruemel',pick(WRONG))}})});
+ closePanel();await reward('kompass',10)}
+
+/* ---------- Kneipe ---------- */
+const MENU=[['Keks-Suppe',14],['Hexen-Limo',8],['Stiefel-Eintopf',27],['Fuchs-Nudeln',19],['Sechs Kekse',6,'sechs Kekse'],['Mixer-Saft',9]];
+const ORDERS=[[2,4],[3,1],[0,5],[2,1],[3,0]];
+function order(o){return new Promise(res=>{const t=`Ich möchte ${MENU[o[0]][2]||MENU[o[0]][0]} und ${MENU[o[1]][2]||MENU[o[1]][0]}.`;let sel=[],lock=false;
+ panel(`<div class="orderwrap"><div class="zettel"><div class="zt">Bestellung</div><p>${t}</p><p class="sig">Dein Kapitän</p><button class="btn small" id="zh">Krümel hilft lesen</button></div>
+ <div class="board"><div class="bt">Speisekarte</div>${MENU.map((m,i)=>`<button class="row" data-i="${i}"><span>${m[0]}</span><span>${m[1]}</span></button>`).join('')}</div></div>`);
+ note('kruemel','Lies den Zettel selbst. Tippe dann auf der Karte an, was der Kapitän möchte.');$('#zh').onclick=()=>speak(t,'kruemel');
+ $$('.row').forEach(r=>r.onclick=()=>{if(lock)return;const i=+r.dataset.i;if(sel.includes(i)){sel=sel.filter(x=>x!==i);r.classList.remove('sel');return}
+  sel.push(i);r.classList.add('sel');if(sel.length<2)return;lock=true;
+  if(o.every(x=>sel.includes(x))){$$('.row.sel').forEach(x=>x.classList.add('good'));note('kruemel',pick(RIGHT));setTimeout(res,1500)}
+  else{note('kruemel','Kräh! Das wollte er nicht. Lies den Zettel nochmal genau.');setTimeout(()=>{$$('.row').forEach(x=>x.classList.remove('sel'));sel=[];lock=false},900)}})})}
+async function pub(){$('#harbor').style.display='none';$('#pub').style.display='';$('#b-home').style.display='none';
+ if(S.done.karte){if(await talk('olga','Schön, dich zu sehen, Moritz! Willst du nochmal meine Speisekarte flicken?',['Ja!','Nein'])===0)await gaps(8,'Speisekarte flicken')}
+ else{await talk('olga','Ahoi Moritz! Ich bin Olga. Oh nein! Krümel hat Löcher in meine Speisekarte gepickt!');
+  await talk('kruemel','Kräh! Die Karte sah aus wie ein Keks!');
+  await brief('Hilf Olga! In jedem Wort fehlt ein Stück. Tippe auf das richtige Stück.');
+  await gaps(8,'Speisekarte flicken');
+  await talk('olga','Danke! Jetzt ist die Karte wieder heil.');
+  await talk('kruemel','Der Kapitän hat Hunger. Hier ist sein Zettel. Den liest du selbst!');
+  const o=pick(ORDERS),a=MENU[o[0]],b=MENU[o[1]],sum=a[1]+b[1];await order(o);
+  await askNumber('Bezahlen',`${a[0]}: ${a[1]} Dublonen. ${b[0]}: ${b[1]} Dublonen. Was kostet das zusammen?`,a[1],'+',b[1]);
+  await askNumber('Wechselgeld',`Du gibst Olga 50 Dublonen. Das Essen kostet ${sum} Dublonen. Wie viele Dublonen bekommst du zurück?`,50,'-',sum);
+  closePanel();S.coins-=sum;S.done.karte=1;save();
+  await talk('olga','Stimmt genau! Hier ist das Essen. Und schau mal, was unter meinem Tresen lag!');
+  panel(`<div class="log"><div class="bigmsg">Ein Stück der Schatzkarte!</div>${MAP}<div class="ltext">Kartenstück 1 von 5</div></div>`);
+  await talk('kruemel','Kräh! Das erste Kartenstück! Bring jetzt schnell das Essen zum Kapitän.',['Juhu!'])}
+ closePanel();$('#pub').style.display='none';$('#harbor').style.display=''}
+
+/* ---------- Logbuch (auf Papier schreiben) ---------- */
+async function logbuch(n){let q=pickWords(n),again=new Set();
+ while(q.length){const w=q.shift();
+  panel(`<div class="ptitle">Logbuch</div><div class="log"><div class="lword">${w.w}</div><div class="timer"><i id="ti"></i></div><div class="ltext">Schau dir das Wort genau an!</div></div>`);
+  note('kruemel','Schau genau hin. Gleich ist das Wort weg!');speak(w.w,'kruemel');await wait(60);$('#ti').style.width='0';await wait(5000);
+  panel(`<div class="ptitle">Logbuch</div><div class="log"><div class="ltext">Schreib das Wort auf dein Papier!</div><div class="lrow"><button class="btn" id="lf">Fertig!</button><button class="btn sec" id="lh">Wort hören</button></div></div>`);
+  note('kruemel','Schreib das Wort auf dein Papier. Tippe dann auf Fertig.');$('#lh').onclick=()=>speak(w.w,'kruemel');
+  await new Promise(r=>$('#lf').onclick=r);
+  panel(`<div class="ptitle">Logbuch</div><div class="log"><div class="lword">${w.w}</div><div class="ltext">Vergleiche Buchstabe für Buchstabe.</div><div class="lrow"><button class="btn" id="ly">Richtig!</button><button class="btn sec" id="ln">Noch nicht</button></div></div>`);
+  note('kruemel','Hast du es genauso geschrieben?');
+  const ok=await new Promise(r=>{$('#ly').onclick=()=>r(true);$('#ln').onclick=()=>r(false)});
+  const st=S.log[w.w]||(S.log[w.w]=[0,0]);st[ok?0:1]++;save();
+  if(!ok&&!again.has(w.w)){again.add(w.w);q.push(w);await talk('kruemel','Macht nichts! Das Wort üben wir gleich nochmal.')}}
+ closePanel()}
+
+/* ---------- Hafen ---------- */
+let busy=false,mx=600;const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110};
+function walkTo(x){return new Promise(res=>{const d=Math.abs(x-mx),m=$('#mor');if(d<6)return res();
+ $('#morflip').setAttribute('transform',`scale(${x<mx?-.85:.85},.85)`);m.classList.add('walk');
+ m.style.transition=`transform ${d*2.6}ms linear`;m.style.transform=`translate(${x}px,588px)`;mx=x;
+ setTimeout(()=>{m.classList.remove('walk');res()},d*2.6+40)})}
+const JOKES=['Was ist grün und klopft an die Tür? Ein Klopfsalat!','Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!','Was machen Piraten am Computer? Sie drücken die Enter-Taste!'];
+const replay=async t=>!S.done[t]||await talk('kruemel','Das hast du schon geschafft! Willst du nochmal üben?',['Ja!','Nein'])===0;
+const ACT={
+ async kapitaen(){const d=S.done;
+  if(d.karte&&!d.logbuch){await talk('kapitaen','Mmmh, lecker! Und mein Kartenstück ist auch da!');
+   await talk('kapitaen','Aber ich vergesse immer alles. Schreib die wichtigen Wörter in dein Logbuch!');
+   await brief('Hol dir Papier und einen Stift. Du siehst ein Wort. Dann ist es weg. Schreib es auf dein Papier.');
+   await logbuch(6);S.done.logbuch=1;save();await ending()}
+  else if(d.logbuch){if(await talk('kapitaen','Ahoi Moritz! Wollen wir nochmal ins Logbuch schreiben?',['Ja!','Nein'])===0)await logbuch(6)}
+  else await talk('kapitaen',['kisten','kanonen','kompass'].every(k=>d[k])?'Du hast Dublonen! Geh zu Olga in die Kneipe.':'Verdiene dir erst Dublonen im Hafen. Tippe auf die Ausrufezeichen!')},
+ async kruemel(){await talk('kruemel',pick(JOKES))},
+ async kisten(){if(await replay('kisten'))await kisten()},
+ async kanonen(){if(await replay('kanonen'))await kanonen()},
+ async kompass(){if(await replay('kompass'))await kompass()},
+ async tuer(){if(['kisten','kanonen','kompass'].every(k=>S.done[k]))await pub();
+  else await talk('olga','Halt! Ohne Dublonen gibt es nichts. Erledige erst alle drei Aufgaben im Hafen!')}};
+async function act(id){if(busy)return;busy=true;$('#b-home').style.display='none';
+ try{await walkTo(POS[id]);await ACT[id]()}finally{closePanel();busy=false;idle()}}
+async function intro(){busy=true;$('#b-home').style.display='none';
+ await talk('kapitaen','Ahoi! Ich bin Kapitän Rechenbart. Du bist bestimmt Moritz, mein neuer Schiffsjunge!');
+ await talk('kapitaen','Ich habe meine Schatzkarte in fünf Stücke gerissen und gut versteckt. Zu gut! Ich weiß nicht mehr, wo.');
+ await talk('kruemel','Kräh! Ich bin Krümel. Der Kapitän vergisst alles. Sogar die Kekse in seinem Bart!');
+ await talk('kapitaen','Ein Stück hat Wirtin Olga in der Kneipe. Aber ohne Dublonen gibt sie nichts her.');
+ await talk('kruemel','Verdiene dir Dublonen im Hafen! Tippe auf die Ausrufezeichen.');
+ S.done.intro=1;busy=false;idle()}
+async function ending(){panel(`<div class="log"><div class="bigmsg">Kapitel 1 geschafft!</div>${MAP}<div class="ltext">Bald geht es weiter: Die Hexenhütte.</div></div>`);
+ await talk('kapitaen','Bravo, Moritz! Ein Kartenstück haben wir. Vier fehlen noch. Das nächste hat die Hexe Mixa!',['Juhu!'])}
+
+/* ---------- Start, Eltern ---------- */
+function showTitle(){const t=$('#title');t.style.display='';
+ t.innerHTML=`<svg viewBox="0 0 1280 800"><g transform="translate(190,720) scale(1.7)">${moritz()}</g><g transform="translate(1090,640) scale(2.2)">${kruemel()}</g><rect x="1080" y="640" width="20" height="160" fill="#6d4a26"/></svg>
+ <h1>Die Insel von<br>Kapitän Rechenbart<small>Kapitel 1: Der Hafen</small></h1>
+ <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Logbuch üben</button></div>
+ <button class="btn small" id="pbtn">Eltern</button>`;
+ $('#t-go').onclick=()=>{t.style.display='none';speak(' ','moritz');idle();if(!S.done.intro)intro()};
+ $('#t-log').onclick=async()=>{t.style.display='none';busy=true;$('#b-home').style.display='none';
+  await brief('Hol dir Papier und einen Stift. Du siehst ein Wort. Dann ist es weg. Schreib es auf dein Papier.');
+  await logbuch(8);await talk('kruemel','Kräh! Fleißig geübt!');busy=false;idle();showTitle()};
+ $('#pbtn').onclick=eltern}
+function eltern(){const e=$('#eltern');e.style.display='flex';
+ const wack=Object.keys(S.log).filter(w=>S.log[w][1]>0).sort((a,b)=>S.log[b][1]-S.log[a][1]).map(w=>`${w} (${S.log[w][1]}×)`).join(', ')||'noch keine';
+ e.innerHTML=`<div class="ecard"><h2>Elternbereich</h2><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label>
+ <div>Deutsche Stimme auf diesem Gerät: <b>${!hasTTS?'keine Sprachausgabe':voice?'gefunden':'nicht gefunden (Gerätestimme wird versucht)'}</b></div>
+ <p style="margin:14px 0 4px"><b>Lernwörter</b></p>${[[1,'Faltblatt 1 (x, chs, ks)'],[2,'Faltblatt 2 (Sp, St)'],[3,'Faltblatt 3 (Farben und mehr)']].map(l=>`<label><input type="checkbox" class="e-l" value="${l[0]}"${S.lists.includes(l[0])?' checked':''}>${l[1]}</label>`).join('')}
+ <p style="margin:14px 0 4px"><b>Wackelwörter aus dem Logbuch:</b> ${wack}</p>
+ <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
+ $('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
+ $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
+ $('#e-t').onclick=()=>{loadVoice();speak('Ahoi! Ich bin Krümel, der Papagei.','kruemel')};
+ let sure=false;$('#e-r').onclick=x=>{if(!sure){sure=true;x.target.textContent='Wirklich löschen? Nochmal tippen';return}
+  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{}};save();mx=600;build();e.style.display='none';showTitle()};
+ $('#e-c').onclick=()=>{e.style.display='none'}}
+function setTon(){$('#b-ton').textContent='Vorlesen: '+(S.speak?'an':'aus')}
+function build(){$('#scene').innerHTML=HARBOR+PUB;$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
+$('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
+$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
+function fit(){const s=Math.min(innerWidth/1280,innerHeight/800);$('#stage').style.transform=`translate(-50%,-50%) scale(${s})`;
+ $('#rot').style.display=innerHeight>innerWidth*1.1?'flex':'none'}
+addEventListener('resize',fit);fit();build();setTon();idle();showTitle();
+</script>
+</body>
+</html>
