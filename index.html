@@ -161,6 +161,13 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .spg .btn{min-width:0;font-size:21px;padding:9px 6px}
 .tonne{font:inherit;font-size:30px;font-weight:700;width:250px;height:150px;border-radius:14px 14px 30px 30px;border:5px solid #2b2a33;box-shadow:0 6px 0 #2b2a33;color:#fff}
 .essen{font-size:72px;font-weight:700;text-align:center;margin:56px 0 44px}
+.dinge{display:flex;gap:26px;justify-content:center;margin-top:8px}
+.ding{font:inherit;width:190px;height:190px;border-radius:22px;border:4px solid #a9793f;background:#fff;box-shadow:0 6px 0 #a9793f;padding:8px}
+.ding svg{width:100%;height:100%}.ding.goodb{border-color:#4f9a4a;box-shadow:0 6px 0 #4f9a4a}
+.lesez{background:#fff8e6;border:3px solid #a9793f;border-radius:10px;padding:16px 26px;font-size:40px;line-height:1.4;margin:6px auto 18px;max-width:1080px;text-align:center}
+.lesez .zt{font-size:22px;text-align:left}
+.wegw{background:#a9793f;border:6px solid #6d4a26;border-radius:12px;color:#fff8e6;font-size:27px;font-weight:700;line-height:1.35;padding:8px 28px;margin:0 auto 10px;width:max-content;text-align:left}
+.wegw~.lesez{font-size:34px;padding:10px 26px;margin-bottom:12px}.wegw~.dinge .ding{width:150px;height:150px}
 .timer i{display:block;height:100%;background:#8e3b3b;width:100%;transition:width 5s linear}
 .lrow{display:flex;gap:30px}
 .bigmsg{font-size:52px;font-weight:700;color:#8e3b3b;margin:6px 0}
@@ -827,7 +834,7 @@ const WISSEN={1:['Piraten und Schiffe',[['Wie heißt die linke Seite von einem S
   ['Ist der Delfin ein Fisch?','Nein, er ist ein Säugetier.','Ja, er ist ein Fisch.','Nein, er ist ein Vogel.','Der Delfin ist ein Säugetier. Er muss zum Atmen auftauchen.'],['Womit atmen Fische?','mit Kiemen','mit der Nase','mit den Flossen','Fische atmen mit Kiemen. Damit holen sie Luft aus dem Wasser.'],['Wozu ist ein Leuchtturm da?','Er zeigt Schiffen den Weg.','Er macht Wellen.','Er fängt Fische.','Das Licht vom Leuchtturm zeigt den Schiffen in der Nacht den Weg.']]],
  5:['Schätze und Höhlen',[['Welches Tier hängt in Höhlen an der Decke?','die Fledermaus','der Fuchs','der Krebs','Fledermäuse schlafen am Tag. Dabei hängen sie mit dem Kopf nach unten.'],['Was zeigt ein Kompass?','die Himmelsrichtungen','die Uhrzeit','das Wetter','Die Nadel im Kompass zeigt immer nach Norden.'],
   ['Wo geht die Sonne auf?','im Osten','im Westen','im Norden','Die Sonne geht im Osten auf und im Westen unter.'],['Womit sehen Piraten weit über das Meer?','mit dem Fernrohr','mit dem Spiegel','mit der Schaufel','Durch ein Fernrohr sieht alles viel näher aus.'],['Woraus sind Dublonen?','aus Gold','aus Holz','aus Keks','Dublonen waren Münzen aus Gold. Piraten haben sie geliebt.']]]};
-async function wissen(n){const[titel,fr]=WISSEN[n];await brief(`In der blauen Kiste stecken Fragen zum Thema ${titel}. Lies die Frage und tippe auf die richtige Antwort.`);
+async function wissen(n){const[titel,fr]=WISSEN[n];await knopf();closePanel();await talk('kruemel',`Die Kiste ist offen! Darin sind Fragen zum Thema ${titel}.`);
  const q=shuffle(fr).slice(0,3);for(let i=0;i<q.length;i++){await choice(titel+' '+dots(i,q.length),q[i][0],q[i].slice(1,4),'Was weißt du?');closePanel();await talk('kruemel','Kräh! '+q[i][4])}}
 
 /* ---------- Fässer-Hüpfen ---------- */
@@ -986,6 +993,47 @@ async function gag(n){const g=GAGS[n];musicOn();cineOpen(`<svg viewBox="0 0 1280
  if(!skip){$('#chat').setAttribute('opacity',0);$('#gk').style.transform='translate(752px,292px) scale(.3)';sfx('ok')}await film('Krümel isst den Keks. Mampf!',4000);hush();cineClose();musicOff()}
 const MOKI=['Uh uh ah ah! Ich bin Moki. Ich bin heimlich mitgefahren!','Hast du eine Banane? Nein? Schade.','Ich habe dem Kapitän einen Keks aus dem Bart geklaut. Pssst!','Moki sieht alles. Moki sagt nichts. Außer für Bananen.','In deiner Klasse ist es schöner. Aber hier gibt es mehr Kokosnüsse!'];
 
+/* ---------- Lesen und Handeln ---------- */
+const FARB={rot:'#d24a43',blau:'#3b78c4','grün':'#4f9a4a',gelb:'#f6d23a',grau:'#9a9a9a'};
+function ding(t,c){c=FARB[c]||c;const k='stroke="#2b2a33" stroke-width="4"';return `<svg viewBox="0 0 100 100">${
+ t==='knopf'?`<circle cx="50" cy="56" r="34" fill="#2b2a33"/><circle cx="50" cy="48" r="31" fill="${c}" ${k}/>`
+ :t==='hebel'?`<rect x="20" y="70" width="60" height="18" rx="6" fill="#8b929a" ${k}/><path d="M50 72L66 24" stroke="#2b2a33" stroke-width="8" stroke-linecap="round"/><circle cx="67" cy="22" r="13" fill="${c}" ${k}/>`
+ :t==='kiste'?`<rect x="14" y="36" width="72" height="50" rx="5" fill="${c}" ${k}/><path d="M14 54h72" stroke="#2b2a33" stroke-width="4"/><rect x="43" y="46" width="14" height="16" rx="3" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/>`
+ :t==='lampe'?`<path d="M50 14a26 26 0 0 1 16 46v10h-32v-10a26 26 0 0 1 16 -46z" fill="${c}" ${k}/><rect x="36" y="70" width="28" height="16" rx="3" fill="#8b929a" ${k}/>`
+ :t==='eimer'?`<path d="M22 34h56l-8 52h-40z" fill="${c}" ${k}/><path d="M22 34q28 -34 56 0" fill="none" ${k}/>`
+ :t==='tuch'?`<path d="M18 30q32 -14 64 0l-6 50q-26 -12 -52 0z" fill="#fff" ${k}/><path d="M30 44h40M32 58h36" stroke="#3b78c4" stroke-width="4"/>`
+ :t==='besen'?`<path d="M50 8V60" stroke="#8c6234" stroke-width="7" stroke-linecap="round"/><path d="M30 60h40l8 30h-56z" fill="#d9a55a" ${k}/>`
+ :`<g transform="rotate(${c} 50 50)"><path d="M50 10L86 50H64V88H36V50H14Z" fill="#a9793f" ${k}/></g>`}</svg>`}
+/* Ein Satz zum Selberlesen, dann das richtige Ding antippen. opts: [typ, farbe, Spruch bei falscher Wahl], das erste ist richtig. */
+function lesen(titel,text,opts,extra,keep){return new Promise(res=>{let lock=false;const o=keep?opts.map((x,i)=>[x,i]):shuffle(opts.map((x,i)=>[x,i]));
+ panel(`<div class="ptitle">${titel}</div>${extra||''}<div class="lesez">${text}</div><div class="dinge">${o.map(x=>`<button class="ding" data-r="${x[1]===0?1:0}" data-i="${x[1]}">${ding(x[0][0],x[0][1])}</button>`).join('')}</div><div class="center" style="margin-top:14px"><button class="btn small" id="le-h">Krümel hilft lesen</button></div>`);
+ note('kruemel','Lies genau. Dann tippe auf das Richtige.');$('#le-h').onclick=()=>sayWord(text.replace(/<[^>]+>/g,' '));
+ $$('.ding').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');setTimeout(res,1200)}
+  else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel',opts[+b.dataset.i][2]||'Kräh! Das stimmt nicht. Lies den Satz nochmal genau.')}})})}
+const KNOPF=[['Drücke den grünen Knopf.',['grün']],['Drücke den Knopf, der so gelb ist wie die Sonne.',['gelb']],['Drücke zuerst den roten Knopf. Drücke dann den blauen Knopf.',['rot','blau']],['Drücke nicht den roten Knopf. Drücke den blauen.',['blau']],
+ ['Der richtige Knopf hat die Farbe von Gras.',['grün']],['Drücke zuerst Gelb. Dann Grün. Dann Rot.',['gelb','grün','rot']],['Drücke den Knopf, der so rot ist wie eine Tomate.',['rot']],['Drücke zweimal den blauen Knopf.',['blau','blau']],
+ ['Der richtige Knopf hat die Farbe vom Meer.',['blau']],['Drücke erst den blauen Knopf und dann den gelben.',['blau','gelb']],['Drücke nicht Rot, nicht Blau und nicht Gelb.',['grün']],['Drücke den Knopf mit der Farbe einer Banane. Dann den roten.',['gelb','rot']]];
+function knopf(){return new Promise(res=>{const[text,seq]=pick(KNOPF);let i=0,lock=false;
+ panel(`<div class="ptitle">Die Kiste ist verschlossen</div><div class="lesez"><div class="zt">Drücke hier zum Öffnen:</div>${text}</div><div class="dinge">${shuffle(['rot','blau','grün','gelb']).map(c=>`<button class="ding" data-c="${c}">${ding('knopf',c)}</button>`).join('')}</div><div class="center" style="margin-top:14px"><button class="btn small" id="le-h">Krümel hilft lesen</button></div>`);
+ window._kn=seq;note('kruemel','Auf der Kiste klebt ein Zettel. Lies ihn selbst!');$('#le-h').onclick=()=>sayWord(text);
+ $$('.ding').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.c===seq[i]){i++;sfx('coin');if(i===seq.length){lock=true;sfx('ok');note('kruemel','Klick! Die Kiste geht auf.');setTimeout(res,1500)}}
+  else{i=0;b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Rrrr! Die Kiste bleibt zu. Lies den Zettel nochmal und fang von vorne an.')}})})}
+const ORT={hexe:'zur Hexenhütte',werft:'zur Werft',turm:'zum Leuchtturm',hoehle:'zur Schatzhöhle'},ORTN={hexe:'Hexenhütte',werft:'Werft',turm:'Leuchtturm',hoehle:'Schatzhöhle'};
+async function wegweiser(ziel){const R=[['nach links',-90],['geradeaus',0],['nach rechts',90],['zurück',180]],pl=shuffle(Object.keys(ORT)),zi=pl.indexOf(ziel),o=R.map((r,i)=>['pfeil',r[1],`Kräh! Da geht es ${ORT[pl[i]]}. Lies nochmal!`]);
+ const opts=[o[zi]].concat(o.filter((_,i)=>i!==zi));
+ await lesen('Am Wegweiser',`Du willst <b>${ORT[ziel]}</b>. Tippe auf den richtigen Pfeil.`,opts,`<div class="wegw">${pl.map((k,i)=>`${ORTN[k]}: ${R[i][0]}`).join('<br>')}</div>`);closePanel()}
+async function lampe(){await talk('strahl','Du bist oben! Aber die Lampe ist kaputt. Hier ist die Anleitung. Lies jeden Schritt genau!');const T='Anleitung: Lampe wechseln ';
+ const st=[['<b>Schritt 1:</b> Schalte zuerst den Strom aus. Ziehe dazu den roten Hebel.',[['hebel','rot'],['hebel','blau','Tuuut! Das war das Nebelhorn. Lies nochmal!'],['hebel','grün','Huch! Jetzt dreht sich der Leuchtturm-Stuhl. Lies nochmal!']]],
+  ['<b>Schritt 2:</b> Die alte Lampe ist kaputt und grau. Drehe sie heraus.',[['lampe','grau'],['lampe','gelb','Kräh! Die gelbe Lampe ist die neue. Wir brauchen erst die alte.'],['knopf','rot','Kräh! Das ist ein Knopf und keine Lampe.']]],
+  ['<b>Schritt 3:</b> Die neue Lampe liegt nicht in der roten Kiste. Sie liegt in der blauen.',[['kiste','blau'],['kiste','rot','In der roten Kiste sind nur alte Socken. Puh!'],['kiste','grün','In der grünen Kiste schläft eine Krabbe. Pssst!']]],
+  ['<b>Schritt 4:</b> Putze die neue Lampe mit dem Tuch. Nimm nicht den Besen!',[['tuch'],['besen',0,'Kräh! Mit dem Besen zerkratzt die Lampe. Lies nochmal!'],['eimer','blau','Kräh! Wasser ist schlecht für die Lampe. Lies nochmal!']]],
+  ['<b>Schritt 5:</b> Jetzt kommt der Strom wieder an. Drücke den grünen Knopf.',[['knopf','grün'],['knopf','rot','Hoppla! Jetzt läuft das Radio. Lies nochmal!'],['knopf','gelb','Hoppla! Das war die Kaffeemaschine. Lies nochmal!']]]];
+ for(let i=0;i<st.length;i++)await lesen(T+dots(i,st.length),st[i][0],st[i][1]);closePanel();sfx('fanfare');await talk('strahl','Die Lampe leuchtet wieder! Du kannst gut lesen, Moritz. Alle Schiffe finden jetzt den Weg.')}
+const RAETSEL=[['Ich habe Zähne, aber ich beiße nicht. Was bin ich?','der Kamm','der Hai','der Hund'],['Ich habe vier Beine, aber ich kann nicht laufen. Was bin ich?','der Tisch','das Pferd','die Ente'],['Ich bin gelb und krumm. Affen lieben mich. Was bin ich?','die Banane','die Zitrone','der Mond'],
+ ['Ich werde nasser, wenn ich dich trockne. Was bin ich?','das Handtuch','die Sonne','der Fisch'],['Ich falle vom Himmel und mache alles nass. Was bin ich?','der Regen','der Stern','der Vogel'],['Ich leuchte in der Nacht und zeige Schiffen den Weg. Was bin ich?','der Leuchtturm','die Kerze','der Keks'],
+ ['Ich habe einen Rüssel und bin grau und sehr groß. Was bin ich?','der Elefant','die Maus','der Dachs'],['Man schreibt in mich hinein. Ich habe viele Seiten. Was bin ich?','das Heft','der Stuhl','der Stiefel'],['Ich habe zwei Flügel und einen Schnabel. Ich fresse gern Kekse. Wer bin ich?','Krümel','Moki','Olga'],
+ ['Ich bin rund und aus Gold. Piraten sammeln mich. Was bin ich?','die Dublone','die Kokosnuss','der Ball']];
+
 /* ---------- Kapitel 3: Werft ---------- */
 const VERBEN=[['Der Papagei ___ auf dem Mast.','sitzt','bellt'],['Das Schiff ___ über das Meer.','fährt','klettert'],['Der Kapitän ___ einen Keks.','isst','liest'],['Die Hexe ___ auf dem Besen.','fliegt','schwimmt'],
  ['Der Fuchs ___ durch den Wald.','rennt','singt'],['Moritz ___ die Schatzkarte.','liest','trinkt'],['Die Sonne ___ am Himmel.','scheint','hüpft'],['Olga ___ eine Suppe.','kocht','sägt']];
@@ -1012,7 +1060,7 @@ async function quatsch(){await brief('Die Möwe erzählt Quatsch. Nur ein Satz s
  const q=shuffle(QUATSCH).slice(0,4);for(let i=0;i<q.length;i++)await choice('Alles Quatsch? '+dots(i,q.length),'Welcher Satz stimmt?',q[i],'Lies alle Sätze genau.');closePanel()}
 async function stufen(){await brief('Der Leuchtturm hat 100 Stufen. Rechne aus, auf welcher Stufe du stehst.');const t=()=>{const a=z(1,8);return[a,z(1,10-a/10)]},m=()=>{const a=z(3,10);return[a,z(1,a/10-1)]};
  await rechnen('Treppe im Leuchtturm',[['+',(a,b)=>`Du stehst auf Stufe ${a}. Du steigst ${b} Stufen höher. Auf welcher Stufe bist du jetzt?`,t],
-  ['-',(a,b)=>`Du stehst auf Stufe ${a}. Du gehst ${b} Stufen nach unten. Auf welcher Stufe bist du jetzt?`,m],['+',(a,b)=>`Du bist auf Stufe ${a}. Bis zur Lampe sind es noch ${b} Stufen. Auf welcher Stufe ist die Lampe?`,zeT]])}
+  ['-',(a,b)=>`Du stehst auf Stufe ${a}. Du gehst ${b} Stufen nach unten. Auf welcher Stufe bist du jetzt?`,m],['+',(a,b)=>`Du bist auf Stufe ${a}. Bis zur Lampe sind es noch ${b} Stufen. Auf welcher Stufe ist die Lampe?`,zeT]]);await lampe()}
 
 /* ---------- Kapitel 5: Schatzhöhle ---------- */
 async function schloss(){await brief('Das Zahlenschloss hat drei Zahlen. Rechne jede Aufgabe aus. Dann geht das Gitter auf.');
@@ -1080,7 +1128,7 @@ const ACT={
  async wissen3(){if(await replay('wissen3')){await wissen(3);await reward('wissen3',10)}},
  async wissen4(){if(await replay('wissen4')){await wissen(4);await reward('wissen4',10)}},
  async wissen5(){if(await replay('wissen5')){await wissen(5);await reward('wissen5',10)}},
- async moki(){const k='moki_'+S.scene;sfx('kraeh');if(!S.done[k]){S.done[k]=1;S.coins+=3;save();await talk('moki','Uh uh ah ah! Du hast mich gefunden! Ich bin Moki. Hier sind 3 Dublonen für dich.')}else await talk('moki',pick(MOKI))},
+ async moki(){const k='moki_'+S.scene;sfx('kraeh');if(!S.done[k]){S.done[k]=1;S.coins+=3;save();await talk('moki','Uh uh ah ah! Du hast mich gefunden! Ich bin Moki. Hier sind 3 Dublonen für dich.')}else{await talk('moki',pick(MOKI));if(await talk('moki','Moki hat ein Rätsel für dich. Willst du es lösen?',['Ja!','Nein'])===0){const r=pick(RAETSEL);await choice('Mokis Rätsel',r[0],r.slice(1),'Lies das Rätsel. Was ist die Lösung?');closePanel();S.coins+=1;sfx('coin');await talk('moki','Uh uh ah ah! Richtig! Eine Dublone für dich.')}}},
  async muell(){if(await replay('muell')){await muell();await reward('muell',15)}},
  async kap5(){await talk('kapitaen',!S.done.schloss?'Knacke zuerst das Zahlenschloss am Gitter!':!S.done.schatzkarte?'Jetzt lies die Schatzkarte auf dem Stein!':'Har har! Öffne die Truhe, Moritz!')},
  async schloss(){if(!await replay('schloss'))return;await schloss();if(S.done.schloss){await talk('kruemel','Super geübt, Käpt’n!');return}
@@ -1215,7 +1263,7 @@ const INTRO={hexe:['c2intro',[['mixa','Hihi! Besuch! Ich bin Mixa, die Hexe. Und
  werft:['c3intro',[['hobel','Moin! Ich bin Meister Hobel, der Schiffsbauer. Mein Schiff hat lauter Löcher!'],['hobel','Ein Kartenstück? Ja, das habe ich als Flicken benutzt. Hilf mir, dann bekommst du es!'],['kruemel','Kräh! Tippe auf die Ausrufezeichen. Zum Schluss wartet eine Überraschung!']]],
  turm:['c4intro',[['strahl','Ahoi da unten! Ich bin Wärter Strahlemann. Mein Leuchtturm braucht Hilfe.'],['strahl','Eine Möwe hat mir ein Kartenstück gebracht. Du bekommst es, wenn du mir hilfst.']]],
  hoehle:['c5intro',[['kapitaen','Har har! Das ist die Schatzhöhle. Das letzte Kartenstück liegt hinter dem Gitter.'],['kapitaen','Knacke das Zahlenschloss. Dann lesen wir die Karte und finden den Schatz!']]]};
-async function goScene(n){const I=INTRO[n];if(I&&!S.done[I[0]]&&FILME[n])await FILME[n]();setScene(n);if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
+async function goScene(n){const I=INTRO[n];if(I&&!S.done[I[0]]){await talk('kruemel','Kräh! Da steht ein Wegweiser. Den musst du selbst lesen!');await wegweiser(n)}if(I&&!S.done[I[0]]&&FILME[n])await FILME[n]();setScene(n);if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
 function setScene(n){S.scene=n;SCN.concat('pub').forEach(k=>{const e=$('#'+k);if(e)e.style.display=k===n?'':'none'})}
 function build(){$('#scene').innerHTML=HARBOR+PUB+HEXE+WERFT+TURM+HOEHLE;setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
