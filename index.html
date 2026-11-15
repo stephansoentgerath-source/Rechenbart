@@ -168,6 +168,9 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .lesez .zt{font-size:22px;text-align:left}
 .wegw{background:#a9793f;border:6px solid #6d4a26;border-radius:12px;color:#fff8e6;font-size:27px;font-weight:700;line-height:1.35;padding:8px 28px;margin:0 auto 10px;width:max-content;text-align:left}
 .wegw~.lesez{font-size:34px;padding:10px 26px;margin-bottom:12px}.wegw~.dinge .ding{width:150px;height:150px}
+.uhrw{display:flex;gap:50px;align-items:center;justify-content:center;margin-top:6px}
+.uhrw svg{width:440px;height:440px;flex:none}.uhrw .copts{flex-direction:column;gap:20px;margin:0}.uhrw .copt{min-width:340px;font-size:40px}
+.uzahl{cursor:pointer}
 .timer i{display:block;height:100%;background:#8e3b3b;width:100%;transition:width 5s linear}
 .lrow{display:flex;gap:30px}
 .bigmsg{font-size:52px;font-weight:700;color:#8e3b3b;margin:6px 0}
@@ -333,6 +336,7 @@ const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,moki:1.5,hobel:.8,strah
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
 const wk=(n,x,y)=>`<g transform="translate(${x},${y})"><rect x="-36" y="-46" width="72" height="46" rx="7" fill="#3b78c4" stroke="#2b2a33" stroke-width="4"/><path d="M-36 -28h72" stroke="#2b2a33" stroke-width="3"/><text y="-8" text-anchor="middle" font-size="32" font-weight="700" fill="#fff">?</text></g>`+mark('wissen'+n,x,y-84);
+const uk=(n,x,y)=>`<g transform="translate(${x},${y})"><circle r="30" fill="#fff8e6" stroke="#6d4a26" stroke-width="6"/><path d="M0 0V-20" stroke="#3b78c4" stroke-width="4" stroke-linecap="round"/><path d="M0 0L12 8" stroke="#d24a43" stroke-width="5" stroke-linecap="round"/><circle r="3" fill="#2b2a33"/></g>`+mark('uhr'+n,x,y-58)+`<rect class="hot" data-act="uhr${n}" x="${x-42}" y="${y-84}" width="84" height="120"/>`;
 const whot=(n,x,y)=>`<rect class="hot" data-act="wissen${n}" x="${x-55}" y="${y-120}" width="110" height="130"/>`;
 const HARBOR=`<svg id="harbor" viewBox="0 0 1280 620">
 <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ee"/><stop offset="1" stop-color="#fbeed3"/></linearGradient></defs>
@@ -364,7 +368,7 @@ const HARBOR=`<svg id="harbor" viewBox="0 0 1280 620">
 <g transform="translate(215,505) scale(.8)">${kapitaen()}</g>
 <g transform="translate(335,400) scale(.9)">${kruemel()}</g>
 <g id="g-schild"><rect x="1212" y="470" width="12" height="120" fill="#6d4a26"/><path d="M1160 478h100l22 22l-22 22h-100z" fill="#a9793f" stroke="#6d4a26" stroke-width="4"/><text x="1214" y="508" text-anchor="middle" font-size="22" font-weight="700" fill="#fff8e6">Zur Hexe</text></g>
-${wk(1,1000,566)}${mark('schiff',90,300)}${mark('schild',1215,440)}${mark('kapitaen',215,190)}${mark('kisten',482,296)}${mark('kanonen',756,370)}${mark('kompass',910,326)}${mark('tuer',1110,405)}
+${uk(1,1110,172)}${wk(1,1000,566)}${mark('schiff',90,300)}${mark('schild',1215,440)}${mark('kapitaen',215,190)}${mark('kisten',482,296)}${mark('kanonen',756,370)}${mark('kompass',910,326)}${mark('tuer',1110,405)}
 ${schildchen(578,470,'Kekse: 1 Dublone','Für Papageien: 3')}<g id="mor" style="transform:translate(600px,588px)"><g id="morflip" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>
 <g class="fg"><path d="M-10 620V548q40 -16 92 0V620Z" fill="#a9793f" stroke="#6d4a26" stroke-width="5"/><path d="M-10 572h94" stroke="#6d4a26" stroke-width="5"/>
 <ellipse cx="160" cy="604" rx="52" ry="15" fill="none" stroke="#d9b48a" stroke-width="10"/><ellipse cx="160" cy="594" rx="42" ry="12" fill="none" stroke="#c9a070" stroke-width="10"/>
@@ -392,7 +396,7 @@ const HEXE=`<svg id="hexe" viewBox="0 0 1280 620" style="display:none">
 <g fill="#8fd16a"><circle cx="-24" cy="352" r="9"/><circle cx="14" cy="338" r="6"/><circle cx="34" cy="356" r="7"/></g></g>
 <g transform="translate(330,500) scale(.95)">${mixa()}</g>
 <g><rect x="1212" y="470" width="12" height="120" fill="#6d4a26"/><path d="M1270 478h-100l-22 22l22 22h100z" fill="#a9793f" stroke="#6d4a26" stroke-width="4"/><text x="1216" y="508" text-anchor="middle" font-size="22" font-weight="700" fill="#fff8e6">Zum Hafen</text></g>
-${wk(2,900,566)}${mark('fehler1',1098,268)}${mark('buch',140,310)}${mark('kessel',565,300)}${mark('mixa',330,140)}
+${uk(2,47,250)}${wk(2,900,566)}${mark('fehler1',1098,268)}${mark('buch',140,310)}${mark('kessel',565,300)}${mark('mixa',330,140)}
 ${schildchen(770,470,'Vorsicht!','Bissiger Besen')}<g id="mor2" style="transform:translate(760px,588px)"><g id="morflip2" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>
 <g class="fg"><path d="M-20 620q10 -110 90 -120q-30 50 -20 120zM60 620q30 -70 100 -70q-40 30 -40 70z" fill="#3f7a4a"/><path d="M1300 620q-10 -110 -90 -120q30 50 20 120z" fill="#3f7a4a"/>
 <g transform="translate(1040,606)"><rect x="-6" y="-18" width="12" height="20" fill="#f4efe4"/><path d="M-24 -18q24 -34 48 0z" fill="#d24a43"/><circle cx="-8" cy="-26" r="4" fill="#fff"/><circle cx="8" cy="-24" r="3" fill="#fff"/></g></g>${mokiG(892,112)}${whot(2,900,566)}${mokiH(892,112)}<rect class="hot" data-act="buch" x="60" y="290" width="170" height="190"/><rect class="hot" data-act="mixa" x="250" y="150" width="170" height="360"/>
@@ -530,7 +534,7 @@ function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filte
   :(!d.intro?'':n<3?'Tippe auf ein Ausrufezeichen im Hafen!':!d.karte?'Geh zur Kneipe!':!d.logbuch?'Bring das Essen zum Kapitän!':'Kapitel 1 geschafft! Folge dem Wegweiser zur Hexe.');
  $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span></div><div class="tx" style="margin-top:10px">${t}</div></div>`;
  const M=[['kisten',d.kisten,1],['kanonen',d.kanonen,1],['kompass',d.kompass,1],['tuer',d.karte&&d.kueche,n>=3],['schild',0,d.logbuch],['schiff',d.rennen,n>=3],['kapitaen',0,d.karte&&!d.logbuch],
-  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['muell',d.muell,1],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];
+  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['muell',d.muell,1],['uhr1',d.uhr1,1],['uhr2',d.uhr2,1],['uhr3',d.uhr3,1],['uhr4',d.uhr4,1],['uhr5',d.uhr5,1],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];
  Object.keys(SC).forEach(k=>{const q=SC[k],all=q.tasks.every(x=>d[x]);q.tasks.forEach(x=>M.push([x,d[x],1]));M.push([q.bonus,d[q.bonus],all],[q.npc,d[q.key],all])});
  M.forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
  ['g-schild','h-schild'].forEach(i=>{const e=$('#'+i);if(e)e.style.display=d.logbuch?'':'none'});
@@ -1034,6 +1038,30 @@ const RAETSEL=[['Ich habe Zähne, aber ich beiße nicht. Was bin ich?','der Kamm
  ['Ich habe einen Rüssel und bin grau und sehr groß. Was bin ich?','der Elefant','die Maus','der Dachs'],['Man schreibt in mich hinein. Ich habe viele Seiten. Was bin ich?','das Heft','der Stuhl','der Stiefel'],['Ich habe zwei Flügel und einen Schnabel. Ich fresse gern Kekse. Wer bin ich?','Krümel','Moki','Olga'],
  ['Ich bin rund und aus Gold. Piraten sammeln mich. Was bin ich?','die Dublone','die Kokosnuss','der Ball']];
 
+/* ---------- Die Uhr ---------- */
+function zifferblatt(h,m,klick){const a=(h%12+m/60)*30,b=m*6;return `<svg viewBox="-115 -115 230 230"><circle r="108" fill="#fff8e6" stroke="#6d4a26" stroke-width="10"/>
+ ${[...Array(12)].map((_,i)=>{const n=i+1,w=n*30*Math.PI/180,x=Math.sin(w)*82,y=-Math.cos(w)*82;return (klick?`<circle class="uzahl" data-n="${n}" cx="${x}" cy="${y}" r="19" fill="#f6c84a" stroke="#2b2a33" stroke-width="2"/>`:'')+`<text x="${x}" y="${y+9}" text-anchor="middle" font-size="26" font-weight="700" fill="#2b2a33" pointer-events="none">${n}</text>`}).join('')}
+ <g transform="rotate(${b})"><path d="M0 8V-74" stroke="#3b78c4" stroke-width="6" stroke-linecap="round"/></g><g id="uklein" transform="rotate(${a})" style="${klick&&klick!==1?'display:none':''}"><path d="M0 8V-46" stroke="#d24a43" stroke-width="9" stroke-linecap="round"/></g><circle r="7" fill="#2b2a33"/></svg>`}
+const zeit=(h,m)=>m===0?`${h} Uhr`:m===30?`halb ${h%12+1}`:m===15?`Viertel nach ${h}`:`Viertel vor ${h%12+1}`;
+const UHRTXT={1:'Die Uhr hat zwei Zeiger. Der kleine rote Zeiger zeigt die Stunde. Steht der große blaue Zeiger auf der 12, ist es genau eine volle Stunde.',
+ 2:'Jetzt stellst du die Uhr selbst. Der große blaue Zeiger steht auf der 12. Tippe auf die Zahl, auf die der kleine rote Zeiger zeigen soll.',
+ 3:'Steht der große blaue Zeiger unten auf der 6, ist eine halbe Stunde vorbei. Der kleine Zeiger steht dann zwischen zwei Zahlen. Halb 5 heißt: Er ist auf dem Weg zur 5.',
+ 4:'Jetzt kommen volle und halbe Stunden gemischt. Schau zuerst auf den großen blauen Zeiger: Steht er auf der 12 oder auf der 6?',
+ 5:'Steht der große blaue Zeiger rechts auf der 3, ist es Viertel nach. Steht er links auf der 9, ist es Viertel vor.'};
+async function uhr(st){await brief(UHRTXT[st]);const wer=['kapitaen','mixa','hobel','strahl','kapitaen'][st-1],frage=['Wann gibt es Essen?','Wann ist der Trank fertig?','Wann machen wir Pause?','Wann geht das Licht an?','Wann öffnen wir die Truhe?'][st-1];
+ for(let i=0;i<5;i++)await new Promise(res=>{const h=rand(1,12),ms=st<3?[0]:st===3?[30]:st===4?[0,30]:[0,15,30,45],m=pick(ms),stellen=st===2||(st===4&&i%2===1);let lock=false;
+  if(stellen){panel(`<div class="ptitle">Die Uhr stellen ${dots(i,5)}</div><div class="uhrw">${zifferblatt(h,0,2)}<div class="lesez" style="max-width:520px;margin:0">${NAME[wer]} sagt:<br><b>Stell die Uhr auf ${h} Uhr.</b></div></div>`);
+   note('kruemel','Tippe auf die Zahl für den kleinen Zeiger.');
+   $$('.uzahl').forEach(z=>z.onclick=()=>{if(lock)return;const kl=$('#uklein');kl.style.display='';kl.setAttribute('transform',`rotate(${z.dataset.n*30})`);
+    if(+z.dataset.n===h){lock=true;sfx('ok');note('kruemel',`Richtig! Es ist ${h} Uhr.`);setTimeout(res,1900)}else{sfx('bad');note('kruemel',`Kräh! Jetzt ist es ${z.dataset.n} Uhr. Wir brauchen ${h} Uhr.`)}})}
+  else{const t=zeit(h,m),set=new Set([t]),alt=[zeit(h%12+1,m),zeit((h+10)%12+1,m),zeit(h,m===0?30:0),zeit(h,m===15?45:m===45?15:m),`${h%12+1} Uhr`];
+   shuffle(alt).forEach(x=>{if(set.size<3)set.add(x)});
+   panel(`<div class="ptitle">Wie spät ist es? ${dots(i,5)}</div><div class="uhrw">${zifferblatt(h,m)}<div class="copts">${shuffle([...set]).map(x=>`<button class="btn sec copt" data-r="${x===t?1:0}">${x}</button>`).join('')}</div></div>`);
+   note(wer,frage+' Schau auf die Uhr!');
+   $$('.copt').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');note('kruemel',`Richtig! Es ist ${t}.`);setTimeout(res,1900)}
+    else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel',m===0?'Kräh! Schau auf den kleinen roten Zeiger. Auf welche Zahl zeigt er?':m===30?'Kräh! Der kleine Zeiger ist schon auf dem Weg zur nächsten Zahl.':'Kräh! Wo steht der große blaue Zeiger: auf der 3 oder auf der 9?')}})}});
+ closePanel()}
+
 /* ---------- Kapitel 3: Werft ---------- */
 const VERBEN=[['Der Papagei ___ auf dem Mast.','sitzt','bellt'],['Das Schiff ___ über das Meer.','fährt','klettert'],['Der Kapitän ___ einen Keks.','isst','liest'],['Die Hexe ___ auf dem Besen.','fliegt','schwimmt'],
  ['Der Fuchs ___ durch den Wald.','rennt','singt'],['Moritz ___ die Schatzkarte.','liest','trinkt'],['Die Sonne ___ am Himmel.','scheint','hüpft'],['Olga ___ eine Suppe.','kocht','sägt']];
@@ -1090,7 +1118,7 @@ async function finale(){musicOn();sfx('fanfare');cineOpen('<div style="position:
 /* ---------- Hafen ---------- */
 let busy=false;const MX={harbor:600,hexe:760,werft:560,turm:500,hoehle:640};
 const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110,schild:1150,schiff:420,buch:250,mixa:470,kessel:690,hafen:1150,fehler1:980,
- planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,muell:790,wissen1:890,wissen2:790,wissen3:470,wissen4:420,wissen5:990,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
+ planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,uhr1:1000,uhr2:150,uhr3:1050,uhr4:1130,uhr5:640,muell:790,wissen1:890,wissen2:790,wissen3:470,wissen4:420,wissen5:990,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
 function walkTo(x){return new Promise(res=>{const k=S.scene,ids=k==='harbor'?['mor','morflip']:k==='hexe'?['mor2','morflip2']:['mor-'+k,'flip-'+k],mx=MX[k],d=Math.abs(x-mx),m=$('#'+ids[0]);if(!m||d<6)return res();
  $('#'+ids[1]).setAttribute('transform',`scale(${x<mx?-.85:.85},.85)`);m.classList.add('walk');
  m.style.transition=`transform ${d*2.6}ms linear`;m.style.transform=`translate(${x}px,588px)`;MX[k]=x;
@@ -1129,6 +1157,11 @@ const ACT={
  async wissen4(){if(await replay('wissen4')){await wissen(4);await reward('wissen4',10)}},
  async wissen5(){if(await replay('wissen5')){await wissen(5);await reward('wissen5',10)}},
  async moki(){const k='moki_'+S.scene;sfx('kraeh');if(!S.done[k]){S.done[k]=1;S.coins+=3;save();await talk('moki','Uh uh ah ah! Du hast mich gefunden! Ich bin Moki. Hier sind 3 Dublonen für dich.')}else{await talk('moki',pick(MOKI));if(await talk('moki','Moki hat ein Rätsel für dich. Willst du es lösen?',['Ja!','Nein'])===0){const r=pick(RAETSEL);await choice('Mokis Rätsel',r[0],r.slice(1),'Lies das Rätsel. Was ist die Lösung?');closePanel();S.coins+=1;sfx('coin');await talk('moki','Uh uh ah ah! Richtig! Eine Dublone für dich.')}}},
+ async uhr1(){if(await replay('uhr1')){await uhr(1);await reward('uhr1',10)}},
+ async uhr2(){if(await replay('uhr2')){await uhr(2);await reward('uhr2',10)}},
+ async uhr3(){if(await replay('uhr3')){await uhr(3);await reward('uhr3',10)}},
+ async uhr4(){if(await replay('uhr4')){await uhr(4);await reward('uhr4',10)}},
+ async uhr5(){if(await replay('uhr5')){await uhr(5);await reward('uhr5',10)}},
  async muell(){if(await replay('muell')){await muell();await reward('muell',15)}},
  async kap5(){await talk('kapitaen',!S.done.schloss?'Knacke zuerst das Zahlenschloss am Gitter!':!S.done.schatzkarte?'Jetzt lies die Schatzkarte auf dem Stein!':'Har har! Öffne die Truhe, Moritz!')},
  async schloss(){if(!await replay('schloss'))return;await schloss();if(S.done.schloss){await talk('kruemel','Super geübt, Käpt’n!');return}
@@ -1221,7 +1254,7 @@ ${wolke(160)}<path class="bgd" d="M820 302Q900 250 1000 302Z" fill="#8fbf88"/>${
 <g transform="translate(1040,0)"><rect y="270" width="220" height="190" fill="#c9a36b"/><path d="M-16 276L110 200L236 276Z" fill="#8e3b3b"/><rect x="80" y="350" width="70" height="110" fill="#6d4a26"/></g>
 <g transform="translate(1130,0)"><path d="M30 500q25 -34 50 0" fill="none" stroke="#2b2a33" stroke-width="6"/><rect y="500" width="110" height="60" rx="6" fill="#d24a43" stroke="#2b2a33" stroke-width="4"/></g>
 <g transform="translate(700,520) scale(.9)">${hobel()}</g>
-${wk(3,360,560)}${mark('planken',185,340)}${mark("verben",478,160)}${mark('nomen',985,240)}${mark('hobel',700,230)}${mark('sortieren',1185,455)}${morG('werft',560)}
+${uk(3,1150,250)}${wk(3,360,560)}${mark('planken',185,340)}${mark("verben",478,160)}${mark('nomen',985,240)}${mark('hobel',700,230)}${mark('sortieren',1185,455)}${morG('werft',560)}
 <g class="fg"><text x="1155" y="388" text-anchor="middle" font-size="14" font-weight="700" fill="#fff8e6">Geschlossen</text><text x="1155" y="406" text-anchor="middle" font-size="13" fill="#fff8e6">Grund: Loch</text>
 <path d="M60 590l8 18l20 2l-15 13l5 20l-18 -11l-18 11l5 -20l-15 -13l20 -2z" fill="#ee8a2e"/><path d="M1180 600q20 -24 40 0q-20 12 -40 0z" fill="#f3b6c0" stroke="#c9828f" stroke-width="3"/>
 <g transform="translate(610,600)"><path d="M-22 -30h44l-6 34h-32z" fill="#3b78c4" stroke="#2b2a33" stroke-width="3"/><path d="M-22 -30q22 -26 44 0" fill="none" stroke="#2b2a33" stroke-width="3"/></g></g>${mokiG(802,304)}
@@ -1235,7 +1268,7 @@ ${wolke(110)}${fernschiff(560,326)}${voegel(420,90)}<rect y="330" width="1280" h
 <path d="M340 472q20 -60 70 -50q40 6 50 50z" fill="#8b929a"/><g transform="translate(405,395)"><ellipse rx="26" ry="16" fill="#fff" stroke="#2b2a33" stroke-width="3"/><circle cx="22" cy="-16" r="12" fill="#fff" stroke="#2b2a33" stroke-width="3"/><path d="M32 -16l16 4l-16 4z" fill="#f6c84a"/><circle cx="25" cy="-19" r="2.5" fill="#2b2a33"/></g>
 <g transform="translate(1110,0)"><rect y="470" width="150" height="90" rx="10" fill="#4f8f55" stroke="#2b2a33" stroke-width="4"/><path d="M20 490h110v50h-80v-25h50" fill="none" stroke="#cfe8d8" stroke-width="8"/></g>
 <g transform="translate(640,530) scale(.9)">${strahl()}</g>
-${wk(4,310,566)}${mark('flaschenpost',170,395)}${mark('quatsch',405,320)}${mark('stufen',900,330)}${mark('strahl',640,238)}${mark('labyrinth',1185,430)}${schildchen(1010,452,'100 Stufen','Kein Aufzug')}${morG('turm',500)}
+<rect x="1229" y="330" width="8" height="140" fill="#6d4a26"/>${uk(4,1233,330)}${wk(4,310,566)}${mark('flaschenpost',170,395)}${mark('quatsch',405,320)}${mark('stufen',900,330)}${mark('strahl',640,238)}${mark('labyrinth',1185,430)}${schildchen(1010,452,'100 Stufen','Kein Aufzug')}${morG('turm',500)}
 <g class="fg"><g fill="#6f9a4a"><path d="M40 620l10 -44l10 44zM64 620l8 -34l8 34zM1210 620l10 -44l10 44zM1236 620l8 -30l8 30z"/></g>
 <g fill="#f6c84a" stroke="#fff" stroke-width="5"><circle cx="110" cy="598" r="7"/><circle cx="560" cy="604" r="7"/><circle cx="1150" cy="600" r="7"/></g>
 <g class="krabbe"><g transform="translate(640,606)"><ellipse cx="-4" cy="0" rx="22" ry="7" fill="#d9b48a"/><circle cx="6" cy="-10" r="14" fill="#a9793f" stroke="#6d4a26" stroke-width="3"/><path d="M-22 -4l-6 -12M-16 -5l-2 -12" stroke="#d9b48a" stroke-width="3"/></g></g></g>${mokiG(770,462)}${whot(4,310,566)}${mokiH(770,462)}${hot('flaschenpost',100,405,150,120)}${hot('quatsch',330,330,150,150)}${hot('stufen',830,60,140,405)}${hot('strahl',570,250,140,290)}${hot('labyrinth',1100,450,170,120)}</svg>`;
@@ -1249,7 +1282,7 @@ const HOEHLE=`<svg id="hoehle" viewBox="0 0 1280 620" style="display:none"><rect
 <rect x="1070" y="230" width="150" height="110" fill="#c9a36b" stroke="#2b2a33" stroke-width="5"/><path d="M1100 320v-40m-14 14h28M1160 320q20 -60 40 0" stroke="#8e3b3b" stroke-width="5" fill="none"/><circle cx="1100" cy="268" r="10" fill="none" stroke="#8e3b3b" stroke-width="5"/>
 <rect x="716" y="250" width="8" height="60" fill="#8c6234"/><path d="M720 214q16 22 0 40q-16 -18 0 -40z" fill="#f6a23a"/>
 <g transform="translate(140,530) scale(.75)">${kapitaen()}</g>
-${wk(5,1100,566)}${mark('schloss',335,212)}${mark('schatzkarte',570,345)}${mark('truhe',895,300)}${mark('fehler2',1145,196)}${schildchen(730,468,'Schatz?','Hier nicht! Ehrlich.')}${morG('hoehle',640)}
+${uk(5,640,250)}${wk(5,1100,566)}${mark('schloss',335,212)}${mark('schatzkarte',570,345)}${mark('truhe',895,300)}${mark('fehler2',1145,196)}${schildchen(730,468,'Schatz?','Hier nicht! Ehrlich.')}${morG('hoehle',640)}
 <g class="fg"><path d="M-10 620l50 -150l50 150zM1200 620l40 -120l50 120z" fill="#2a2333"/>
 <g class="blink" fill="#f6c84a"><circle cx="470" cy="596" r="8"/><circle cx="990" cy="604" r="8"/></g></g>${mokiG(1225,548,.8)}${whot(5,1100,566)}${mokiH(1225,548)}${hot('kap5',60,250,160,290)}${hot('schloss',255,230,160,250)}${hot('schatzkarte',490,360,160,130)}${hot('truhe',800,320,190,170)}${hot('fehler2',1055,215,180,140)}</svg>`;
 const SCN=['harbor','hexe','werft','turm','hoehle'];
