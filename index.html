@@ -104,7 +104,6 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .ecard label{display:block;margin:8px 0}
 .ecard input{width:26px;height:26px;vertical-align:-4px;margin-right:10px}
 .ecard .lrow{margin-top:16px;gap:14px;flex-wrap:wrap}
-#rot{position:fixed;inset:0;background:#22313a;color:#fbeed3;font-size:30px;display:none;align-items:center;justify-content:center;text-align:center;z-index:20;padding:30px}
 </style>
 </head>
 <body>
@@ -116,7 +115,6 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
   <div id="title"></div>
   <div id="eltern"></div>
 </div>
-<div id="rot">Bitte dreh das Tablet quer.</div>
 <script>
 const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
 const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
@@ -464,9 +462,11 @@ function setTon(){$('#b-ton').textContent='Vorlesen: '+(S.speak?'an':'aus')}
 function build(){$('#scene').innerHTML=HARBOR+PUB;$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
 $('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
-function fit(){const s=Math.min(innerWidth/1280,innerHeight/800);$('#stage').style.transform=`translate(-50%,-50%) scale(${s})`;
- $('#rot').style.display=innerHeight>innerWidth*1.1?'flex':'none'}
-addEventListener('resize',fit);fit();build();setTon();idle();showTitle();
+let lastW=0,lastH=0;
+function fit(){const w=innerWidth,h=innerHeight;if(w===lastW&&h===lastH)return;lastW=w;lastH=h;
+ const port=h>w,s=port?Math.min(h/1280,w/800):Math.min(w/1280,h/800);
+ $('#stage').style.transform=`translate(-50%,-50%)${port?' rotate(90deg)':''} scale(${s})`}
+addEventListener('resize',fit);addEventListener('orientationchange',()=>{setTimeout(fit,100);setTimeout(fit,500)});setInterval(fit,700);fit();build();setTon();idle();showTitle();
 </script>
 </body>
 </html>
