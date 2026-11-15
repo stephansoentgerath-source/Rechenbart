@@ -225,6 +225,8 @@ function ladeInhalt(){const L=aktLW(),B=PAKETE[0],P=aktPaket(),g=k=>P[k]||B[k];
  SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze');TUN=g('tun');KEINTUN=g('keinTun');GEGENT=g('gegenteile');GSCHRIFT=g('geisterschrift');BEFEHLE=Object.assign({},B.befehle,P.befehle);RG={};['rechnen5','rechnen6','rechnen7'].forEach(k=>RG[k]=g(k))}
 ladeInhalt();
 const SW=()=>S.schwer==null?1:S.schwer;
+/* Sanduhr in Sekunden: 0 = aus. Stufe im Elternbereich (S.timer), Vorgabe 45 */
+const SAND=()=>S.timer===false?0:typeof S.timer==='number'?S.timer:45;
 
 /* ---------- Lernwörter ---------- */
 
@@ -704,7 +706,7 @@ function duelTask(n){let a,b,op='+';
  else if(rand(0,1)){a=rand(11,79);if(a%10===0)a++;b=z(1,Math.floor((99-a)/10));if(rand(0,1))[a,b]=[b,a]}
  else{a=rand(31,99);if(a%10===0)a++;b=z(1,Math.floor(a/10)-1);op='-'}
  return{a,b,op,ans:op==='+'?a+b:a-b}}
-function duel(n,wer){wer=wer||'mixa';const gn=NAME[wer].split(' ').pop();return new Promise(res=>{let me=0,she=0,val='',lock=true,cur,to=null;const T=n===3&&S.timer!==false?45:0;
+function duel(n,wer){wer=wer||'mixa';const gn=NAME[wer].split(' ').pop();return new Promise(res=>{let me=0,she=0,val='',lock=true,cur,to=null;const T=n===3?SAND():0;
  panel(`<div class="num"><div class="numl"><div class="ptitle">Rechen-Duell ${n}</div><div class="duel">
  <div class="pot">Moritz<div class="glas"><i id="pm" style="background:#4f9a4a"></i></div><b id="sm">0</b></div>
  <div class="pot">${gn}<div class="glas"><i id="px" style="background:#6b4a8e"></i></div><b id="sx">0</b></div>
@@ -1006,10 +1008,11 @@ function ding(t,c){c=FARB[c]||c;const k='stroke="#2b2a33" stroke-width="4"';retu
  :t==='besen'?`<path d="M50 8V60" stroke="#8c6234" stroke-width="7" stroke-linecap="round"/><path d="M30 60h40l8 30h-56z" fill="#d9a55a" ${k}/>`
  :`<g transform="rotate(${c} 50 50)"><path d="M50 10L86 50H64V88H36V50H14Z" fill="#a9793f" ${k}/></g>`}</svg>`}
 /* Ein Satz zum Selberlesen, dann das richtige Ding antippen. opts: [typ, farbe, Spruch bei falscher Wahl], das erste ist richtig. */
-function lesen(titel,text,opts,extra,keep){return new Promise(res=>{let lock=false;const o=keep?opts.map((x,i)=>[x,i]):shuffle(opts.map((x,i)=>[x,i]));
- panel(`<div class="ptitle">${titel}</div>${extra||''}<div class="lesez">${text}</div><div class="dinge">${o.map(x=>`<button class="ding" data-r="${x[1]===0?1:0}" data-i="${x[1]}">${ding(x[0][0],x[0][1])}</button>`).join('')}</div><div class="center" style="margin-top:14px"><button class="btn small" id="le-h">Krümel hilft lesen</button></div>`);
- note('kruemel','Lies genau. Dann tippe auf das Richtige.');$('#le-h').onclick=()=>sayWord(text.replace(/<[^>]+>/g,' '));
- $$('.ding').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');setTimeout(res,1200)}
+function lesen(titel,text,opts,extra,keep,T){return new Promise(res=>{let lock=false,to=null;const o=keep?opts.map((x,i)=>[x,i]):shuffle(opts.map((x,i)=>[x,i]));
+ panel(`<div class="ptitle">${titel}</div>${T?'<div class="timer" style="margin:0 auto 10px"><i id="lt"></i></div>':''}${extra||''}<div class="lesez">${text}</div><div class="dinge">${o.map(x=>`<button class="ding" data-r="${x[1]===0?1:0}" data-i="${x[1]}">${ding(x[0][0],x[0][1])}</button>`).join('')}</div><div class="center" style="margin-top:14px"><button class="btn small" id="le-h">Krümel hilft lesen</button></div>`);
+ note('kruemel',T?'Die Sanduhr läuft. Du hast genug Zeit.':'Lies genau. Dann tippe auf das Richtige.');$('#le-h').onclick=()=>sayWord(text.replace(/<[^>]+>/g,' '));
+ if(T){const t=$('#lt');t.style.transition='none';t.style.width='100%';void t.offsetWidth;t.style.transition=`width ${T}s linear`;t.style.width='0';to=setTimeout(()=>{if(!lock)note('kruemel','Die Sanduhr ist leer. Macht nichts! Lies in Ruhe zu Ende.')},T*1000)}
+ $$('.ding').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;clearTimeout(to);if(T)$('#lt').style.transition='none';b.classList.add('goodb');sfx('ok');setTimeout(res,1200)}
   else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel',opts[+b.dataset.i][2]||'Kräh! Das stimmt nicht. Lies den Satz nochmal genau.')}})})}
 
 function knopf(){return new Promise(res=>{const[text,seq]=pick(KNOPF);let i=0,lock=false;
@@ -1070,7 +1073,7 @@ async function grossSchreiben(liste,titel,wer){const sp=shuffle(liste).slice(0,5
   $$('.wort').forEach(b=>b.onclick=()=>{const j=+b.dataset.j;if(b.classList.contains('good'))return;
    if(caps.includes(j)){b.textContent=cap(ws[j]);b.classList.add('good');if(--left===0){speak(cap(sp[i][0]),wer);sfx('ok');setTimeout(res,2400)}else sfx('coin')}
    else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Kräh! Dieses Wort bleibt klein.')}})});closePanel()}
-async function befehle(k,titel){const st=BEFEHLE[k];for(let i=0;i<st.length;i++)await lesen(titel+' '+dots(i,st.length),st[i][0],st[i][1]);closePanel()}
+async function befehle(k,titel){const st=BEFEHLE[k];for(let i=0;i<st.length;i++)await lesen(titel+' '+dots(i,st.length),st[i][0],st[i][1],'',false,SAND());closePanel()}
 const genP=()=>{let a,b;do{a=rand(13,69);b=rand(6,29)}while(a+b>100||a%10+b%10<10);return[a,b]},genM=()=>{let a,b;do{a=rand(31,95);b=rand(6,28)}while(a%10>=b%10);return[a,b]};
 /* Feindliche Schiffe abwehren */
 function abwehr(){return new Promise(res=>{musicOn();const c=$('#cine'),LY=[320,470,620],sh=[],NS=14+SW()*4;let made=0,hit=0,last=0,tsp=.8,fin=false,msgT=0;
@@ -1206,7 +1209,7 @@ const ACT={
   let n=!d.duell1?1:!d.duell2?2:3;
   if(d.duell3){if(await talk('mixa','Du willst noch ein Duell? Hihi! Sehr gerne!',['Ja!','Nein'])!==0)return;n=rand(1,3)}
   else await talk('mixa',['Bereit für das erste Duell? Wir rechnen plus mit Zehnerzahlen!','Zweites Duell! Jetzt rechnen wir minus. Hihi!','Das letzte Duell! Plus und minus, mit großen Zahlen. Gewinnst du, bekommst du das Kartenstück!'][n-1]);
-  await brief('Jede richtige Antwort füllt deinen Trank. Bei einem Fehler bekommt Mixa einen Punkt. Wer zuerst 5 Punkte hat, gewinnt.'+(n===3&&S.timer!==false?' Diesmal läuft eine Sanduhr. Keine Sorge: Du hast viel Zeit.':''));
+  await brief('Jede richtige Antwort füllt deinen Trank. Bei einem Fehler bekommt Mixa einen Punkt. Wer zuerst 5 Punkte hat, gewinnt.'+(n===3&&SAND()?' Diesmal läuft eine Sanduhr. Keine Sorge: Du hast viel Zeit.':''));
   for(;;){const win=await duel(n);closePanel();if(win)break;
    if(await talk('mixa','Hihi! Diesmal war ich schneller. Willst du eine Revanche?',['Ja!','Später'])!==0)return}
   if(d['duell'+n]){await talk('mixa','Schon wieder gewonnen! Du bist ein echter Rechen-Meister.');return}
@@ -1284,7 +1287,7 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  const sel=(id,opts,akt)=>`<select id="${id}">${opts.map(o=>`<option value="${o[0]}"${String(o[0])===String(akt)?' selected':''}>${o[1]}</option>`).join('')}</select>`;
  e.innerHTML=`<div class="ecard breit"><h2>Elternbereich${S.reisen?` <span style="font-size:22px;color:#2b2a33">(Reise ${S.reisen+1})</span>`:''}</h2>
  <div><b>Spiel</b><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik</label>
- <label><input type="checkbox" id="e-ti"${S.timer!==false?' checked':''}>Sanduhr im letzten Rechen-Duell</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
+ <label>Sanduhr (letztes Rechen-Duell, Lesen und Handeln): ${sel('e-ti',[[0,'aus'],[60,'gemütlich (60 s)'],[45,'normal (45 s)'],[30,'sportlich (30 s)']],SAND())}</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
  <label>Belohnungsspiele: ${sel('e-sw',[[0,'leicht'],[1,'mittel'],[2,'schwer']],SW())}</label>
  <div style="margin-top:6px">Deutsche Stimme: <b>${!hasTTS?'keine Sprachausgabe':voice?'gefunden':'nicht gefunden'}</b></div></div>
  <div><b>Lernen</b><label>Lernpaket: ${sel('e-pk',PAKETE.map(q=>[q.id,q.name]),aktPaket().id)}</label>
@@ -1292,7 +1295,7 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  ${BLATTK.map(k=>`<label><input type="checkbox" class="e-l" value="${k}"${S.lists.includes(k)?' checked':''}>${BLATT[k]}</label>`).join('')}
  <div style="margin-top:6px"><b>Wackelwörter:</b> ${wack}</div><div><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen</div></div>
  <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-n">Neue Reise starten</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
- $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=x.target.checked;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
+ $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=+x.target.value;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
  $('#e-sw').onchange=x=>{S.schwer=+x.target.value;save()};$('#e-pk').onchange=x=>{S.paket=x.target.value;ladeInhalt();save()};
  $('#e-lw').onchange=x=>{S.lw=x.target.value;S.lists=null;ladeInhalt();save();eltern()};
  $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
