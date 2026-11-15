@@ -201,7 +201,23 @@ body.aufgabe #scene,body.aufgabe #scene *{animation-play-state:paused!important}
 .katzauge{animation:katzauge 12s infinite}@keyframes katzauge{0%,80%,93%,100%{opacity:0}82%,91%{opacity:1}}
 .katzschwanz{transform-origin:-44px -12px;animation:katzschwanz 7s infinite}@keyframes katzschwanz{0%,70%,100%{transform:none}76%,88%{transform:rotate(25deg)}82%{transform:rotate(-10deg)}}
 .zzz{animation:zzz 4s linear infinite}@keyframes zzz{0%{transform:translate(0,0);opacity:0}20%{opacity:.9}100%{transform:translate(14px,-46px);opacity:0}}
-.krabbeln{animation:krabbeln 11s ease-in-out infinite}@keyframes krabbeln{0%,55%,100%{transform:none}65%,80%{transform:translate(22px,16px)}}@keyframes zitter{25%{transform:translateX(-5px) rotate(-2deg)}75%{transform:translateX(5px) rotate(2deg)}}
+.krabbeln{animation:krabbeln 11s ease-in-out infinite}
+/* Einmalige Überraschungen je Szene (laufen nur einmal je Reise) */
+.u-auf{animation:uAuf 8s ease-in-out both}@keyframes uAuf{0%{transform:translate(780px,390px) scale(.3);opacity:0}8%{opacity:1}25%{transform:translate(780px,300px) scale(1)}40%{transform:translate(800px,290px) rotate(6deg)}55%{transform:translate(760px,295px) rotate(-6deg)}70%{transform:translate(780px,280px) rotate(0)}100%{transform:translate(1450px,-120px) rotate(-10deg)}}
+.u-platsch{transform-box:fill-box;transform-origin:center;animation:uPlatsch 1.6s ease-out both}@keyframes uPlatsch{from{transform:scale(.2);opacity:.9}to{transform:scale(1.8);opacity:0}}
+.u-flug{animation:uFlug 7s ease-in-out both}@keyframes uFlug{0%{transform:translate(-120px,140px)}25%{transform:translate(300px,90px) rotate(-8deg)}45%{transform:translate(620px,160px) rotate(8deg)}52%,62%{transform:translate(700px,150px) rotate(0)}80%{transform:translate(1000px,60px)}100%{transform:translate(1450px,20px)}}
+.u-strahl{animation:uStrahl 7s both}@keyframes uStrahl{0%,50%,64%,100%{opacity:0}53%,61%{opacity:.55}}
+.u-maus{animation:uMaus 4.5s linear both}@keyframes uMaus{0%{transform:translate(1330px,420px)}100%{transform:translate(-90px,420px)}}
+.u-trippel{animation:uTrippel .18s infinite alternate}@keyframes uTrippel{to{transform:translateY(-4px)}}
+.u-besen{animation:uBesen 6s ease-in-out both}@keyframes uBesen{0%{transform:translate(1400px,140px) rotate(-10deg)}30%{transform:translate(950px,220px) rotate(8deg)}60%{transform:translate(500px,120px) rotate(-8deg)}100%{transform:translate(-220px,220px) rotate(6deg)}}
+.u-wal{animation:uWal 7s ease-in-out both}@keyframes uWal{0%{transform:translate(240px,330px);opacity:0}15%{transform:translate(240px,312px);opacity:1}85%{transform:translate(180px,312px);opacity:1}100%{transform:translate(170px,335px);opacity:0}}
+.u-fontaene{transform-box:fill-box;transform-origin:50% 100%;animation:uFont 7s both}@keyframes uFont{0%,28%{transform:scaleY(0);opacity:0}36%{transform:scaleY(1.15);opacity:1}55%{transform:scaleY(1);opacity:1}66%,100%{transform:scaleY(.2);opacity:0}}
+.u-schlange{animation:uSchlange 8s linear both}@keyframes uSchlange{0%{transform:translate(720px,372px);opacity:0}10%,90%{opacity:1}100%{transform:translate(380px,372px);opacity:0}}
+.u-bogen{animation:uBogen .7s ease-in-out infinite alternate}@keyframes uBogen{to{transform:translateY(8px)}}
+.u-liane{transform-origin:640px -300px;animation:uLiane 4s ease-in-out both}@keyframes uLiane{from{transform:rotate(80deg)}to{transform:rotate(-80deg)}}
+.u-uboot{animation:uUboot 10s linear both}@keyframes uUboot{0%{transform:translate(-200px,200px)}50%{transform:translate(640px,225px)}100%{transform:translate(1500px,190px)}}
+.u-geist{animation:uGeist 10s ease-in-out both}@keyframes uGeist{0%{transform:translate(1400px,215px) scale(.75);opacity:0}15%,85%{opacity:.6}50%{transform:translate(625px,205px) scale(.75)}100%{transform:translate(-150px,215px) scale(.75);opacity:0}}
+.u-fm{opacity:0;animation:uFm 3.2s ease-in both}@keyframes uFm{0%{transform:translate(1150px,var(--a));opacity:0}10%{opacity:1}100%{transform:translate(-120px,var(--b));opacity:1}}@keyframes krabbeln{0%,55%,100%{transform:none}65%,80%{transform:translate(22px,16px)}}@keyframes zitter{25%{transform:translateX(-5px) rotate(-2deg)}75%{transform:translateX(5px) rotate(2deg)}}
 .bb .btn:nth-last-child(n+3),.bb .btn:nth-last-child(n+3)~.btn{font-size:21px;padding:7px 14px}
 .spg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:470px}
 .spg .btn{min-width:0;font-size:20px;padding:7px 6px}
@@ -1503,7 +1519,28 @@ const LEBEN={
  riff:TIER.schwarm(290)+TIER.blasen(60,400)+TIER.blasen(1220,400)+TIER.qualle(330,220),
  nebel:TIER.fledermaus(930,140),
  hoehle:TIER.haengt(720,40)+TIER.tropfen(220,190)+TIER.tropfen(1000,170,2.5)};
-const leben=svg=>{const id=(svg.match(/^<svg id="(\w+)"/)||[])[1];return LEBEN[id]?svg.replace(/<\/svg>\s*$/,`<g class="bgd">${LEBEN[id]}</g></svg>`):svg};
+const leben=svg=>{const id=(svg.match(/^<svg id="(\w+)"/)||[])[1];return id?svg.replace(/<\/svg>\s*$/,`<g class="bgd">${LEBEN[id]||''}</g><g class="bgd" id="ue-${id}"></g></svg>`):svg};
+/* ---------- Einmalige Überraschung je Szene ----------
+   Startet, wenn Moritz in der Szene insgesamt etwa 8 Sekunden nichts zu tun hat (nie während Aufgaben,
+   Gesprächen oder Spielen). Merkt sich S.done['ue_'+Szene], kommt also in jeder neuen Reise einmal wieder. */
+const UFO=`<path class="u-strahl" d="M-20 10L-60 130H60L20 10z" fill="#f6f1a8"/><ellipse cx="0" cy="0" rx="60" ry="16" fill="#9aa3ad" stroke="#2b2a33" stroke-width="3"/><path d="M-30 -6q30 -40 60 0z" fill="#bfe6f0" stroke="#2b2a33" stroke-width="3"/><circle cx="0" cy="-16" r="9" fill="#8fc640"/><circle cx="-3" cy="-18" r="2" fill="#2b2a33"/><circle cx="3" cy="-18" r="2" fill="#2b2a33"/><circle cx="-36" cy="2" r="4" fill="#f6c84a"/><circle cx="0" cy="5" r="4" fill="#d24a43"/><circle cx="36" cy="2" r="4" fill="#4f9a4a"/>`;
+const UEB={
+ harbor:['Kräh! Ein Ufo! Das glaubt mir keiner.',8,`<ellipse class="u-platsch" cx="780" cy="385" rx="40" ry="10" fill="none" stroke="#fff" stroke-width="4"/><g class="u-auf u-main">${UFO}</g>`,'splash'],
+ turm:['Kräh! Schon wieder ein Ufo? Die suchen bestimmt Kekse!',7,`<g class="u-flug u-main">${UFO}</g>`],
+ pub:['Kräh! Eine Maus! Und die Katze schläft einfach weiter.',4.5,`<g class="u-maus u-main"><g class="u-trippel"><g transform="scale(1.6)"><path d="M16 -6q30 -4 34 -20" stroke="#5f6670" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="0" cy="-10" rx="18" ry="11" fill="#6f7680"/><circle cx="-16" cy="-16" r="7" fill="#6f7680"/><circle cx="-12" cy="-24" r="6" fill="#c9a0a8" stroke="#6f7680" stroke-width="2"/><circle cx="-21" cy="-17" r="1.8" fill="#2b2a33"/><circle cx="-24" cy="-13" r="2" fill="#d98a8a"/></g></g></g>`],
+ hexe:['Kräh! Mixas Besen fliegt mal wieder allein.',6,`<g class="u-besen u-main"><path d="M-80 0h100" stroke="#8c6234" stroke-width="7" stroke-linecap="round"/><path d="M20 -6l54 -14v40l-54 -14z" fill="#d9a55a" stroke="#2b2a33" stroke-width="2"/><g fill="#f6c84a"><circle cx="96" cy="-10" r="4"/><circle cx="120" cy="8" r="3"/><circle cx="146" cy="-4" r="2.5"/></g></g>`],
+ werft:['Kräh! Ein Wal! Und er macht eine Dusche.',7,`<g class="u-wal u-main"><path d="M-70 0q40 -46 110 -10q20 10 30 10z" fill="#3d5a80"/><circle cx="-36" cy="-14" r="3" fill="#fff"/><path class="u-fontaene" d="M10 -32q-6 -40 -26 -50M10 -32q0 -46 0 -62M10 -32q6 -40 26 -50" stroke="#e8f6ff" stroke-width="5" fill="none" stroke-linecap="round"/></g>`,'splash'],
+ see:['Kräh! Eine Seeschlange! Zum Glück ist sie freundlich.',8,`<g class="u-schlange u-main">${[0,70,140].map((x,i)=>`<path class="u-bogen" style="animation-delay:-${i*.25}s" d="M${x} 0q20 -40 40 0" stroke="#4f9a4a" stroke-width="12" fill="none" stroke-linecap="round"/>`).join('')}<path d="M-6 0q0 -30 -26 -30" stroke="#4f9a4a" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="-38" cy="-32" r="15" fill="#4f9a4a"/><circle cx="-44" cy="-36" r="3" fill="#2b2a33"/><path d="M-50 -24q6 4 12 0" stroke="#2b2a33" stroke-width="2" fill="none"/></g>`,'splash'],
+ affen:['Uh uh ah ah! Ein Affe an der Liane!',4,`<g class="u-liane u-main"><path d="M640 -300V210" stroke="#3f7a4a" stroke-width="5"/><g transform="translate(640,300) scale(.75)">${moki()}</g></g>`],
+ riff:['Blubb! Ein gelbes U-Boot. Wer sitzt da wohl drin?',10,`<g class="u-uboot u-main"><path d="M-70 0l-22 -16v32z" fill="#e0ae1f" stroke="#2b2a33" stroke-width="2"/><rect x="-70" y="-24" width="140" height="48" rx="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/><rect x="-20" y="-44" width="40" height="22" rx="6" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/><path d="M0 -44v-18h14" stroke="#2b2a33" stroke-width="4" fill="none"/>${[-30,0,30].map(x=>`<circle cx="${x}" cy="0" r="9" fill="#bfe6f0" stroke="#2b2a33" stroke-width="3"/>`).join('')}<g fill="none" stroke="#e8f6ff" stroke-width="2.5"><circle class="blase" cx="-100" cy="-6" r="5"/><circle class="blase" style="animation-delay:-2s" cx="-110" cy="4" r="4"/></g></g>`],
+ nebel:['Kräh! Ein Geisterschiff! Mir zittern die Federn.',10,`<g class="u-geist u-main"><path d="M-90 0h180l-30 40h-120z" fill="#c9d1e0"/><path d="M0 0v-130" stroke="#c9d1e0" stroke-width="6"/><path d="M4 -126q50 30 0 60zM4 -60q40 20 0 50z" fill="#c9d1e0"/><path d="M-60 14h20M-10 14h20M40 14h20" stroke="#5a6478" stroke-width="5" stroke-linecap="round"/></g>`],
+ hoehle:['Kräh! So viele Fledermäuse! Kopf einziehen!',5.2,[0,1,2,3,4,5,6,7].map(i=>`<g class="u-fm${i===7?' u-main':''}" style="animation-delay:${i*.28}s;--a:${180+i%3*40}px;--b:${20+i%4*30}px"><path class="flap" d="M0 0q-10 -12 -26 -8q6 6 4 12q-8 -2 -12 4q14 0 34 -8zM0 0q10 -12 26 -8q-6 6 -4 12q8 -2 12 4q-14 0 -34 -8z" fill="#1d1c22"/><circle cx="0" cy="-1" r="6" fill="#1d1c22"/></g>`).join('')]};
+const UEZ={};let ueSc='';
+function ueRuhig(){const v=s=>{const e=$(s);return e&&getComputedStyle(e).display!=='none'};return !busy&&!v('#title')&&!v('#panel')&&!v('#cine')&&!v('#eltern')&&!$('#bar .btn')&&!document.hidden}
+function ueberraschung(n){const u=UEB[n],g=$('#ue-'+n);if(!u||!g)return;S.done['ue_'+n]=1;save();
+ g.innerHTML=u[2];if(u[3])sfx(u[3]);const m=g.querySelector('.u-main');if(m)m.addEventListener('animationend',e=>{if(e.target===m)g.innerHTML=''},{once:false});
+ setTimeout(()=>{if(S.scene!==n||!ueRuhig())return;sfx('kraeh');note('kruemel',u[0]);setTimeout(()=>{const t=$('#bar .tx'),k=x=>x.replace(/\s+/g,'');if(ueRuhig()&&t&&k(t.textContent)===k(u[0]))idle()},5000)},Math.min(2500,u[1]*400))}
+setInterval(()=>{const n=S.scene;if(!UEB[n]||S.done['ue_'+n]||!ueRuhig())return;UEZ[n]=(UEZ[n]||0)+1;if(UEZ[n]>=8){UEZ[n]=0;ueberraschung(n)}},1000);
 function build(){$('#scene').innerHTML=[HARBOR,PUB,HEXE,WERFT,TURM,HOEHLE,SEE,AFFEN,RIFF,NEBEL].map(leben).join('');setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
 $('#b-insel').onclick=insel;$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
