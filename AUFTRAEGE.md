@@ -1,12 +1,12 @@
 # Arbeitsaufträge „Die Insel von Kapitän Rechenbart“
 
-Stand 15.11.2026. Diese Datei ist für die Arbeit mit einem einfachen Modell gedacht:
+Stand 15.11.2026 (abends). Diese Datei ist für die Arbeit mit einem einfachen Modell gedacht:
 einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 
 ## Regeln für jeden Auftrag
 
 - Vor dem Start `git status` und `git log -3` ansehen. Nur das ändern, was der Auftrag nennt.
-- Spieltexte: kurze Sätze, höchstens 10 Wörter, Wörter der 2. Klasse, kein Zeitdruck, kein Tadel.
+- Spieltexte: kurze Sätze, höchstens 10 Wörter, Wörter der 2. Klasse, kein Tadel. Zeitdruck nur über die Sanduhr (siehe unten).
 - Inhalte (Wörter, Sätze, Fragen) gehören in `inhalte.js`, Spiellogik in `index.html`.
 - Nach der Änderung: Skript auf Syntax prüfen (`node --check`), die betroffene Szene im Browser
   einmal durchspielen, dann committen und pushen. Ehrlich sagen, was nicht getestet wurde.
@@ -21,7 +21,10 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 ## Aufbau in Kürze
 
 - `index.html`: Spiel. `SC` = Szenenbilder (SVG), `ACT` = Aktionen der Plätze, `OFFEN` = Freischaltung,
-  `KAPITEL` = Inselkarte, `UHRK` = Uhr-Stufen, `genP/genM/zeT/zeM` = Rechenaufgaben.
+  `KAPITEL` = Inselkarte, `UHRK` = Uhr-Stufen, `genP/genM/zeT/zeM` = Rechenaufgaben,
+  `geschichten()` = Rechengeschichten aus `inhalte.js` einsetzen, `TIER`/`LEBEN` = Tiere in den Szenen,
+  `UEB` = einmalige Überraschung je Szene, `reagiere()`/`MINI()` = Moritz im Aufgabenfenster.
+- `PRUEFLISTE.md`: Liste zum Abhaken auf dem Fire Tablet.
 - `inhalte.js`: `LERNWOERTER` (Listen) und `PAKETE` (Lernpakete). Das erste Paket ist die Grundlage,
   weitere überschreiben nur einzelne Schlüssel. Anleitung steht oben in der Datei.
 - Jedes Kapitel hat sechs Plätze: Rechnen, Sprache, Lesen und Handeln, Uhr, Wissens-Kiste, Belohnungsspiel.
@@ -34,14 +37,16 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 `PAKETE` anhängen (`id` = Jahr-Monat, `name` = Monat und Themen). Nur die Schlüssel eintragen, die sich
 ändern. Lernwörter nur anfassen, wenn Stephan es ausdrücklich sagt (dann neue Liste in `LERNWOERTER`).
 
-**A2 Rechnen in Akt 2 einstellbar machen.** `genP`/`genM` (Zeile ~1072) erzeugen Aufgaben mit
-Zehnerübergang (47 + 25). Im Elternbereich einen Schalter „Rechnen: leicht / mittel / schwer“ ergänzen
+**A2 Rechnen in Akt 2 einstellbar machen.** `genP`/`genM` (Suche nach `const genP=`) erzeugen Aufgaben
+mit Zehnerübergang (47 + 25). Im Elternbereich einen Schalter „Rechnen: leicht / mittel / schwer“ ergänzen
 (Spielstand `S.rechnen`, Vorgabe „mittel“). leicht = nur Zehnerzahlen dazu/weg (`zeT`/`zeM`),
-mittel = ohne Übergang, schwer = wie jetzt.
+mittel = ohne Übergang, schwer = wie jetzt. **Wichtig:** Die Rechengeschichten der Kapitel 5–7 holen
+ihre Zahlen über `geschichten()` (direkt über `async function rechnen`). Die Stufe muss dort mit
+ausgewertet werden, sonst wirkt der Schalter dort nicht. Das Rechen-Duell (`duelTask`) bleibt unverändert.
 
-**A3 Rechengeschichten in die Pakete verlagern.** Die Geschichten der Plätze `see_r`, `affen_r`,
-`riff_r`, `nebel_r` (Zeile ~1220–1230) stehen als Funktionen im Spiel. Als Textvorlagen mit `{a}` und
-`{b}` nach `inhalte.js` (Schlüssel `rechnen5` … `rechnen8`) verschieben, im Spiel nur noch einsetzen.
+~~**A3 Rechengeschichten in die Pakete verlagern.**~~ **Erledigt 15.11.2026.** Die Geschichten von
+`see_r`, `affen_r`, `riff_r` stehen als `rechnen5` bis `rechnen7` in `inhalte.js`. `nebel_r` ist ein
+reines Rechen-Duell ohne Geschichten, ein `rechnen8` gibt es deshalb nicht.
 
 **A4 Wissens-Kisten auffüllen.** Jede Kiste (`wissen` 1–9 in `inhalte.js`) auf mindestens 8 Fragen
 bringen, damit eine „Neue Reise“ andere Fragen zeigt. Je Frage drei Antworten, eine richtig,
@@ -62,6 +67,12 @@ erst nach 8 Sekunden oder nach dem ersten Fehlversuch. Ab Kapitel 5 erst nach de
 **A9 Film-Galerie.** Im Hauptmenü „Kino“: alle schon gesehenen Filme, Gags und die Bilder
 `titel.jpg`, `akt1.jpg`, `akt2.jpg`, `schluss.jpg` noch einmal ansehen.
 
+**A10 Schalter „Animationen: viel / wenig“.** Nur nötig, wenn die Prüfliste auf dem Fire Tablet Ruckeln
+zeigt. Im Elternbereich (Spielstand `S.anim`, Vorgabe „viel“). „wenig“ = keine Tiere (`LEBEN`), kein
+Blinzeln/Zwinkern/Wedeln (Klassen `aug`, `zwink`, `schmunzel`, `wedel`, `fluegel`); am einfachsten über
+eine Klasse am `body` und CSS `animation:none`. Bleiben sollen: Reaktionen nach Eingaben (`reagiere`,
+Duell), Überraschungen (`UEB`), Belohnungsspiele.
+
 ## B – Mittlere Aufträge (einfaches Modell, danach Stichprobe)
 
 **B1 Uhr-Anstieg glätten.** Stufen jetzt: 1 volle Stunde lesen, 2 stellen, 3 gemischt, 4 halb,
@@ -80,9 +91,8 @@ bleibt über den Krümel-Knopf möglich. Texte dafür auf höchstens drei kurze 
 Schuhe) und Kapitän (weißer Bart mit Kekskrümeln, Hut mit Plus und Minus) in den SVG-Funktionen
 nachziehen. Moki ist schon nach dem echten Stofftier gezeichnet.
 
-**B5 Fire-Tablet-Prüfliste.** Kein Code. Eine Liste für Stephan zum Abhaken am Gerät: Vollbild,
-Drehen, Ton, Stimme, je Belohnungsspiel „ruckelt es?“, Treffflächen groß genug, Spielstand bleibt
-nach Schließen erhalten.
+~~**B5 Fire-Tablet-Prüfliste.**~~ **Erledigt 15.11.2026:** `PRUEFLISTE.md`. Ergebnisse von Stephan
+abwarten; daraus ergeben sich ggf. A10 und ein Auftrag „Offline-Betrieb“ (Service Worker fehlt bisher).
 
 ## C – Für Fable (Neues, Dramaturgie)
 
@@ -92,7 +102,8 @@ nach Schließen erhalten.
 - 11 Piratenfest: Kochen nach Rezept, Musik (Rhythmus nachtippen), Uhr „Wann beginnt das Fest?“.
 Danach `OFFEN` umhängen: Schatzhöhle erst nach Kapitel 11.
 
-**C2 Rechen-Fechten.** Säbel-Duell als Kopfrechnen ohne Zeitdruck: richtige Antwort = Parade.
+**C2 Rechen-Fechten.** Säbel-Duell als Kopfrechnen: richtige Antwort = Parade. Zeitdruck nur als
+Sanduhr-Option über `SAND()`, Reaktionen nach den Regeln oben.
 
 **C3 Zweite Reise mit eigener Geschichte.** Bei „Reise 2“ nicht nur neue Aufgaben, sondern ein neuer
 Anlass (z. B. die Möwe hat die Karte geklaut) und zwei neue Filme.
@@ -101,4 +112,5 @@ Anlass (z. B. die Möwe hat die Karte geklaut) und zwei neue Filme.
 
 - Alles ist nur am Computer getestet (Chrome, automatischer Durchlauf), nicht auf dem Fire Tablet.
 - Geräusche und Musik hat noch niemand außer Stephan und Moritz gehört.
-- Kapitel 9 bis 11 fehlen; nach Kapitel 8 geht es direkt in die Schatzhöhle.
+- Kapitel 9 bis 11 fehlen (auf der Inselkarte als „bald“); nach Kapitel 8 geht es direkt in die Schatzhöhle.
+- Kein Offline-Betrieb: ohne WLAN startet das Spiel vermutlich nicht (kein Service Worker).
