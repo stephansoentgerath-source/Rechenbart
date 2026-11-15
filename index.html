@@ -295,8 +295,8 @@ const dots=(i,n)=>`<span class="dots">${'●'.repeat(i)}${'○'.repeat(n-i)}</sp
 /* ---------- Rechnen ---------- */
 const blocks=n=>`<span class="blk">${'<i class="ten"></i>'.repeat(Math.floor(n/10))}${'<i class="one"></i>'.repeat(n%10)}</span>`;
 function stepHint(a,op,b){const t=Math.floor(b/10)*10,o=b%10;
- if(op==='+'){if(!t){const f=10-a%10;return `Tipp: ${a} + ${f} = ${a+f}. Dann noch + ${b-f}.`}return `Tipp: Rechne erst ${a} + ${t} = ${a+t}. Dann noch + ${o}.`}
- if(!t){const f=a%10;return f?`Tipp: ${a} − ${f} = ${a-f}. Dann noch − ${b-f}.`:`Tipp: Zähle von ${a} rückwärts.`}
+ if(op==='+'){if(!t&&a%10+b<10)return `Tipp: Rechne nur die Einer: ${a%10} + ${b} = ${a%10+b}.`;if(!t){const f=10-a%10;return `Tipp: ${a} + ${f} = ${a+f}. Dann noch + ${b-f}.`}return `Tipp: Rechne erst ${a} + ${t} = ${a+t}. Dann noch + ${o}.`}
+ if(!t&&a%10>=b)return `Tipp: Rechne nur die Einer: ${a%10} − ${b} = ${a%10-b}.`;if(!t){const f=a%10;return f?`Tipp: ${a} − ${f} = ${a-f}. Dann noch − ${b-f}.`:`Tipp: Zähle von ${a} rückwärts.`}
  return o?`Tipp: Rechne erst ${a} − ${t} = ${a-t}. Dann noch − ${o}.`:`Tipp: Nimm ${t/10} Zehner weg.`}
 function askNumber(title,text,a,op,b){return new Promise(res=>{const ans=op==='+'?a+b:a-b;let val='',tries=0,lock=false;
  panel(`<div class="num"><div class="numl"><div class="ptitle">${title}</div><p class="story">${text}</p><div class="eq">${a} ${op==='+'?'+':'−'} ${b} = <span id="ans" class="ans">?</span></div><div id="hint" class="hint"></div><button class="btn small" id="again">Nochmal hören</button></div>
@@ -311,9 +311,9 @@ function askNumber(title,text,a,op,b){return new Promise(res=>{const ans=op==='+
     setTimeout(()=>{A.textContent='?';A.classList.remove('bad')},700);return}}
   else if(val.length<3)val+=c;A.textContent=val||'?'})})}
 async function kisten(){await brief('Der Kapitän will wissen, wie viele Kekse er hat. Rechne aus. Tippe die Zahl ein und drücke OK.');
- for(let i=0;i<3;i++){let a,b;if(i<2){do{a=rand(13,69);b=rand(6,29)}while(a+b>100||a%10+b%10<10);
+ for(let i=0;i<3;i++){let a,b;if(i<2){if(i===0){do{a=rand(12,75);b=rand(2,8)}while(a%10+b>9)}else{do{a=rand(14,68);b=rand(3,9)}while(a%10+b<10)}
    await askNumber('Kekskisten '+dots(i,3),`In der ersten Kiste sind ${a} Kekse. In der zweiten Kiste sind ${b} Kekse. Wie viele Kekse sind es zusammen?`,a,'+',b)}
-  else{do{a=rand(31,95);b=rand(6,28)}while(a%10>=b%10);
+  else{do{a=rand(25,89);b=rand(2,8)}while(a%10<b);
    await askNumber('Kekskisten '+dots(i,3),`In der Kiste waren ${a} Kekse. Krümel hat heimlich ${b} Kekse gefressen! Wie viele Kekse sind noch da?`,a,'-',b)}}
  closePanel();await reward('kisten',30)}
 async function reward(k,n){if(!S.done[k]){S.done[k]=1;S.coins+=n;save();await talk('kruemel',`Geschafft! Du bekommst ${n} Dublonen.`)}else await talk('kruemel','Super geübt, Käpt’n!')}
@@ -332,15 +332,14 @@ async function kanonen(){await brief('Jedes Wort gehört in ein Fass. Der ist bl
  closePanel();await reward('kanonen',20)}
 
 /* ---------- Wortlücken ---------- */
-async function gaps(n,title){const ws=pickWords(n);
- for(let i=0;i<ws.length;i++)await new Promise(res=>{const w=ws[i];let lock=false;
-  panel(`<div class="ptitle">${title} ${dots(i,ws.length)}</div><div class="sign"><span>${w.g[0]}</span><span class="gap" id="gap">&nbsp;</span><span>${w.g[2]}</span></div>
+async function gaps(n,title){const ws=pickWords(n);for(let i=0;i<ws.length;i++)await gapOne(ws[i],title+' '+dots(i,ws.length));closePanel()}
+function gapOne(w,title){return new Promise(res=>{let lock=false,first=true;
+  panel(`<div class="ptitle">${title}</div><div class="sign"><span>${w.g[0]}</span><span class="gap" id="gap">&nbsp;</span><span>${w.g[2]}</span></div>
   <div class="opts">${shuffle(w.o).map(o=>`<button class="btn plank" data-o="${o}">${o}</button>`).join('')}</div><div class="center"><button class="btn small" id="again">Wort hören</button></div>`);
   note('kruemel','Welches Stück fehlt?');speak(w.w,'kruemel');$('#again').onclick=()=>speak(w.w,'kruemel');
   $$('.plank').forEach(b=>b.onclick=()=>{if(lock)return;
-   if(b.dataset.o===w.g[1]){lock=true;const g=$('#gap');g.textContent=w.g[1];g.classList.add('good');speak(w.w,'kruemel');setTimeout(res,1500)}
-   else{b.classList.add('shake');b.disabled=true;note('kruemel',pick(WRONG))}})});
- closePanel()}
+   if(b.dataset.o===w.g[1]){lock=true;const g=$('#gap');g.textContent=w.g[1];g.classList.add('good');speak(w.w,'kruemel');setTimeout(()=>res(first),1500)}
+   else{first=false;b.classList.add('shake');b.disabled=true;note('kruemel',pick(WRONG))}})})}
 
 /* ---------- Kompass ---------- */
 async function kompass(){await brief('Der Kompass hat seine Buchstaben verloren. Norden ist immer oben. Dann geht es im Kreis herum: Norden, Osten, Süden, Westen.');
@@ -358,7 +357,7 @@ async function kompass(){await brief('Der Kompass hat seine Buchstaben verloren.
  closePanel();await reward('kompass',10)}
 
 /* ---------- Kneipe ---------- */
-const MENU=[['Keks-Suppe',14],['Hexen-Limo',8],['Stiefel-Eintopf',27],['Fuchs-Nudeln',19],['Sechs Kekse',6,'sechs Kekse'],['Mixer-Saft',9]];
+const MENU=[['Keks-Suppe',7],['Hexen-Limo',4],['Stiefel-Eintopf',12],['Fuchs-Nudeln',9],['Sechs Kekse',6,'sechs Kekse'],['Mixer-Saft',5]];
 const ORDERS=[[2,4],[3,1],[0,5],[2,1],[3,0]];
 function order(o){return new Promise(res=>{const t=`Ich möchte ${MENU[o[0]][2]||MENU[o[0]][0]} und ${MENU[o[1]][2]||MENU[o[1]][0]}.`;let sel=[],lock=false;
  panel(`<div class="orderwrap"><div class="zettel"><div class="zt">Bestellung</div><p>${t}</p><p class="sig">Dein Kapitän</p><button class="btn small" id="zh">Krümel hilft lesen</button></div>
@@ -378,7 +377,7 @@ async function pub(){$('#harbor').style.display='none';$('#pub').style.display='
   await talk('kruemel','Der Kapitän hat Hunger. Hier ist sein Zettel. Den liest du selbst!');
   const o=pick(ORDERS),a=MENU[o[0]],b=MENU[o[1]],sum=a[1]+b[1];await order(o);
   await askNumber('Bezahlen',`${a[0]}: ${a[1]} Dublonen. ${b[0]}: ${b[1]} Dublonen. Was kostet das zusammen?`,a[1],'+',b[1]);
-  await askNumber('Wechselgeld',`Du gibst Olga 50 Dublonen. Das Essen kostet ${sum} Dublonen. Wie viele Dublonen bekommst du zurück?`,50,'-',sum);
+  await askNumber('Wechselgeld',`Du gibst Olga 20 Dublonen. Das Essen kostet ${sum} Dublonen. Wie viele Dublonen bekommst du zurück?`,20,'-',sum);
   closePanel();S.coins-=sum;S.done.karte=1;save();
   await talk('olga','Stimmt genau! Hier ist das Essen. Und schau mal, was unter meinem Tresen lag!');
   panel(`<div class="log"><div class="bigmsg">Ein Stück der Schatzkarte!</div>${MAP}<div class="ltext">Kartenstück 1 von 5</div></div>`);
@@ -387,18 +386,48 @@ async function pub(){$('#harbor').style.display='none';$('#pub').style.display='
 
 /* ---------- Logbuch (auf Papier schreiben) ---------- */
 async function logbuch(n){let q=pickWords(n),again=new Set();
- while(q.length){const w=q.shift();
-  panel(`<div class="ptitle">Logbuch</div><div class="log"><div class="lword">${w.w}</div><div class="timer"><i id="ti"></i></div><div class="ltext">Schau dir das Wort genau an!</div></div>`);
-  note('kruemel','Schau genau hin. Gleich ist das Wort weg!');speak(w.w,'kruemel');await wait(60);$('#ti').style.width='0';await wait(5000);
-  panel(`<div class="ptitle">Logbuch</div><div class="log"><div class="ltext">Schreib das Wort auf dein Papier!</div><div class="lrow"><button class="btn" id="lf">Fertig!</button><button class="btn sec" id="lh">Wort hören</button></div></div>`);
-  note('kruemel','Schreib das Wort auf dein Papier. Tippe dann auf Fertig.');$('#lh').onclick=()=>speak(w.w,'kruemel');
-  await new Promise(r=>$('#lf').onclick=r);
-  panel(`<div class="ptitle">Logbuch</div><div class="log"><div class="lword">${w.w}</div><div class="ltext">Vergleiche Buchstabe für Buchstabe.</div><div class="lrow"><button class="btn" id="ly">Richtig!</button><button class="btn sec" id="ln">Noch nicht</button></div></div>`);
-  note('kruemel','Hast du es genauso geschrieben?');
-  const ok=await new Promise(r=>{$('#ly').onclick=()=>r(true);$('#ln').onclick=()=>r(false)});
-  const st=S.log[w.w]||(S.log[w.w]=[0,0]);st[ok?0:1]++;save();
+ while(q.length){const w=q.shift(),ok=await logOne(w,'Logbuch');
   if(!ok&&!again.has(w.w)){again.add(w.w);q.push(w);await talk('kruemel','Macht nichts! Das Wort üben wir gleich nochmal.')}}
  closePanel()}
+async function logOne(w,ti){
+  panel(`<div class="ptitle">${ti}</div><div class="log"><div class="lword">${w.w}</div><div class="timer"><i id="ti"></i></div><div class="ltext">Schau dir das Wort genau an!</div></div>`);
+  note('kruemel','Schau genau hin. Gleich ist das Wort weg!');speak(w.w,'kruemel');await wait(60);$('#ti').style.width='0';await wait(5000);
+  panel(`<div class="ptitle">${ti}</div><div class="log"><div class="ltext">Schreib das Wort auf dein Papier!</div><div class="lrow"><button class="btn" id="lf">Fertig!</button><button class="btn sec" id="lh">Wort hören</button></div></div>`);
+  note('kruemel','Schreib das Wort auf dein Papier. Tippe dann auf Fertig.');$('#lh').onclick=()=>speak(w.w,'kruemel');
+  await new Promise(r=>$('#lf').onclick=r);
+  panel(`<div class="ptitle">${ti}</div><div class="log"><div class="lword">${w.w}</div><div class="ltext">Vergleiche Buchstabe für Buchstabe.</div><div class="lrow"><button class="btn" id="ly">Richtig!</button><button class="btn sec" id="ln">Noch nicht</button></div></div>`);
+  note('kruemel','Hast du es genauso geschrieben?');
+  const ok=await new Promise(r=>{$('#ly').onclick=()=>r(true);$('#ln').onclick=()=>r(false)});
+  const st=S.log[w.w]||(S.log[w.w]=[0,0]);st[ok?0:1]++;save();return ok}
+
+/* ---------- Lernwörter-Training (Testvorbereitung) ---------- */
+const BLATT={1:'Blatt 1: x und chs',2:'Blatt 2: Sp und St',3:'Blatt 3: Farben',0:'Alle Wörter'};
+const lvl=w=>Math.min(2,(S.mw||{})[w.w]||0);
+function artOne(w){return new Promise(res=>{let lock=false;
+ panel(`<div class="ptitle">Der, die oder das?</div><div class="kan"><div class="ball" id="ball" style="left:60px">${w.w}</div><div class="faesser">${['der','die','das'].map(a=>`<button class="fass" data-a="${a}" style="background:${ART[a]}">${a}</button>`).join('')}</div></div>`);
+ note('kruemel','Welcher Artikel passt?');speak(w.w,'kruemel');
+ $$('.fass').forEach(b=>b.onclick=()=>{if(lock)return;
+  if(b.dataset.a===w.a){lock=true;$('#ball').textContent=w.a+' '+w.w;$('#ball').style.background=ART[w.a];speak(w.a+' '+w.w,'kruemel');setTimeout(res,1300)}
+  else{b.classList.add('shake');b.disabled=true;note('kruemel',pick(WRONG))}})})}
+function schatz(){return new Promise(res=>{const ws=WORDS,n=ws.filter(w=>lvl(w)>=2).length;
+ panel(`<div class="ptitle">Wörter-Schatzkiste <span style="font-size:24px;color:#3a2c20">${n} von ${ws.length} Wörtern sitzen</span></div>
+ <div style="display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px">${ws.map(w=>{const l=lvl(w);return `<span style="font-size:22px;padding:4px 10px;border-radius:10px;border:2px solid ${l>=2?'#4f9a4a':l?'#c98f1f':'#cbb892'};background:${l>=2?'#bfe6b0':l?'#fbe3a0':'#fff'}">${l>=2?'★ ':''}${w.w}</span>`}).join('')}</div>
+ <div style="font-size:24px;margin-bottom:10px">Was willst du üben?</div><div class="lrow" style="flex-wrap:wrap;gap:16px">${[1,2,3,0].map(k=>`<button class="btn${k?' sec':''}" data-k="${k}" style="font-size:24px">${BLATT[k]}</button>`).join('')}<button class="btn small" id="sz-x">Zurück</button></div>`);
+ note('kruemel','Grün mit Stern heißt: Das Wort sitzt! Welche Wörter willst du üben?');
+ $$('[data-k]').forEach(b=>b.onclick=()=>res(+b.dataset.k));$('#sz-x').onclick=()=>res(-1)})}
+async function training(){busy=true;$('#b-home').style.display='none';
+ if(!S.mw)S.mw={};
+ await brief('Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift!');
+ for(;;){const k=await schatz();if(k<0)break;
+  const src=WORDS.filter(w=>!k||w.l===k);
+  const ws=src.map(w=>[lvl(w)*10+Math.random()*9,w]).sort((a,b)=>a[0]-b[0]).slice(0,6).map(x=>x[1]);
+  for(let i=0;i<ws.length;i++){const w=ws[i],t=`Wort ${i+1} von ${ws.length}`;
+   const g=await gapOne(w,t);if(w.a)await artOne(w);const ok=await logOne(w,t);
+   S.mw[w.w]=(g&&ok)?(S.mw[w.w]||0)+1:Math.min(S.mw[w.w]||0,1);save();
+   if(S.mw[w.w]===2&&g&&ok)await talk('kruemel',`Kräh! „${w.w}“ sitzt jetzt! Ab in die Schatzkiste!`);
+   else if(!ok)await talk('kruemel','Macht nichts! Das Wort kommt bald nochmal dran.')}
+  S.coins+=5;save();await talk('kruemel','Super geübt! Du bekommst 5 Dublonen.')}
+ closePanel();busy=false;idle();showTitle()}
 
 /* ---------- Hafen ---------- */
 let busy=false,mx=600;const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110};
@@ -438,25 +467,23 @@ async function ending(){panel(`<div class="log"><div class="bigmsg">Kapitel 1 ge
 function showTitle(){const t=$('#title');t.style.display='';
  t.innerHTML=`<svg viewBox="0 0 1280 800"><g transform="translate(190,720) scale(1.7)">${moritz()}</g><g transform="translate(1090,640) scale(2.2)">${kruemel()}</g><rect x="1080" y="640" width="20" height="160" fill="#6d4a26"/></svg>
  <h1>Die Insel von<br>Kapitän Rechenbart<small>Kapitel 1: Der Hafen</small></h1>
- <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Logbuch üben</button></div>
+ <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Lernwörter üben</button></div>
  <button class="btn small" id="pbtn">Eltern</button>`;
  $('#t-go').onclick=()=>{t.style.display='none';speak(' ','moritz');idle();if(!S.done.intro)intro()};
- $('#t-log').onclick=async()=>{t.style.display='none';busy=true;$('#b-home').style.display='none';
-  await brief('Hol dir Papier und einen Stift. Du siehst ein Wort. Dann ist es weg. Schreib es auf dein Papier.');
-  await logbuch(8);await talk('kruemel','Kräh! Fleißig geübt!');busy=false;idle();showTitle()};
+ $('#t-log').onclick=()=>{t.style.display='none';speak(' ','moritz');training()};
  $('#pbtn').onclick=eltern}
 function eltern(){const e=$('#eltern');e.style.display='flex';
  const wack=Object.keys(S.log).filter(w=>S.log[w][1]>0).sort((a,b)=>S.log[b][1]-S.log[a][1]).map(w=>`${w} (${S.log[w][1]}×)`).join(', ')||'noch keine';
  e.innerHTML=`<div class="ecard"><h2>Elternbereich</h2><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label>
  <div>Deutsche Stimme auf diesem Gerät: <b>${!hasTTS?'keine Sprachausgabe':voice?'gefunden':'nicht gefunden (Gerätestimme wird versucht)'}</b></div>
  <p style="margin:14px 0 4px"><b>Lernwörter</b></p>${[[1,'Faltblatt 1 (x, chs, ks)'],[2,'Faltblatt 2 (Sp, St)'],[3,'Faltblatt 3 (Farben und mehr)']].map(l=>`<label><input type="checkbox" class="e-l" value="${l[0]}"${S.lists.includes(l[0])?' checked':''}>${l[1]}</label>`).join('')}
- <p style="margin:14px 0 4px"><b>Wackelwörter aus dem Logbuch:</b> ${wack}</p>
+ <p style="margin:14px 0 4px"><b>Wackelwörter aus dem Logbuch:</b> ${wack}</p><p style="margin:4px 0"><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen (zweimal fehlerfrei)</p>
  <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
  $('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
  $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
  $('#e-t').onclick=()=>{loadVoice();speak('Ahoi! Ich bin Krümel, der Papagei.','kruemel')};
  let sure=false;$('#e-r').onclick=x=>{if(!sure){sure=true;x.target.textContent='Wirklich löschen? Nochmal tippen';return}
-  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{}};save();mx=600;build();e.style.display='none';showTitle()};
+  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{},mw:{}};save();mx=600;build();e.style.display='none';showTitle()};
  $('#e-c').onclick=()=>{e.style.display='none'}}
 function setTon(){$('#b-ton').textContent='Vorlesen: '+(S.speak?'an':'aus')}
 function build(){$('#scene').innerHTML=HARBOR+PUB;$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
