@@ -125,6 +125,26 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .dw{font:inherit;font-size:40px;font-weight:700;padding:10px 24px;border-radius:14px;border:3px solid #a9793f;background:#fff;color:#2b2a33}
 .dw.good{background:#bfe6b0;border-color:#4f9a4a}
 .ohr{font-size:120px;line-height:1}
+#hudnav{display:flex;gap:10px}
+.frage{font-size:48px;font-weight:700;text-align:center;margin:50px 0 36px}
+.copts{display:flex;gap:26px;justify-content:center;margin-bottom:24px}
+.copts.col{flex-direction:column;align-items:center;gap:16px}
+.copt{font-size:40px}.col .copt{font-size:30px;min-width:920px}
+.goodb{background:#bfe6b0!important}
+.nw{font:inherit;font-size:44px;font-weight:700;padding:14px 26px;border-radius:40px;border:4px solid #3b78c4;background:#dff0fb;color:#2b2a33}
+.nw.good{background:#bfe6b0;border-color:#4f9a4a}
+.splank{font:inherit;font-size:44px;font-weight:700;min-width:120px;padding:16px 10px;border:4px solid #8c6234;border-radius:8px;background:#d9a55a;color:#2b2a33}
+.srow{display:flex;gap:14px;justify-content:center;min-height:96px;margin:26px 0}
+.fwrap{display:flex;gap:18px}.fpic{width:595px;height:436px;border:4px solid #2b2a33;border-radius:10px}
+.mzwrap{display:flex;gap:30px;align-items:center;justify-content:center}
+.mzpad{display:grid;grid-template-columns:repeat(3,96px);grid-auto-rows:96px;gap:8px}
+.mzpad button{font:inherit;font-size:44px;border-radius:16px;border:3px solid #2b2a33;background:#f6c84a;box-shadow:0 5px 0 #2b2a33}
+.orte{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:20px}
+.orte .btn{min-width:560px}.orte .btn:disabled{opacity:.4}
+#credits{position:absolute;inset:0;background:#1d1826cc;overflow:hidden;color:#fbeed3;text-align:center}
+.roll{position:absolute;left:0;right:0;top:0;font-size:38px;line-height:1.6;animation:roll 30s linear forwards}
+.roll h2{font-size:64px;color:#f6c84a;margin:0 0 30px}.roll p{margin:0 0 34px}.roll small{display:block;font-size:26px;color:#f6c84a}
+@keyframes roll{from{transform:translateY(800px)}to{transform:translateY(-100%)}}
 .timer i{display:block;height:100%;background:#8e3b3b;width:100%;transition:width 5s linear}
 .lrow{display:flex;gap:30px}
 .bigmsg{font-size:52px;font-weight:700;color:#8e3b3b;margin:6px 0}
@@ -146,7 +166,7 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 <body>
 <div id="stage">
   <div id="scene"></div>
-  <div id="hud"><button id="b-ton">Vorlesen: an</button><button id="b-home">Start</button></div>
+  <div id="hud"><button id="b-ton">Vorlesen: an</button><span id="hudnav"><button id="b-insel">Insel</button><button id="b-home">Start</button></span></div>
   <div id="panel"></div>
   <div id="bar"></div>
   <div id="cine"></div>
@@ -255,10 +275,21 @@ function mixa(){return `
 <circle cx="-26" cy="-212" r="7" fill="#f0a58e" opacity=".6"/>
 <path d="M-40 -256L6 -352L32 -332L40 -256Z" fill="#523672"/><ellipse cx="0" cy="-254" rx="64" ry="12" fill="#3d2a57"/>
 <path d="M-36 -266q36 12 74 0l-2 -12q-34 10 -68 0z" fill="#f6c84a"/>`}
-const PORT={mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,moritz:`<svg viewBox="-62 -268 124 124">${moritz()}</svg>`,kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
+function typ(o){return `<ellipse cx="0" cy="2" rx="54" ry="9" fill="#0002"/>
+<rect x="-30" y="-80" width="24" height="80" rx="8" fill="${o.hose}"/><rect x="6" y="-80" width="24" height="80" rx="8" fill="${o.hose}"/>
+<ellipse cx="-18" cy="-6" rx="20" ry="10" fill="#2b2a33"/><ellipse cx="18" cy="-6" rx="20" ry="10" fill="#2b2a33"/>
+<ellipse cx="-56" cy="-150" rx="13" ry="42" fill="${o.jacke}" transform="rotate(10 -56 -150)"/><ellipse cx="56" cy="-150" rx="13" ry="42" fill="${o.jacke}" transform="rotate(-10 56 -150)"/>
+<circle cx="-62" cy="-108" r="10" fill="#e9b990"/><circle cx="62" cy="-108" r="10" fill="#e9b990"/>
+<path d="M-48 -72L-42 -196Q0 -214 42 -196L48 -72Z" fill="${o.jacke}"/>${o.vorn||''}
+<circle cx="0" cy="-232" r="36" fill="#e9b990"/>
+<circle cx="-13" cy="-240" r="4.5" fill="#2b2a33"/><circle cx="13" cy="-240" r="4.5" fill="#2b2a33"/>
+<path d="M-14 -214q14 12 28 0" stroke="#a5553f" stroke-width="4" fill="none" stroke-linecap="round"/>${o.bart||''}<circle cx="0" cy="-228" r="8" fill="#dc9f78"/>${o.hut}`}
+const hobel=()=>typ({hose:'#4a5d7a',jacke:'#b5533c',vorn:'<path d="M-30 -72L-26 -172H26L30 -72Z" fill="#e7d7b0"/>',bart:'<path d="M-24 -222q24 -12 48 0q-24 12 -48 0z" fill="#7a5230"/>',hut:'<path d="M-38 -252q38 -46 76 0z" fill="#f6c84a"/><rect x="-46" y="-256" width="92" height="10" rx="5" fill="#d9a520"/>'});
+const strahl=()=>typ({hose:'#3d5a80',jacke:'#f6c84a',bart:'<path d="M-34 -230q-6 50 34 58q40 -8 34 -58q-34 22 -68 0z" fill="#ece8dd"/>',hut:'<path d="M-40 -254q40 -50 80 0z" fill="#f6c84a"/><path d="M-54 -250q54 14 108 0l-8 -10h-92z" fill="#e0ae1f"/>'});
+const PORT={hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,moritz:`<svg viewBox="-62 -268 124 124">${moritz()}</svg>`,kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
  kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
-const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa'};
-const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,moritz:1};
+const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
+const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,hobel:.8,strahl:.9,moritz:1};
 
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
@@ -318,10 +349,10 @@ const HEXE=`<svg id="hexe" viewBox="0 0 1280 620" style="display:none">
 <g fill="#8fd16a"><circle cx="-24" cy="352" r="9"/><circle cx="14" cy="338" r="6"/><circle cx="34" cy="356" r="7"/></g></g>
 <g transform="translate(330,500) scale(.95)">${mixa()}</g>
 <g><rect x="1212" y="470" width="12" height="120" fill="#6d4a26"/><path d="M1270 478h-100l-22 22l22 22h100z" fill="#a9793f" stroke="#6d4a26" stroke-width="4"/><text x="1216" y="508" text-anchor="middle" font-size="22" font-weight="700" fill="#fff8e6">Zum Hafen</text></g>
-${mark('buch',140,310)}${mark('kessel',565,300)}${mark('mixa',330,140)}
+${mark('fehler1',1098,268)}${mark('buch',140,310)}${mark('kessel',565,300)}${mark('mixa',330,140)}
 <g id="mor2" style="transform:translate(760px,588px)"><g id="morflip2" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>
 <rect class="hot" data-act="buch" x="60" y="290" width="170" height="190"/><rect class="hot" data-act="mixa" x="250" y="150" width="170" height="360"/>
-<rect class="hot" data-act="kessel" x="470" y="280" width="190" height="210"/><rect class="hot" data-act="hafen" x="1140" y="466" width="140" height="140"/></svg>`;
+<rect class="hot" data-act="kessel" x="470" y="280" width="190" height="210"/><rect class="hot" data-act="fehler1" x="1040" y="240" width="120" height="130"/><rect class="hot" data-act="hafen" x="1140" y="466" width="140" height="140"/></svg>`;
 const PUB=`<svg id="pub" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#8a6038"/>
 <g stroke="#76502c" stroke-width="4">${[...Array(15)].map((_,i)=>`<path d="M${(i+1)*82} 0V430"/>`).join('')}</g>
 <circle cx="560" cy="70" r="60" fill="#f8d66b" opacity=".25"/><circle cx="560" cy="70" r="22" fill="#f8d66b"/><path d="M560 0V48" stroke="#2b2a33" stroke-width="4"/>
@@ -333,13 +364,14 @@ const PUB=`<svg id="pub" viewBox="0 0 1280 620" style="display:none"><rect width
 <g transform="translate(300,428) scale(1.2)">${olga()}</g>
 <rect y="430" width="1280" height="190" fill="#b98a4e"/><rect y="420" width="1280" height="24" fill="#d9a55a"/>
 <g transform="translate(620,420)">${kruemel()}</g></svg>`;
+const STUECK=[['M8 8H150L132 100L170 252H8Z','<path d="M30 220q30 -60 60 -40t40 -70" stroke="#8e3b3b" stroke-width="5" stroke-dasharray="10 8" fill="none"/><path d="M40 60q8 -30 0 -44" stroke="#8c6234" stroke-width="5" fill="none"/><ellipse cx="28" cy="20" rx="18" ry="6" fill="#4f8f55"/><ellipse cx="54" cy="20" rx="18" ry="6" fill="#4f8f55"/>',70,140],
+ ['M150 8H250L260 80L132 100Z','<path d="M176 78V52l22 -18l22 18v26z" fill="#6b4a8e"/>',200,66],
+ ['M250 8H392V110L260 80Z','<path d="M300 70h60l-10 16h-40z" fill="#8c6234"/><path d="M330 70V34l22 30z" fill="#f4efe4"/>',320,70],
+ ['M132 100L260 80L392 110V180L232 160L170 140L142 140Z','<path d="M300 150l8 -44h14l8 44z" fill="#fff" stroke="#d24a43" stroke-width="4"/><path d="M150 120q60 30 130 10" stroke="#8e3b3b" stroke-width="5" stroke-dasharray="10 8" fill="none"/>',310,150],
+ ['M142 140L170 140L232 160L392 180V252H170Z','<path d="M286 206l22 22m0 -22l-22 22" stroke="#d24a43" stroke-width="7"/><path d="M190 180q40 40 90 36" stroke="#8e3b3b" stroke-width="5" stroke-dasharray="10 8" fill="none"/>',290,235]];
+const hat=()=>{const d=S.done;return[d.karte,d.duell3,d.k3,d.k4,d.schloss]};
 const mapSvg=k=>`<svg viewBox="0 0 400 260" width="400" height="260"><rect x="6" y="6" width="388" height="248" rx="10" fill="#f1dfb4" stroke="#a9793f" stroke-width="5" stroke-dasharray="14 8"/>
-<path d="M150 6L132 100L170 254M150 100L260 80L394 110M260 80L250 6M210 254L232 160L394 180M232 160L170 140" stroke="#a9793f" stroke-width="3" stroke-dasharray="8 6" fill="none"/>
-<g class="${k===1?'newp':''}"><path d="M8 8H150L132 100L170 252H8Z" fill="#e7c98a" stroke="#6d4a26" stroke-width="4"/>
-<path d="M30 220q30 -60 60 -40t40 -70" stroke="#8e3b3b" stroke-width="5" stroke-dasharray="10 8" fill="none"/>
-<path d="M40 60q8 -30 0 -44" stroke="#8c6234" stroke-width="5" fill="none"/><ellipse cx="28" cy="20" rx="18" ry="6" fill="#4f8f55"/><ellipse cx="54" cy="20" rx="18" ry="6" fill="#4f8f55"/></g>
-${S.done.duell3?`<g class="${k===2?'newp':''}"><path d="M150 8H250L260 80L132 100Z" fill="#e7c98a" stroke="#6d4a26" stroke-width="4"/><path d="M176 78V52l22 -18l22 18v26z" fill="#6b4a8e"/><path d="M150 96q30 -20 50 -18" stroke="#8e3b3b" stroke-width="5" stroke-dasharray="10 8" fill="none"/></g>`:''}
-<g font-size="46" font-weight="700" fill="#b9a377" text-anchor="middle">${S.done.duell3?'':'<text x="200" y="66">?</text>'}<text x="320" y="70">?</text><text x="310" y="160">?</text><text x="290" y="235">?</text></g></svg>`;
+${STUECK.map((t,i)=>hat()[i]?`<g class="${k===i+1?'newp':''}"><path d="${t[0]}" fill="#e7c98a" stroke="#6d4a26" stroke-width="4"/>${t[1]}</g>`:`<path d="${t[0]}" fill="none" stroke="#a9793f" stroke-width="3" stroke-dasharray="8 6"/><text x="${t[2]}" y="${t[3]}" font-size="46" font-weight="700" fill="#b9a377" text-anchor="middle">?</text>`).join('')}</svg>`;
 
 /* ---------- Sprache ---------- */
 let voice=null;const hasTTS='speechSynthesis' in window;
@@ -448,14 +480,17 @@ function talk(who,text,btns){btns=btns||['Weiter'];return new Promise(res=>{barH
  $$('#bar .btn').forEach(b=>b.onclick=()=>{hush();res(+b.dataset.b)})})}
 function note(who,text){barHtml(who,text,[]);speak(text,who,hl)}
 async function brief(text){while(await talk('kruemel',text+' Alles klar, Käpt’n?',['Ja!','Nochmal hören']));}
-function idle(){const d=S.done,hx=S.scene==='hexe',n=['kisten','kanonen','kompass'].filter(k=>d[k]).length,n2=['buch','kessel'].filter(k=>d[k]).length;
- const t=hx?(!d.c2intro?'':n2<2?'Hilf der Hexe! Tippe auf ein Ausrufezeichen.':!d.duell3?'Fordere Mixa zum Rechen-Duell! Tippe sie an.':'Kapitel 2 geschafft! Du kannst alles nochmal üben.')
+function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filter(k=>d[k]).length,n2=['buch','kessel'].filter(k=>d[k]).length,c=SC[sc];let t;
+ if(c){const m=c.tasks.filter(k=>d[k]).length;t=!d[c.intro]?'':m<c.tasks.length?'Tippe auf ein Ausrufezeichen!':!d[c.key]?c.hint:sc==='hoehle'?'Du hast den Schatz gefunden! Du kannst alles nochmal üben.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.'}
+ else t=sc==='hexe'?(!d.c2intro?'':n2<2?'Hilf der Hexe! Tippe auf ein Ausrufezeichen.':!d.duell3?'Fordere Mixa zum Rechen-Duell! Tippe sie an.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.')
   :(!d.intro?'':n<3?'Tippe auf ein Ausrufezeichen im Hafen!':!d.karte?'Geh zur Kneipe!':!d.logbuch?'Bring das Essen zum Kapitän!':'Kapitel 1 geschafft! Folge dem Wegweiser zur Hexe.');
- $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${(d.karte?1:0)+(d.duell3?1:0)} von 5</span></div><div class="tx" style="margin-top:10px">${t}</div></div>`;
- [['kisten',d.kisten,1],['kanonen',d.kanonen,1],['kompass',d.kompass,1],['tuer',d.karte,n>=3],['schild',0,d.logbuch],['schiff',d.rennen,n>=3],['kapitaen',0,d.karte&&!d.logbuch],
-  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2]].forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
+ $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span></div><div class="tx" style="margin-top:10px">${t}</div></div>`;
+ const M=[['kisten',d.kisten,1],['kanonen',d.kanonen,1],['kompass',d.kompass,1],['tuer',d.karte,n>=3],['schild',0,d.logbuch],['schiff',d.rennen,n>=3],['kapitaen',0,d.karte&&!d.logbuch],
+  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['fehler1',d.fehler1,n2>=2]];
+ Object.keys(SC).forEach(k=>{const q=SC[k],all=q.tasks.every(x=>d[x]);q.tasks.forEach(x=>M.push([x,d[x],1]));M.push([q.bonus,d[q.bonus],all],[q.npc,d[q.key],all])});
+ M.forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
  ['g-schild','h-schild'].forEach(i=>{const e=$('#'+i);if(e)e.style.display=d.logbuch?'':'none'});
- $('#b-home').style.display='';save()}
+ $('#hudnav').style.display='';save()}
 const WRONG=['Kräh! Knapp daneben. Versuch es nochmal!','Hoppla! Da ist ein Krümel verrutscht. Nochmal!','Fast! Probier es noch einmal.'];
 const RIGHT=['Kräh! Richtig!','Volltreffer, Käpt’n!','Stark gemacht!'];
 const panel=h=>{const p=$('#panel');p.innerHTML=h;p.style.display='block'};
@@ -537,7 +572,7 @@ function order(o){return new Promise(res=>{const t=`Ich möchte ${MENU[o[0]][2]|
   sel.push(i);r.classList.add('sel');if(sel.length<2)return;lock=true;
   if(o.every(x=>sel.includes(x))){$$('.row.sel').forEach(x=>x.classList.add('good'));note('kruemel',(sfx('ok'),pick(RIGHT)));setTimeout(res,1500)}
   else{note('kruemel','Kräh! Das wollte er nicht. Lies den Zettel nochmal genau.');setTimeout(()=>{$$('.row').forEach(x=>x.classList.remove('sel'));sel=[];lock=false},900)}})})}
-async function pub(){$('#harbor').style.display='none';$('#pub').style.display='';$('#b-home').style.display='none';
+async function pub(){$('#harbor').style.display='none';$('#pub').style.display='';$('#hudnav').style.display='none';
  if(S.done.karte){if(await talk('olga','Schön, dich zu sehen, Moritz! Willst du nochmal meine Speisekarte flicken?',['Ja!','Nein'])===0)await gaps(8,'Speisekarte flicken')}
  else{await talk('olga','Ahoi Moritz! Ich bin Olga. Oh nein! Krümel hat Löcher in meine Speisekarte gepickt!');
   await talk('kruemel','Kräh! Die Karte sah aus wie ein Keks!');
@@ -585,7 +620,7 @@ function schatz(){return new Promise(res=>{const ws=WORDS,n=ws.filter(w=>lvl(w)>
  <div style="font-size:24px;margin-bottom:10px">Was willst du üben?</div><div class="lrow" style="flex-wrap:wrap;gap:16px">${[1,2,3,0].map(k=>`<button class="btn${k?' sec':''}" data-k="${k}" style="font-size:24px">${BLATT[k]}</button>`).join('')}<button class="btn small" id="sz-x">Zurück</button></div>`);
  note('kruemel','Grün mit Stern heißt: Das Wort sitzt! Welche Wörter willst du üben?');
  $$('[data-k]').forEach(b=>b.onclick=()=>res(+b.dataset.k));$('#sz-x').onclick=()=>res(-1)})}
-async function training(){busy=true;$('#b-home').style.display='none';
+async function training(){busy=true;$('#hudnav').style.display='none';
  if(!S.mw)S.mw={};
  await brief('Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift!');
  for(;;){const k=await schatz();if(k<0)break;
@@ -665,12 +700,14 @@ const STORY=[{l:1,t:'Die Hexe und der Keks',p:['Im Wald wohnt eine Hexe. Sie hat
  {l:3,t:'Krümel malt ein Bild',p:['Krümel will ein Bild malen. Er holt jede Farbe, die er hat: rot, gelb, blau und grün. Er malt einen Elefanten. Der Rüssel wird blau. Ein Ohr wird rot, das andere Ohr wird gelb.',
   'Da tritt Krümel mit dem Fuß in die Farbe. Oh nein! Jetzt ist sein Fuß grün. Er will schnell zum Wasser rennen. Überall sind bunte Flecken. Der Kapitän lacht: Dein Bild ist schön! Nur mein Bart bleibt weiß und mein Hut bleibt schwarz.']}];
 function sayWord(t){const o=S.speak;S.speak=true;speak(t,'kruemel');S.speak=o}
-async function diktat(){busy=true;$('#b-home').style.display='none';
+async function diktat(){busy=true;$('#hudnav').style.display='none';
  const k=await new Promise(r=>{panel(`<div class="ptitle">Lese-Diktat</div><div class="log" style="height:440px"><div class="ltext">Welche Geschichte willst du lesen?</div>
   ${STORY.map((g,i)=>`<button class="btn${i?' sec':''}" data-g="${i}" style="min-width:640px">${g.t} <span style="font-weight:400;font-size:22px">(Blatt ${g.l})</span></button>`).join('')}<button class="btn small" id="dk-x">Zurück</button></div>`);
   note('kruemel','Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!');
   $$('[data-g]').forEach(b=>b.onclick=()=>r(+b.dataset.g));$('#dk-x').onclick=()=>r(-1)});
- if(k>=0){const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(w=>w.w),re=new RegExp('(^|[^A-Za-zÄÖÜäöüß])('+lw.join('|')+')(?![A-Za-zÄÖÜäöüß])','g');
+ if(k>=0)await diktatRun(k);
+ closePanel();busy=false;idle();showTitle()}
+async function diktatRun(k){{const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(w=>w.w),re=new RegExp('(^|[^A-Za-zÄÖÜäöüß])('+lw.join('|')+')(?![A-Za-zÄÖÜäöüß])','g');
   for(let i=0;i<g.p.length;i++)await new Promise(r=>{
    panel(`<div class="ptitle">${g.t}<span style="font-size:22px;color:#3a2c20">Seite ${i+1} von ${g.p.length}</span></div><div class="lese">${g.p[i].replace(re,'$1<b>$2</b>')}</div>
    <div class="lrow" style="justify-content:center"><button class="btn sec" id="dk-v">Krümel liest vor</button><button class="btn" id="dk-w">${i<g.p.length-1?'Weiter lesen':'Fertig gelesen'}</button></div>`);
@@ -688,13 +725,118 @@ async function diktat(){busy=true;$('#b-home').style.display='none';
    note('kruemel','Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün.');
    $$('.dw').forEach(b=>b.onclick=()=>b.classList.toggle('good'));$('#dk-e').onclick=()=>r($$('.dw').map(b=>b.classList.contains('good')))});
   ws.forEach((w,i)=>{const st=S.log[w]||(S.log[w]=[0,0]);st[ok[i]?0:1]++});const n=ok.filter(x=>x).length;S.coins+=5;save();sfx(n===ws.length?'fanfare':'coin');
-  await talk('kruemel',n===ws.length?'Kräh! Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!':`Du hast ${n} von ${ws.length} Wörtern richtig. Gut gemacht! Die anderen üben wir nochmal. 5 Dublonen für dich!`)}
- closePanel();busy=false;idle();showTitle()}
+  await talk('kruemel',n===ws.length?'Kräh! Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!':`Du hast ${n} von ${ws.length} Wörtern richtig. Gut gemacht! Die anderen üben wir nochmal. 5 Dublonen für dich!`)}}
+
+/* ---------- Bausteine für Aufgaben ---------- */
+function choice(title,q,opts,hint){return new Promise(res=>{const col=opts.some(o=>o.length>14);let lock=false;
+ panel(`<div class="ptitle">${title}</div><div class="frage">${q}</div><div class="copts${col?' col':''}">${shuffle(opts.map((o,i)=>[o,i])).map(x=>`<button class="btn sec copt" data-r="${x[1]?0:1}">${x[0]}</button>`).join('')}</div><div class="center"><button class="btn small" id="ch-h">Krümel hilft lesen</button></div>`);
+ note('kruemel',hint);$('#ch-h').onclick=()=>sayWord(q.replace('___','hm')+' '+opts.join('. Oder: '));
+ $$('.copt').forEach(b=>b.onclick=()=>{if(lock)return;
+  if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');speak(q.includes('___')?q.replace('___',opts[0]):opts[0],'kruemel');setTimeout(res,2400)}
+  else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel','Kräh! Das ist Quatsch. Lies nochmal genau.')}})})}
+const zeT=()=>{let a=rand(11,79);if(a%10===0)a++;return[a,z(1,Math.floor((99-a)/10))]},zeM=()=>{let a=rand(31,99);if(a%10===0)a++;return[a,z(1,Math.floor(a/10)-1)]};
+async function rechnen(titel,aufg){for(let i=0;i<aufg.length;i++){const[op,f,g]=aufg[i],[a,b]=g();await askNumber(titel+' '+dots(i,aufg.length),f(a,b),a,op,b)}closePanel()}
+
+/* ---------- Belohnungsspiele ---------- */
+const PICS={kueche:{base:'<rect width="300" height="220" fill="#e9dcc0"/><rect y="170" width="300" height="50" fill="#b98a4e"/><rect x="20" y="60" width="120" height="6" fill="#6d4a26"/><rect x="200" y="30" width="70" height="60" fill="#2b3a67" stroke="#6d4a26" stroke-width="5"/><path d="M110 150q0 45 40 45t40 -45z" fill="#2b2a33"/><ellipse cx="150" cy="150" rx="42" ry="8" fill="#8fd16a"/><path d="M230 195q0 -40 20 -40t20 40z" fill="#444"/><circle cx="250" cy="150" r="14" fill="#444"/><path d="M240 140l-2 -14l10 8z" fill="#444"/><circle cx="245" cy="149" r="2.5" fill="#f6c84a"/><circle cx="255" cy="149" r="2.5" fill="#f6c84a"/>',
+ d:[[40,48,'<rect x="32" y="36" width="16" height="24" rx="4" fill="#d24a43"/>','<rect x="32" y="36" width="16" height="24" rx="4" fill="#3b78c4"/>'],[80,48,'<rect x="72" y="40" width="16" height="20" rx="4" fill="#4f9a4a"/>',''],[120,48,'','<rect x="112" y="38" width="16" height="22" rx="4" fill="#f6c84a"/>'],
+ [235,58,'<circle cx="235" cy="58" r="14" fill="#f8f1c9"/>','<circle cx="235" cy="58" r="14" fill="#f8f1c9"/><circle cx="242" cy="54" r="12" fill="#2b3a67"/>'],[150,122,'<g fill="#8fd16a"><circle cx="135" cy="128" r="6"/><circle cx="152" cy="116" r="5"/><circle cx="166" cy="130" r="6"/></g>','<circle cx="152" cy="116" r="5" fill="#8fd16a"/>'],
+ [260,130,'<path d="M260 140l2 -14l-10 8z" fill="#444"/>',''],[57,186,'<g fill="#d9a55a"><circle cx="50" cy="190" r="7"/><circle cx="64" cy="188" r="7"/><circle cx="57" cy="180" r="7"/></g>','<g fill="#d9a55a"><circle cx="50" cy="190" r="7"/><circle cx="64" cy="188" r="7"/></g>'],
+ [25,140,'<path d="M25 80V165" stroke="#8c6234" stroke-width="4"/><path d="M15 165h20l4 30h-28z" fill="#d9a55a"/>','']]},
+ hoehle:{base:'<rect width="300" height="220" fill="#4a3f57"/><rect y="170" width="300" height="50" fill="#6b5a4a"/><rect x="110" y="130" width="80" height="45" fill="#8c3b2e" stroke="#f6c84a" stroke-width="4"/><path d="M110 130q0 -28 40 -28t40 28z" fill="#a4483a" stroke="#f6c84a" stroke-width="4"/><rect x="37" y="76" width="6" height="30" fill="#8c6234"/><rect x="75" y="45" width="40" height="28" fill="#f1dfb4"/>',
+ d:[[150,136,'<rect x="143" y="128" width="14" height="16" rx="3" fill="#f6c84a"/>',''],[57,188,'<g fill="#f6c84a"><circle cx="50" cy="192" r="7"/><circle cx="64" cy="190" r="7"/><circle cx="57" cy="182" r="7"/></g>','<g fill="#f6c84a"><circle cx="50" cy="192" r="7"/><circle cx="64" cy="190" r="7"/></g>'],
+ [40,64,'<path d="M40 50q12 16 0 28q-12 -12 0 -28z" fill="#f6a23a"/>','<path d="M40 50q12 16 0 28q-12 -12 0 -28z" fill="#6bd0ff"/>'],[240,26,'<path d="M225 0l15 50l15 -50z" fill="#2a2333"/>',''],
+ [240,184,'<ellipse cx="240" cy="188" rx="16" ry="10" fill="#e2572b"/><circle cx="233" cy="176" r="3" fill="#fff"/><circle cx="247" cy="176" r="3" fill="#fff"/>','<ellipse cx="240" cy="188" rx="16" ry="10" fill="#3b78c4"/><circle cx="233" cy="176" r="3" fill="#fff"/><circle cx="247" cy="176" r="3" fill="#fff"/>'],
+ [197,96,'<circle cx="197" cy="96" r="9" fill="#d9a55a"/>',''],[95,59,'<path d="M88 52l14 14m0 -14l-14 14" stroke="#d24a43" stroke-width="3"/>',''],[280,150,'','<path d="M268 150l12 -14l12 14l-12 14z" fill="#6bd0ff"/>']]}};
+function fehler(pic){return new Promise(res=>{const P=PICS[pic],ch=shuffle(P.d.map((_,i)=>i)).slice(0,5);let left=5;
+ const draw=r=>`<svg viewBox="0 0 300 220" class="fpic">${P.base}${P.d.map((d,i)=>r&&ch.includes(i)?d[3]:d[2]).join('')}${ch.map(i=>`<circle class="fhit" data-i="${i}" cx="${P.d[i][0]}" cy="${P.d[i][1]}" r="26" fill="transparent"/>`).join('')}</svg>`;
+ panel(`<div class="ptitle">Fehlersuche<span id="fz" style="color:#3a2c20">Noch 5 Fehler</span></div><div class="fwrap">${draw(0)}${draw(1)}</div>`);
+ note('kruemel','Im rechten Bild sind 5 Fehler versteckt. Vergleiche die Bilder und tippe die Fehler an!');
+ $$('.fhit').forEach(h=>h.onclick=()=>{if(h.dataset.f)return;$$(`.fhit[data-i="${h.dataset.i}"]`).forEach(e=>{e.dataset.f=1;e.setAttribute('stroke','#4fd14a');e.setAttribute('stroke-width',5)});
+  sfx('ok');left--;$('#fz').textContent=left?`Noch ${left} Fehler`:'Alle gefunden!';if(!left)setTimeout(res,1600)})})}
+async function sortieren(){await brief('Die Planken sind durcheinander. Tippe sie der Reihe nach an: erst die kleinste Zahl, zum Schluss die größte.');
+ for(let r=0;r<3;r++)await new Promise(res=>{const set=new Set();while(set.size<(r===2?6:5))set.add(r===1?z(1,10):r?rand(11,99):rand(1,20));const nums=[...set],ord=nums.slice().sort((a,b)=>a-b);let i=0;
+  panel(`<div class="ptitle">Planken sortieren ${dots(r,3)}</div><div class="center ltext" style="margin-top:30px">Von klein nach groß</div><div class="srow" id="s-in">${nums.map(n=>`<button class="splank" data-n="${n}">${n}</button>`).join('')}</div><div class="srow" id="s-out"></div>`);
+  note('kruemel','Welche Zahl ist die kleinste?');
+  $$('.splank').forEach(b=>b.onclick=()=>{if(+b.dataset.n===ord[i]){i++;$('#s-out').appendChild(b);b.onclick=null;sfx('ok');if(i===ord.length)setTimeout(res,1300)}
+   else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Kräh! Es gibt noch eine kleinere Zahl.')}})});
+ closePanel()}
+function labyrinth(){return new Promise(res=>{const W=8,H=5,C=100,R=[],D=[],seen=[];for(let y=0;y<H;y++){R.push(Array(W).fill(1));D.push(Array(W).fill(1));seen.push(Array(W).fill(0))}
+ const st=[[0,0]];seen[0][0]=1;while(st.length){const[x,y]=st[st.length-1],nb=shuffle([[1,0],[-1,0],[0,1],[0,-1]]).filter(v=>x+v[0]>=0&&x+v[0]<W&&y+v[1]>=0&&y+v[1]<H&&!seen[y+v[1]][x+v[0]]);
+  if(!nb.length){st.pop();continue}const[dx,dy]=nb[0];if(dx===1)R[y][x]=0;if(dx===-1)R[y][x-1]=0;if(dy===1)D[y][x]=0;if(dy===-1)D[y-1][x]=0;seen[y+dy][x+dx]=1;st.push([x+dx,y+dy])}
+ window._mz={R,D,W,H};let px=0,py=0,coins=0;const cs=shuffle([...Array(W*H-2)].map((_,i)=>i+1)).slice(0,4).map(i=>[i%W,Math.floor(i/W)]);let walls='';
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){if(R[y][x]&&x<W-1)walls+=`M${(x+1)*C} ${y*C}v${C}`;if(D[y][x]&&y<H-1)walls+=`M${x*C} ${(y+1)*C}h${C}`}
+ panel(`<div class="ptitle">Labyrinth<span style="color:#3a2c20"><i class="coin"></i><span id="mzc">0</span></span></div><div class="mzwrap"><svg viewBox="-6 -6 ${W*C+12} ${H*C+12}" width="${W*C*.98}" height="${H*C*.98}"><rect width="${W*C}" height="${H*C}" fill="#cfe8d8" stroke="#2b2a33" stroke-width="10"/>
+ <g transform="translate(${W*C-50},${H*C-50})"><circle r="30" fill="#d9a55a" stroke="#8c6234" stroke-width="5"/><g fill="#6d4a26"><circle cx="-10" cy="-8" r="5"/><circle cx="10" cy="-2" r="5"/><circle cx="-4" cy="12" r="5"/></g></g>
+ ${cs.map((c,i)=>`<circle id="mzo${i}" cx="${c[0]*C+50}" cy="${c[1]*C+50}" r="16" fill="#f6c84a" stroke="#a9793f" stroke-width="5"/>`).join('')}<path d="${walls}" stroke="#2b2a33" stroke-width="8" stroke-linecap="round"/>
+ <g id="mzp" style="transition:transform .18s;transform:translate(50px,88px)"><g transform="scale(.3)">${moritz()}</g></g></svg>
+ <div class="mzpad"><i></i><button data-d="N">▲</button><i></i><button data-d="W">◀</button><i></i><button data-d="O">▶</button><i></i><button data-d="S">▼</button><i></i></div></div>`);
+ note('kruemel','Führe Moritz zum großen Keks! Tippe auf die Pfeile. Sammle unterwegs Dublonen.');let fin=false;
+ $$('.mzpad button').forEach(b=>b.onclick=()=>{if(fin)return;const d=b.dataset.d;let ok=false;
+  if(d==='O'&&px<W-1&&!R[py][px]){px++;ok=1}else if(d==='W'&&px>0&&!R[py][px-1]){px--;ok=1}else if(d==='S'&&py<H-1&&!D[py][px]){py++;ok=1}else if(d==='N'&&py>0&&!D[py-1][px]){py--;ok=1}
+  if(!ok){sfx('bad');return}$('#mzp').style.transform=`translate(${px*C+50}px,${py*C+88}px)`;
+  cs.forEach((c,i)=>{if(c&&c[0]===px&&c[1]===py){cs[i]=null;$('#mzo'+i).remove();coins++;$('#mzc').textContent=coins;sfx('coin')}});
+  if(px===W-1&&py===H-1){fin=true;sfx('fanfare');setTimeout(()=>res(coins),1500)}})})}
+
+/* ---------- Kapitel 3: Werft ---------- */
+const VERBEN=[['Der Papagei ___ auf dem Mast.','sitzt','bellt'],['Das Schiff ___ über das Meer.','fährt','klettert'],['Der Kapitän ___ einen Keks.','isst','liest'],['Die Hexe ___ auf dem Besen.','fliegt','schwimmt'],
+ ['Der Fuchs ___ durch den Wald.','rennt','singt'],['Moritz ___ die Schatzkarte.','liest','trinkt'],['Die Sonne ___ am Himmel.','scheint','hüpft'],['Olga ___ eine Suppe.','kocht','sägt']];
+const NOMEN=['FUCHS','STEIN','STUHL','KEKS','HEXE','SPIEGEL','OHR','FUSS','AXT','STIEFEL','SCHIFF','INSEL','ANKER','FISCH','DACHS'],KEINNOMEN=['GRÜN','RENNEN','BOXEN','EXTRA','GELB','SCHNELL','LAUT','LACHEN','KLEIN','SINGEN','NASS','ROT'];
+async function planken(){await brief('Meister Hobel braucht Material. Rechne aus, wie viel er braucht. Tippe die Zahl ein und drücke OK.');
+ await rechnen('Planken flicken',[['+',(a,b)=>`Für das Schiff liegen ${a} Planken bereit. Meister Hobel bringt noch ${b} dazu. Wie viele Planken sind es jetzt?`,zeT],
+  ['-',(a,b)=>`Im Schiff sind ${a} Löcher. ${b} Löcher hast du schon geflickt. Wie viele Löcher sind noch offen?`,zeM],['-',(a,b)=>`In der Kiste sind ${a} Nägel. Du brauchst ${b} Nägel. Wie viele Nägel bleiben übrig?`,zeM]])}
+async function verben(){await brief('Krümel redet Quatsch! In jedem Satz fehlt ein Wort. Lies den Satz und tippe auf das Wort, das passt.');
+ const v=shuffle(VERBEN).slice(0,5);for(let i=0;i<v.length;i++)await choice('Papageien-Quatsch '+dots(i,v.length),v[i][0],[v[i][1],v[i][2]],'Welches Wort passt in die Lücke?');closePanel()}
+async function nomen(){await brief('Wir angeln Namenwörter! Namenwörter sind Dinge, Tiere und Menschen. Davor passt der, die oder das. Tippe alle Namenwörter an.');
+ for(let r=0;r<3;r++)await new Promise(res=>{const good=shuffle(NOMEN).slice(0,3),ws=shuffle(good.concat(shuffle(KEINNOMEN).slice(0,3)));let left=3;
+  panel(`<div class="ptitle">Nomen angeln ${dots(r,3)}</div><div class="center ltext" style="margin-top:36px">Finde die 3 Namenwörter!</div><div class="dgrid" style="margin-top:50px;gap:24px">${ws.map(w=>`<button class="nw" data-n="${good.includes(w)?1:0}">${w}</button>`).join('')}</div>`);
+  note('kruemel','Passt der, die oder das davor? Dann ist es ein Namenwort.');
+  $$('.nw').forEach(b=>b.onclick=()=>{if(b.classList.contains('good'))return;if(b.dataset.n==='1'){b.classList.add('good');sfx('ok');if(--left===0)setTimeout(res,1300)}
+   else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Kräh! Das ist kein Namenwort.')}})});
+ closePanel()}
+
+/* ---------- Kapitel 4: Leuchtturm ---------- */
+const QUATSCH=[['Der Kapitän trinkt Tee aus einer Tasse.','Die Tasse trinkt Tee aus dem Kapitän.','Der Kapitän trinkt den Mond aus einem Stiefel.'],['Moritz putzt sich die Zähne.','Moritz putzt sich die Wolken.','Die Zähne putzen sich den Moritz.'],
+ ['Der Leuchtturm leuchtet in der Nacht.','Der Leuchtturm schwimmt in der Suppe.','Die Nacht leuchtet im Keks.'],['Die Möwe fliegt über das Meer.','Das Meer fliegt über die Möwe.','Die Möwe bellt unter dem Meer.'],
+ ['Olga schneidet das Brot mit dem Messer.','Olga schneidet das Messer mit dem Brot.','Das Brot schneidet Olga mit der Suppe.'],['Krümel frisst gern Kekse.','Kekse fressen gern Krümel.','Krümel frisst gern Steine und Stühle.']];
+async function flaschenpost(){await talk('kruemel','Kräh! In der Flasche steckt eine Geschichte. Die lesen wir jetzt!');await diktatRun(rand(0,2));closePanel()}
+async function quatsch(){await brief('Die Möwe erzählt Quatsch. Nur ein Satz stimmt. Lies alle Sätze und tippe auf den richtigen.');
+ const q=shuffle(QUATSCH).slice(0,4);for(let i=0;i<q.length;i++)await choice('Alles Quatsch? '+dots(i,q.length),'Welcher Satz stimmt?',q[i],'Lies alle Sätze genau.');closePanel()}
+async function stufen(){await brief('Der Leuchtturm hat 100 Stufen. Rechne aus, auf welcher Stufe du stehst.');const t=()=>{const a=z(1,8);return[a,z(1,10-a/10)]},m=()=>{const a=z(3,10);return[a,z(1,a/10-1)]};
+ await rechnen('Treppe im Leuchtturm',[['+',(a,b)=>`Du stehst auf Stufe ${a}. Du steigst ${b} Stufen höher. Auf welcher Stufe bist du jetzt?`,t],
+  ['-',(a,b)=>`Du stehst auf Stufe ${a}. Du gehst ${b} Stufen nach unten. Auf welcher Stufe bist du jetzt?`,m],['+',(a,b)=>`Du bist auf Stufe ${a}. Bis zur Lampe sind es noch ${b} Stufen. Auf welcher Stufe ist die Lampe?`,zeT]])}
+
+/* ---------- Kapitel 5: Schatzhöhle ---------- */
+async function schloss(){await brief('Das Zahlenschloss hat drei Zahlen. Rechne jede Aufgabe aus. Dann geht das Gitter auf.');
+ const p=()=>{let a,b;do{a=rand(13,69);b=rand(6,29)}while(a+b>100||a%10+b%10<10);return[a,b]},m=()=>{let a,b;do{a=rand(31,95);b=rand(6,28)}while(a%10>=b%10);return[a,b]};
+ await rechnen('Zahlenschloss',[['+',(a,b)=>`Erste Zahl: Wie viel ist ${a} plus ${b}?`,p],['-',(a,b)=>`Zweite Zahl: Wie viel ist ${a} minus ${b}?`,m],['+',(a,b)=>`Dritte Zahl: Wie viel ist ${a} plus ${b}?`,p]])}
+const RI={N:['Norden',0,-1],O:['Osten',1,0],S:['Süden',0,1],W:['Westen',-1,0]};
+async function schatzkarte(){await brief('Jetzt ist die Karte ganz. Lies die Schritte selbst. Norden ist oben. Tippe dann auf das Feld, wo der Schatz liegt.');
+ for(let r=0;r<2;r++)await new Promise(res=>{const W=6,H=4;let x=rand(0,W-1),y=rand(0,H-1);const sx=x,sy=y,steps=[];
+  for(let i=0;i<2+r;i++){const ds=shuffle(i%2?['N','S']:['O','W']);let ok=false;for(const d of ds){const v=RI[d],max=v[1]>0?W-1-x:v[1]<0?x:v[2]>0?H-1-y:y;if(max>0){const n=rand(1,Math.min(3,max));x+=v[1]*n;y+=v[2]*n;steps.push(`Geh ${n} ${n>1?'Schritte':'Schritt'} nach ${v[0]}.`);ok=true;break}}}
+  const t=steps.join(' ');let lock=false;
+  panel(`<div class="ptitle">Schatzkarte lesen ${dots(r,2)}</div><div class="orderwrap" style="height:520px"><div class="zettel" style="transform:none"><div class="zt">Start ist beim Kreis.</div>${steps.map(q=>`<p style="font-size:34px;margin:8px 0">${q}</p>`).join('')}<button class="btn small" id="zh">Krümel hilft lesen</button></div>
+  <svg viewBox="-40 -40 700 520" width="640" height="476" style="flex:none"><text x="300" y="-12" text-anchor="middle" font-size="26" font-weight="700">Norden</text><text x="300" y="472" text-anchor="middle" font-size="26" font-weight="700">Süden</text><text x="-24" y="210" text-anchor="middle" font-size="26" font-weight="700" transform="rotate(-90 -24 210)">Westen</text><text x="624" y="210" text-anchor="middle" font-size="26" font-weight="700" transform="rotate(90 624 210)">Osten</text>
+  ${[...Array(W*H)].map((_,i)=>{const cx=i%W,cy=Math.floor(i/W);return `<rect class="hot zelle" data-t="${cx===x&&cy===y?1:0}" x="${cx*100}" y="${cy*110}" width="100" height="110" style="fill:#f1dfb4" stroke="#a9793f" stroke-width="3"/>`}).join('')}
+  <circle cx="${sx*100+50}" cy="${sy*110+55}" r="30" fill="#3b78c4" stroke="#2b2a33" stroke-width="4" pointer-events="none"/></svg></div>`);
+  note('kruemel','Lies die Schritte. Zähle die Felder. Tippe auf das Feld mit dem Schatz.');$('#zh').onclick=()=>sayWord(t);
+  $$('.zelle').forEach(c=>c.onclick=()=>{if(lock)return;if(c.dataset.t==='1'){lock=true;c.style.fill='#f6c84a';sfx('ok');note('kruemel','Kräh! Genau da liegt der Schatz!');setTimeout(res,2000)}
+   else{c.style.fill='#f3c0bb';setTimeout(()=>c.style.fill='#f1dfb4',700);sfx('bad');note('kruemel','Kräh! Zähle die Schritte nochmal. Norden ist oben.')}})});
+ closePanel()}
+async function finale(){musicOn();sfx('fanfare');cineOpen('<div style="position:absolute;inset:0;background:#2a2333 url(schluss.jpg) center/cover"></div>');
+ await film('Die Truhe geht auf. Sie ist voller Gold und Kekse!',6000);await film('Krümel sitzt mittendrin. Der Kapitän tanzt vor Freude. Har har!',6500);
+ await film('Moritz hat alle fünf Kartenstücke gefunden. Er ist jetzt ein echter Pirat und Rechen-Meister!',7500);
+ if(!skip){$('#ccap').textContent='';$('#cine').insertAdjacentHTML('beforeend',`<div id="credits"><div class="roll"><h2>Die Insel von<br>Kapitän Rechenbart</h2>
+ <p><small>Held und Schiffsjunge</small>Moritz</p><p><small>Idee, Aufgaben und Kapitän an Land</small>Papa</p><p><small>Gezeichnet, gebaut und komponiert von</small>Claude</p><p><small>Titelbild und Schatzbild</small>gemalt von einer Bild-KI</p>
+ <p><small>Kekse</small>Krümel (alle aufgefressen)</p><p><small>Zaubertränke</small>Hexe Mixa</p><p><small>Suppe</small>Wirtin Olga</p><p><small>Planken</small>Meister Hobel</p><p><small>Licht</small>Wärter Strahlemann</p><h2>Ende</h2><p>Har har!</p></div></div>`);$('#cine').appendChild($('#cskip'))}
+ await cw(31000);hush();cineClose();musicOff()}
 
 /* ---------- Hafen ---------- */
-let busy=false;const MX={harbor:600,hexe:760};const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110,schild:1150,schiff:420,buch:250,mixa:470,kessel:690,hafen:1150};
-function walkTo(x){return new Promise(res=>{const hx=S.scene==='hexe',k=hx?'hexe':'harbor',mx=MX[k],d=Math.abs(x-mx),m=$(hx?'#mor2':'#mor');if(d<6)return res();
- $(hx?'#morflip2':'#morflip').setAttribute('transform',`scale(${x<mx?-.85:.85},.85)`);m.classList.add('walk');
+let busy=false;const MX={harbor:600,hexe:760,werft:560,turm:500,hoehle:640};
+const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110,schild:1150,schiff:420,buch:250,mixa:470,kessel:690,hafen:1150,fehler1:980,
+ planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
+function walkTo(x){return new Promise(res=>{const k=S.scene,ids=k==='harbor'?['mor','morflip']:k==='hexe'?['mor2','morflip2']:['mor-'+k,'flip-'+k],mx=MX[k],d=Math.abs(x-mx),m=$('#'+ids[0]);if(!m||d<6)return res();
+ $('#'+ids[1]).setAttribute('transform',`scale(${x<mx?-.85:.85},.85)`);m.classList.add('walk');
  m.style.transition=`transform ${d*2.6}ms linear`;m.style.transform=`translate(${x}px,588px)`;MX[k]=x;
  setTimeout(()=>{m.classList.remove('walk');res()},d*2.6+40)})}
 const JOKES=['Was ist grün und klopft an die Tür? Ein Klopfsalat!','Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!','Was machen Piraten am Computer? Sie drücken die Enter-Taste!'];
@@ -711,17 +853,28 @@ const ACT={
  async kisten(){if(await replay('kisten'))await kisten()},
  async kanonen(){if(await replay('kanonen'))await kanonen()},
  async kompass(){if(await replay('kompass'))await kompass()},
- async schild(){setScene('hexe');if(!S.done.c2intro){
-   await talk('mixa','Hihi! Besuch! Ich bin Mixa, die Hexe. Und du bist der Schiffsjunge Moritz?');
-   await talk('mixa','Ja, ich habe ein Stück von der Schatzkarte. Aber ich gebe es nur einem echten Rechen-Meister!');
-   await talk('kruemel','Kräh! Mixa liebt Rechen-Duelle. Aber erst braucht sie Hilfe mit ihrem Zauberbuch und ihrem Kessel.');
-   S.done.c2intro=1}},
- async schiff(){
-  if(!['kisten','kanonen','kompass'].every(k=>S.done[k])){await talk('kruemel','Kräh! Erst die Aufgaben im Hafen, dann das Schiffsrennen!');return}
-  await talk('kapitaen','Har har! Lust auf ein Wettrennen? Mixa fliegt auf ihrem Besen gegen uns!');
-  await brief('Das Schiff fährt von allein. Tippe dorthin, wo es fahren soll: oben, in die Mitte oder unten. Sammle Dublonen und weiche den Felsen aus!');
-  const n=await race();S.coins+=n;S.done.rennen=1;save();sfx('coin');
-  await talk('kapitaen',`Har har! Gewonnen! Du hast ${n} Dublonen gesammelt.`)},
+ async schild(){await goScene('hexe')},
+ async fehler1(){if(!(S.done.buch&&S.done.kessel)){await talk('kruemel','Kräh! Erst das Zauberbuch und der Kessel. Dann gibt es die Überraschung!');return}
+  await talk('mixa','Hihi! In meiner Küche stimmt etwas nicht. Findest du die Fehler?');await fehler('kueche');closePanel();await reward('fehler1',5)},
+ async planken(){if(await replay('planken')){await planken();await reward('planken',15)}},
+ async verben(){if(await replay('verben')){await verben();await reward('verben',15)}},
+ async nomen(){if(await replay('nomen')){await nomen();await reward('nomen',15)}},
+ async sortieren(){if(!SC.werft.tasks.every(k=>S.done[k])){await talk('kruemel','Kräh! Die Werkzeugkiste ist die Überraschung. Erst die drei Aufgaben!');return}await sortieren();await reward('sortieren',5)},
+ async hobel(){await gate('werft','Erst die Arbeit! Flicke die Planken, hör dir Krümels Quatsch an und angle die Namenwörter.','Danke, Moritz! Das Schiff ist wieder dicht. Hier ist dein Kartenstück!',3,'Kräh! Drei Kartenstücke! Das nächste hat der Leuchtturmwärter. Tippe oben auf Insel!')},
+ async flaschenpost(){if(await replay('flaschenpost')){await flaschenpost();await reward('flaschenpost',15)}},
+ async quatsch(){if(await replay('quatsch')){await quatsch();await reward('quatsch',15)}},
+ async stufen(){if(await replay('stufen')){await stufen();await reward('stufen',15)}},
+ async labyrinth(){if(!SC.turm.tasks.every(k=>S.done[k])){await talk('kruemel','Kräh! Das Labyrinth ist die Überraschung. Erst die drei Aufgaben!');return}
+  const n=await labyrinth();closePanel();S.coins+=n;await reward('labyrinth',5)},
+ async strahl(){await gate('turm','Erst die Arbeit! Lies die Flaschenpost, hör der Möwe zu und steig die Treppe hoch.','Mein Licht strahlt wieder! Hier ist das Kartenstück von der Möwe.',4,'Kräh! Vier Kartenstücke! Das letzte liegt in der Schatzhöhle. Tippe oben auf Insel!')},
+ async kap5(){await talk('kapitaen',!S.done.schloss?'Knacke zuerst das Zahlenschloss am Gitter!':!S.done.schatzkarte?'Jetzt lies die Schatzkarte auf dem Stein!':'Har har! Öffne die Truhe, Moritz!')},
+ async schloss(){if(!await replay('schloss'))return;await schloss();if(S.done.schloss){await talk('kruemel','Super geübt, Käpt’n!');return}
+  S.done.schloss=1;S.coins+=15;save();sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Das letzte Kartenstück!</div>${mapSvg(5)}<div class="ltext">Kartenstück 5 von 5</div></div>`);
+  await talk('kapitaen','Har har! Das Gitter ist offen. Die Karte ist wieder ganz!',['Juhu!'])},
+ async schatzkarte(){if(!S.done.schloss){await talk('kapitaen','Die Karte ist noch nicht ganz. Knacke erst das Zahlenschloss!');return}if(await replay('schatzkarte')){await schatzkarte();await reward('schatzkarte',15)}},
+ async fehler2(){if(!SC.hoehle.tasks.every(k=>S.done[k])){await talk('kruemel','Kräh! Das Höhlenbild ist die Überraschung. Erst das Schloss und die Karte!');return}await fehler('hoehle');closePanel();await reward('fehler2',5)},
+ async truhe(){if(!SC.hoehle.tasks.every(k=>S.done[k])){await talk('kapitaen','Die Truhe ist noch zu. Wir müssen erst die Karte lesen!');return}
+  if(S.done.ende&&await talk('kapitaen','Willst du das Ende noch einmal sehen?',['Ja!','Nein'])!==0)return;S.done.ende=1;save();await finale()},
  async hafen(){setScene('harbor')},
  async buch(){if(await replay('buch'))await buch()},
  async kessel(){if(await replay('kessel'))await kessel()},
@@ -737,13 +890,20 @@ const ACT={
   d['duell'+n]=1;S.coins+=10;save();
   if(n<3){await talk('mixa','Nicht schlecht, Schiffsjunge! Du bekommst 10 Dublonen. Aber das nächste Duell wird schwerer!');return}
   await talk('mixa','Unglaublich! Du hast mich dreimal besiegt. Hier ist dein Kartenstück, Rechen-Meister!');
-  sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Kapitel 2 geschafft!</div>${mapSvg(2)}<div class="ltext">Kartenstück 2 von 5. Bald geht es weiter: Die Werft.</div></div>`);
-  await talk('kruemel','Kräh! Zwei Kartenstücke! Das nächste liegt in der Werft. Da müssen wir Planken flicken.',['Juhu!'])},
+  sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Kapitel 2 geschafft!</div>${mapSvg(2)}<div class="ltext">Kartenstück 2 von 5. Weiter geht es in der Werft.</div></div>`);
+  await talk('kruemel','Kräh! Zwei Kartenstücke! Das nächste liegt in der Werft. Da müssen wir Planken flicken. Tippe oben auf Insel!',['Juhu!'])},
  async tuer(){if(['kisten','kanonen','kompass'].every(k=>S.done[k]))await pub();
   else await talk('olga','Halt! Ohne Dublonen gibt es nichts. Erledige erst alle drei Aufgaben im Hafen!')}};
-async function act(id){if(busy)return;busy=true;$('#b-home').style.display='none';
+async function gate(sc,noch,geben,nr,danach){const c=SC[sc],d=S.done;if(!c.tasks.every(k=>d[k])){await talk(c.npc,noch);return}
+ if(d[c.key]){await talk(c.npc,'Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben.');return}
+ await talk(c.npc,geben);d[c.key]=1;S.coins+=10;save();sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Ein Stück der Schatzkarte!</div>${mapSvg(nr)}<div class="ltext">Kartenstück ${nr} von 5</div></div>`);
+ await talk('kruemel',danach,['Juhu!'])}
+function insel(){if(busy)return;hush();panel(`<div class="ptitle">Die Insel</div><div class="orte">${SCN.map(k=>`<button class="btn${k===S.scene?'':' sec'}" data-o="${k}"${offen(k)?'':' disabled'}>${KAP[k]}${offen(k)?'':' (noch zu)'}</button>`).join('')}<button class="btn small" id="or-x">Zurück</button></div>`);
+ note('kruemel','Wohin soll die Reise gehen?');$('#or-x').onclick=()=>{closePanel();idle()};
+ $$('[data-o]').forEach(b=>b.onclick=async()=>{closePanel();busy=true;$('#hudnav').style.display='none';try{await goScene(b.dataset.o)}finally{busy=false;idle()}})}
+async function act(id){if(busy)return;busy=true;$('#hudnav').style.display='none';
  try{await walkTo(POS[id]);await ACT[id]()}finally{closePanel();busy=false;idle()}}
-async function intro(){busy=true;$('#b-home').style.display='none';
+async function intro(){busy=true;$('#hudnav').style.display='none';
  await talk('kapitaen','Ahoi! Ich bin Kapitän Rechenbart. Du bist bestimmt Moritz, mein neuer Schiffsjunge!');
  await talk('kapitaen','Ich habe meine Schatzkarte in fünf Stücke gerissen und gut versteckt. Zu gut! Ich weiß nicht mehr, wo.');
  await talk('kruemel','Kräh! Ich bin Krümel. Der Kapitän vergisst alles. Sogar die Kekse in seinem Bart!');
@@ -757,7 +917,7 @@ async function ending(){panel(`<div class="log"><div class="bigmsg">Kapitel 1 ge
 function goFull(){try{const d=document.documentElement,f=d.requestFullscreen||d.webkitRequestFullscreen;
  if(f&&!(document.fullscreenElement||document.webkitFullscreenElement)){const r=f.call(d,{navigationUI:'hide'});if(r&&r.catch)r.catch(()=>{})}}catch(e){}}
 function showTitle(){const t=$('#title');t.style.display='';
- t.innerHTML=`<h1>Die Insel von<br>Kapitän Rechenbart<small>${S.scene==='hexe'?'Kapitel 2: Die Hexenhütte':'Kapitel 1: Der Hafen'}</small></h1>
+ t.innerHTML=`<h1>Die Insel von<br>Kapitän Rechenbart<small>${KAP[S.scene]||KAP.harbor}</small></h1>
  <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Lernwörter üben</button><button class="btn sec" id="t-dik">Lese-Diktat</button></div>
  <button class="btn small" id="pbtn">Eltern</button>`;
  $('#t-go').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');idle();if(!S.done.intro)introFilm().then(intro)};
@@ -765,22 +925,70 @@ function showTitle(){const t=$('#title');t.style.display='';
  $('#pbtn').onclick=eltern}
 function eltern(){const e=$('#eltern');e.style.display='flex';
  const wack=Object.keys(S.log).filter(w=>S.log[w][1]>0).sort((a,b)=>S.log[b][1]-S.log[a][1]).map(w=>`${w} (${S.log[w][1]}×)`).join(', ')||'noch keine';
- e.innerHTML=`<div class="ecard"><h2>Elternbereich</h2><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik (im Film und beim Schiffsrennen)</label><label><input type="checkbox" id="e-ti"${S.timer!==false?' checked':''}>Sanduhr im letzten Rechen-Duell (45 Sekunden je Aufgabe)</label>
+ e.innerHTML=`<div class="ecard"><h2>Elternbereich</h2><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik (im Film und beim Schiffsrennen)</label><label><input type="checkbox" id="e-ti"${S.timer!==false?' checked':''}>Sanduhr im letzten Rechen-Duell (45 Sekunden je Aufgabe)</label>
  <div>Deutsche Stimme auf diesem Gerät: <b>${!hasTTS?'keine Sprachausgabe':voice?'gefunden':'nicht gefunden (Gerätestimme wird versucht)'}</b></div>
  <p style="margin:14px 0 4px"><b>Lernwörter</b></p>${[[1,'Faltblatt 1 (x, chs, ks)'],[2,'Faltblatt 2 (Sp, St)'],[3,'Faltblatt 3 (Farben und mehr)']].map(l=>`<label><input type="checkbox" class="e-l" value="${l[0]}"${S.lists.includes(l[0])?' checked':''}>${l[1]}</label>`).join('')}
  <p style="margin:14px 0 4px"><b>Wackelwörter aus dem Logbuch:</b> ${wack}</p><p style="margin:4px 0"><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen (zweimal fehlerfrei)</p>
  <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
- $('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=x.target.checked;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
+ $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=x.target.checked;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
  $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
  $('#e-t').onclick=()=>{loadVoice();speak('Ahoi! Ich bin Krümel, der Papagei.','kruemel')};
  let sure=false;$('#e-r').onclick=x=>{if(!sure){sure=true;x.target.textContent='Wirklich löschen? Nochmal tippen';return}
-  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{},mw:{}};S.scene='harbor';save();MX.harbor=600;MX.hexe=760;build();e.style.display='none';showTitle()};
+  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{},mw:{}};S.scene='harbor';save();Object.assign(MX,{harbor:600,hexe:760,werft:560,turm:500,hoehle:640});build();e.style.display='none';showTitle()};
  $('#e-c').onclick=()=>{e.style.display='none'}}
 function setTon(){$('#b-ton').textContent='Vorlesen: '+(S.speak?'an':'aus')}
-function setScene(n){S.scene=n;['harbor','hexe','pub'].forEach(k=>{const e=$('#'+k);if(e)e.style.display=k===n?'':'none'})}
-function build(){$('#scene').innerHTML=HARBOR+PUB+HEXE;setScene(S.scene==='hexe'?'hexe':'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
+const morG=(id,x)=>`<g id="mor-${id}" style="transform:translate(${x}px,588px)"><g id="flip-${id}" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>`;
+const hot=(a,x,y,w,h)=>`<rect class="hot" data-act="${a}" x="${x}" y="${y}" width="${w}" height="${h}"/>`;
+const WERFT=`<svg id="werft" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="330" fill="#cfe8ef"/><circle cx="200" cy="90" r="46" fill="#f8d66b"/>
+<g fill="#fff" opacity=".85"><ellipse cx="700" cy="80" rx="90" ry="22"/><ellipse cx="1050" cy="130" rx="70" ry="18"/></g>
+<rect y="300" width="1280" height="150" fill="#4a9aa6"/><path d="M0 430Q640 390 1280 430V620H0Z" fill="#e7cf98"/>
+<g transform="translate(100,0)" fill="#c2935a" stroke="#8c6234" stroke-width="4"><rect x="0" y="440" width="170" height="18"/><rect x="10" y="422" width="170" height="18"/><rect x="0" y="404" width="170" height="18"/><rect x="14" y="386" width="150" height="18"/></g>
+<g transform="translate(430,0)"><rect x="215" y="170" width="12" height="130" fill="#6d4a26"/><path d="M80 430V486M370 430V486" stroke="#6d4a26" stroke-width="12"/><path d="M0 300H440L400 430H50Z" fill="#b98a4e" stroke="#6d4a26" stroke-width="6"/>
+<path d="M70 300V430M140 300V430M210 300V430M280 300V430M350 300V430" stroke="#6d4a26" stroke-width="5"/><ellipse cx="170" cy="360" rx="26" ry="18" fill="#3a2c20"/><ellipse cx="310" cy="392" rx="20" ry="14" fill="#3a2c20"/></g>
+<g transform="translate(475,300) scale(.9)">${kruemel()}</g>
+<g transform="translate(930,0)"><path d="M30 400L84 286" stroke="#6d4a26" stroke-width="6"/><path d="M84 286q30 40 10 92" stroke="#2b2a33" stroke-width="2" fill="none"/><path d="M82 380q14 -10 26 0q-12 10 -26 0z" fill="#e2572b"/><path d="M0 400q30 -10 60 0l6 70h-72Z" fill="#a9793f"/><path d="M-3 420h66M-5 448h70" stroke="#6d4a26" stroke-width="4"/></g>
+<g transform="translate(1040,0)"><rect y="270" width="220" height="190" fill="#c9a36b"/><path d="M-16 276L110 200L236 276Z" fill="#8e3b3b"/><rect x="80" y="350" width="70" height="110" fill="#6d4a26"/></g>
+<g transform="translate(1130,0)"><path d="M30 500q25 -34 50 0" fill="none" stroke="#2b2a33" stroke-width="6"/><rect y="500" width="110" height="60" rx="6" fill="#d24a43" stroke="#2b2a33" stroke-width="4"/></g>
+<g transform="translate(700,520) scale(.9)">${hobel()}</g>
+${mark('planken',185,340)}${mark("verben",478,160)}${mark('nomen',985,240)}${mark('hobel',700,230)}${mark('sortieren',1185,455)}${morG('werft',560)}
+${hot('planken',90,350,200,120)}${hot('verben',400,150,110,160)}${hot('nomen',900,250,150,230)}${hot('hobel',630,240,140,290)}${hot('sortieren',1110,465,160,110)}</svg>`;
+const TURM=`<svg id="turm" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#f6d2a8"/><circle cx="240" cy="160" r="62" fill="#f8d66b"/>
+<rect y="330" width="1280" height="140" fill="#3f8f9c"/><path d="M0 450Q500 410 1280 440V620H0Z" fill="#9db27a"/>
+<g transform="translate(900,0)"><path d="M34 100L380 40V170L34 130Z" fill="#fff6c9" opacity=".7"/><path d="M-60 460L-40 140H40L60 460Z" fill="#fff" stroke="#2b2a33" stroke-width="5"/><path d="M-44 210H44L48 280H-48Z" fill="#d24a43"/><path d="M-53 350H53L57 420H-57Z" fill="#d24a43"/>
+<rect x="-34" y="90" width="68" height="50" fill="#f8d66b" stroke="#2b2a33" stroke-width="5"/><path d="M-46 90L0 50L46 90Z" fill="#d24a43"/><path d="M-24 460V400a24 24 0 0 1 48 0V460Z" fill="#6d4a26"/></g>
+<g transform="translate(170,490) rotate(-20)"><rect x="-14" y="-50" width="28" height="56" rx="10" fill="#bfe6d8" stroke="#2b2a33" stroke-width="4"/><rect x="-6" y="-66" width="12" height="18" fill="#a9793f"/><rect x="-8" y="-38" width="16" height="30" fill="#f1dfb4"/></g>
+<path d="M340 472q20 -60 70 -50q40 6 50 50z" fill="#8b929a"/><g transform="translate(405,395)"><ellipse rx="26" ry="16" fill="#fff" stroke="#2b2a33" stroke-width="3"/><circle cx="22" cy="-16" r="12" fill="#fff" stroke="#2b2a33" stroke-width="3"/><path d="M32 -16l16 4l-16 4z" fill="#f6c84a"/><circle cx="25" cy="-19" r="2.5" fill="#2b2a33"/></g>
+<g transform="translate(1110,0)"><rect y="470" width="150" height="90" rx="10" fill="#4f8f55" stroke="#2b2a33" stroke-width="4"/><path d="M20 490h110v50h-80v-25h50" fill="none" stroke="#cfe8d8" stroke-width="8"/></g>
+<g transform="translate(640,530) scale(.9)">${strahl()}</g>
+${mark('flaschenpost',170,395)}${mark('quatsch',405,320)}${mark('stufen',900,330)}${mark('strahl',640,238)}${mark('labyrinth',1185,430)}${morG('turm',500)}
+${hot('flaschenpost',100,405,150,120)}${hot('quatsch',330,330,150,150)}${hot('stufen',830,60,140,405)}${hot('strahl',570,250,140,290)}${hot('labyrinth',1100,450,170,120)}</svg>`;
+const HOEHLE=`<svg id="hoehle" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#3a3144"/><path d="M0 0H1280V120Q900 190 640 130T0 160Z" fill="#2a2333"/>
+<g fill="#2a2333"><path d="M200 140l20 80l20 -80zM520 120l16 60l16 -60zM980 150l22 90l22 -90z"/></g><path d="M0 470Q640 430 1280 470V620H0Z" fill="#6b5a4a"/>
+<circle cx="895" cy="400" r="150" fill="#f8d66b" opacity=".18"/>
+<g transform="translate(270,0)"><path d="M0 470V310a65 65 0 0 1 130 0V470Z" fill="#1d1826"/><path d="M20 262V470M50 248V470M80 248V470M110 262V470M0 330H130M0 410H130" stroke="#8b929a" stroke-width="7"/><rect x="45" y="352" width="40" height="34" rx="6" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/></g>
+<path d="M500 482q10 -60 70 -60q60 0 70 60z" fill="#8b929a"/><rect x="535" y="392" width="70" height="46" fill="#f1dfb4" stroke="#a9793f" stroke-width="3" transform="rotate(-6 570 415)"/>
+<g transform="translate(820,0)"><rect y="400" width="150" height="80" fill="#8c3b2e" stroke="#f6c84a" stroke-width="6"/><path d="M0 400q0 -50 75 -50t75 50z" fill="#a4483a" stroke="#f6c84a" stroke-width="6"/><rect x="62" y="388" width="26" height="30" rx="5" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/></g>
+<rect x="1070" y="230" width="150" height="110" fill="#c9a36b" stroke="#2b2a33" stroke-width="5"/><path d="M1100 320v-40m-14 14h28M1160 320q20 -60 40 0" stroke="#8e3b3b" stroke-width="5" fill="none"/><circle cx="1100" cy="268" r="10" fill="none" stroke="#8e3b3b" stroke-width="5"/>
+<rect x="716" y="250" width="8" height="60" fill="#8c6234"/><path d="M720 214q16 22 0 40q-16 -18 0 -40z" fill="#f6a23a"/>
+<g transform="translate(140,530) scale(.75)">${kapitaen()}</g>
+${mark('schloss',335,212)}${mark('schatzkarte',570,345)}${mark('truhe',895,300)}${mark('fehler2',1145,196)}${morG('hoehle',640)}
+${hot('kap5',60,250,160,290)}${hot('schloss',255,230,160,250)}${hot('schatzkarte',490,360,160,130)}${hot('truhe',800,320,190,170)}${hot('fehler2',1055,215,180,140)}</svg>`;
+const SCN=['harbor','hexe','werft','turm','hoehle'];
+const KAP={harbor:'Kapitel 1: Der Hafen',hexe:'Kapitel 2: Die Hexenhütte',werft:'Kapitel 3: Die Werft',turm:'Kapitel 4: Der Leuchtturm',hoehle:'Kapitel 5: Die Schatzhöhle'};
+const OFFEN={harbor:d=>1,hexe:d=>d.logbuch,werft:d=>d.duell3,turm:d=>d.k3,hoehle:d=>d.k4};
+const offen=k=>S.alle||OFFEN[k](S.done);
+const SC={werft:{intro:'c3intro',tasks:['planken','verben','nomen'],bonus:'sortieren',npc:'hobel',key:'k3',hint:'Sprich mit Meister Hobel!'},
+ turm:{intro:'c4intro',tasks:['flaschenpost','quatsch','stufen'],bonus:'labyrinth',npc:'strahl',key:'k4',hint:'Sprich mit dem Leuchtturmwärter!'},
+ hoehle:{intro:'c5intro',tasks:['schloss','schatzkarte'],bonus:'fehler2',npc:'truhe',key:'ende',hint:'Öffne die Schatztruhe!'}};
+const INTRO={hexe:['c2intro',[['mixa','Hihi! Besuch! Ich bin Mixa, die Hexe. Und du bist der Schiffsjunge Moritz?'],['mixa','Ja, ich habe ein Stück von der Schatzkarte. Aber ich gebe es nur einem echten Rechen-Meister!'],['kruemel','Kräh! Mixa liebt Rechen-Duelle. Aber erst braucht sie Hilfe mit ihrem Zauberbuch und ihrem Kessel.']]],
+ werft:['c3intro',[['hobel','Moin! Ich bin Meister Hobel, der Schiffsbauer. Mein Schiff hat lauter Löcher!'],['hobel','Ein Kartenstück? Ja, das habe ich als Flicken benutzt. Hilf mir, dann bekommst du es!'],['kruemel','Kräh! Tippe auf die Ausrufezeichen. Zum Schluss wartet eine Überraschung!']]],
+ turm:['c4intro',[['strahl','Ahoi da unten! Ich bin Wärter Strahlemann. Mein Leuchtturm braucht Hilfe.'],['strahl','Eine Möwe hat mir ein Kartenstück gebracht. Du bekommst es, wenn du mir hilfst.']]],
+ hoehle:['c5intro',[['kapitaen','Har har! Das ist die Schatzhöhle. Das letzte Kartenstück liegt hinter dem Gitter.'],['kapitaen','Knacke das Zahlenschloss. Dann lesen wir die Karte und finden den Schatz!']]]};
+async function goScene(n){setScene(n);const I=INTRO[n];if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
+function setScene(n){S.scene=n;SCN.concat('pub').forEach(k=>{const e=$('#'+k);if(e)e.style.display=k===n?'':'none'})}
+function build(){$('#scene').innerHTML=HARBOR+PUB+HEXE+WERFT+TURM+HOEHLE;setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
-$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
+$('#b-insel').onclick=insel;$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
 let lastW=0,lastH=0;
 function fit(){const w=innerWidth,h=innerHeight;if(w===lastW&&h===lastH)return;lastW=w;lastH=h;
  const port=h>w,s=port?Math.min(h/1280,w/800):Math.min(w/1280,h/800);
