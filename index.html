@@ -119,6 +119,12 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 #rmsg{position:absolute;left:0;right:0;top:250px;text-align:center;font-size:90px;font-weight:700;color:#fff;text-shadow:0 5px 0 #2b2a33;pointer-events:none}
 .newp{transform-box:fill-box;transform-origin:center;animation:pin 1.5s ease-out}
 @keyframes pin{from{transform:scale(4) rotate(-540deg);opacity:0}}
+.lese{font-size:44px;line-height:1.5;margin:14px 10px 20px;min-height:380px}
+.lese b{color:#8e3b3b}
+.dgrid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:26px 0}
+.dw{font:inherit;font-size:40px;font-weight:700;padding:10px 24px;border-radius:14px;border:3px solid #a9793f;background:#fff;color:#2b2a33}
+.dw.good{background:#bfe6b0;border-color:#4f9a4a}
+.ohr{font-size:120px;line-height:1}
 .timer i{display:block;height:100%;background:#8e3b3b;width:100%;transition:width 5s linear}
 .lrow{display:flex;gap:30px}
 .bigmsg{font-size:52px;font-weight:700;color:#8e3b3b;margin:6px 0}
@@ -127,7 +133,7 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 #title h1 small{display:block;font-size:30px;color:#2b2a33;font-weight:700;margin-top:6px}
 #title svg{position:absolute;left:0;top:0;width:1280px;height:800px}
 .tbtns{position:absolute;left:0;right:0;bottom:0;padding:50px 0 22px;display:flex;justify-content:center;align-items:center;gap:30px;background:linear-gradient(transparent,#2b2118cc 55%)}
-.tbtns .btn.big{font-size:46px;padding:14px 60px}
+.tbtns .btn.big{font-size:44px;padding:14px 50px}
 #pbtn{position:absolute;right:20px;bottom:18px;font-size:18px;padding:6px 12px}
 #eltern{height:800px;z-index:9;background:#22313aee;display:none;align-items:center;justify-content:center}
 .ecard{background:#fbeed3;border-radius:20px;padding:26px 38px;width:820px;font-size:24px}
@@ -651,6 +657,40 @@ async function kessel(){await brief('Mixa braucht bunte Zaubertränke. Lies das 
     setTimeout(()=>{$$('.fl').forEach(x=>x.classList.remove('sel'));sel=[];lock=false;$('#saft').setAttribute('fill','#9a9a9a');$('#blub').setAttribute('fill','#9a9a9a')},2600)}})});
  closePanel();await reward('kessel',15)}
 
+/* ---------- Lese-Diktat (Testvorbereitung) ---------- */
+const STORY=[{l:1,t:'Die Hexe und der Keks',p:['Im Wald wohnt eine Hexe. Sie hat sechs Tiere. Ein Fuchs, ein Dachs und ein Ochse sind auch dabei. Heute will die Hexe einen Keks backen. Sie holt den Mixer. Dann liest sie den Text im Backbuch.',
+  'Da steht: Nimm extra viel Zucker! Der Fuchs will helfen. Er holt mit der Axt Holz für den Ofen. Der Dachs und der Ochse boxen aus Spaß vor der Tür. Bald ist der Keks fertig. Er ist so groß wie ein Rad! Alle sechs Tiere essen mit.']},
+ {l:2,t:'Der Stier mit dem Spiegel',p:['Moritz findet am Strand einen alten Stiefel. Daneben ist eine Spur im Sand. Wer war das? Moritz folgt der Spur eine ganze Stunde lang. Hinter einem großen Stein steht ein Stier. Der Stier sitzt auf einem Stuhl!',
+  'Er schaut in einen Spiegel. Ein Strahl der Sonne fällt auf die Spitze von seinem Horn. Der Stier lacht. Er sagt: Das ist mein liebstes Spiel! Moritz lacht auch. So ein Spaß! Dann gibt er dem Stier den Stiefel zurück.']},
+ {l:3,t:'Krümel malt ein Bild',p:['Krümel will ein Bild malen. Er holt jede Farbe, die er hat: rot, gelb, blau und grün. Er malt einen Elefanten. Der Rüssel wird blau. Ein Ohr wird rot, das andere Ohr wird gelb.',
+  'Da tritt Krümel mit dem Fuß in die Farbe. Oh nein! Jetzt ist sein Fuß grün. Er will schnell zum Wasser rennen. Überall sind bunte Flecken. Der Kapitän lacht: Dein Bild ist schön! Nur mein Bart bleibt weiß und mein Hut bleibt schwarz.']}];
+function sayWord(t){const o=S.speak;S.speak=true;speak(t,'kruemel');S.speak=o}
+async function diktat(){busy=true;$('#b-home').style.display='none';
+ const k=await new Promise(r=>{panel(`<div class="ptitle">Lese-Diktat</div><div class="log" style="height:440px"><div class="ltext">Welche Geschichte willst du lesen?</div>
+  ${STORY.map((g,i)=>`<button class="btn${i?' sec':''}" data-g="${i}" style="min-width:640px">${g.t} <span style="font-weight:400;font-size:22px">(Blatt ${g.l})</span></button>`).join('')}<button class="btn small" id="dk-x">Zurück</button></div>`);
+  note('kruemel','Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!');
+  $$('[data-g]').forEach(b=>b.onclick=()=>r(+b.dataset.g));$('#dk-x').onclick=()=>r(-1)});
+ if(k>=0){const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(w=>w.w),re=new RegExp('(^|[^A-Za-zÄÖÜäöüß])('+lw.join('|')+')(?![A-Za-zÄÖÜäöüß])','g');
+  for(let i=0;i<g.p.length;i++)await new Promise(r=>{
+   panel(`<div class="ptitle">${g.t}<span style="font-size:22px;color:#3a2c20">Seite ${i+1} von ${g.p.length}</span></div><div class="lese">${g.p[i].replace(re,'$1<b>$2</b>')}</div>
+   <div class="lrow" style="justify-content:center"><button class="btn sec" id="dk-v">Krümel liest vor</button><button class="btn" id="dk-w">${i<g.p.length-1?'Weiter lesen':'Fertig gelesen'}</button></div>`);
+   note('kruemel','Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!');
+   $('#dk-v').onclick=()=>sayWord(g.p[i]);$('#dk-w').onclick=()=>{hush();r()}});
+  await brief('Jetzt kommt das Diktat. Ich sage ein Wort. Du schreibst es auf dein Papier. Das Wort siehst du erst ganz am Schluss.');
+  const ws=shuffle(lw).slice(0,8);
+  for(let i=0;i<ws.length;i++)await new Promise(r=>{
+   panel(`<div class="ptitle">Diktat ${dots(i,ws.length)}</div><div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
+   <div class="lrow"><button class="btn sec" id="dk-n">Nochmal hören</button><button class="btn" id="dk-f">Geschrieben!</button></div></div>`);
+   note('kruemel',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);setTimeout(()=>sayWord(ws[i]),S.speak?2300:300);
+   $('#dk-n').onclick=()=>sayWord(ws[i]);$('#dk-f').onclick=()=>{hush();r()}});
+  const ok=await new Promise(r=>{panel(`<div class="ptitle">Diktat: Vergleiche!</div><div class="center ltext">Tippe alle Wörter an, die du richtig geschrieben hast.</div>
+   <div class="dgrid">${ws.map((w,i)=>`<button class="dw" data-i="${i}">${i+1}. ${w}</button>`).join('')}</div><div class="center"><button class="btn" id="dk-e">Fertig verglichen</button></div>`);
+   note('kruemel','Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün.');
+   $$('.dw').forEach(b=>b.onclick=()=>b.classList.toggle('good'));$('#dk-e').onclick=()=>r($$('.dw').map(b=>b.classList.contains('good')))});
+  ws.forEach((w,i)=>{const st=S.log[w]||(S.log[w]=[0,0]);st[ok[i]?0:1]++});const n=ok.filter(x=>x).length;S.coins+=5;save();sfx(n===ws.length?'fanfare':'coin');
+  await talk('kruemel',n===ws.length?'Kräh! Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!':`Du hast ${n} von ${ws.length} Wörtern richtig. Gut gemacht! Die anderen üben wir nochmal. 5 Dublonen für dich!`)}
+ closePanel();busy=false;idle();showTitle()}
+
 /* ---------- Hafen ---------- */
 let busy=false;const MX={harbor:600,hexe:760};const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110,schild:1150,schiff:420,buch:250,mixa:470,kessel:690,hafen:1150};
 function walkTo(x){return new Promise(res=>{const hx=S.scene==='hexe',k=hx?'hexe':'harbor',mx=MX[k],d=Math.abs(x-mx),m=$(hx?'#mor2':'#mor');if(d<6)return res();
@@ -718,10 +758,10 @@ function goFull(){try{const d=document.documentElement,f=d.requestFullscreen||d.
  if(f&&!(document.fullscreenElement||document.webkitFullscreenElement)){const r=f.call(d,{navigationUI:'hide'});if(r&&r.catch)r.catch(()=>{})}}catch(e){}}
 function showTitle(){const t=$('#title');t.style.display='';
  t.innerHTML=`<h1>Die Insel von<br>Kapitän Rechenbart<small>${S.scene==='hexe'?'Kapitel 2: Die Hexenhütte':'Kapitel 1: Der Hafen'}</small></h1>
- <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Lernwörter üben</button></div>
+ <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Lernwörter üben</button><button class="btn sec" id="t-dik">Lese-Diktat</button></div>
  <button class="btn small" id="pbtn">Eltern</button>`;
  $('#t-go').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');idle();if(!S.done.intro)introFilm().then(intro)};
- $('#t-log').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');training()};
+ $('#t-dik').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');diktat()};$('#t-log').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');training()};
  $('#pbtn').onclick=eltern}
 function eltern(){const e=$('#eltern');e.style.display='flex';
  const wack=Object.keys(S.log).filter(w=>S.log[w][1]>0).sort((a,b)=>S.log[b][1]-S.log[a][1]).map(w=>`${w} (${S.log[w][1]}×)`).join(', ')||'noch keine';
