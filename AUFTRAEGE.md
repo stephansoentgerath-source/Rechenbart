@@ -11,6 +11,12 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 - Nach der Änderung: Skript auf Syntax prüfen (`node --check`), die betroffene Szene im Browser
   einmal durchspielen, dann committen und pushen. Ehrlich sagen, was nicht getestet wurde.
 - Wenn etwas unklar ist oder mehr als die genannten Stellen betroffen wären: nachfragen, nicht raten.
+- Animation in Aufgaben: zu Beginn kurz erlaubt (z. B. Krümel flattert beim Ansagen), während des
+  Überlegens Ruhe, Reaktion nur nach einer Eingabe (`reagiere('jubel','hops')` bzw.
+  `reagiere('oh','seufz')`, Moritz im Fenster über `MINI()`). Szenen dürfen leben, im offenen
+  Aufgabenfenster steht die Szene still (Klasse `aufgabe` am `body`). Neue Tiere in `TIER`/`LEBEN`.
+- Zeitdruck ist gewollt und wird trainiert, aber nur über die Sanduhr (`SAND()`, Stufen im
+  Elternbereich). Ablaufen ohne Tadel: Krümel sagt „Macht nichts!“.
 
 ## Aufbau in Kürze
 
