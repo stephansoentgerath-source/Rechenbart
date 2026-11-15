@@ -138,6 +138,34 @@ const PAKETE=[
      ["Wo geht die Sonne auf?", "im Osten", "im Westen", "im Norden", "Die Sonne geht im Osten auf und im Westen unter."],
      ["Womit sehen Piraten weit über das Meer?", "mit dem Fernrohr", "mit dem Spiegel", "mit der Schaufel", "Durch ein Fernrohr sieht alles viel näher aus."],
      ["Woraus sind Dublonen?", "aus Gold", "aus Holz", "aus Keks", "Dublonen waren Münzen aus Gold. Piraten haben sie geliebt."]
+   ]],
+   6:["Wind und Wetter",[
+     ["Was bewegt die Wolken am Himmel?","der Wind","die Sonne","der Mond","Der Wind schiebt die Wolken über den Himmel."],
+     ["Was sieht man nach dem Regen manchmal am Himmel?","einen Regenbogen","einen Schneemann","eine Laterne","Scheint die Sonne in den Regen, entsteht ein Regenbogen."],
+     ["Was kommt bei einem Gewitter zuerst?","der Blitz","der Donner","der Schnee","Erst sieht man den Blitz. Den Donner hört man danach."],
+     ["Woraus besteht eine Wolke?","aus winzigen Wassertropfen","aus Watte","aus Rauch","Wolken bestehen aus vielen winzigen Wassertropfen."],
+     ["Womit misst man, wie warm es ist?","mit dem Thermometer","mit dem Kompass","mit der Uhr","Das Thermometer zeigt die Temperatur in Grad."]
+   ]],
+   7:["Affen und Dschungel",[
+     ["Wo leben die meisten Affen?","im Wald auf Bäumen","in der Wüste","am Nordpol","Die meisten Affen leben im Regenwald. Dort klettern sie auf Bäume."],
+     ["Was fressen Affen gern?","Früchte und Blätter","Steine","Sand","Affen fressen Früchte, Blätter und Nüsse."],
+     ["Wie ist das Wetter im Regenwald?","warm und nass","kalt und trocken","immer Schnee","Im Regenwald ist es das ganze Jahr warm, und es regnet oft."],
+     ["Womit halten sich manche Affen am Ast fest?","mit dem Schwanz","mit den Ohren","mit der Nase","Manche Affen können sich sogar mit dem Schwanz festhalten."],
+     ["Wie heißt ein sehr großer, starker Affe?","Gorilla","Gürteltier","Giraffe","Der Gorilla ist der größte Affe."]
+   ]],
+   8:["Am Korallenriff",[
+     ["Was ist eine Koralle?","ein Tier","ein Stein","ein Spielzeug","Korallen sehen aus wie Steine. Es sind aber viele winzige Tiere."],
+     ["Wie viele Arme hat ein Seestern meistens?","fünf","zwei","zwanzig","Die meisten Seesterne haben fünf Arme."],
+     ["Wie holen Delfine Luft?","Sie tauchen auf und atmen.","Sie atmen mit Kiemen.","Sie brauchen keine Luft.","Delfine atmen durch ein Loch oben auf dem Kopf."],
+     ["Was trägt die Schildkröte auf dem Rücken?","einen Panzer","einen Rucksack","ein Segel","Der Panzer schützt die Schildkröte."],
+     ["Was macht der Tintenfisch, wenn er Angst hat?","Er spritzt Tinte.","Er singt laut.","Er baut eine Burg.","In der dunklen Tintenwolke kann sich der Tintenfisch verstecken."]
+   ]],
+   9:["Nacht und Himmel",[
+     ["Wann sieht man die Sterne am besten?","in der Nacht","am Mittag","am Morgen","Am Tag ist die Sonne zu hell. In der Nacht sieht man die Sterne."],
+     ["Welches Tier jagt in der Nacht und ruft Schuhu?","die Eule","die Möwe","das Huhn","Eulen sehen und hören im Dunkeln sehr gut."],
+     ["Leuchtet der Mond von allein?","Nein, die Sonne strahlt ihn an.","Ja, er brennt.","Ja, er hat eine Lampe.","Der Mond leuchtet nicht selbst. Die Sonne strahlt ihn an."],
+     ["Was ist Nebel?","eine Wolke am Boden","Rauch von Geistern","Staub","Nebel ist eine Wolke, die ganz tief am Boden hängt."],
+     ["Wie viele Stunden hat ein Tag mit der Nacht zusammen?","24","12","10","Ein ganzer Tag hat 24 Stunden."]
    ]]
   },
   /* Olgas Küche: Was soll man oft essen, was nur manchmal? */
@@ -188,6 +216,43 @@ const PAKETE=[
    "Moki sieht alles. Moki sagt nichts. Außer für Bananen.",
    "In deiner Klasse ist es schöner. Aber hier gibt es mehr Kokosnüsse!"
   ],
+  /* ================= Akt 2: Die große Fahrt (Kapitel 5 bis 8) ================= */
+  /* Tunwörter angeln (Kapitel 5): Tunwörter und andere Wörter */
+  tun:["SEGELN","LAUFEN","SPRINGEN","LESEN","RECHNEN","SCHWIMMEN","ESSEN","LACHEN","SINGEN","KLETTERN","RUDERN","SCHLAFEN"],
+  keinTun:["SCHIFF","GRÜN","FISCH","LAUT","INSEL","NASS","KEKS","KLEIN","MOND","ROT","ANKER","SCHNELL"],
+  /* Gegenteile (Kapitel 6): [Wort, Gegenteil, falsch, falsch] */
+  gegenteile:[
+   ["groß","klein","dick","rund"],["heiß","kalt","warm","nass"],["laut","leise","schnell","hoch"],["hell","dunkel","bunt","leer"],["nass","trocken","kalt","weich"],
+   ["schnell","langsam","leicht","lang"],["voll","leer","schwer","offen"],["oben","unten","hinten","neben"],["alt","jung","lieb","klug"],["lang","kurz","breit","dünn"]
+  ],
+  /* Geister-Schrift (Kapitel 8): wie das Zauberbuch */
+  geisterschrift:[
+   ["um mitternacht tanzt das gespenst.",[0,1,4]],["die laterne leuchtet im nebel.",[0,1,4]],["das schiff knarrt in der nacht.",[0,1,5]],["ein gespenst hat angst vor krümel.",[0,1,3,5]],
+   ["der mond scheint auf das deck.",[0,1,5]],["im keller rasselt eine kette.",[0,1,4]],["die eule ruft dreimal.",[0,1]],["der kapitän zittert ein wenig.",[0,1]]
+  ],
+  /* Lesen und Handeln: [Satz, [[Ding, Farbe, Spruch bei falscher Wahl], ...]]. Das ERSTE Ding ist das richtige.
+     Dinge: knopf hebel kiste lampe eimer tuch besen. Farben: rot blau grün gelb grau */
+  befehle:{
+   see:[
+    ["<b>Sturm!</b> Das Deck ist nass. Wisch es mit dem Tuch trocken.",[["tuch"],["besen",0,"Kräh! Der Besen macht nur Pfützen. Lies nochmal!"],["eimer","blau","Kräh! Noch mehr Wasser? Lies nochmal!"]]],
+    ["Im Schiff ist Wasser. Schöpfe es mit dem roten Eimer heraus.",[["eimer","rot"],["eimer","blau","Der blaue Eimer hat ein Loch. Lies nochmal!"],["eimer","grün","Im grünen Eimer wohnt ein Fisch. Lies nochmal!"]]],
+    ["Zieh das Segel ein. Dazu ziehst du den gelben Hebel. Nicht den grünen!",[["hebel","gelb"],["hebel","grün","Huch! Das war der Anker. Platsch!"],["hebel","rot","Tuuut! Das war das Nebelhorn."]]],
+    ["Es wird dunkel. Mach die Lampe an. Sie ist gelb.",[["lampe","gelb"],["lampe","grau","Die graue Lampe ist kaputt. Lies nochmal!"],["knopf","gelb","Kräh! Das ist ein Knopf und keine Lampe."]]],
+    ["Geschafft! Hol dir zur Belohnung einen Keks aus der blauen Kiste.",[["kiste","blau"],["kiste","rot","In der roten Kiste sind nur Socken vom Kapitän. Puh!"],["kiste","grün","Die grüne Kiste ist leer. Krümel war schon da."]]]
+   ],
+   riff:[
+    ["Unter Wasser ist es dunkel. Nimm die gelbe Lampe mit.",[["lampe","gelb"],["lampe","grau","Blubb! Die graue Lampe ist kaputt."],["eimer","gelb","Kräh! Ein Eimer leuchtet nicht."]]],
+    ["Die Perle liegt in einer Kiste. Sie liegt nicht in der roten und nicht in der blauen.",[["kiste","grün"],["kiste","rot","Zwick! In der roten Kiste wohnt ein Krebs."],["kiste","blau","Blubb! In der blauen Kiste schläft ein Tintenfisch."]]],
+    ["Die Kiste klemmt. Zieh am grünen Hebel.",[["hebel","grün"],["hebel","rot","Blubb! Jetzt sprudelt es überall."],["hebel","blau","Hoppla! Das war die Tür vom Wrack."]]],
+    ["Die Perle ist schmutzig. Putze sie vorsichtig mit dem Tuch.",[["tuch"],["besen",0,"Kräh! Der Besen ist viel zu grob."],["eimer","rot","Kräh! Wir sind doch schon im Wasser!"]]]
+   ],
+   nebel:[
+    ["<b>Anleitung: Gespenster vertreiben.</b> Gespenster mögen kein Licht. Mach die gelbe Lampe an.",[["lampe","gelb"],["lampe","grau","Buh! Die graue Lampe ist kaputt."],["knopf","rot","Huuu! Das war der Gruselknopf. Lies nochmal!"]]],
+    ["Gespenster mögen keine sauberen Schiffe. Feg das Deck mit dem Besen.",[["besen"],["tuch",0,"Das Tuch ist zu klein für ein ganzes Deck."],["eimer","blau","Platsch! Jetzt ist das Gespenst nass und sauer."]]],
+    ["Die Geister-Musik kommt aus einer Kiste. Mach die Kiste zu, die nicht rot und nicht grün ist.",[["kiste","blau"],["kiste","rot","In der roten Kiste sitzt nur eine Fledermaus."],["kiste","grün","In der grünen Kiste liegt alter Käse. Puh!"]]],
+    ["Jetzt läute die Schiffsglocke. Zieh dazu am roten Hebel.",[["hebel","rot"],["hebel","blau","Huch! Die Falltür geht auf."],["hebel","gelb","Quietsch! Das war die Gruselorgel."]]]
+   ]
+  },
   witze:[
    "Was ist grün und klopft an die Tür? Ein Klopfsalat!",
    "Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!",

@@ -162,7 +162,7 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .spinne{animation:spi 5s ease-in-out infinite alternate}@keyframes spi{to{transform:translateY(90px)}}
 .bb .btn:nth-last-child(n+3),.bb .btn:nth-last-child(n+3)~.btn{font-size:21px;padding:7px 14px}
 .spg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:470px}
-.spg .btn{min-width:0;font-size:21px;padding:9px 6px}
+.spg .btn{min-width:0;font-size:20px;padding:7px 6px}
 .tonne{font:inherit;font-size:30px;font-weight:700;width:250px;height:150px;border-radius:14px 14px 30px 30px;border:5px solid #2b2a33;box-shadow:0 6px 0 #2b2a33;color:#fff}
 .essen{font-size:72px;font-weight:700;text-align:center;margin:56px 0 44px}
 .dinge{display:flex;gap:26px;justify-content:center;margin-top:8px}
@@ -217,12 +217,12 @@ let S={coins:0,done:{},lists:[1,2,3],speak:true,log:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 /* ---------- Inhalte aus inhalte.js: Lernwörter-Liste und Lernpaket ---------- */
-let WORDS,STORY,BLATTN,BLATT,BLATTK,SPELLS,VERBEN,NOMEN,KEINNOMEN,QUATSCH,WISSEN,OFT,SELTEN,ERN,KNOPF,RAETSEL,MOKI,JOKES;
+let TUN,KEINTUN,GEGENT,GSCHRIFT,BEFEHLE,WORDS,STORY,BLATTN,BLATT,BLATTK,SPELLS,VERBEN,NOMEN,KEINNOMEN,QUATSCH,WISSEN,OFT,SELTEN,ERN,KNOPF,RAETSEL,MOKI,JOKES;
 const aktLW=()=>LERNWOERTER.find(l=>l.id===S.lw)||LERNWOERTER[0],aktPaket=()=>PAKETE.find(q=>q.id===S.paket)||PAKETE[PAKETE.length-1];
 function ladeInhalt(){const L=aktLW(),B=PAKETE[0],P=aktPaket(),g=k=>P[k]||B[k];
  WORDS=L.woerter.map(a=>({l:a[0],w:a[1],a:a[2],g:a[3],o:a[4]}));STORY=L.geschichten;BLATTN=L.blaetter;BLATTK=Object.keys(BLATTN).map(Number);BLATT={0:'Alle Wörter'};BLATTK.forEach(k=>BLATT[k]=`Blatt ${k}: ${BLATTN[k]}`);
  if(!S.lists||!S.lists.some(k=>BLATTK.includes(k)))S.lists=BLATTK.slice();
- SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze')}
+ SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze');TUN=g('tun');KEINTUN=g('keinTun');GEGENT=g('gegenteile');GSCHRIFT=g('geisterschrift');BEFEHLE=Object.assign({},B.befehle,P.befehle)}
 ladeInhalt();
 const SW=()=>S.schwer==null?1:S.schwer;
 
@@ -329,10 +329,18 @@ const mokiG=(x,y,sc)=>`<g transform="translate(${x},${y}) scale(${sc||.7})"><g c
 const schildchen=(x,y,a,b)=>`<g transform="translate(${x},${y})"><rect x="-3" y="0" width="6" height="34" fill="#6d4a26"/><rect x="-92" y="-46" width="184" height="50" rx="5" fill="#fff8e6" stroke="#6d4a26" stroke-width="3"/><text y="-25" text-anchor="middle" font-size="17" font-weight="700" fill="#2b2a33">${a}</text><text y="-6" text-anchor="middle" font-size="16" fill="#2b2a33">${b}</text></g>`;
 const wolke=y=>`<g class="drift bgd" fill="#fff" opacity=".8"><ellipse cx="0" cy="${y}" rx="80" ry="18"/><ellipse cx="50" cy="${y-14}" rx="50" ry="16"/></g>`,fernschiff=(x,y)=>`<g class="bgd" transform="translate(${x},${y})"><path d="M-24 0h48l-9 13h-30z" fill="#6d4a26"/><path d="M0 0v-34l20 28z" fill="#fff"/><path d="M-3 0v-28l-16 24z" fill="#f4efe4"/></g>`,
  voegel=(x,y)=>`<path class="bgd" d="M${x} ${y}q8 -8 16 0q8 -8 16 0M${x+80} ${y-28}q6 -6 12 0q6 -6 12 0" stroke="#2b2a33" stroke-width="3" fill="none"/>`;
-const PORT={moki:`<svg viewBox="-50 -118 100 100">${moki()}</svg>`,hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
+const koko=()=>moki()+'<path d="M-22 -103l8 -24l14 15l14 -15l8 24z" fill="#f6c84a" stroke="#2b2a33" stroke-width="2.5"/><circle cx="0" cy="-112" r="4" fill="#d24a43"/>';
+const schildi=()=>`<ellipse cx="0" cy="2" rx="74" ry="8" fill="#0002"/><rect x="-50" y="-22" width="22" height="24" rx="8" fill="#9bc26b" stroke="#2b2a33" stroke-width="4"/><rect x="30" y="-22" width="22" height="24" rx="8" fill="#9bc26b" stroke="#2b2a33" stroke-width="4"/>
+<ellipse cx="88" cy="-36" rx="25" ry="19" fill="#9bc26b" stroke="#2b2a33" stroke-width="4"/><circle cx="97" cy="-41" r="4" fill="#2b2a33"/><path d="M84 -28q10 7 20 0" stroke="#2b2a33" stroke-width="3" fill="none"/><circle cx="93" cy="-41" r="11" fill="none" stroke="#2b2a33" stroke-width="2.5"/>
+<path d="M-70 -20q70 -92 140 0z" fill="#4f8f55" stroke="#2b2a33" stroke-width="4"/><path d="M-40 -36l20 -24h40l20 24M-20 -60l-6 38M20 -60l6 38" fill="none" stroke="#3f7a4a" stroke-width="4"/>`;
+const GEIST='<path d="M-40 40V-10a40 40 0 0 1 80 0V40l-14 -12l-13 12l-13 -12l-13 12l-13 -12z" fill="#fff" opacity=".92" stroke="#b9b3c9" stroke-width="4"/><circle cx="-14" cy="-8" r="7" fill="#2b2a33"/><circle cx="14" cy="-8" r="7" fill="#2b2a33"/><ellipse cx="0" cy="14" rx="8" ry="10" fill="#2b2a33"/>';
+const schlotter=()=>`<g transform="translate(0,-74) scale(1.7)">${GEIST}</g><path d="M-70 -150Q0 -168 70 -150Q44 -206 0 -210Q-44 -206 -70 -150Z" fill="#2b2a33"/><ellipse cx="0" cy="-150" rx="74" ry="9" fill="#2b2a33"/><path d="M-12 -182h24M0 -194v24" stroke="#fff" stroke-width="4"/>`;
+const DELFIN='<path d="M-90 -20q60 -60 150 -20q30 12 50 -10q0 40 -40 40q-80 30 -160 -10z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><path d="M-10 -52l20 -34l14 38z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><circle cx="-62" cy="-22" r="5" fill="#2b2a33"/><path d="M-84 -10q12 8 26 2" stroke="#2b2a33" stroke-width="3" fill="none"/>';
+const FEIND='<path d="M-70 0h140l-20 40h-100z" fill="#4a4a55" stroke="#2b2a33" stroke-width="4"/><rect x="-4" y="-92" width="8" height="92" fill="#2b2a33"/><path d="M4 -88q62 32 0 72z" fill="#8a5bb5" stroke="#2b2a33" stroke-width="3"/><circle cx="-32" cy="-14" r="13" fill="#e9b990" stroke="#2b2a33" stroke-width="3"/><path d="M-48 -22h32l-16 -18z" fill="#2b2a33"/><path d="M-38 -10q6 6 12 0" stroke="#2b2a33" stroke-width="2.5" fill="none"/>';
+const PORT={koko:`<svg viewBox="-55 -132 110 110">${koko()}</svg>`,schildi:`<svg viewBox="30 -94 100 100">${schildi()}</svg>`,schlotter:`<svg viewBox="-90 -222 180 180"><rect x="-90" y="-222" width="180" height="180" fill="#5a6478"/>${schlotter()}</svg>`,moki:`<svg viewBox="-50 -118 100 100">${moki()}</svg>`,hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
  kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
-const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
-const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,moki:1.5,hobel:.8,strahl:.9,moritz:1};
+const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
+const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
 
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
@@ -457,6 +465,7 @@ let mus=null;
 function musicOn(){if(S.music===false||mus||!ac())return;const E=.2;let i=0,b=0,tm=AC.currentTime+.15,tb=tm;
  mus=setInterval(()=>{try{while(tm<AC.currentTime+.5){const n=MEL[i%MEL.length];tone(NF[n[0]],tm,n[1]*E*.95,'triangle',.07);tm+=n[1]*E;i++}
   while(tb<AC.currentTime+.5){const f=NF[BASS[b%BASS.length]];tone(f,tb,E*2.6,'sine',.09);tone(f*1.5,tb+E*3,E*2.6,'sine',.06);tb+=E*6;b++}}catch(e){}},120)}
+function bild(f,t){return new Promise(res=>{const im=new Image();im.onerror=()=>res();im.onload=async()=>{musicOn();sfx('fanfare');cineOpen(`<div style="position:absolute;inset:0;background:#22313a url(${f}) center/cover"></div>`);await film(t,10000);hush();cineClose();musicOff();res()};im.src=f})}
 function musicOff(){clearInterval(mus);mus=null}
 
 /* ---------- Filmsequenzen ---------- */
@@ -533,9 +542,9 @@ function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filte
  if(c){const m=c.tasks.filter(k=>d[k]).length;t=!d[c.intro]?'':m<c.tasks.length?'Tippe auf ein Ausrufezeichen!':!d[c.key]?c.hint:sc==='hoehle'?'Du hast den Schatz gefunden! Du kannst alles nochmal üben.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.'}
  else t=sc==='hexe'?(!d.c2intro?'':n2<2?'Hilf der Hexe! Tippe auf ein Ausrufezeichen.':!d.duell3?'Fordere Mixa zum Rechen-Duell! Tippe sie an.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.')
   :(!d.intro?'':n<3?'Tippe auf ein Ausrufezeichen im Hafen!':!d.karte?'Geh zur Kneipe!':!d.logbuch?'Bring das Essen zum Kapitän!':'Kapitel 1 geschafft! Folge dem Wegweiser zur Hexe.');
- $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span></div><div class="tx" style="margin-top:10px">${t}</div></div>`;
+ $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span>${['k5','k6','k7','k8'].some(k=>d[k])?`<span class="stat">Orden: ${['k5','k6','k7','k8'].filter(k=>d[k]).length}</span>`:''}</div><div class="tx" style="margin-top:10px">${t}</div></div>`;
  const M=[['kisten',d.kisten,1],['kanonen',d.kanonen,1],['kompass',d.kompass,1],['tuer',d.karte&&d.kueche,n>=3],['schild',0,d.logbuch],['schiff',d.rennen,n>=3],['kapitaen',0,d.karte&&!d.logbuch],
-  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['muell',d.muell,1],['uhr1',d.uhr1,1],['uhr2',d.uhr2,1],['uhr3',d.uhr3,1],['uhr4',d.uhr4,1],['uhr5',d.uhr5,1],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];
+  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['muell',d.muell,1],['uhr1',d.uhr1,1],['uhr2',d.uhr2,1],['uhr3',d.uhr3,1],['uhr4',d.uhr4,1],['uhr5',d.uhr5,1],['uhr6',d.uhr6,1],['uhr7',d.uhr7,1],['uhr8',d.uhr8,1],['uhr9',d.uhr9,1],['wissen6',d.wissen6,1],['wissen7',d.wissen7,1],['wissen8',d.wissen8,1],['wissen9',d.wissen9,1],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];
  Object.keys(SC).forEach(k=>{const q=SC[k],all=q.tasks.every(x=>d[x]);q.tasks.forEach(x=>M.push([x,d[x],1]));M.push([q.bonus,d[q.bonus],all],[q.npc,d[q.key],all])});
  M.forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
  ['g-schild','h-schild'].forEach(i=>{const e=$('#'+i);if(e)e.style.display=d.logbuch?'':'none'});
@@ -692,23 +701,23 @@ function duelTask(n){let a,b,op='+';
  else if(rand(0,1)){a=rand(11,79);if(a%10===0)a++;b=z(1,Math.floor((99-a)/10));if(rand(0,1))[a,b]=[b,a]}
  else{a=rand(31,99);if(a%10===0)a++;b=z(1,Math.floor(a/10)-1);op='-'}
  return{a,b,op,ans:op==='+'?a+b:a-b}}
-function duel(n){return new Promise(res=>{let me=0,she=0,val='',lock=true,cur,to=null;const T=n===3&&S.timer!==false?45:0;
+function duel(n,wer){wer=wer||'mixa';const gn=NAME[wer].split(' ').pop();return new Promise(res=>{let me=0,she=0,val='',lock=true,cur,to=null;const T=n===3&&S.timer!==false?45:0;
  panel(`<div class="num"><div class="numl"><div class="ptitle">Rechen-Duell ${n}</div><div class="duel">
  <div class="pot">Moritz<div class="glas"><i id="pm" style="background:#4f9a4a"></i></div><b id="sm">0</b></div>
- <div class="pot">Mixa<div class="glas"><i id="px" style="background:#6b4a8e"></i></div><b id="sx">0</b></div>
+ <div class="pot">${gn}<div class="glas"><i id="px" style="background:#6b4a8e"></i></div><b id="sx">0</b></div>
  <div class="dq">${T?'<div class="timer"><i id="dt"></i></div>':''}<div class="eq"><span id="dq"></span> <span id="ans" class="ans">?</span></div><div id="hint" class="hint"></div></div></div></div>
  <div class="pad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'OK'].map(k=>`<button class="key${k==='OK'?' ok':''}" data-k="${k}">${k}</button>`).join('')}</div></div>`);
  const A=$('#ans'),sym=()=>cur.op==='+'?'+':'−';
  function score(){$('#pm').style.height=me*20+'%';$('#px').style.height=she*20+'%';$('#sm').textContent=me;$('#sx').textContent=she}
  function next(){if(me>=5||she>=5){setTimeout(()=>res(me>=5),600);return}
   cur=duelTask(n);val='';A.textContent='?';A.className='ans';$('#hint').textContent='';$('#dq').textContent=`${cur.a} ${sym()} ${cur.b} =`;
-  note('mixa',`${cur.a} ${cur.op==='+'?'plus':'minus'} ${cur.b}`);lock=false;
+  note(wer,`${cur.a} ${cur.op==='+'?'plus':'minus'} ${cur.b}`);lock=false;
   if(T){const t=$('#dt');t.style.transition='none';t.style.width='100%';void t.offsetWidth;t.style.transition=`width ${T}s linear`;t.style.width='0';to=setTimeout(()=>miss('Die Sanduhr ist leer. Macht nichts!'),T*1000)}}
  function miss(msg){lock=true;clearTimeout(to);she++;score();A.classList.add('bad');$('#hint').textContent=`${cur.a} ${sym()} ${cur.b} = ${cur.ans}`;note('kruemel',msg);setTimeout(next,3200)}
  $$('.key').forEach(k=>k.onclick=()=>{if(lock)return;const c=k.dataset.k;
   if(c==='⌫')val=val.slice(0,-1);else if(c==='OK'){if(!val)return;
    if(+val===cur.ans){lock=true;clearTimeout(to);if(T)$('#dt').style.transition='none';me++;score();A.classList.add('good');note('kruemel',(sfx('ok'),pick(RIGHT)));setTimeout(next,1500)}
-   else{sfx('bad');miss('Hoppla! Der Punkt geht an Mixa. Schau dir die Lösung an.')}return}
+   else{sfx('bad');miss(`Hoppla! Der Punkt geht an ${gn}. Schau dir die Lösung an.`)}return}
   else if(val.length<3)val+=c;A.textContent=val||'?'});
  score();next()})}
 
@@ -827,12 +836,12 @@ async function wissen(n){const[titel,fr]=WISSEN[n];await knopf();closePanel();aw
  const q=shuffle(fr).slice(0,3);for(let i=0;i<q.length;i++){await choice(titel+' '+dots(i,q.length),q[i][0],q[i].slice(1,4),'Was weißt du?');closePanel();await talk('kruemel','Kräh! '+q[i][4])}}
 
 /* ---------- Fässer-Hüpfen ---------- */
-function faesser(){return new Promise(res=>{musicOn();const c=$('#cine'),X0=260,GY=600,bs=[];let x=1150;for(let i=0;i<14+SW()*3;i++){bs.push({x});x+=rand(540-SW()*70,780-SW()*130)}const END=x+150;
+function faesser(sk){return new Promise(res=>{const df=sk==='delfin';musicOn();const c=$('#cine'),X0=260,GY=600,bs=[];let x=1150;for(let i=0;i<14+SW()*3;i++){bs.push({x});x+=rand(540-SW()*70,780-SW()*130)}const END=x+150;
  c.innerHTML=`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#cfe8ef"/><circle cx="1050" cy="130" r="56" fill="#f8d66b"/><rect y="420" width="1280" height="200" fill="#4a9aa6"/>${WAVES(470)}${WAVES(540)}
- <rect y="600" width="1280" height="200" fill="#c2935a"/><rect y="600" width="1280" height="12" fill="#9c7040"/>
- <g id="fworld">${bs.map((b,i)=>`<g id="fb${i}" transform="translate(${b.x},${GY-34})"><circle r="34" fill="#a9793f" stroke="#6d4a26" stroke-width="6"/><path d="M-34 0h68M0 -34v68" stroke="#6d4a26" stroke-width="5"/></g>`).join('')}
+ ${df?`<rect y="600" width="1280" height="200" fill="#3f8f9c"/>${WAVES(650)}${WAVES(730)}`:'<rect y="600" width="1280" height="200" fill="#c2935a"/><rect y="600" width="1280" height="12" fill="#9c7040"/>'}
+ <g id="fworld">${bs.map((b,i)=>`<g id="fb${i}" transform="translate(${b.x},${GY-34})">${df?'<path d="M-30 34L-18 -34H18L30 34Z" fill="#d24a43" stroke="#2b2a33" stroke-width="5"/><path d="M-23 4H23" stroke="#fff" stroke-width="12"/>':'<circle r="34" fill="#a9793f" stroke="#6d4a26" stroke-width="6"/><path d="M-34 0h68M0 -34v68" stroke="#6d4a26" stroke-width="5"/>'}</g>`).join('')}
  <g transform="translate(${END},0)"><rect y="330" width="14" height="270" fill="#fff"/><path d="M14 330h110l-26 34l26 34h-110z" fill="#d24a43"/><text x="64" y="376" text-anchor="middle" font-size="30" font-weight="700" fill="#fff">Ziel</text></g></g>
- <g id="fmor"><g transform="scale(.85)" class="walk"><g class="bob">${moritz()}</g></g></g></svg><div id="rhud"><i class="coin"></i><span id="rc">0</span></div><div id="rmsg"></div>
+ <g id="fmor">${df?`<g transform="translate(0,14)"><g transform="translate(-4,-50) scale(.5)">${moritz()}</g><g transform="scale(-1.05,1.05)">${DELFIN}</g></g>`:`<g transform="scale(.85)" class="walk"><g class="bob">${moritz()}</g></g>`}</g></svg><div id="rhud"><i class="coin"></i><span id="rc">0</span></div><div id="rmsg"></div>
  <button class="btn" style="position:absolute;right:40px;bottom:36px;font-size:46px;padding:26px 54px">Springen!</button>`;c.style.display='block';
  let wx=0,v=250+SW()*30,h=0,vy=0,slow=0,pts=0,last=0,msgT=0,fin=false;const mor=$('#fmor'),world=$('#fworld'),msg=$('#rmsg');
  c.onclick=()=>{if(h===0&&!fin){vy=640;h=.01;sfx('jump')}};
@@ -944,14 +953,14 @@ async function kekskanone(){await brief('Die Kanone schießt mit alten Keksen! R
     ball.style.transform=`translate(${dx}px,0) scale(.3) rotate(540deg)`;sfx('splash');setTimeout(()=>{b.textContent='Treffer!';b.style.fontSize='34px';sfx('ok')},500);note('kapitaen',pick(['Har har! Volltreffer!','Mitten ins Fass! Har har!','Krümel, hol neue Kekse!']));setTimeout(res,1900)}
    else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel','Kräh! Daneben. Rechne nochmal.')}})});
  closePanel()}
-function saebel(){return new Promise(res=>{musicOn();const c=$('#cine'),G=900,NS=18+SW()*5,obs=[];let made=0,hit=0,last=0,tsp=0,msgT=0,fin=false;
- c.innerHTML=`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#cfe8ef"/><circle cx="1080" cy="120" r="56" fill="#f8d66b"/><rect y="640" width="1280" height="160" fill="#e7cf98"/>${PALME(120,690)}${PALME(1180,700)}
- <g transform="translate(250,790) scale(1.1)">${moritz()}<path d="M54 -100L130 -210" stroke="#c9a36b" stroke-width="10" stroke-linecap="round"/><path d="M48 -92l16 -10" stroke="#6d4a26" stroke-width="10" stroke-linecap="round"/></g><g id="sw"></g></svg><div id="rhud">Kokosnüsse: <span id="rc">0</span></div><div id="rmsg" style="font-size:54px;top:120px"></div>`;c.style.display='block';
+function saebel(sk){return new Promise(res=>{const gs=sk==='geist';musicOn();const c=$('#cine'),G=900,NS=18+SW()*5,obs=[];let made=0,hit=0,last=0,tsp=0,msgT=0,fin=false;
+ c.innerHTML=`<svg viewBox="0 0 1280 800">${gs?'<rect width="1280" height="800" fill="#2a3350"/><circle cx="1080" cy="120" r="56" fill="#f8f1c9"/><rect y="640" width="1280" height="160" fill="#5c4a3a"/>':`<rect width="1280" height="800" fill="#cfe8ef"/><circle cx="1080" cy="120" r="56" fill="#f8d66b"/><rect y="640" width="1280" height="160" fill="#e7cf98"/>${PALME(120,690)}${PALME(1180,700)}`}
+ <g transform="translate(250,790) scale(1.1)">${moritz()}<path d="M54 -100L130 -210" stroke="#c9a36b" stroke-width="10" stroke-linecap="round"/><path d="M48 -92l16 -10" stroke="#6d4a26" stroke-width="10" stroke-linecap="round"/></g><g id="sw"></g></svg><div id="rhud">${gs?'Gespenster':'Kokosnüsse'}: <span id="rc">0</span></div><div id="rmsg" style="font-size:54px;top:120px"></div>`;c.style.display='block';
  const sw=$('#sw'),msg=$('#rmsg');
  function spawn(){const k=made%(6-SW())===3,x=rand(260,1020),o={x,y:860,vx:(640-x)*.25+rand(-40,40),vy:-rand(900,1010),k,dead:0};
-  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML=k?`<circle r="70" fill="transparent"/><g transform="translate(0,50)">${kruemel()}</g>`:`<circle r="74" fill="transparent"/><circle r="46" fill="#7a5230" stroke="#4a2f17" stroke-width="5"/><g fill="#4a2f17"><circle cx="-12" cy="-10" r="5"/><circle cx="10" cy="-12" r="5"/><circle cx="0" cy="6" r="5"/></g>`;
-  g.style.cursor='pointer';g.onpointerdown=()=>{if(o.dead)return;if(k){sfx('kraeh');msg.textContent='Kräh! Ich bin keine Kokosnuss!';msgT=1.8;return}
-   o.dead=1;hit++;$('#rc').textContent=hit;sfx('splash');g.innerHTML='<path d="M-50 0a46 46 0 0 1 44 -46v92a46 46 0 0 1 -44 -46z" fill="#fff" stroke="#7a5230" stroke-width="8"/><path d="M50 0a46 46 0 0 0 -44 -46v92a46 46 0 0 0 44 -46z" fill="#fff" stroke="#7a5230" stroke-width="8" transform="translate(16,10) rotate(20)"/>'};
+  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML=k?`<circle r="70" fill="transparent"/><g transform="translate(0,50)">${kruemel()}</g>`:gs?`<circle r="74" fill="transparent"/>${GEIST}`:`<circle r="74" fill="transparent"/><circle r="46" fill="#7a5230" stroke="#4a2f17" stroke-width="5"/><g fill="#4a2f17"><circle cx="-12" cy="-10" r="5"/><circle cx="10" cy="-12" r="5"/><circle cx="0" cy="6" r="5"/></g>`;
+  g.style.cursor='pointer';g.onpointerdown=()=>{if(o.dead)return;if(k){sfx('kraeh');msg.textContent=gs?'Kräh! Ich bin kein Gespenst!':'Kräh! Ich bin keine Kokosnuss!';msgT=1.8;return}
+   o.dead=1;hit++;$('#rc').textContent=hit;sfx('splash');g.innerHTML=gs?'<circle r="44" fill="#fff" opacity=".4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#fff">Puff!</text>':'<path d="M-50 0a46 46 0 0 1 44 -46v92a46 46 0 0 1 -44 -46z" fill="#fff" stroke="#7a5230" stroke-width="8"/><path d="M50 0a46 46 0 0 0 -44 -46v92a46 46 0 0 0 44 -46z" fill="#fff" stroke="#7a5230" stroke-width="8" transform="translate(16,10) rotate(20)"/>'};
   o.g=g;sw.appendChild(g);obs.push(o);made++}
  function frame(now){if(!last)last=now;const dt=Math.min(.05,(now-last)/1000);last=now;tsp-=dt;msgT-=dt;if(msgT<0&&!fin)msg.textContent='';
   if(made<NS&&tsp<=0){spawn();tsp=1.35-SW()*.25}
@@ -1026,8 +1035,12 @@ const UHRTXT={1:'Die Uhr hat zwei Zeiger. Der kleine rote Zeiger zeigt die Stund
  3:'Steht der große blaue Zeiger unten auf der 6, ist eine halbe Stunde vorbei. Der kleine Zeiger steht dann zwischen zwei Zahlen. Halb 5 heißt: Er ist auf dem Weg zur 5.',
  4:'Jetzt kommen volle und halbe Stunden gemischt. Schau zuerst auf den großen blauen Zeiger: Steht er auf der 12 oder auf der 6?',
  5:'Steht der große blaue Zeiger rechts auf der 3, ist es Viertel nach. Steht er links auf der 9, ist es Viertel vor.'};
-async function uhr(st){await brief(UHRTXT[st]);const wer=['kapitaen','mixa','hobel','strahl','kapitaen'][st-1],frage=['Wann gibt es Essen?','Wann ist der Trank fertig?','Wann machen wir Pause?','Wann geht das Licht an?','Wann öffnen wir die Truhe?'][st-1];
- for(let i=0;i<5;i++)await new Promise(res=>{const h=rand(1,12),ms=st<3?[0]:st===3?[30]:st===4?[0,30]:[0,15,30,45],m=pick(ms),stellen=st===2||(st===4&&i%2===1);let lock=false;
+UHRTXT[6]='Steht der große blaue Zeiger rechts auf der 3, ist eine Viertelstunde vorbei. Dann sagt man: Viertel nach.';
+/* Uhr je Kapitel: m = Minuten, s = stellen (1 immer, .5 jede zweite), t = Erklärung, w = wer fragt */
+const UHRK={1:{m:[0],t:1,w:'kapitaen',f:'Wann gibt es Essen?'},2:{m:[0],s:1,t:2,w:'mixa',f:'Wann ist der Trank fertig?'},3:{m:[0],s:.5,t:2,w:'hobel',f:'Wann machen wir Pause?'},4:{m:[30],t:3,w:'strahl',f:'Wann geht das Licht an?'},
+ 5:{m:[0,15,30,45],t:5,w:'kapitaen',f:'Wann öffnen wir die Truhe?'},6:{m:[0,30],t:4,w:'kapitaen',f:'Wann sind wir da?'},7:{m:[0,30],s:.5,t:4,w:'koko',f:'Wann gibt es Bananen?'},8:{m:[15],t:6,w:'schildi',f:'Wann kommt die Flut?'},9:{m:[15,45],t:5,w:'schlotter',f:'Wann ist Geisterstunde?'}};
+async function uhr(st){const U=UHRK[st];await brief(UHRTXT[U.t]);const wer=U.w,frage=U.f;
+ for(let i=0;i<5;i++)await new Promise(res=>{const h=rand(1,12),stellen=U.s===1||(U.s===.5&&i%2===1),m=stellen?0:pick(U.m);let lock=false;
   if(stellen){panel(`<div class="ptitle">Die Uhr stellen ${dots(i,5)}</div><div class="uhrw">${zifferblatt(h,0,2)}<div class="lesez" style="max-width:520px;margin:0">${NAME[wer]} sagt:<br><b>Stell die Uhr auf ${h} Uhr.</b></div></div>`);
    note('kruemel','Tippe auf die Zahl für den kleinen Zeiger.');
    $$('.uzahl').forEach(z=>z.onclick=()=>{if(lock)return;const kl=$('#uklein');kl.style.display='';kl.setAttribute('transform',`rotate(${z.dataset.n*30})`);
@@ -1039,6 +1052,39 @@ async function uhr(st){await brief(UHRTXT[st]);const wer=['kapitaen','mixa','hob
    $$('.copt').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');note('kruemel',`Richtig! Es ist ${t}.`);setTimeout(res,1900)}
     else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel',m===0?'Kräh! Schau auf den kleinen roten Zeiger. Auf welche Zahl zeigt er?':m===30?'Kräh! Der kleine Zeiger ist schon auf dem Weg zur nächsten Zahl.':'Kräh! Wo steht der große blaue Zeiger: auf der 3 oder auf der 9?')}})}});
  closePanel()}
+
+/* ---------- Bausteine für Akt 2 ---------- */
+async function angeln(titel,gut,schlecht,frage,tipp,falsch){for(let r=0;r<3;r++)await new Promise(res=>{const good=shuffle(gut).slice(0,3),ws=shuffle(good.concat(shuffle(schlecht).slice(0,3)));let left=3;
+  panel(`<div class="ptitle">${titel} ${dots(r,3)}</div><div class="center ltext" style="margin-top:36px">${frage}</div><div class="dgrid" style="margin-top:50px;gap:24px">${ws.map(w=>`<button class="nw" data-n="${good.includes(w)?1:0}">${w}</button>`).join('')}</div>`);
+  note('kruemel',tipp);$$('.nw').forEach(b=>b.onclick=()=>{if(b.classList.contains('good'))return;if(b.dataset.n==='1'){b.classList.add('good');sfx('ok');if(--left===0)setTimeout(res,1300)}
+   else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel',falsch)}})});closePanel()}
+async function grossSchreiben(liste,titel,wer){const sp=shuffle(liste).slice(0,5);
+ for(let i=0;i<sp.length;i++)await new Promise(res=>{const ws=sp[i][0].split(' '),caps=sp[i][1];let left=caps.length;
+  panel(`<div class="ptitle">${titel} ${dots(i,sp.length)}</div><div class="satz">${ws.map((w,j)=>`<button class="wort" data-j="${j}" data-r="${caps.includes(j)?1:0}">${w}</button>`).join('')}</div><div class="center ltext">Welche Wörter schreibt man groß?</div>`);
+  note('kruemel','Tippe alle Wörter an, die groß sein müssen.');
+  $$('.wort').forEach(b=>b.onclick=()=>{const j=+b.dataset.j;if(b.classList.contains('good'))return;
+   if(caps.includes(j)){b.textContent=cap(ws[j]);b.classList.add('good');if(--left===0){speak(cap(sp[i][0]),wer);sfx('ok');setTimeout(res,2400)}else sfx('coin')}
+   else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Kräh! Dieses Wort bleibt klein.')}})});closePanel()}
+async function befehle(k,titel){const st=BEFEHLE[k];for(let i=0;i<st.length;i++)await lesen(titel+' '+dots(i,st.length),st[i][0],st[i][1]);closePanel()}
+const genP=()=>{let a,b;do{a=rand(13,69);b=rand(6,29)}while(a+b>100||a%10+b%10<10);return[a,b]},genM=()=>{let a,b;do{a=rand(31,95);b=rand(6,28)}while(a%10>=b%10);return[a,b]};
+/* Feindliche Schiffe abwehren */
+function abwehr(){return new Promise(res=>{musicOn();const c=$('#cine'),LY=[320,470,620],sh=[],NS=14+SW()*4;let made=0,hit=0,last=0,tsp=.8,fin=false,msgT=0;
+ c.innerHTML=`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#4a9aa6"/><rect width="1280" height="220" fill="#cfe8ef"/><circle cx="1080" cy="110" r="50" fill="#f8d66b"/>${WAVES(290)}${WAVES(440)}${WAVES(590)}${WAVES(740)}
+ <g transform="translate(-90,250) scale(1.15)">${SHIP()}</g><g id="ab"></g></svg><div id="rhud">Vertrieben: <span id="rc">0</span></div><div id="rmsg" style="font-size:54px;top:110px"></div>`;c.style.display='block';
+ const ab=$('#ab'),msg=$('#rmsg');
+ function spawn(){const o={x:1380,l:rand(0,2),v:95+SW()*25+made*5,st:0},g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML=`<rect x="-90" y="-110" width="180" height="170" fill="transparent"/>${FEIND}`;g.style.cursor='pointer';
+  g.onpointerdown=()=>{if(o.st)return;o.st=1;hit++;$('#rc').textContent=hit;sfx('splash');msg.textContent=pick(['Volltreffer!','Keks ahoi!','Und tschüss!']);msgT=.9};o.g=g;ab.appendChild(g);sh.push(o);made++}
+ function frame(now){if(!last)last=now;const dt=Math.min(.05,(now-last)/1000);last=now;tsp-=dt;msgT-=dt;if(msgT<0&&!fin)msg.textContent='';
+  if(made<NS&&tsp<=0){spawn();tsp=Math.max(.9,2.2-SW()*.3-made*.05)}
+  sh.forEach(o=>{if(o.st)o.x+=330*dt;else{o.x-=o.v*dt;if(o.x<330){o.st=2;sfx('bad');msg.textContent='Die haben einen Keks geklaut!';msgT=1.4}}o.g.setAttribute('transform',`translate(${o.x},${LY[o.l]}) scale(${o.st?-1:1},1)`)});
+  if(made>=NS&&sh.every(o=>o.x>1400)&&!fin){fin=true;msg.textContent='Geschafft!';sfx('fanfare');setTimeout(()=>{musicOff();c.style.display='none';c.innerHTML='';res(hit)},2400)}
+  if(!fin)requestAnimationFrame(frame)}
+ requestAnimationFrame(frame)})}
+async function orden(sc,noch,geben,name,danach){const c=SC[sc],d=S.done;if(!c.tasks.every(k=>d[k])){await talk(c.wer,noch);return}
+ if(d[c.key]){await talk(c.wer,'Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben.');return}
+ await talk(c.wer,geben);d[c.key]=1;S.coins+=10;save();sfx('fanfare');
+ panel(`<div class="log"><div class="bigmsg">Ein Orden für Moritz!</div><svg viewBox="-80 -80 160 190" width="210" height="250"><path d="M-30 60l-16 44l46 -18l46 18l-16 -44z" fill="#d24a43" stroke="#2b2a33" stroke-width="4"/><circle r="66" fill="#f6c84a" stroke="#a9793f" stroke-width="8" class="newp"/><path d="M0 -40l12 26l28 3l-21 19l6 28l-25 -15l-25 15l6 -28l-21 -19l28 -3z" fill="#fff8e6" stroke="#a9793f" stroke-width="3"/></svg><div class="ltext">${name}</div></div>`);
+ await talk('kruemel',danach,['Juhu!']);if(sc==='nebel'){closePanel();await bild('akt2.jpg','Land in Sicht! Da vorne liegt die Schatzinsel.')}}
 
 /* ---------- Kapitel 3: Werft ---------- */
 
@@ -1091,9 +1137,10 @@ async function finale(){musicOn();sfx('fanfare');cineOpen('<div style="position:
  await cw(31000);hush();cineClose();musicOff()}
 
 /* ---------- Hafen ---------- */
-let busy=false;const MX={harbor:600,hexe:760,werft:560,turm:500,hoehle:640};
+let busy=false;const MX={harbor:600,hexe:760,werft:560,turm:500,hoehle:640,see:600,affen:760,riff:540,nebel:560};
 const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110,schild:1150,schiff:420,buch:250,mixa:470,kessel:690,hafen:1150,fehler1:980,
- planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,uhr1:1000,uhr2:150,uhr3:1050,uhr4:1130,uhr5:640,muell:790,wissen1:890,wissen2:790,wissen3:470,wissen4:420,wissen5:990,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
+ planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,seekap:330,see_r:640,see_s:720,see_l:880,abwehr:1030,uhr6:560,wissen6:310,affen_r:340,affen_s:545,koko:770,affen_l:790,maze2:1040,uhr7:950,wissen7:410,
+ riff_r:320,riff_s:520,schildi:560,riff_l:790,delfin:1040,uhr8:690,wissen8:930,nebel_r:340,nebel_s:560,schlotter:770,nebel_l:800,geister:1010,uhr9:690,wissen9:220,uhr1:1000,uhr2:150,uhr3:1050,uhr4:1130,uhr5:640,muell:790,wissen1:890,wissen2:790,wissen3:470,wissen4:420,wissen5:990,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
 function walkTo(x){return new Promise(res=>{const k=S.scene,ids=k==='harbor'?['mor','morflip']:k==='hexe'?['mor2','morflip2']:['mor-'+k,'flip-'+k],mx=MX[k],d=Math.abs(x-mx),m=$('#'+ids[0]);if(!m||d<6)return res();
  $('#'+ids[1]).setAttribute('transform',`scale(${x<mx?-.85:.85},.85)`);m.classList.add('walk');
  m.style.transition=`transform ${d*2.6}ms linear`;m.style.transform=`translate(${x}px,588px)`;MX[k]=x;
@@ -1125,7 +1172,7 @@ const ACT={
  async stufen(){if(await replay('stufen')){await stufen();await reward('stufen',15)}},
  async labyrinth(){if(!SC.turm.tasks.every(k=>S.done[k])){await talk('kruemel','Kräh! Das Labyrinth ist die Überraschung. Erst die drei Aufgaben!');return}
   const n=await labyrinth();closePanel();S.coins+=n;await reward('labyrinth',5)},
- async strahl(){await gate('turm','Erst die Arbeit! Lies die Flaschenpost, hör der Möwe zu und steig die Treppe hoch.','Mein Licht strahlt wieder! Hier ist das Kartenstück von der Möwe.',4,'Kräh! Vier Kartenstücke! Das letzte liegt in der Schatzhöhle. Tippe oben auf Insel!')},
+ async strahl(){await gate('turm','Erst die Arbeit! Lies die Flaschenpost, hör der Möwe zu und steig die Treppe hoch.','Mein Licht strahlt wieder! Hier ist das Kartenstück von der Möwe.',4,'Kräh! Vier Kartenstücke! Jetzt segeln wir zur Schatzinsel. Tippe oben auf Insel!')},
  async wissen1(){if(await replay('wissen1')){await wissen(1);await reward('wissen1',10)}},
  async wissen2(){if(await replay('wissen2')){await wissen(2);await reward('wissen2',10)}},
  async wissen3(){if(await replay('wissen3')){await wissen(3);await reward('wissen3',10)}},
@@ -1165,15 +1212,43 @@ const ACT={
   await talk('kruemel','Kräh! Zwei Kartenstücke! Das nächste liegt in der Werft. Da müssen wir Planken flicken. Tippe oben auf Insel!',['Juhu!'])},
  async tuer(){if(['kisten','kanonen','kompass'].every(k=>S.done[k]))await pub();
   else await talk('olga','Halt! Ohne Dublonen gibt es nichts. Erledige erst alle drei Aufgaben im Hafen!')}};
+const T=(k,f,n)=>async()=>{if(await replay(k)){await f();await reward(k,n||15)}},BON=(sc,k,f,txt)=>async()=>{if(!SC[sc].tasks.every(x=>S.done[x])){await talk('kruemel',txt);return}await f();closePanel();await reward(k,5)};
+Object.assign(ACT,{uhr6:T('uhr6',()=>uhr(6),10),uhr7:T('uhr7',()=>uhr(7),10),uhr8:T('uhr8',()=>uhr(8),10),uhr9:T('uhr9',()=>uhr(9),10),
+ wissen6:T('wissen6',()=>wissen(6),10),wissen7:T('wissen7',()=>wissen(7),10),wissen8:T('wissen8',()=>wissen(8),10),wissen9:T('wissen9',()=>wissen(9),10),
+ see_r:T('see_r',async()=>{await brief('Der Koch zählt den Proviant. Rechne aus und tippe die Zahl ein.');await rechnen('Proviant zählen',[['+',(a,b)=>`Im Lager liegen ${a} Zwiebäcke. Der Koch bringt noch ${b} dazu. Wie viele Zwiebäcke sind es jetzt?`,genP],
+   ['-',(a,b)=>`An Bord sind ${a} Äpfel. Die Mannschaft isst ${b} Äpfel. Wie viele Äpfel sind noch da?`,genM],['+',(a,b)=>`Das Schiff ist schon ${a} Meilen gefahren. Heute fährt es noch ${b} Meilen. Wie viele Meilen sind es zusammen?`,genP]])}),
+ see_s:T('see_s',async()=>{await brief('Im Netz zappeln Wörter! Wir angeln nur Tunwörter. Ein Tunwort sagt, was man tut: laufen, lachen, essen.');await angeln('Tunwörter angeln',TUN,KEINTUN,'Finde die 3 Tunwörter!','Kann man das tun? Dann ist es ein Tunwort.','Kräh! Das ist kein Tunwort.')}),
+ see_l:T('see_l',async()=>{await talk('kapitaen','Ein Sturm zieht auf! Ich rufe dir Befehle zu. Lies sie genau und mach schnell!');await befehle('see','Befehle im Sturm')}),
+ abwehr:BON('see','abwehr',async()=>{await talk('kapitaen','Alarm! Die Stinkstiefel-Bande will unsere Kekse klauen!');await brief('Tippe auf die Boote der Stinkstiefel-Bande. Dann schießt unsere Kanone einen alten Keks, und sie drehen um. Lass keines an unser Schiff!');const n=await abwehr();S.coins+=Math.floor(n/3)},'Kräh! Die Stinkstiefel-Bande kommt später. Erst die drei Aufgaben!'),
+ seekap:()=>orden('see','Erst die Arbeit, Schiffsjunge! Proviant zählen, Wörter angeln und den Sturm überstehen.','Har har! Du bist ein echter Seebär, Moritz. Dafür gibt es einen Orden!','Der Seebär-Orden','Kräh! Land in Sicht: die Affeninsel! Tippe oben auf Insel.'),
+ affen_r:T('affen_r',async()=>{await brief('Auf dem Bananen-Markt wird gerechnet. Tippe die Zahl ein und drücke OK.');await rechnen('Bananen-Markt',[['+',(a,b)=>`Am Stand liegen ${a} Bananen. Die Affen bringen noch ${b} Bananen. Wie viele Bananen sind es jetzt?`,genP],
+   ['-',(a,b)=>`Königin Koko hat ${a} Kokosnüsse. Sie verschenkt ${b} Kokosnüsse. Wie viele hat sie noch?`,genM],['-',(a,b)=>`Im Korb sind ${a} Mangos. Moki nascht heimlich ${b} Mangos. Wie viele Mangos sind noch im Korb?`,zeM]])}),
+ affen_s:T('affen_s',async()=>{await brief('Die Affen machen immer das Gegenteil! Lies die Frage und tippe auf das Gegenteil.');const g=shuffle(GEGENT).slice(0,6);
+   for(let i=0;i<g.length;i++)await choice('Affen-Gegenteile '+dots(i,g.length),`Was ist das Gegenteil von <b style="color:#8e3b3b">${g[i][0]}</b>?`,g[i].slice(1),'Was ist das Gegenteil?');closePanel()}),
+ affen_l:T('affen_l',async()=>{await talk('koko','Das ist mein Bananen-Automat. Er hat drei Schlösser. Lies jeden Zettel genau!');for(let i=0;i<3;i++){await knopf();closePanel()}await talk('kruemel','Klack! Der Automat spuckt eine Banane aus.')}),
+ maze2:BON('affen','maze2',async()=>{S.coins+=await labyrinth()},'Kräh! Das Dschungel-Labyrinth ist die Überraschung. Erst die drei Aufgaben!'),
+ koko:()=>orden('affen','Uh uh! Erst rechnen, dann die Gegenteile, dann der Automat.','Uh uh ah ah! Du bist klug wie ein Affe. Hier ist dein Orden und Proviant für die Reise!','Der Affen-Orden','Kräh! Weiter geht es zum Korallenriff. Tippe oben auf Insel.'),
+ riff_r:T('riff_r',async()=>{await brief('Die Muschel sammelt Perlen. Rechne aus, wie viele es sind.');await rechnen('Perlen zählen',[['+',(a,b)=>`In der Muschel liegen ${a} Perlen. Oma Schildi legt ${b} Perlen dazu. Wie viele Perlen sind es jetzt?`,zeT],
+   ['-',(a,b)=>`Am Riff schwimmen ${a} Fische. ${b} Fische schwimmen weg. Wie viele Fische sind noch da?`,genM],['+',(a,b)=>`Ein Seestern zählt ${a} Muscheln und dann noch ${b} Muscheln. Wie viele sind es zusammen?`,genP]])}),
+ riff_s:T('riff_s',async()=>{await brief('Auf der Steintafel stehen deine Lernwörter. Aber die Fische haben Stücke abgeknabbert. Tippe auf das richtige Stück.');await gaps(6,'Muschel-Wörter')}),
+ riff_l:T('riff_l',async()=>{await talk('schildi','In einer alten Kiste liegt meine schönste Perle. Ich habe dir aufgeschrieben, wie du sie findest.');await befehle('riff','Tauchgang zur Perle')}),
+ delfin:BON('riff','delfin',async()=>{await brief('Der Delfin nimmt dich mit! Tippe auf Springen, wenn eine Boje kommt. Für jede Boje gibt es eine Dublone.');S.coins+=await faesser('delfin')},'Kräh! Der Delfin wartet noch. Erst die drei Aufgaben!'),
+ schildi:()=>orden('riff','Blubb. Erst die Perlen, die Steintafel und die Kiste, junger Mann.','Blubb! So ein fleißiger Taucher. Hier ist dein Orden. Und fahr vorsichtig: Da vorne ist Nebel.','Der Riff-Orden','Kräh! Es wird neblig. Tippe oben auf Insel. Hoffentlich spukt es nicht!'),
+ nebel_r:T('nebel_r',async()=>{await talk('schlotter','Buhuuu! Wer mich im Rechnen schlägt, vor dem zittere ich. Ein Duell!');await brief('Jede richtige Antwort füllt deinen Trank. Bei einem Fehler bekommt Schlotter einen Punkt. Wer zuerst 5 Punkte hat, gewinnt.');
+   for(;;){const win=await duel(3,'schlotter');closePanel();if(win)break;await talk('schlotter','Buhuhu! Gewonnen! Aber du darfst es nochmal versuchen.')}await talk('schlotter','Oh nein! Jetzt zittere ich wirklich.')}),
+ nebel_s:T('nebel_s',async()=>{await brief('Im Geisterbuch ist alles klein geschrieben. Tippe alle Wörter an, die groß sein müssen: das erste Wort im Satz und alle Namenwörter.');await grossSchreiben(GSCHRIFT,'Geister-Schrift','schlotter')}),
+ nebel_l:T('nebel_l',async()=>{await talk('kruemel','Kräh! Hier liegt eine Anleitung: Gespenster vertreiben. Lies sie genau!');await befehle('nebel','Gespenster vertreiben');await talk('schlotter','Hilfe! Licht! Ein sauberes Deck! Eine Glocke! Ihr seid ja richtige Profis.')}),
+ geister:BON('nebel','geister',async()=>{await brief('Gespenster-Jagd! Tippe auf die kleinen Gespenster. Dann machen sie Puff. Aber Vorsicht: Krümel ist kein Gespenst!');const n=await saebel('geist');S.coins+=Math.floor(n/3)},'Kräh! Die kleinen Gespenster kommen später. Erst die drei Aufgaben!'),
+ schlotter:()=>orden('nebel','Buhuuu! Erst das Duell, das Geisterbuch und die Anleitung.','Ihr seid die mutigsten Piraten, die ich kenne. Hier ist ein Orden. Und nehmt bitte den Papagei wieder mit!','Der Geister-Orden','Kräh! Der Nebel ist weg. Und da vorne liegt die Schatzinsel! Tippe oben auf Insel.')});
 async function gate(sc,noch,geben,nr,danach){const c=SC[sc],d=S.done;if(!c.tasks.every(k=>d[k])){await talk(c.npc,noch);return}
  if(d[c.key]){await talk(c.npc,'Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben.');return}
  await talk(c.npc,geben);d[c.key]=1;S.coins+=10;save();sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Ein Stück der Schatzkarte!</div>${mapSvg(nr)}<div class="ltext">Kartenstück ${nr} von 5</div></div>`);
- await talk('kruemel',danach,['Juhu!']);closePanel();await gag(sc==='werft'?2:3)}
+ await talk('kruemel',danach,['Juhu!']);closePanel();await gag(sc==='werft'?2:3);if(sc==='turm')await bild('akt1.jpg','Leinen los! Die große Fahrt über das Meer beginnt.')}
 const SPIELE=[['Schiffsrennen',d=>d.kisten&&d.kanonen&&d.kompass,async()=>{const n=await race();S.coins+=n;S.done.rennen=1;sfx('coin');await talk('kapitaen',`Har har! Du hast ${n} Dublonen gesammelt.`)}],
  ['Fässer-Hüpfen',d=>d.kisten&&d.kanonen&&d.kompass,async()=>{await brief('Die Fässer rollen über den Steg! Tippe auf Springen, wenn ein Fass kommt. Für jedes Fass gibt es eine Dublone.');const n=await faesser();S.coins+=n;sfx('coin');await talk('kruemel',`Kräh! Du bist über ${n} Fässer gehüpft. ${n} Dublonen für dich!`)}],
  ['Keks-Kanone',d=>d.kanonen,async()=>{await kekskanone();S.coins+=5;sfx('coin');await talk('kapitaen','Har har! Gut gezielt und gut gerechnet. 5 Dublonen!')}],
  ['Säbel-Training',d=>d.logbuch,async()=>{await brief('Säbel-Training mit dem Holzsäbel! Tippe auf die Kokosnüsse. Aber Vorsicht: Krümel ist keine Kokosnuss!');const n=await saebel();const c=Math.floor(n/3);S.coins+=c;sfx('coin');await talk('kapitaen',`Har har! ${n} Kokosnüsse geknackt. Das gibt ${c} Dublonen.`)}],
- ['Strand aufräumen',d=>d.c3intro,async()=>{await muell()}],['Fehlersuche',d=>d.fehler1,async()=>{await fehler(pick(['kueche','hoehle']))}],['Planken sortieren',d=>d.sortieren,()=>sortieren()],['Labyrinth',d=>d.labyrinth,async()=>{S.coins+=await labyrinth()}]];
+ ['Schiffe abwehren',d=>d.abwehr,async()=>{S.coins+=Math.floor(await abwehr()/3)}],['Delfin-Ritt',d=>d.delfin,async()=>{S.coins+=await faesser('delfin')}],['Gespenster-Jagd',d=>d.geister,async()=>{S.coins+=Math.floor(await saebel('geist')/3)}],['Strand aufräumen',d=>d.c3intro,async()=>{await muell()}],['Fehlersuche',d=>d.fehler1,async()=>{await fehler(pick(['kueche','hoehle']))}],['Planken sortieren',d=>d.sortieren,()=>sortieren()],['Labyrinth',d=>d.labyrinth,async()=>{S.coins+=await labyrinth()}]];
 function insel(){if(busy)return;hush();const d=S.done,run=async f=>{closePanel();busy=true;$('#hudnav').style.display='none';try{await f()}finally{closePanel();busy=false;idle()}};
  panel(`<div class="ptitle">Die Insel</div><div class="kwrap" style="align-items:flex-start;gap:30px"><div class="kap12">${KAPITEL.map(k=>`<button class="btn${k[0]===S.scene?'':' sec'}"${k[0]&&offen(k[0])?` data-o="${k[0]}"`:' disabled'}>${k[1]}${k[0]?'':' (bald)'}</button>`).join('')}</div>
  <div class="orte"><button class="btn" id="or-l" style="min-width:470px">Olgas Piratenladen</button><div style="font-size:24px;font-weight:700;color:#8e3b3b;margin-top:6px">Spiele</div><div class="spg">${SPIELE.map((g,i)=>{if(g[1](d))(S.frei=S.frei||{})[g[0]]=1;return `<button class="btn sec" data-s="${i}"${S.alle||(S.frei||{})[g[0]]?'':' disabled'}>${g[0]}</button>`}).join('')}</div></div></div>
@@ -1270,12 +1345,53 @@ const HOEHLE=`<svg id="hoehle" viewBox="0 0 1280 620" style="display:none"><rect
 ${uk(5,640,250)}${wk(5,1100,566)}${mark('schloss',335,212)}${mark('schatzkarte',570,345)}${mark('truhe',895,300)}${mark('fehler2',1145,196)}${schildchen(730,468,'Schatz?','Hier nicht! Ehrlich.')}${morG('hoehle',640)}
 <g class="fg"><path d="M-10 620l50 -150l50 150zM1200 620l40 -120l50 120z" fill="#2a2333"/>
 <g class="blink" fill="#f6c84a"><circle cx="470" cy="596" r="8"/><circle cx="990" cy="604" r="8"/></g></g>${mokiG(1225,548,.8)}${whot(5,1100,566)}${mokiH(1225,548)}${hot('kap5',60,250,160,290)}${hot('schloss',255,230,160,250)}${hot('schatzkarte',490,360,160,130)}${hot('truhe',800,320,190,170)}${hot('fehler2',1055,215,180,140)}</svg>`;
-const SCN=['harbor','hexe','werft','turm','hoehle'];
-const KAP={harbor:'Kapitel 1: Der Hafen',hexe:'Kapitel 2: Die Hexenhütte',werft:'Kapitel 3: Die Werft',turm:'Kapitel 4: Der Leuchtturm',hoehle:'Kapitel 12: Die Schatzhöhle'};
+const deck=f=>`<rect y="440" width="1280" height="180" fill="${f}"/><path d="M0 490H1280M0 540H1280M0 590H1280" stroke="#0002" stroke-width="3"/><path d="M0 440H1280M0 398H1280" stroke="#6d4a26" stroke-width="10"/><path d="${[...Array(17)].map((_,i)=>`M${i*80} 398V440`).join('')}" stroke="#6d4a26" stroke-width="8"/>`;
+const fass=(x)=>`<g transform="translate(${x},80)"><path d="M0 398q30 -10 60 0l6 64h-72Z" fill="#a9793f"/><path d="M-3 418h66M-5 444h70" stroke="#6d4a26" stroke-width="4"/></g>`;
+const hecke=f=>`<g transform="translate(1110,0)"><rect y="470" width="150" height="90" rx="10" fill="${f}" stroke="#2b2a33" stroke-width="4"/><path d="M20 490h110v50h-80v-25h50" fill="none" stroke="#cfe8d8" stroke-width="8"/></g>`;
+const SEE=`<svg id="see" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="330" fill="#cfe8ef"/>${wolke(120)}${voegel(300,90)}<circle cx="1000" cy="100" r="50" fill="#f8d66b"/><rect y="290" width="1280" height="160" fill="#4a9aa6"/>${WAVES(320)}${WAVES(370)}
+<g transform="translate(1150,330) scale(.8)" class="wippe">${FEIND}</g><rect x="630" y="0" width="22" height="440" fill="#6d4a26"/><path d="M652 20Q830 130 652 262Z" fill="#f4efe4"/><path d="M630 30Q460 130 630 252Z" fill="#f4efe4"/>${deck('#c2935a')}
+<g transform="translate(330,410)"><rect x="-5" y="40" width="10" height="70" fill="#6d4a26"/><circle r="42" fill="none" stroke="#6d4a26" stroke-width="9"/><path d="M-56 0H56M0 -56V56M-40 -40L40 40M-40 40L40 -40" stroke="#6d4a26" stroke-width="6"/></g>
+${fass(470)}${fass(540)}<path d="M800 320V470" stroke="#6d4a26" stroke-width="8"/><path d="M800 334q70 20 76 96q-44 30 -76 10z" fill="#fff3" stroke="#2b2a33" stroke-width="3" stroke-dasharray="6 6"/><path d="M820 400q16 -12 30 0q-14 12 -30 0z" fill="#e2572b"/>
+<rect x="940" y="380" width="110" height="92" rx="8" fill="#8b929a" stroke="#2b2a33" stroke-width="4"/><g stroke="#2b2a33" stroke-width="3"><circle cx="968" cy="412" r="12" fill="#d24a43"/><circle cx="996" cy="412" r="12" fill="#f6d23a"/><circle cx="1024" cy="412" r="12" fill="#4f9a4a"/></g><path d="M970 450h50" stroke="#2b2a33" stroke-width="6"/>
+<g transform="translate(200,540) scale(.8)">${kapitaen()}</g><g transform="translate(740,398) scale(.85)">${kruemel()}</g>${mokiG(641,112)}${uk(6,641,262)}${wk(6,420,566)}
+${mark('see_r',535,424)}${mark('see_s',836,290)}${mark('see_l',995,338)}${mark('seekap',200,226)}${mark('abwehr',1150,200)}<g class="fg">${schildchen(1140,468,'Vorsicht, Sturm!','Hut festhalten')}</g>${morG('see',600)}
+${whot(6,420,566)}${mokiH(641,112)}${hot('see_r',465,430,150,120)}${hot('see_s',770,300,120,180)}${hot('see_l',930,340,130,140)}${hot('seekap',125,230,150,310)}${hot('abwehr',1075,210,150,150)}</svg>`;
+const AFFEN=`<svg id="affen" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#cfe8ef"/>${wolke(90)}<g fill="#5f9c63"><ellipse cx="200" cy="330" rx="330" ry="150"/><ellipse cx="760" cy="300" rx="380" ry="170"/><ellipse cx="1200" cy="340" rx="260" ry="150"/></g>
+<path d="M0 450Q640 410 1280 450V620H0Z" fill="#e7cf98"/>${PALME(310,480)}${PALME(1040,480)}
+<g transform="translate(120,0)"><rect y="390" width="180" height="84" fill="#c9a36b" stroke="#6d4a26" stroke-width="4"/><path d="M-12 336h204l-14 54h-176z" fill="#d24a43" stroke="#6d4a26" stroke-width="4"/><g fill="none" stroke="#f6d23a" stroke-width="9" stroke-linecap="round"><path d="M30 384q20 16 40 0M80 384q20 16 40 0M126 384q20 16 40 0"/></g></g>
+<rect x="430" y="400" width="8" height="74" fill="#6d4a26"/><rect x="378" y="330" width="114" height="78" rx="6" fill="#fff8e6" stroke="#6d4a26" stroke-width="5"/><text x="435" y="362" text-anchor="middle" font-size="20" font-weight="700">groß</text><text x="435" y="392" text-anchor="middle" font-size="15" font-weight="700">klein</text>
+<path d="M570 474q0 -130 70 -130t70 130z" fill="#8b929a" stroke="#2b2a33" stroke-width="4"/><g transform="translate(640,440) scale(1.15)" class="wippe">${koko()}</g>
+<rect x="860" y="330" width="92" height="144" rx="10" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><g stroke="#2b2a33" stroke-width="3"><circle cx="884" cy="360" r="10" fill="#d24a43"/><circle cx="928" cy="360" r="10" fill="#3b78c4"/><circle cx="884" cy="390" r="10" fill="#4f9a4a"/><circle cx="928" cy="390" r="10" fill="#f6d23a"/></g><rect x="876" y="420" width="60" height="34" rx="6" fill="#2b2a33"/>
+${hecke('#3f7a4a')}${mokiG(318,236)}${uk(7,1048,330)}${wk(7,520,566)}
+${mark('affen_r',210,290)}${mark('affen_s',435,286)}${mark('koko',640,236)}${mark('affen_l',906,286)}${mark('maze2',1185,430)}<g class="fg"><path d="M-20 620q10 -110 90 -120q-30 50 -20 120z" fill="#3f7a4a"/>${schildchen(760,470,'Bananen-Bank','Heute: 1 Banane = 1 Banane')}</g>${morG('affen',760)}
+${whot(7,520,566)}${mokiH(318,236)}${hot('affen_r',105,300,210,180)}${hot('affen_s',370,300,130,170)}${hot('koko',565,250,150,230)}${hot('affen_l',850,300,112,180)}${hot('maze2',1100,450,170,120)}</svg>`;
+const RIFF=`<svg id="riff" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#2f7fa3"/><rect width="1280" height="200" fill="#5aa9c9" opacity=".6"/><g fill="#fff" opacity=".12"><path d="M200 0l-120 620h120l60 -620zM700 0l-80 620h140l20 -620zM1050 0l40 620h120l-80 -620z"/></g>
+<path d="M0 470Q640 430 1280 470V620H0Z" fill="#d9c79a"/><g class="blink" fill="#fff" opacity=".7"><circle cx="300" cy="220" r="8"/><circle cx="320" cy="160" r="5"/><circle cx="960" cy="260" r="7"/><circle cx="980" cy="200" r="4"/><circle cx="560" cy="120" r="6"/></g>
+<g fill="#ee6f8e" stroke="#2b2a33" stroke-width="3"><path d="M40 480q-20 -80 10 -90q10 30 20 0q30 10 10 90z"/><path d="M1200 480q-20 -100 10 -110q10 40 22 0q30 14 8 110z"/></g><g fill="#ee8a2e" stroke="#2b2a33" stroke-width="3"><path d="M500 478q-10 -50 14 -56q8 20 16 0q22 8 10 56z"/></g>
+<g stroke="#3f7a4a" stroke-width="9" fill="none" stroke-linecap="round" class="wippe"><path d="M280 480q-14 -50 0 -100M300 480q14 -40 4 -80"/></g>
+<g class="krabbe"><g transform="translate(60,150)"><path d="M-26 0q26 -24 46 0q-20 24 -46 0zM20 0l14 -12v24z" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/></g></g>
+<path d="M150 474q50 -74 100 0z" fill="#f3b6c0" stroke="#2b2a33" stroke-width="4"/><path d="M150 474q50 20 100 0" fill="#f7d5db" stroke="#2b2a33" stroke-width="4"/><circle cx="200" cy="462" r="13" fill="#fff" stroke="#b9b3c9" stroke-width="3"/>
+<rect x="360" y="366" width="100" height="108" rx="16" fill="#8b929a" stroke="#2b2a33" stroke-width="4"/><text x="410" y="430" text-anchor="middle" font-size="30" font-weight="700" fill="#fff8e6">ABC</text>
+<g transform="translate(640,490) scale(1.15)">${schildi()}</g><g transform="translate(846,160) scale(.72)"><rect y="400" width="150" height="80" fill="#8c3b2e" stroke="#f6c84a" stroke-width="6"/><path d="M0 400q0 -50 75 -50t75 50z" fill="#a4483a" stroke="#f6c84a" stroke-width="6"/></g>
+<g transform="translate(1120,240) scale(.9)" class="wippe">${DELFIN}</g><path d="M730 470q10 -40 44 -40t44 40z" fill="#8b929a"/><circle cx="120" cy="170" r="62" fill="#fff" opacity=".25" stroke="#fff" stroke-width="5"/>${mokiG(120,212,.62)}${uk(8,774,410)}${wk(8,1040,566)}
+${mark('riff_r',200,384)}${mark('riff_s',410,318)}${mark('schildi',640,356)}${mark('riff_l',900,366)}${mark('delfin',1120,150)}<g class="fg"><path d="M1290 620q-10 -110 -80 -130q20 60 10 130z" fill="#3f7a4a"/>${schildchen(770,566,'Bitte nicht','auf die Seeigel setzen')}</g>${morG('riff',540)}
+${whot(8,1040,566)}${mokiH(120,212)}${hot('riff_r',130,400,140,90)}${hot('riff_s',350,340,120,140)}${hot('schildi',545,400,210,100)}${hot('riff_l',836,380,130,120)}${hot('delfin',1030,160,180,130)}</svg>`;
+const NEBEL=`<svg id="nebel" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#5a6478"/><circle cx="1080" cy="110" r="54" fill="#f8f1c9"/><g class="drift" fill="#fff" opacity=".22"><ellipse cx="0" cy="220" rx="260" ry="50"/><ellipse cx="300" cy="320" rx="300" ry="46"/></g><g fill="#fff" opacity=".16"><ellipse cx="300" cy="380" rx="420" ry="50"/><ellipse cx="1000" cy="360" rx="380" ry="44"/></g>
+<rect x="760" y="0" width="22" height="440" fill="#3a2c20"/><path d="M782 30Q930 120 790 150Q880 190 782 250Z" fill="#b9b3c9" opacity=".8"/><path d="M760 40Q620 110 740 150Q660 200 760 240Z" fill="#b9b3c9" opacity=".8"/>${deck('#5c4a3a')}
+<g class="blink"><circle cx="60" cy="350" r="26" fill="#f8d66b" opacity=".5"/><circle cx="60" cy="350" r="12" fill="#f8d66b"/></g><g class="blink" style="animation-delay:1s"><circle cx="1230" cy="350" r="26" fill="#f8d66b" opacity=".5"/><circle cx="1230" cy="350" r="12" fill="#f8d66b"/></g>
+<rect x="216" y="430" width="8" height="44" fill="#3a2c20"/><rect x="160" y="340" width="120" height="92" rx="6" fill="#2f3b3a" stroke="#3a2c20" stroke-width="7"/><text x="220" y="398" text-anchor="middle" font-size="30" font-weight="700" fill="#f4efe4">1 + 1 = ?</text>
+<g transform="translate(310,0)"><path d="M-50 470q0 -70 50 -70t50 70z" transform="translate(140,0)" fill="#8c6234"/><path d="M94 396q24 -16 46 0q22 -16 46 0v-34q-24 -14 -46 0q-22 -14 -46 0z" fill="#fff8e6" stroke="#6b4a8e" stroke-width="5"/></g>
+<rect x="860" y="410" width="100" height="62" fill="#8c6234" stroke="#3a2c20" stroke-width="4"/><path d="M910 300v40" stroke="#3a2c20" stroke-width="5"/><rect x="890" y="340" width="40" height="52" rx="8" fill="#f8d66b" stroke="#2b2a33" stroke-width="4"/>
+<g transform="translate(1130,300)" class="wippe"><g transform="scale(.6)">${GEIST}</g><g transform="translate(-60,30) scale(.45)">${GEIST}</g><g transform="translate(62,26) scale(.5)">${GEIST}</g></g>
+<g transform="translate(640,500)" class="wippe" opacity=".95">${schlotter()}</g>${mokiG(1040,470)}<path d="M1010 404q30 -30 60 0v70h-60z" fill="#fff" opacity=".55"/>${uk(9,771,262)}${wk(9,330,566)}
+${mark('nebel_r',220,296)}${mark('nebel_s',450,312)}${mark('schlotter',640,244)}${mark('nebel_l',910,266)}${mark('geister',1130,216)}<g class="fg">${schildchen(1180,468,'Geisterstunde','täglich 12 Uhr')}</g>${morG('nebel',560)}
+${whot(9,330,566)}${mokiH(1040,470)}${hot('nebel_r',150,320,140,150)}${hot('nebel_s',390,330,120,150)}${hot('schlotter',565,270,150,240)}${hot('nebel_l',850,300,120,180)}${hot('geister',1050,220,160,130)}</svg>`;
+const SCN=['harbor','hexe','werft','turm','see','affen','riff','nebel','hoehle'];
+const KAP={harbor:'Kapitel 1: Der Hafen',hexe:'Kapitel 2: Die Hexenhütte',werft:'Kapitel 3: Die Werft',turm:'Kapitel 4: Der Leuchtturm',hoehle:'Kapitel 12: Die Schatzhöhle',see:'Kapitel 5: Auf hoher See',affen:'Kapitel 6: Die Affeninsel',riff:'Kapitel 7: Das Korallenriff',nebel:'Kapitel 8: Die Nebelbank'};
 /* Alle zwölf Kapitel. null = Szene ist noch nicht gebaut. */
-const KAPITEL=[['harbor','1 Der Hafen'],['hexe','2 Die Hexenhütte'],['werft','3 Die Werft'],['turm','4 Der Leuchtturm'],[null,'5 Auf hoher See'],[null,'6 Die Affeninsel'],[null,'7 Das Korallenriff'],[null,'8 Die Nebelbank'],
+const KAPITEL=[['harbor','1 Der Hafen'],['hexe','2 Die Hexenhütte'],['werft','3 Die Werft'],['turm','4 Der Leuchtturm'],['see','5 Auf hoher See'],['affen','6 Die Affeninsel'],['riff','7 Das Korallenriff'],['nebel','8 Die Nebelbank'],
  [null,'9 Der Schildkröten-Strand'],[null,'10 Der Dschungel-Tempel'],[null,'11 Das Piratenfest'],['hoehle','12 Die Schatzhöhle']];
-const OFFEN={harbor:d=>1,hexe:d=>d.logbuch,werft:d=>d.duell3,turm:d=>d.k3,hoehle:d=>d.k4};
+const OFFEN={harbor:d=>1,hexe:d=>d.logbuch,werft:d=>d.duell3,turm:d=>d.k3,see:d=>d.k4,affen:d=>d.k5,riff:d=>d.k6,nebel:d=>d.k7,hoehle:d=>d.k8};
 const offen=k=>S.alle||OFFEN[k](S.done);
 const SC={werft:{intro:'c3intro',tasks:['planken','verben','nomen'],bonus:'sortieren',npc:'hobel',key:'k3',hint:'Sprich mit Meister Hobel!'},
  turm:{intro:'c4intro',tasks:['flaschenpost','quatsch','stufen'],bonus:'labyrinth',npc:'strahl',key:'k4',hint:'Sprich mit dem Leuchtturmwärter!'},
@@ -1284,9 +1400,17 @@ const INTRO={hexe:['c2intro',[['mixa','Hihi! Besuch! Ich bin Mixa, die Hexe. Und
  werft:['c3intro',[['hobel','Moin! Ich bin Meister Hobel, der Schiffsbauer. Mein Schiff hat lauter Löcher!'],['hobel','Ein Kartenstück? Ja, das habe ich als Flicken benutzt. Hilf mir, dann bekommst du es!'],['kruemel','Kräh! Tippe auf die Ausrufezeichen. Zum Schluss wartet eine Überraschung!']]],
  turm:['c4intro',[['strahl','Ahoi da unten! Ich bin Wärter Strahlemann. Mein Leuchtturm braucht Hilfe.'],['strahl','Eine Möwe hat mir ein Kartenstück gebracht. Du bekommst es, wenn du mir hilfst.']]],
  hoehle:['c5intro',[['kapitaen','Har har! Das ist die Schatzhöhle. Das letzte Kartenstück liegt hinter dem Gitter.'],['kapitaen','Knacke das Zahlenschloss. Dann lesen wir die Karte und finden den Schatz!']]]};
-async function goScene(n){const I=INTRO[n];if(I&&!S.done[I[0]]){await talk('kruemel','Kräh! Da steht ein Wegweiser. Den musst du selbst lesen!');await wegweiser(n)}if(I&&!S.done[I[0]]&&FILME[n])await FILME[n]();setScene(n);if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
+Object.assign(SC,{see:{intro:'c5intro',tasks:['see_r','see_s','see_l'],bonus:'abwehr',npc:'seekap',wer:'kapitaen',key:'k5',hint:'Sprich mit dem Kapitän am Steuerrad!'},
+ affen:{intro:'c6intro',tasks:['affen_r','affen_s','affen_l'],bonus:'maze2',npc:'koko',wer:'koko',key:'k6',hint:'Sprich mit Königin Koko!'},
+ riff:{intro:'c7intro',tasks:['riff_r','riff_s','riff_l'],bonus:'delfin',npc:'schildi',wer:'schildi',key:'k7',hint:'Sprich mit Oma Schildi!'},
+ nebel:{intro:'c8intro',tasks:['nebel_r','nebel_s','nebel_l'],bonus:'geister',npc:'schlotter',wer:'schlotter',key:'k8',hint:'Sprich mit Käpt’n Schlotter!'}});
+Object.assign(INTRO,{see:['c5intro',[['kapitaen','Leinen los! Wir segeln zur Schatzinsel. Aber das Meer ist groß und wild.'],['kapitaen','An Bord gibt es immer Arbeit. Hilf mir, Schiffsjunge! Und pass auf die Stinkstiefel-Bande auf.'],['kruemel','Kräh! Die wollen unsere Kekse klauen. Aber erst die Arbeit!']]],
+ affen:['c6intro',[['koko','Uh uh! Willkommen auf der Affeninsel. Ich bin Königin Koko.'],['koko','Wer Wasser und Bananen für die Reise will, muss erst meine Aufgaben lösen.'],['moki','Psst, Moritz! Das ist meine Tante. Sei nett zu ihr.']]],
+ riff:['c7intro',[['schildi','Blubb. Guten Tag, junger Mann. Ich bin Oma Schildi und schon hundert Jahre alt.'],['schildi','Mein Riff ist das schönste im ganzen Meer. Hilf mir ein wenig, dann zeige ich dir den Weg.']]],
+ nebel:['c8intro',[['kruemel','Kräh! So ein dicker Nebel. Und was ist das für ein altes Schiff?'],['schlotter','Buhuuu! Ich bin Käpt’n Schlotter, der Schrecken der Meere!'],['schlotter','Äh, ihr habt doch keinen Papagei dabei? Vor Papageien habe ich nämlich Angst.'],['kruemel','Kräh! Der ist ja gar nicht gruselig. Der will nur spielen.']]]});
+async function goScene(n){const I=INTRO[n];if(I&&!S.done[I[0]]&&ORT[n]){await talk('kruemel','Kräh! Da steht ein Wegweiser. Den musst du selbst lesen!');await wegweiser(n)}if(I&&!S.done[I[0]]&&FILME[n])await FILME[n]();setScene(n);if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
 function setScene(n){S.scene=n;SCN.concat('pub').forEach(k=>{const e=$('#'+k);if(e)e.style.display=k===n?'':'none'})}
-function build(){$('#scene').innerHTML=HARBOR+PUB+HEXE+WERFT+TURM+HOEHLE;setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
+function build(){$('#scene').innerHTML=HARBOR+PUB+HEXE+WERFT+TURM+HOEHLE+SEE+AFFEN+RIFF+NEBEL;setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
 $('#b-insel').onclick=insel;$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
 let lastW=0,lastH=0;
