@@ -217,12 +217,12 @@ let S={coins:0,done:{},lists:[1,2,3],speak:true,log:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 /* ---------- Inhalte aus inhalte.js: Lernwörter-Liste und Lernpaket ---------- */
-let TUN,KEINTUN,GEGENT,GSCHRIFT,BEFEHLE,WORDS,STORY,BLATTN,BLATT,BLATTK,SPELLS,VERBEN,NOMEN,KEINNOMEN,QUATSCH,WISSEN,OFT,SELTEN,ERN,KNOPF,RAETSEL,MOKI,JOKES;
+let TUN,KEINTUN,GEGENT,GSCHRIFT,BEFEHLE,WORDS,STORY,BLATTN,BLATT,BLATTK,SPELLS,VERBEN,NOMEN,KEINNOMEN,QUATSCH,WISSEN,OFT,SELTEN,ERN,KNOPF,RAETSEL,MOKI,JOKES,RG;
 const aktLW=()=>LERNWOERTER.find(l=>l.id===S.lw)||LERNWOERTER[0],aktPaket=()=>PAKETE.find(q=>q.id===S.paket)||PAKETE[PAKETE.length-1];
 function ladeInhalt(){const L=aktLW(),B=PAKETE[0],P=aktPaket(),g=k=>P[k]||B[k];
  WORDS=L.woerter.map(a=>({l:a[0],w:a[1],a:a[2],g:a[3],o:a[4]}));STORY=L.geschichten;BLATTN=L.blaetter;BLATTK=Object.keys(BLATTN).map(Number);BLATT={0:'Alle Wörter'};BLATTK.forEach(k=>BLATT[k]=`Blatt ${k}: ${BLATTN[k]}`);
  if(!S.lists||!S.lists.some(k=>BLATTK.includes(k)))S.lists=BLATTK.slice();
- SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze');TUN=g('tun');KEINTUN=g('keinTun');GEGENT=g('gegenteile');GSCHRIFT=g('geisterschrift');BEFEHLE=Object.assign({},B.befehle,P.befehle)}
+ SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze');TUN=g('tun');KEINTUN=g('keinTun');GEGENT=g('gegenteile');GSCHRIFT=g('geisterschrift');BEFEHLE=Object.assign({},B.befehle,P.befehle);RG={};['rechnen5','rechnen6','rechnen7'].forEach(k=>RG[k]=g(k))}
 ladeInhalt();
 const SW=()=>S.schwer==null?1:S.schwer;
 
@@ -790,6 +790,8 @@ function choice(title,q,opts,hint){return new Promise(res=>{const col=opts.some(
   if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');speak(q.includes('___')?q.replace('___',opts[0]):opts[0],'kruemel');setTimeout(res,2400)}
   else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel','Kräh! Das ist Quatsch. Lies nochmal genau.')}})})}
 const zeT=()=>{let a=rand(11,79);if(a%10===0)a++;return[a,z(1,Math.floor((99-a)/10))]},zeM=()=>{let a=rand(31,99);if(a%10===0)a++;return[a,z(1,Math.floor(a/10)-1)]};
+/* Rechengeschichten aus inhalte.js: [Rechenart, Text mit {a} und {b}]. stufen je Aufgabe: 'ze' = nur Zehnerzahlen, sonst mit Übergang */
+const geschichten=(k,stufen)=>RG[k].map(([op,t],i)=>[op,(a,b)=>t.replace(/\{a\}/g,a).replace(/\{b\}/g,b),stufen[i]==='ze'?(op==='+'?zeT:zeM):(op==='+'?genP:genM)]);
 async function rechnen(titel,aufg){for(let i=0;i<aufg.length;i++){const[op,f,g]=aufg[i],[a,b]=g();await askNumber(titel+' '+dots(i,aufg.length),f(a,b),a,op,b)}closePanel()}
 
 /* ---------- Belohnungsspiele ---------- */
@@ -1218,21 +1220,18 @@ const ACT={
 const T=(k,f,n)=>async()=>{if(await replay(k)){await f();await reward(k,n||15)}},BON=(sc,k,f,txt)=>async()=>{if(!SC[sc].tasks.every(x=>S.done[x])){await talk('kruemel',txt);return}await f();closePanel();await reward(k,5)};
 Object.assign(ACT,{uhr6:T('uhr6',()=>uhr(6),10),uhr7:T('uhr7',()=>uhr(7),10),uhr8:T('uhr8',()=>uhr(8),10),uhr9:T('uhr9',()=>uhr(9),10),
  wissen6:T('wissen6',()=>wissen(6),10),wissen7:T('wissen7',()=>wissen(7),10),wissen8:T('wissen8',()=>wissen(8),10),wissen9:T('wissen9',()=>wissen(9),10),
- see_r:T('see_r',async()=>{await brief('Der Koch zählt den Proviant. Rechne aus und tippe die Zahl ein.');await rechnen('Proviant zählen',[['+',(a,b)=>`Im Lager liegen ${a} Zwiebäcke. Der Koch bringt noch ${b} dazu. Wie viele Zwiebäcke sind es jetzt?`,genP],
-   ['-',(a,b)=>`An Bord sind ${a} Äpfel. Die Mannschaft isst ${b} Äpfel. Wie viele Äpfel sind noch da?`,genM],['+',(a,b)=>`Das Schiff ist schon ${a} Meilen gefahren. Heute fährt es noch ${b} Meilen. Wie viele Meilen sind es zusammen?`,genP]])}),
+ see_r:T('see_r',async()=>{await brief('Der Koch zählt den Proviant. Rechne aus und tippe die Zahl ein.');await rechnen('Proviant zählen',geschichten('rechnen5',[]))}),
  see_s:T('see_s',async()=>{await brief('Im Netz zappeln Wörter! Wir angeln nur Tunwörter. Ein Tunwort sagt, was man tut: laufen, lachen, essen.');await angeln('Tunwörter angeln',TUN,KEINTUN,'Finde die 3 Tunwörter!','Kann man das tun? Dann ist es ein Tunwort.','Kräh! Das ist kein Tunwort.')}),
  see_l:T('see_l',async()=>{await talk('kapitaen','Ein Sturm zieht auf! Ich rufe dir Befehle zu. Lies sie genau und mach schnell!');await befehle('see','Befehle im Sturm')}),
  abwehr:BON('see','abwehr',async()=>{await talk('kapitaen','Alarm! Die Stinkstiefel-Bande will unsere Kekse klauen!');await brief('Tippe auf die Boote der Stinkstiefel-Bande. Dann schießt unsere Kanone einen alten Keks, und sie drehen um. Lass keines an unser Schiff!');const n=await abwehr();S.coins+=Math.floor(n/3)},'Kräh! Die Stinkstiefel-Bande kommt später. Erst die drei Aufgaben!'),
  seekap:()=>orden('see','Erst die Arbeit, Schiffsjunge! Proviant zählen, Wörter angeln und den Sturm überstehen.','Har har! Du bist ein echter Seebär, Moritz. Dafür gibt es einen Orden!','Der Seebär-Orden','Kräh! Land in Sicht: die Affeninsel! Tippe oben auf Insel.'),
- affen_r:T('affen_r',async()=>{await brief('Auf dem Bananen-Markt wird gerechnet. Tippe die Zahl ein und drücke OK.');await rechnen('Bananen-Markt',[['+',(a,b)=>`Am Stand liegen ${a} Bananen. Die Affen bringen noch ${b} Bananen. Wie viele Bananen sind es jetzt?`,genP],
-   ['-',(a,b)=>`Königin Koko hat ${a} Kokosnüsse. Sie verschenkt ${b} Kokosnüsse. Wie viele hat sie noch?`,genM],['-',(a,b)=>`Im Korb sind ${a} Mangos. Moki nascht heimlich ${b} Mangos. Wie viele Mangos sind noch im Korb?`,zeM]])}),
+ affen_r:T('affen_r',async()=>{await brief('Auf dem Bananen-Markt wird gerechnet. Tippe die Zahl ein und drücke OK.');await rechnen('Bananen-Markt',geschichten('rechnen6',['','','ze']))}),
  affen_s:T('affen_s',async()=>{await brief('Die Affen machen immer das Gegenteil! Lies die Frage und tippe auf das Gegenteil.');const g=shuffle(GEGENT).slice(0,6);
    for(let i=0;i<g.length;i++)await choice('Affen-Gegenteile '+dots(i,g.length),`Was ist das Gegenteil von <b style="color:#8e3b3b">${g[i][0]}</b>?`,g[i].slice(1),'Was ist das Gegenteil?');closePanel()}),
  affen_l:T('affen_l',async()=>{await talk('koko','Das ist mein Bananen-Automat. Er hat drei Schlösser. Lies jeden Zettel genau!');for(let i=0;i<3;i++){await knopf();closePanel()}await talk('kruemel','Klack! Der Automat spuckt eine Banane aus.')}),
  maze2:BON('affen','maze2',async()=>{S.coins+=await labyrinth()},'Kräh! Das Dschungel-Labyrinth ist die Überraschung. Erst die drei Aufgaben!'),
  koko:()=>orden('affen','Uh uh! Erst rechnen, dann die Gegenteile, dann der Automat.','Uh uh ah ah! Du bist klug wie ein Affe. Hier ist dein Orden und Proviant für die Reise!','Der Affen-Orden','Kräh! Weiter geht es zum Korallenriff. Tippe oben auf Insel.'),
- riff_r:T('riff_r',async()=>{await brief('Die Muschel sammelt Perlen. Rechne aus, wie viele es sind.');await rechnen('Perlen zählen',[['+',(a,b)=>`In der Muschel liegen ${a} Perlen. Oma Schildi legt ${b} Perlen dazu. Wie viele Perlen sind es jetzt?`,zeT],
-   ['-',(a,b)=>`Am Riff schwimmen ${a} Fische. ${b} Fische schwimmen weg. Wie viele Fische sind noch da?`,genM],['+',(a,b)=>`Ein Seestern zählt ${a} Muscheln und dann noch ${b} Muscheln. Wie viele sind es zusammen?`,genP]])}),
+ riff_r:T('riff_r',async()=>{await brief('Die Muschel sammelt Perlen. Rechne aus, wie viele es sind.');await rechnen('Perlen zählen',geschichten('rechnen7',['ze']))}),
  riff_s:T('riff_s',async()=>{await brief('Auf der Steintafel stehen deine Lernwörter. Aber die Fische haben Stücke abgeknabbert. Tippe auf das richtige Stück.');await gaps(6,'Muschel-Wörter')}),
  riff_l:T('riff_l',async()=>{await talk('schildi','In einer alten Kiste liegt meine schönste Perle. Ich habe dir aufgeschrieben, wie du sie findest.');await befehle('riff','Tauchgang zur Perle')}),
  delfin:BON('riff','delfin',async()=>{await brief('Der Delfin nimmt dich mit! Tippe auf Springen, wenn eine Boje kommt. Für jede Boje gibt es eine Dublone.');S.coins+=await faesser('delfin')},'Kräh! Der Delfin wartet noch. Erst die drei Aufgaben!'),

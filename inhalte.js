@@ -253,6 +253,24 @@ const PAKETE=[
     ["Jetzt läute die Schiffsglocke. Zieh dazu am roten Hebel.",[["hebel","rot"],["hebel","blau","Huch! Die Falltür geht auf."],["hebel","gelb","Quietsch! Das war die Gruselorgel."]]]
    ]
   },
+  /* Rechengeschichten (Kapitel 5 bis 7): [Rechenart "+" oder "-", Text]. {a} und {b} werden durch Zahlen ersetzt.
+     Bei "-" ist {a} die größere Zahl. Die Reihenfolge bestimmt die Schwierigkeit:
+     rechnen6 Nr. 3 und rechnen7 Nr. 1 rechnen nur mit Zehnerzahlen, alle anderen mit Übergang. */
+  rechnen5:[
+   ["+","Im Lager liegen {a} Zwiebäcke. Der Koch bringt noch {b} dazu. Wie viele Zwiebäcke sind es jetzt?"],
+   ["-","An Bord sind {a} Äpfel. Die Mannschaft isst {b} Äpfel. Wie viele Äpfel sind noch da?"],
+   ["+","Das Schiff ist schon {a} Meilen gefahren. Heute fährt es noch {b} Meilen. Wie viele Meilen sind es zusammen?"]
+  ],
+  rechnen6:[
+   ["+","Am Stand liegen {a} Bananen. Die Affen bringen noch {b} Bananen. Wie viele Bananen sind es jetzt?"],
+   ["-","Königin Koko hat {a} Kokosnüsse. Sie verschenkt {b} Kokosnüsse. Wie viele hat sie noch?"],
+   ["-","Im Korb sind {a} Mangos. Moki nascht heimlich {b} Mangos. Wie viele Mangos sind noch im Korb?"]
+  ],
+  rechnen7:[
+   ["+","In der Muschel liegen {a} Perlen. Oma Schildi legt {b} Perlen dazu. Wie viele Perlen sind es jetzt?"],
+   ["-","Am Riff schwimmen {a} Fische. {b} Fische schwimmen weg. Wie viele Fische sind noch da?"],
+   ["+","Ein Seestern zählt {a} Muscheln und dann noch {b} Muscheln. Wie viele sind es zusammen?"]
+  ],
   witze:[
    "Was ist grün und klopft an die Tür? Ein Klopfsalat!",
    "Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!",
