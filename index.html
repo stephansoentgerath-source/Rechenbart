@@ -500,7 +500,10 @@ ${STUECK.map((t,i)=>hat()[i]?`<g class="${k===i+1?'newp':''}"><path d="${t[0]}" 
 
 /* ---------- Sprache ---------- */
 let voice=null;const hasTTS='speechSynthesis' in window;
-function loadVoice(){try{voice=speechSynthesis.getVoices().find(v=>/^de/i.test(v.lang))||null}catch(e){}}
+/* Deutsche Stimmen des Geräts. Gewählte Stimme steht in S.stimme (Name), sonst wird die vermutlich beste genommen. */
+const deVoices=()=>{try{return speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang))}catch(e){return[]}};
+const voiceRang=v=>(/neural|natural|premium|enhanced|wavenet|online/i.test(v.name)?4:0)+(/google/i.test(v.name)?2:0)+(/de-DE/i.test(v.lang)?1:0);
+function loadVoice(){const L=deVoices();voice=L.find(v=>v.name===S.stimme)||L.slice().sort((a,b)=>voiceRang(b)-voiceRang(a))[0]||null}
 if(hasTTS){loadVoice();try{speechSynthesis.onvoiceschanged=loadVoice}catch(e){}}
 function hush(){if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
 function speak(text,who,onword){hush();if(!S.speak||!hasTTS)return;
@@ -1361,13 +1364,15 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  <div><b>Spiel</b><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik</label>
  <label>Sanduhr (letztes Rechen-Duell, Lesen und Handeln): ${sel('e-ti',[[0,'aus'],[60,'gemütlich (60 s)'],[45,'normal (45 s)'],[30,'sportlich (30 s)']],SAND())}</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
  <label>Belohnungsspiele: ${sel('e-sw',[[0,'leicht'],[1,'mittel'],[2,'schwer']],SW())}</label>
- <div style="margin-top:6px">Deutsche Stimme: <b>${!hasTTS?'keine Sprachausgabe':voice?'gefunden':'nicht gefunden'}</b></div></div>
+ <div style="margin-top:6px">${!hasTTS?'Stimme: <b>keine Sprachausgabe</b>':!deVoices().length?'Stimme: <b>keine deutsche Stimme gefunden</b>'
+ :`<label>Stimme: ${sel('e-st',deVoices().map(v=>[v.name,v.name.replace(/^(Microsoft|Google|Amazon)\s*/,'').slice(0,34)]),voice?voice.name:'')}</label> <button class="btn small" id="e-sh">Probehören</button>`}</div></div>
  <div><b>Lernen</b><label>Lernpaket: ${sel('e-pk',PAKETE.map(q=>[q.id,q.name]),aktPaket().id)}</label>
  <label>Lernwörter: ${sel('e-lw',LERNWOERTER.map(l=>[l.id,l.name]),aktLW().id)}</label>
  ${BLATTK.map(k=>`<label><input type="checkbox" class="e-l" value="${k}"${S.lists.includes(k)?' checked':''}>${BLATT[k]}</label>`).join('')}
  <div style="margin-top:6px"><b>Wackelwörter:</b> ${wack}</div><div><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen</div></div>
  <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-n">Neue Reise starten</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
- $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=+x.target.value;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
+ $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};if($('#e-st')){$('#e-st').onchange=x=>{S.stimme=x.target.value;loadVoice();save();speak('Ahoi, Moritz! So klinge ich.','kruemel')};
+  $('#e-sh').onclick=()=>{const old=S.speak;S.speak=true;speak('Ahoi, Moritz! Ich bin Kapitän Rechenbart. Har har!','kapitaen');S.speak=old}}$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=+x.target.value;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
  $('#e-sw').onchange=x=>{S.schwer=+x.target.value;save()};$('#e-pk').onchange=x=>{S.paket=x.target.value;ladeInhalt();save()};
  $('#e-lw').onchange=x=>{S.lw=x.target.value;S.lists=null;ladeInhalt();save();eltern()};
  $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
