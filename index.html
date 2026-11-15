@@ -145,6 +145,11 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .roll{position:absolute;left:0;right:0;top:0;font-size:38px;line-height:1.6;animation:roll 30s linear forwards}
 .roll h2{font-size:64px;color:#f6c84a;margin:0 0 30px}.roll p{margin:0 0 34px}.roll small{display:block;font-size:26px;color:#f6c84a}
 @keyframes roll{from{transform:translateY(800px)}to{transform:translateY(-100%)}}
+.shop{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+.ware{font:inherit;background:#fff;border:3px solid #a9793f;border-radius:16px;padding:8px 6px 10px;text-align:center;color:#2b2a33}
+.ware svg{width:92px;height:92px;display:block;margin:0 auto}
+.ware b{display:block;font-size:24px}.ware span{font-size:22px}
+.ware.hat{background:#bfe6b0;border-color:#4f9a4a}
 .timer i{display:block;height:100%;background:#8e3b3b;width:100%;transition:width 5s linear}
 .lrow{display:flex;gap:30px}
 .bigmsg{font-size:52px;font-weight:700;color:#8e3b3b;margin:6px 0}
@@ -227,7 +232,13 @@ function moritz(){const h='#a98455',h2='#c4a070';return `
 <circle cx="-12" cy="-206" r="4.5" fill="#3d4a3a"/><circle cx="12" cy="-206" r="4.5" fill="#3d4a3a"/>
 <path d="M-19 -216q7 -4 13 0M6 -216q7 -4 13 0" stroke="#8a6a44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 <path d="M-10 -192q10 9 20 0" stroke="#a5553f" stroke-width="3" fill="none" stroke-linecap="round"/>
-<circle cx="-22" cy="-196" r="6" fill="#f0a58e" opacity=".55"/><circle cx="22" cy="-196" r="6" fill="#f0a58e" opacity=".55"/>`}
+<circle cx="-22" cy="-196" r="6" fill="#f0a58e" opacity=".55"/><circle cx="22" cy="-196" r="6" fill="#f0a58e" opacity=".55"/>${gear()}`}
+function gear(){const v=S.inv||{};return (v.stiefel?'<g fill="#6d4a26"><rect x="-30" y="-40" width="26" height="36" rx="6"/><rect x="4" y="-40" width="26" height="36" rx="6"/><ellipse cx="-18" cy="-8" rx="21" ry="11"/><ellipse cx="18" cy="-8" rx="21" ry="11"/></g><path d="M-30 -36h26M4 -36h26" stroke="#f6c84a" stroke-width="4"/>':'')
+ +(v.kompass?'<path d="M-14 -168L0 -148L14 -168" stroke="#6d4a26" stroke-width="2.5" fill="none"/><circle cx="0" cy="-140" r="11" fill="#f4efe4" stroke="#f6c84a" stroke-width="3.5"/><path d="M0 -148l3 8l-3 8l-3 -8z" fill="#d24a43"/>':'')
+ +(v.schaufel?'<path d="M-54 -156V-62" stroke="#8c6234" stroke-width="6" stroke-linecap="round"/><path d="M-66 -62h24v16q-12 14 -24 0z" fill="#8b929a" stroke="#2b2a33" stroke-width="2"/>':'')
+ +(v.fernrohr?'<g transform="rotate(24 54 -94)"><rect x="48" y="-134" width="12" height="52" rx="3" fill="#8c6234"/><rect x="46" y="-138" width="16" height="10" rx="2" fill="#f6c84a"/><rect x="47" y="-100" width="14" height="6" fill="#f6c84a"/></g>':'')
+ +(v.klappe?'<path d="M-33 -218L33 -212" stroke="#2b2a33" stroke-width="2.5"/><circle cx="12" cy="-206" r="8.5" fill="#2b2a33"/>':'')
+ +(v.hut?'<path d="M-46 -236Q0 -256 46 -236Q28 -278 0 -282Q-28 -278 -46 -236Z" fill="#2b2a33"/><path d="M-46 -237q46 -15 92 0" stroke="#f6c84a" stroke-width="4" fill="none"/><circle cx="0" cy="-258" r="7" fill="#d9a55a"/>':'')}
 function kapitaen(){return `
 <ellipse cx="0" cy="2" rx="62" ry="9" fill="#0002"/>
 <rect x="-36" y="-72" width="28" height="72" rx="6" fill="#2b2a33"/><rect x="14" y="-72" width="11" height="72" fill="#a9793f"/>
@@ -286,13 +297,15 @@ function typ(o){return `<ellipse cx="0" cy="2" rx="54" ry="9" fill="#0002"/>
 <path d="M-14 -214q14 12 28 0" stroke="#a5553f" stroke-width="4" fill="none" stroke-linecap="round"/>${o.bart||''}<circle cx="0" cy="-228" r="8" fill="#dc9f78"/>${o.hut}`}
 const hobel=()=>typ({hose:'#4a5d7a',jacke:'#b5533c',vorn:'<path d="M-30 -72L-26 -172H26L30 -72Z" fill="#e7d7b0"/>',bart:'<path d="M-24 -222q24 -12 48 0q-24 12 -48 0z" fill="#7a5230"/>',hut:'<path d="M-38 -252q38 -46 76 0z" fill="#f6c84a"/><rect x="-46" y="-256" width="92" height="10" rx="5" fill="#d9a520"/>'});
 const strahl=()=>typ({hose:'#3d5a80',jacke:'#f6c84a',bart:'<path d="M-34 -230q-6 50 34 58q40 -8 34 -58q-34 22 -68 0z" fill="#ece8dd"/>',hut:'<path d="M-40 -254q40 -50 80 0z" fill="#f6c84a"/><path d="M-54 -250q54 14 108 0l-8 -10h-92z" fill="#e0ae1f"/>'});
-const PORT={hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,moritz:`<svg viewBox="-62 -268 124 124">${moritz()}</svg>`,kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
+const PORT={hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
  kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
 const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
 const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,hobel:.8,strahl:.9,moritz:1};
 
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
+const wk=(n,x,y)=>`<g transform="translate(${x},${y})"><rect x="-36" y="-46" width="72" height="46" rx="7" fill="#3b78c4" stroke="#2b2a33" stroke-width="4"/><path d="M-36 -28h72" stroke="#2b2a33" stroke-width="3"/><text y="-8" text-anchor="middle" font-size="32" font-weight="700" fill="#fff">?</text></g>`+mark('wissen'+n,x,y-84);
+const whot=(n,x,y)=>`<rect class="hot" data-act="wissen${n}" x="${x-55}" y="${y-120}" width="110" height="130"/>`;
 const HARBOR=`<svg id="harbor" viewBox="0 0 1280 620">
 <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ee"/><stop offset="1" stop-color="#fbeed3"/></linearGradient></defs>
 <rect width="1280" height="320" fill="url(#sky)"/><circle cx="880" cy="90" r="50" fill="#f8d66b"/>
@@ -323,11 +336,11 @@ const HARBOR=`<svg id="harbor" viewBox="0 0 1280 620">
 <g transform="translate(215,505) scale(.8)">${kapitaen()}</g>
 <g transform="translate(335,400) scale(.9)">${kruemel()}</g>
 <g id="g-schild"><rect x="1212" y="470" width="12" height="120" fill="#6d4a26"/><path d="M1160 478h100l22 22l-22 22h-100z" fill="#a9793f" stroke="#6d4a26" stroke-width="4"/><text x="1214" y="508" text-anchor="middle" font-size="22" font-weight="700" fill="#fff8e6">Zur Hexe</text></g>
-${mark('schiff',90,300)}${mark('schild',1215,440)}${mark('kapitaen',215,190)}${mark('kisten',482,296)}${mark('kanonen',756,370)}${mark('kompass',910,326)}${mark('tuer',1110,405)}
+${wk(1,1000,566)}${mark('schiff',90,300)}${mark('schild',1215,440)}${mark('kapitaen',215,190)}${mark('kisten',482,296)}${mark('kanonen',756,370)}${mark('kompass',910,326)}${mark('tuer',1110,405)}
 <g id="mor" style="transform:translate(600px,588px)"><g id="morflip" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>
 <rect class="hot" data-act="schiff" x="30" y="70" width="340" height="360"/><rect class="hot" data-act="kapitaen" x="135" y="160" width="160" height="350"/><rect class="hot" data-act="kruemel" x="296" y="280" width="90" height="140"/>
 <rect class="hot" data-act="kisten" x="400" y="266" width="170" height="204"/><rect class="hot" data-act="kanonen" x="625" y="340" width="230" height="130"/>
-<rect class="hot" data-act="kompass" x="860" y="296" width="100" height="174"/><rect class="hot" data-act="tuer" x="1030" y="300" width="170" height="160"/><rect class="hot" id="h-schild" data-act="schild" x="1150" y="466" width="130" height="140"/></svg>`;
+<rect class="hot" data-act="kompass" x="860" y="296" width="100" height="174"/><rect class="hot" data-act="tuer" x="1030" y="300" width="170" height="160"/>${whot(1,1000,566)}<rect class="hot" id="h-schild" data-act="schild" x="1150" y="466" width="130" height="140"/></svg>`;
 const HEXE=`<svg id="hexe" viewBox="0 0 1280 620" style="display:none">
 <rect width="1280" height="620" fill="#cfe8d8"/>
 <g fill="#5f9c63"><ellipse cx="120" cy="60" rx="220" ry="110"/><ellipse cx="520" cy="20" rx="260" ry="100"/><ellipse cx="1180" cy="70" rx="240" ry="120"/><ellipse cx="820" cy="10" rx="200" ry="80"/></g>
@@ -349,9 +362,9 @@ const HEXE=`<svg id="hexe" viewBox="0 0 1280 620" style="display:none">
 <g fill="#8fd16a"><circle cx="-24" cy="352" r="9"/><circle cx="14" cy="338" r="6"/><circle cx="34" cy="356" r="7"/></g></g>
 <g transform="translate(330,500) scale(.95)">${mixa()}</g>
 <g><rect x="1212" y="470" width="12" height="120" fill="#6d4a26"/><path d="M1270 478h-100l-22 22l22 22h100z" fill="#a9793f" stroke="#6d4a26" stroke-width="4"/><text x="1216" y="508" text-anchor="middle" font-size="22" font-weight="700" fill="#fff8e6">Zum Hafen</text></g>
-${mark('fehler1',1098,268)}${mark('buch',140,310)}${mark('kessel',565,300)}${mark('mixa',330,140)}
+${wk(2,900,566)}${mark('fehler1',1098,268)}${mark('buch',140,310)}${mark('kessel',565,300)}${mark('mixa',330,140)}
 <g id="mor2" style="transform:translate(760px,588px)"><g id="morflip2" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>
-<rect class="hot" data-act="buch" x="60" y="290" width="170" height="190"/><rect class="hot" data-act="mixa" x="250" y="150" width="170" height="360"/>
+${whot(2,900,566)}<rect class="hot" data-act="buch" x="60" y="290" width="170" height="190"/><rect class="hot" data-act="mixa" x="250" y="150" width="170" height="360"/>
 <rect class="hot" data-act="kessel" x="470" y="280" width="190" height="210"/><rect class="hot" data-act="fehler1" x="1040" y="240" width="120" height="130"/><rect class="hot" data-act="hafen" x="1140" y="466" width="140" height="140"/></svg>`;
 const PUB=`<svg id="pub" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#8a6038"/>
 <g stroke="#76502c" stroke-width="4">${[...Array(15)].map((_,i)=>`<path d="M${(i+1)*82} 0V430"/>`).join('')}</g>
@@ -486,7 +499,7 @@ function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filte
   :(!d.intro?'':n<3?'Tippe auf ein Ausrufezeichen im Hafen!':!d.karte?'Geh zur Kneipe!':!d.logbuch?'Bring das Essen zum Kapitän!':'Kapitel 1 geschafft! Folge dem Wegweiser zur Hexe.');
  $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span></div><div class="tx" style="margin-top:10px">${t}</div></div>`;
  const M=[['kisten',d.kisten,1],['kanonen',d.kanonen,1],['kompass',d.kompass,1],['tuer',d.karte,n>=3],['schild',0,d.logbuch],['schiff',d.rennen,n>=3],['kapitaen',0,d.karte&&!d.logbuch],
-  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['fehler1',d.fehler1,n2>=2]];
+  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];
  Object.keys(SC).forEach(k=>{const q=SC[k],all=q.tasks.every(x=>d[x]);q.tasks.forEach(x=>M.push([x,d[x],1]));M.push([q.bonus,d[q.bonus],all],[q.npc,d[q.key],all])});
  M.forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
  ['g-schild','h-schild'].forEach(i=>{const e=$('#'+i);if(e)e.style.display=d.logbuch?'':'none'});
@@ -761,22 +774,110 @@ async function sortieren(){await brief('Die Planken sind durcheinander. Tippe si
   $$('.splank').forEach(b=>b.onclick=()=>{if(+b.dataset.n===ord[i]){i++;$('#s-out').appendChild(b);b.onclick=null;sfx('ok');if(i===ord.length)setTimeout(res,1300)}
    else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Kräh! Es gibt noch eine kleinere Zahl.')}})});
  closePanel()}
-function labyrinth(){return new Promise(res=>{const W=8,H=5,C=100,R=[],D=[],seen=[];for(let y=0;y<H;y++){R.push(Array(W).fill(1));D.push(Array(W).fill(1));seen.push(Array(W).fill(0))}
+function labyrinth(){return new Promise(res=>{const W=11,H=7,C=72,R=[],D=[],seen=[];for(let y=0;y<H;y++){R.push(Array(W).fill(1));D.push(Array(W).fill(1));seen.push(Array(W).fill(0))}
  const st=[[0,0]];seen[0][0]=1;while(st.length){const[x,y]=st[st.length-1],nb=shuffle([[1,0],[-1,0],[0,1],[0,-1]]).filter(v=>x+v[0]>=0&&x+v[0]<W&&y+v[1]>=0&&y+v[1]<H&&!seen[y+v[1]][x+v[0]]);
   if(!nb.length){st.pop();continue}const[dx,dy]=nb[0];if(dx===1)R[y][x]=0;if(dx===-1)R[y][x-1]=0;if(dy===1)D[y][x]=0;if(dy===-1)D[y-1][x]=0;seen[y+dy][x+dx]=1;st.push([x+dx,y+dy])}
- window._mz={R,D,W,H};let px=0,py=0,coins=0;const cs=shuffle([...Array(W*H-2)].map((_,i)=>i+1)).slice(0,4).map(i=>[i%W,Math.floor(i/W)]);let walls='';
+ window._mz={R,D,W,H,C};let px=0,py=0,coins=0;const cs=shuffle([...Array(W*H-2)].map((_,i)=>i+1)).slice(0,6).map(i=>[i%W,Math.floor(i/W)]);let walls='';
  for(let y=0;y<H;y++)for(let x=0;x<W;x++){if(R[y][x]&&x<W-1)walls+=`M${(x+1)*C} ${y*C}v${C}`;if(D[y][x]&&y<H-1)walls+=`M${x*C} ${(y+1)*C}h${C}`}
  panel(`<div class="ptitle">Labyrinth<span style="color:#3a2c20"><i class="coin"></i><span id="mzc">0</span></span></div><div class="mzwrap"><svg viewBox="-6 -6 ${W*C+12} ${H*C+12}" width="${W*C*.98}" height="${H*C*.98}"><rect width="${W*C}" height="${H*C}" fill="#cfe8d8" stroke="#2b2a33" stroke-width="10"/>
- <g transform="translate(${W*C-50},${H*C-50})"><circle r="30" fill="#d9a55a" stroke="#8c6234" stroke-width="5"/><g fill="#6d4a26"><circle cx="-10" cy="-8" r="5"/><circle cx="10" cy="-2" r="5"/><circle cx="-4" cy="12" r="5"/></g></g>
- ${cs.map((c,i)=>`<circle id="mzo${i}" cx="${c[0]*C+50}" cy="${c[1]*C+50}" r="16" fill="#f6c84a" stroke="#a9793f" stroke-width="5"/>`).join('')}<path d="${walls}" stroke="#2b2a33" stroke-width="8" stroke-linecap="round"/>
- <g id="mzp" style="transition:transform .18s;transform:translate(50px,88px)"><g transform="scale(.3)">${moritz()}</g></g></svg>
+ <g transform="translate(${W*C-C/2},${H*C-C/2}) scale(.7)"><circle r="30" fill="#d9a55a" stroke="#8c6234" stroke-width="5"/><g fill="#6d4a26"><circle cx="-10" cy="-8" r="5"/><circle cx="10" cy="-2" r="5"/><circle cx="-4" cy="12" r="5"/></g></g>
+ ${cs.map((c,i)=>`<circle id="mzo${i}" cx="${c[0]*C+C/2}" cy="${c[1]*C+C/2}" r="13" fill="#f6c84a" stroke="#a9793f" stroke-width="5"/>`).join('')}<path d="${walls}" stroke="#2b2a33" stroke-width="8" stroke-linecap="round"/>
+ <g id="mzp" style="transition:transform .15s;transform:translate(${C/2}px,${C*.9}px)"><g transform="scale(.22)">${moritz()}</g></g></svg>
  <div class="mzpad"><i></i><button data-d="N">▲</button><i></i><button data-d="W">◀</button><i></i><button data-d="O">▶</button><i></i><button data-d="S">▼</button><i></i></div></div>`);
  note('kruemel','Führe Moritz zum großen Keks! Tippe auf die Pfeile. Sammle unterwegs Dublonen.');let fin=false;
  $$('.mzpad button').forEach(b=>b.onclick=()=>{if(fin)return;const d=b.dataset.d;let ok=false;
   if(d==='O'&&px<W-1&&!R[py][px]){px++;ok=1}else if(d==='W'&&px>0&&!R[py][px-1]){px--;ok=1}else if(d==='S'&&py<H-1&&!D[py][px]){py++;ok=1}else if(d==='N'&&py>0&&!D[py-1][px]){py--;ok=1}
-  if(!ok){sfx('bad');return}$('#mzp').style.transform=`translate(${px*C+50}px,${py*C+88}px)`;
+  if(!ok){sfx('bad');return}$('#mzp').style.transform=`translate(${px*C+C/2}px,${py*C+C*.9}px)`;
   cs.forEach((c,i)=>{if(c&&c[0]===px&&c[1]===py){cs[i]=null;$('#mzo'+i).remove();coins++;$('#mzc').textContent=coins;sfx('coin')}});
   if(px===W-1&&py===H-1){fin=true;sfx('fanfare');setTimeout(()=>res(coins),1500)}})})}
+
+/* ---------- Sachunterricht: Wissens-Kisten ---------- */
+const WISSEN={1:['Piraten und Schiffe',[['Wie heißt die linke Seite von einem Schiff?','Backbord','Steuerbord','Hinterbord','Links ist Backbord. Rechts ist Steuerbord.'],['Womit hält ein Schiff an einer Stelle fest?','mit dem Anker','mit dem Segel','mit der Flagge','Der schwere Anker hakt sich im Meeresboden fest.'],
+  ['Wer bestimmt auf einem Schiff?','der Kapitän','der Koch','der Papagei','Der Kapitän führt das Schiff. Alle hören auf ihn.'],['Was treibt ein Segelschiff an?','der Wind','die Fische','die Wolken','Der Wind bläst in die Segel und schiebt das Schiff an.'],['Wie heißt die Küche auf einem Schiff?','Kombüse','Kajüte','Kompass','Die Küche heißt Kombüse. Die Kajüte ist ein Zimmer auf dem Schiff.']]],
+ 2:['Tiere im Wald',[['Wo wohnt der Dachs?','in einem Bau unter der Erde','in einem Nest im Baum','im Wasser','Der Dachs gräbt sich einen großen Bau mit vielen Gängen.'],['Was frisst ein Fuchs gern?','Mäuse','Steine','Holz','Der Fuchs fängt Mäuse. Er frisst aber auch Beeren und Würmer.'],
+  ['Welches Tier kann fliegen?','die Fledermaus','der Dachs','der Ochse','Die Fledermaus fliegt in der Nacht. Sie ist kein Vogel, sondern ein Säugetier.'],['Wie viele Beine hat eine Spinne?','acht','sechs','vier','Spinnen haben acht Beine. Insekten haben nur sechs.'],['Welches Tier schläft den ganzen Winter?','der Igel','der Fuchs','die Möwe','Der Igel hält Winterschlaf. Er rollt sich in einem Laubhaufen ein.']]],
+ 3:['Meere und Ozeane',[['Wie schmeckt das Wasser im Meer?','salzig','süß','sauer','Im Meerwasser ist viel Salz. Man kann es nicht trinken.'],['Welcher Ozean ist der größte?','der Pazifik','der Atlantik','die Nordsee','Der Pazifik ist der größte Ozean der Erde.'],
+  ['Was passiert bei Ebbe?','Das Wasser geht zurück.','Das Wasser wird warm.','Die Fische schlafen.','Bei Ebbe geht das Wasser zurück. Bei Flut kommt es wieder.'],['Was bedeckt den größten Teil der Erde?','Wasser','Sand','Wald','Mehr als die Hälfte der Erde ist mit Wasser bedeckt.'],['Welches Meer liegt im Norden von Deutschland?','die Nordsee','das Mittelmeer','der Pazifik','Im Norden von Deutschland liegen die Nordsee und die Ostsee.']]],
+ 4:['Tiere im Meer',[['Welches ist das größte Tier der Welt?','der Blauwal','der Elefant','der Hai','Der Blauwal ist das größte Tier der Welt. Er ist so lang wie drei Busse.'],['Wie viele Arme hat ein Krake?','acht','fünf','zwei','Ein Krake hat acht Arme mit vielen Saugnäpfen.'],
+  ['Ist der Delfin ein Fisch?','Nein, er ist ein Säugetier.','Ja, er ist ein Fisch.','Nein, er ist ein Vogel.','Der Delfin ist ein Säugetier. Er muss zum Atmen auftauchen.'],['Womit atmen Fische?','mit Kiemen','mit der Nase','mit den Flossen','Fische atmen mit Kiemen. Damit holen sie Luft aus dem Wasser.'],['Wozu ist ein Leuchtturm da?','Er zeigt Schiffen den Weg.','Er macht Wellen.','Er fängt Fische.','Das Licht vom Leuchtturm zeigt den Schiffen in der Nacht den Weg.']]],
+ 5:['Schätze und Höhlen',[['Welches Tier hängt in Höhlen an der Decke?','die Fledermaus','der Fuchs','der Krebs','Fledermäuse schlafen am Tag. Dabei hängen sie mit dem Kopf nach unten.'],['Was zeigt ein Kompass?','die Himmelsrichtungen','die Uhrzeit','das Wetter','Die Nadel im Kompass zeigt immer nach Norden.'],
+  ['Wo geht die Sonne auf?','im Osten','im Westen','im Norden','Die Sonne geht im Osten auf und im Westen unter.'],['Womit sehen Piraten weit über das Meer?','mit dem Fernrohr','mit dem Spiegel','mit der Schaufel','Durch ein Fernrohr sieht alles viel näher aus.'],['Woraus sind Dublonen?','aus Gold','aus Holz','aus Keks','Dublonen waren Münzen aus Gold. Piraten haben sie geliebt.']]]};
+async function wissen(n){const[titel,fr]=WISSEN[n];await brief(`In der blauen Kiste stecken Fragen zum Thema ${titel}. Lies die Frage und tippe auf die richtige Antwort.`);
+ const q=shuffle(fr).slice(0,3);for(let i=0;i<q.length;i++){await choice(titel+' '+dots(i,q.length),q[i][0],q[i].slice(1,4),'Was weißt du?');closePanel();await talk('kruemel','Kräh! '+q[i][4])}}
+
+/* ---------- Fässer-Hüpfen ---------- */
+function faesser(){return new Promise(res=>{musicOn();const c=$('#cine'),X0=260,GY=600,bs=[];let x=1150;for(let i=0;i<14;i++){bs.push({x});x+=rand(540,780)}const END=x+150;
+ c.innerHTML=`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#cfe8ef"/><circle cx="1050" cy="130" r="56" fill="#f8d66b"/><rect y="420" width="1280" height="200" fill="#4a9aa6"/>${WAVES(470)}${WAVES(540)}
+ <rect y="600" width="1280" height="200" fill="#c2935a"/><rect y="600" width="1280" height="12" fill="#9c7040"/>
+ <g id="fworld">${bs.map((b,i)=>`<g id="fb${i}" transform="translate(${b.x},${GY-34})"><circle r="34" fill="#a9793f" stroke="#6d4a26" stroke-width="6"/><path d="M-34 0h68M0 -34v68" stroke="#6d4a26" stroke-width="5"/></g>`).join('')}
+ <g transform="translate(${END},0)"><rect y="330" width="14" height="270" fill="#fff"/><path d="M14 330h110l-26 34l26 34h-110z" fill="#d24a43"/><text x="64" y="376" text-anchor="middle" font-size="30" font-weight="700" fill="#fff">Ziel</text></g></g>
+ <g id="fmor"><g transform="scale(.85)" class="walk"><g class="bob">${moritz()}</g></g></g></svg><div id="rhud"><i class="coin"></i><span id="rc">0</span></div><div id="rmsg"></div>
+ <button class="btn" style="position:absolute;right:40px;bottom:36px;font-size:46px;padding:26px 54px">Springen!</button>`;c.style.display='block';
+ let wx=0,v=250,h=0,vy=0,slow=0,pts=0,last=0,msgT=0,fin=false;const mor=$('#fmor'),world=$('#fworld'),msg=$('#rmsg');
+ c.onclick=()=>{if(h===0&&!fin){vy=640;h=.01;sfx('jump')}};
+ function frame(now){if(!last)last=now;const dt=Math.min(.05,(now-last)/1000);last=now;slow-=dt;msgT-=dt;if(msgT<0&&!fin)msg.textContent='';
+  if(h>0){h+=vy*dt;vy-=1700*dt;if(h<=0){h=0;vy=0}}wx+=(slow>0?v*.4:v)*dt;
+  mor.setAttribute('transform',`translate(${X0},${GY-h}) rotate(${slow>0?Math.sin(now/50)*10:0})`);world.setAttribute('transform',`translate(${-wx},0)`);
+  bs.forEach((b,i)=>{if(b.done)return;const sx=b.x-wx;if(Math.abs(sx-X0)<50&&h<50){b.done=1;slow=1;v=Math.max(220,v-20);sfx('bad');msg.textContent='Hoppla!';msgT=1;const e=$('#fb'+i);if(e)e.remove()}
+   else if(sx<X0-60){b.done=1;pts++;v=Math.min(360,v+7);$('#rc').textContent=pts;sfx('coin')}});
+  if(wx+X0>=END){fin=true;msg.textContent='Ziel!';sfx('fanfare');setTimeout(()=>{musicOff();c.onclick=null;c.style.display='none';c.innerHTML='';res(pts)},2600)}else requestAnimationFrame(frame)}
+ requestAnimationFrame(frame)})}
+
+/* ---------- Olgas Piratenladen ---------- */
+const WAREN=[['keks','Papageien-Keks',10,'<circle cx="50" cy="52" r="30" fill="#d9a55a" stroke="#8c6234" stroke-width="5"/><g fill="#6d4a26"><circle cx="40" cy="44" r="5"/><circle cx="60" cy="50" r="5"/><circle cx="46" cy="64" r="5"/></g>'],
+ ['schaufel','Schaufel',20,'<path d="M50 12V62" stroke="#8c6234" stroke-width="8" stroke-linecap="round"/><path d="M34 60h32v16q-16 20 -32 0z" fill="#8b929a" stroke="#2b2a33" stroke-width="3"/>'],
+ ['klappe','Augenklappe',25,'<path d="M10 36L90 52" stroke="#2b2a33" stroke-width="5"/><ellipse cx="54" cy="52" rx="22" ry="18" fill="#2b2a33"/>'],
+ ['kompass','Kompass',30,'<circle cx="50" cy="52" r="32" fill="#f4efe4" stroke="#f6c84a" stroke-width="7"/><path d="M50 26l9 26l-9 26l-9 -26z" fill="#d9a55a"/><path d="M50 26l9 26h-18z" fill="#d24a43"/>'],
+ ['stiefel','Piraten-Stiefel',35,'<path d="M36 14h26v46h22q8 0 8 12v10H36z" fill="#6d4a26" stroke="#2b2a33" stroke-width="3"/><path d="M36 26h26" stroke="#f6c84a" stroke-width="6"/>'],
+ ['hut','Piratenhut',40,'<path d="M8 66Q50 44 92 66Q76 22 50 18Q24 22 8 66Z" fill="#2b2a33"/><path d="M8 66q42 -16 84 0" stroke="#f6c84a" stroke-width="5" fill="none"/><circle cx="50" cy="42" r="9" fill="#d9a55a"/>'],
+ ['fernrohr','Fernrohr',50,'<g transform="rotate(-30 50 50)"><rect x="12" y="40" width="44" height="20" rx="4" fill="#8c6234"/><rect x="54" y="43" width="34" height="14" rx="3" fill="#a9793f"/><rect x="8" y="37" width="10" height="26" rx="3" fill="#f6c84a"/><rect x="50" y="39" width="8" height="22" fill="#f6c84a"/></g>'],
+ ['flagge','Keks-Flagge',60,'<rect x="16" y="10" width="7" height="82" fill="#6d4a26"/><path d="M23 14h62l-12 20l12 20h-62z" fill="#2b2a33"/><circle cx="50" cy="34" r="12" fill="#d9a55a"/>']];
+async function laden(){if(!S.inv)S.inv={};for(;;){
+  const w=await new Promise(r=>{panel(`<div class="ptitle">Olgas Piratenladen<span style="color:#3a2c20"><i class="coin"></i>${S.coins} Dublonen</span></div><div class="shop">${WAREN.map((a,i)=>`<button class="ware${S.inv[a[0]]?' hat':''}" data-w="${i}"><svg viewBox="0 0 100 100">${a[3]}</svg><b>${a[1]}</b><span>${S.inv[a[0]]?'gekauft':a[2]+' Dublonen'}</span></button>`).join('')}</div><div class="center" style="margin-top:12px"><button class="btn small" id="la-x">Zurück</button></div>`);
+   note('olga','Willkommen in meinem Laden! Was darf es sein?');$$('.ware').forEach(b=>b.onclick=()=>r(WAREN[+b.dataset.w]));$('#la-x').onclick=()=>r(null)});
+  if(!w)break;const[id,name,p]=w;
+  if(S.inv[id]){await talk('olga',`${name}: Das hast du schon. Es steht dir prima!`);continue}
+  if(S.coins<p){sfx('bad');await talk('olga',`Dir fehlen noch ${p-S.coins} Dublonen. Verdiene dir noch welche!`);continue}
+  let pay=Math.min(100,Math.floor(S.coins/10)*10);if(pay<p)pay=S.coins;
+  if(pay>p)await askNumber('Bezahlen',`${name} kostet ${p} Dublonen. Du gibst Olga ${pay} Dublonen. Wie viele Dublonen bekommst du zurück?`,pay,'-',p);
+  closePanel();S.coins-=p;sfx('coin');
+  if(id==='keks'){sfx('kraeh');await talk('kruemel','Mampf, mampf! Kräh! Der beste Keks der Welt. Danke, Käpt’n!')}
+  else{S.inv[id]=1;save();$$('#scene .bob').forEach(e=>e.innerHTML=moritz());await talk('olga',id==='flagge'?'Die Keks-Flagge! Damit bist du ein echter Pirat.':`Gute Wahl! ${name}: Das trägst du jetzt bei dir.`)}
+  save()}
+ closePanel()}
+
+/* ---------- Kleine Filme ---------- */
+const PALME=(x,y)=>`<path d="M${x} ${y}q16 -150 0 -260" stroke="#8c6234" stroke-width="22" fill="none"/><g fill="#4f8f55"><ellipse cx="${x-50}" cy="${y-262}" rx="70" ry="18" transform="rotate(-18 ${x-50} ${y-262})"/><ellipse cx="${x+60}" cy="${y-262}" rx="70" ry="18" transform="rotate(18 ${x+60} ${y-262})"/><ellipse cx="${x+4}" cy="${y-296}" rx="20" ry="56"/></g>`;
+const FILME={
+ async hexe(){musicOn();cineOpen(`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#cfe8d8"/><g fill="#5f9c63"><ellipse cx="200" cy="80" rx="320" ry="130"/><ellipse cx="900" cy="60" rx="420" ry="120"/></g><rect y="620" width="1280" height="180" fill="#a8c686"/>
+  ${PALME(260,640)}${PALME(960,640)}<g id="fm" class="cmv walk" style="transform:translate(-120px,700px);transition-duration:6s"><g class="bob">${moritz()}</g></g>
+  <g id="fk" class="cmv" style="transform:translate(60px,330px) scale(1.3);transition-duration:2.6s">${kruemel()}</g>
+  <text id="chat" x="800" y="250" font-size="110" font-weight="700" fill="#d24a43" stroke="#fff" stroke-width="6" paint-order="stroke" opacity="0">Bonk!</text></svg>`);
+  if(!skip){$('#fm').style.transform='translate(520px,700px)';$('#fk').style.transform='translate(900px,360px) scale(1.3)'}
+  await film('Moritz und Krümel gehen durch den Dschungel. Krümel fliegt voraus.',2700);
+  if(!skip){$('#chat').setAttribute('opacity',1);sfx('bad');sfx('kraeh');$('#fk').style.transitionDuration='.7s';$('#fk').style.transform='translate(860px,640px) scale(1.3) rotate(120deg)'}
+  await film('Bonk! Krümel hat die Palme nicht gesehen.',4800);
+  if(!skip){$('#chat').setAttribute('opacity',0);$('#fk').style.transform='translate(860px,650px) scale(1.3)'}
+  await film('Nichts passiert! Und da vorne ist schon die Hexenhütte.',4800);hush();cineClose();musicOff()},
+ async hoehle(){musicOn();cineOpen(`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#f6d2a8"/><path d="M0 800V300Q300 120 640 110T1280 300V800Z" fill="#8b929a"/><path d="M380 800V470Q640 250 900 470V800Z" fill="#1d1826"/><rect y="700" width="1280" height="100" fill="#6b5a4a"/>
+  <g id="fm" class="cmv walk" style="transform:translate(-200px,760px);transition-duration:4s"><g class="bob">${moritz()}</g></g><g id="fc" class="cmv" style="transform:translate(-360px,770px) scale(.9);transition-duration:4s">${kapitaen()}</g>
+  ${[...Array(9)].map((_,i)=>`<path class="cmv fbat" d="M-30 0q10 -22 20 -4q10 -12 20 0q10 -18 20 4q-20 -8 -30 8q-10 -16 -30 -8z" fill="#2b2a33" style="transform:translate(${600+i*14}px,${560-i%3*30}px) scale(.2);transition-duration:${2+i*.25}s"/>`).join('')}</svg>`);
+  if(!skip){$('#fm').style.transform='translate(330px,760px)';$('#fc').style.transform='translate(170px,770px) scale(.9)'}
+  await film('Moritz und der Kapitän kommen zur dunklen Schatzhöhle.',5200);
+  if(!skip){sfx('kraeh');$$('.fbat').forEach((b,i)=>b.style.transform=`translate(${-100+i*170}px,${60+i%4*70}px) scale(${1.4+i%3*.4})`)}
+  await film('Flatter, flatter! Viele Fledermäuse fliegen heraus.',5200);
+  if(!skip)$('#fc').style.transform='translate(60px,770px) scale(.9) rotate(-12deg)';
+  await film('Der Kapitän erschrickt. Aber Fledermäuse sind ganz lieb. Sie fressen nur Insekten.',6500);hush();cineClose();musicOff()}};
+async function kesselFilm(){musicOn();cineOpen(`<svg viewBox="0 0 1280 800"><rect width="1280" height="800" fill="#cbb7d9"/><rect y="640" width="1280" height="160" fill="#8a6038"/>
+ <g id="fbl">${[['#d24a43',-200,-300],['#f6d23a',-60,-420],['#4f9a4a',120,-380],['#3b78c4',260,-260],['#ee8a2e',-330,-160],['#8a5bb5',360,-120],['#f6d23a',20,-240]].map(v=>`<circle class="cmv" r="46" fill="${v[0]}" data-x="${v[1]}" data-y="${v[2]}" style="transform:translate(560px,470px) scale(.1);transition-duration:1.2s"/>`).join('')}</g>
+ <path d="M370 470q0 230 190 230t190 -230z" fill="#2b2a33"/><ellipse cx="560" cy="470" rx="200" ry="36" fill="#3d3c47"/><ellipse cx="560" cy="470" rx="170" ry="26" fill="#8fd16a"/>
+ <g transform="translate(980,740) scale(1.5)">${mixa()}<g id="fhaar" opacity="0"><circle cx="-36" cy="-208" r="21" fill="#d24a43"/><circle cx="36" cy="-208" r="21" fill="#3b78c4"/><circle cx="-42" cy="-182" r="17" fill="#f6d23a"/><circle cx="42" cy="-182" r="17" fill="#4f9a4a"/></g></g>
+ <text id="chat" x="330" y="230" font-size="120" font-weight="700" fill="#d24a43" stroke="#fff" stroke-width="6" paint-order="stroke" opacity="0">PENG!</text></svg>`);
+ await film('Mixa hat verloren. Vor Schreck fällt ihr Zauberstab in den Kessel.',5500);
+ if(!skip){$('#chat').setAttribute('opacity',1);sfx('hatschi');$$('#fbl circle').forEach(b=>b.style.transform=`translate(${560+ +b.dataset.x}px,${470+ +b.dataset.y}px) scale(1)`)}
+ await film('Blubb, blubb, PENG! Der Trank spritzt überall hin.',5000);
+ if(!skip){$('#chat').setAttribute('opacity',0);$('#fhaar').setAttribute('opacity',1);sfx('ok')}
+ await film('Jetzt hat Mixa bunte Haare. Hihi! Das gefällt ihr sogar.',5200);hush();cineClose();musicOff()}
 
 /* ---------- Kapitel 3: Werft ---------- */
 const VERBEN=[['Der Papagei ___ auf dem Mast.','sitzt','bellt'],['Das Schiff ___ über das Meer.','fährt','klettert'],['Der Kapitän ___ einen Keks.','isst','liest'],['Die Hexe ___ auf dem Besen.','fliegt','schwimmt'],
@@ -834,7 +935,7 @@ async function finale(){musicOn();sfx('fanfare');cineOpen('<div style="position:
 /* ---------- Hafen ---------- */
 let busy=false;const MX={harbor:600,hexe:760,werft:560,turm:500,hoehle:640};
 const POS={kapitaen:320,kruemel:400,kisten:500,kanonen:735,kompass:915,tuer:1110,schild:1150,schiff:420,buch:250,mixa:470,kessel:690,hafen:1150,fehler1:980,
- planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
+ planken:300,verben:540,nomen:860,hobel:820,sortieren:1050,flaschenpost:280,quatsch:520,stufen:800,strahl:760,labyrinth:1040,wissen1:890,wissen2:790,wissen3:470,wissen4:420,wissen5:990,kap5:260,schloss:440,schatzkarte:680,truhe:740,fehler2:1000};
 function walkTo(x){return new Promise(res=>{const k=S.scene,ids=k==='harbor'?['mor','morflip']:k==='hexe'?['mor2','morflip2']:['mor-'+k,'flip-'+k],mx=MX[k],d=Math.abs(x-mx),m=$('#'+ids[0]);if(!m||d<6)return res();
  $('#'+ids[1]).setAttribute('transform',`scale(${x<mx?-.85:.85},.85)`);m.classList.add('walk');
  m.style.transition=`transform ${d*2.6}ms linear`;m.style.transform=`translate(${x}px,588px)`;MX[k]=x;
@@ -867,6 +968,11 @@ const ACT={
  async labyrinth(){if(!SC.turm.tasks.every(k=>S.done[k])){await talk('kruemel','Kräh! Das Labyrinth ist die Überraschung. Erst die drei Aufgaben!');return}
   const n=await labyrinth();closePanel();S.coins+=n;await reward('labyrinth',5)},
  async strahl(){await gate('turm','Erst die Arbeit! Lies die Flaschenpost, hör der Möwe zu und steig die Treppe hoch.','Mein Licht strahlt wieder! Hier ist das Kartenstück von der Möwe.',4,'Kräh! Vier Kartenstücke! Das letzte liegt in der Schatzhöhle. Tippe oben auf Insel!')},
+ async wissen1(){if(await replay('wissen1')){await wissen(1);await reward('wissen1',10)}},
+ async wissen2(){if(await replay('wissen2')){await wissen(2);await reward('wissen2',10)}},
+ async wissen3(){if(await replay('wissen3')){await wissen(3);await reward('wissen3',10)}},
+ async wissen4(){if(await replay('wissen4')){await wissen(4);await reward('wissen4',10)}},
+ async wissen5(){if(await replay('wissen5')){await wissen(5);await reward('wissen5',10)}},
  async kap5(){await talk('kapitaen',!S.done.schloss?'Knacke zuerst das Zahlenschloss am Gitter!':!S.done.schatzkarte?'Jetzt lies die Schatzkarte auf dem Stein!':'Har har! Öffne die Truhe, Moritz!')},
  async schloss(){if(!await replay('schloss'))return;await schloss();if(S.done.schloss){await talk('kruemel','Super geübt, Käpt’n!');return}
   S.done.schloss=1;S.coins+=15;save();sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Das letzte Kartenstück!</div>${mapSvg(5)}<div class="ltext">Kartenstück 5 von 5</div></div>`);
@@ -889,7 +995,7 @@ const ACT={
   if(d['duell'+n]){await talk('mixa','Schon wieder gewonnen! Du bist ein echter Rechen-Meister.');return}
   d['duell'+n]=1;S.coins+=10;save();
   if(n<3){await talk('mixa','Nicht schlecht, Schiffsjunge! Du bekommst 10 Dublonen. Aber das nächste Duell wird schwerer!');return}
-  await talk('mixa','Unglaublich! Du hast mich dreimal besiegt. Hier ist dein Kartenstück, Rechen-Meister!');
+  await kesselFilm();await talk('mixa','Unglaublich! Du hast mich dreimal besiegt. Hier ist dein Kartenstück, Rechen-Meister!');
   sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Kapitel 2 geschafft!</div>${mapSvg(2)}<div class="ltext">Kartenstück 2 von 5. Weiter geht es in der Werft.</div></div>`);
   await talk('kruemel','Kräh! Zwei Kartenstücke! Das nächste liegt in der Werft. Da müssen wir Planken flicken. Tippe oben auf Insel!',['Juhu!'])},
  async tuer(){if(['kisten','kanonen','kompass'].every(k=>S.done[k]))await pub();
@@ -898,9 +1004,15 @@ async function gate(sc,noch,geben,nr,danach){const c=SC[sc],d=S.done;if(!c.tasks
  if(d[c.key]){await talk(c.npc,'Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben.');return}
  await talk(c.npc,geben);d[c.key]=1;S.coins+=10;save();sfx('fanfare');panel(`<div class="log"><div class="bigmsg">Ein Stück der Schatzkarte!</div>${mapSvg(nr)}<div class="ltext">Kartenstück ${nr} von 5</div></div>`);
  await talk('kruemel',danach,['Juhu!'])}
-function insel(){if(busy)return;hush();panel(`<div class="ptitle">Die Insel</div><div class="orte">${SCN.map(k=>`<button class="btn${k===S.scene?'':' sec'}" data-o="${k}"${offen(k)?'':' disabled'}>${KAP[k]}${offen(k)?'':' (noch zu)'}</button>`).join('')}<button class="btn small" id="or-x">Zurück</button></div>`);
- note('kruemel','Wohin soll die Reise gehen?');$('#or-x').onclick=()=>{closePanel();idle()};
- $$('[data-o]').forEach(b=>b.onclick=async()=>{closePanel();busy=true;$('#hudnav').style.display='none';try{await goScene(b.dataset.o)}finally{busy=false;idle()}})}
+const SPIELE=[['Schiffsrennen',d=>d.kisten&&d.kanonen&&d.kompass,async()=>{const n=await race();S.coins+=n;S.done.rennen=1;sfx('coin');await talk('kapitaen',`Har har! Du hast ${n} Dublonen gesammelt.`)}],
+ ['Fässer-Hüpfen',d=>d.kisten&&d.kanonen&&d.kompass,async()=>{await brief('Die Fässer rollen über den Steg! Tippe auf Springen, wenn ein Fass kommt. Für jedes Fass gibt es eine Dublone.');const n=await faesser();S.coins+=n;sfx('coin');await talk('kruemel',`Kräh! Du bist über ${n} Fässer gehüpft. ${n} Dublonen für dich!`)}],
+ ['Fehlersuche',d=>d.fehler1,async()=>{await fehler(pick(['kueche','hoehle']))}],['Planken sortieren',d=>d.sortieren,()=>sortieren()],['Labyrinth',d=>d.labyrinth,async()=>{S.coins+=await labyrinth()}]];
+function insel(){if(busy)return;hush();const d=S.done,run=async f=>{closePanel();busy=true;$('#hudnav').style.display='none';try{await f()}finally{closePanel();busy=false;idle()}};
+ panel(`<div class="ptitle">Die Insel</div><div class="kwrap" style="align-items:flex-start;gap:44px"><div class="orte">${SCN.map(k=>`<button class="btn${k===S.scene?'':' sec'}" data-o="${k}"${offen(k)?'':' disabled'}>${KAP[k]}${offen(k)?'':' (noch zu)'}</button>`).join('')}</div>
+ <div class="orte"><button class="btn" id="or-l" style="min-width:400px">Olgas Piratenladen</button><div style="font-size:24px;font-weight:700;color:#8e3b3b;margin-top:6px">Spiele</div>${SPIELE.map((g,i)=>`<button class="btn sec" data-s="${i}"${S.alle||g[1](d)?'':' disabled'} style="min-width:400px;font-size:24px;padding:9px 20px">${g[0]}</button>`).join('')}</div></div>
+ <div class="center" style="margin-top:12px"><button class="btn small" id="or-x">Zurück</button></div>`);
+ note('kruemel','Wohin soll die Reise gehen?');$('#or-x').onclick=()=>{closePanel();idle()};$('#or-l').onclick=()=>run(laden);
+ $$('[data-s]').forEach(b=>b.onclick=()=>run(SPIELE[+b.dataset.s][2]));$$('[data-o]').forEach(b=>b.onclick=()=>run(()=>goScene(b.dataset.o)))}
 async function act(id){if(busy)return;busy=true;$('#hudnav').style.display='none';
  try{await walkTo(POS[id]);await ACT[id]()}finally{closePanel();busy=false;idle()}}
 async function intro(){busy=true;$('#hudnav').style.display='none';
@@ -934,7 +1046,7 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
  $('#e-t').onclick=()=>{loadVoice();speak('Ahoi! Ich bin Krümel, der Papagei.','kruemel')};
  let sure=false;$('#e-r').onclick=x=>{if(!sure){sure=true;x.target.textContent='Wirklich löschen? Nochmal tippen';return}
-  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{},mw:{}};S.scene='harbor';save();Object.assign(MX,{harbor:600,hexe:760,werft:560,turm:500,hoehle:640});build();e.style.display='none';showTitle()};
+  S={coins:0,done:{},lists:S.lists,speak:S.speak,log:{},mw:{},inv:{}};S.scene='harbor';save();Object.assign(MX,{harbor:600,hexe:760,werft:560,turm:500,hoehle:640});build();e.style.display='none';showTitle()};
  $('#e-c').onclick=()=>{e.style.display='none'}}
 function setTon(){$('#b-ton').textContent='Vorlesen: '+(S.speak?'an':'aus')}
 const morG=(id,x)=>`<g id="mor-${id}" style="transform:translate(${x}px,588px)"><g id="flip-${id}" transform="scale(.85)"><g class="bob">${moritz()}</g></g></g>`;
@@ -950,8 +1062,8 @@ const WERFT=`<svg id="werft" viewBox="0 0 1280 620" style="display:none"><rect w
 <g transform="translate(1040,0)"><rect y="270" width="220" height="190" fill="#c9a36b"/><path d="M-16 276L110 200L236 276Z" fill="#8e3b3b"/><rect x="80" y="350" width="70" height="110" fill="#6d4a26"/></g>
 <g transform="translate(1130,0)"><path d="M30 500q25 -34 50 0" fill="none" stroke="#2b2a33" stroke-width="6"/><rect y="500" width="110" height="60" rx="6" fill="#d24a43" stroke="#2b2a33" stroke-width="4"/></g>
 <g transform="translate(700,520) scale(.9)">${hobel()}</g>
-${mark('planken',185,340)}${mark("verben",478,160)}${mark('nomen',985,240)}${mark('hobel',700,230)}${mark('sortieren',1185,455)}${morG('werft',560)}
-${hot('planken',90,350,200,120)}${hot('verben',400,150,110,160)}${hot('nomen',900,250,150,230)}${hot('hobel',630,240,140,290)}${hot('sortieren',1110,465,160,110)}</svg>`;
+${wk(3,360,560)}${mark('planken',185,340)}${mark("verben",478,160)}${mark('nomen',985,240)}${mark('hobel',700,230)}${mark('sortieren',1185,455)}${morG('werft',560)}
+${whot(3,360,560)}${hot('planken',90,350,200,120)}${hot('verben',400,150,110,160)}${hot('nomen',900,250,150,230)}${hot('hobel',630,240,140,290)}${hot('sortieren',1110,465,160,110)}</svg>`;
 const TURM=`<svg id="turm" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#f6d2a8"/><circle cx="240" cy="160" r="62" fill="#f8d66b"/>
 <rect y="330" width="1280" height="140" fill="#3f8f9c"/><path d="M0 450Q500 410 1280 440V620H0Z" fill="#9db27a"/>
 <g transform="translate(900,0)"><path d="M34 100L380 40V170L34 130Z" fill="#fff6c9" opacity=".7"/><path d="M-60 460L-40 140H40L60 460Z" fill="#fff" stroke="#2b2a33" stroke-width="5"/><path d="M-44 210H44L48 280H-48Z" fill="#d24a43"/><path d="M-53 350H53L57 420H-57Z" fill="#d24a43"/>
@@ -960,8 +1072,8 @@ const TURM=`<svg id="turm" viewBox="0 0 1280 620" style="display:none"><rect wid
 <path d="M340 472q20 -60 70 -50q40 6 50 50z" fill="#8b929a"/><g transform="translate(405,395)"><ellipse rx="26" ry="16" fill="#fff" stroke="#2b2a33" stroke-width="3"/><circle cx="22" cy="-16" r="12" fill="#fff" stroke="#2b2a33" stroke-width="3"/><path d="M32 -16l16 4l-16 4z" fill="#f6c84a"/><circle cx="25" cy="-19" r="2.5" fill="#2b2a33"/></g>
 <g transform="translate(1110,0)"><rect y="470" width="150" height="90" rx="10" fill="#4f8f55" stroke="#2b2a33" stroke-width="4"/><path d="M20 490h110v50h-80v-25h50" fill="none" stroke="#cfe8d8" stroke-width="8"/></g>
 <g transform="translate(640,530) scale(.9)">${strahl()}</g>
-${mark('flaschenpost',170,395)}${mark('quatsch',405,320)}${mark('stufen',900,330)}${mark('strahl',640,238)}${mark('labyrinth',1185,430)}${morG('turm',500)}
-${hot('flaschenpost',100,405,150,120)}${hot('quatsch',330,330,150,150)}${hot('stufen',830,60,140,405)}${hot('strahl',570,250,140,290)}${hot('labyrinth',1100,450,170,120)}</svg>`;
+${wk(4,310,566)}${mark('flaschenpost',170,395)}${mark('quatsch',405,320)}${mark('stufen',900,330)}${mark('strahl',640,238)}${mark('labyrinth',1185,430)}${morG('turm',500)}
+${whot(4,310,566)}${hot('flaschenpost',100,405,150,120)}${hot('quatsch',330,330,150,150)}${hot('stufen',830,60,140,405)}${hot('strahl',570,250,140,290)}${hot('labyrinth',1100,450,170,120)}</svg>`;
 const HOEHLE=`<svg id="hoehle" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#3a3144"/><path d="M0 0H1280V120Q900 190 640 130T0 160Z" fill="#2a2333"/>
 <g fill="#2a2333"><path d="M200 140l20 80l20 -80zM520 120l16 60l16 -60zM980 150l22 90l22 -90z"/></g><path d="M0 470Q640 430 1280 470V620H0Z" fill="#6b5a4a"/>
 <circle cx="895" cy="400" r="150" fill="#f8d66b" opacity=".18"/>
@@ -971,8 +1083,8 @@ const HOEHLE=`<svg id="hoehle" viewBox="0 0 1280 620" style="display:none"><rect
 <rect x="1070" y="230" width="150" height="110" fill="#c9a36b" stroke="#2b2a33" stroke-width="5"/><path d="M1100 320v-40m-14 14h28M1160 320q20 -60 40 0" stroke="#8e3b3b" stroke-width="5" fill="none"/><circle cx="1100" cy="268" r="10" fill="none" stroke="#8e3b3b" stroke-width="5"/>
 <rect x="716" y="250" width="8" height="60" fill="#8c6234"/><path d="M720 214q16 22 0 40q-16 -18 0 -40z" fill="#f6a23a"/>
 <g transform="translate(140,530) scale(.75)">${kapitaen()}</g>
-${mark('schloss',335,212)}${mark('schatzkarte',570,345)}${mark('truhe',895,300)}${mark('fehler2',1145,196)}${morG('hoehle',640)}
-${hot('kap5',60,250,160,290)}${hot('schloss',255,230,160,250)}${hot('schatzkarte',490,360,160,130)}${hot('truhe',800,320,190,170)}${hot('fehler2',1055,215,180,140)}</svg>`;
+${wk(5,1100,566)}${mark('schloss',335,212)}${mark('schatzkarte',570,345)}${mark('truhe',895,300)}${mark('fehler2',1145,196)}${morG('hoehle',640)}
+${whot(5,1100,566)}${hot('kap5',60,250,160,290)}${hot('schloss',255,230,160,250)}${hot('schatzkarte',490,360,160,130)}${hot('truhe',800,320,190,170)}${hot('fehler2',1055,215,180,140)}</svg>`;
 const SCN=['harbor','hexe','werft','turm','hoehle'];
 const KAP={harbor:'Kapitel 1: Der Hafen',hexe:'Kapitel 2: Die Hexenhütte',werft:'Kapitel 3: Die Werft',turm:'Kapitel 4: Der Leuchtturm',hoehle:'Kapitel 5: Die Schatzhöhle'};
 const OFFEN={harbor:d=>1,hexe:d=>d.logbuch,werft:d=>d.duell3,turm:d=>d.k3,hoehle:d=>d.k4};
@@ -984,7 +1096,7 @@ const INTRO={hexe:['c2intro',[['mixa','Hihi! Besuch! Ich bin Mixa, die Hexe. Und
  werft:['c3intro',[['hobel','Moin! Ich bin Meister Hobel, der Schiffsbauer. Mein Schiff hat lauter Löcher!'],['hobel','Ein Kartenstück? Ja, das habe ich als Flicken benutzt. Hilf mir, dann bekommst du es!'],['kruemel','Kräh! Tippe auf die Ausrufezeichen. Zum Schluss wartet eine Überraschung!']]],
  turm:['c4intro',[['strahl','Ahoi da unten! Ich bin Wärter Strahlemann. Mein Leuchtturm braucht Hilfe.'],['strahl','Eine Möwe hat mir ein Kartenstück gebracht. Du bekommst es, wenn du mir hilfst.']]],
  hoehle:['c5intro',[['kapitaen','Har har! Das ist die Schatzhöhle. Das letzte Kartenstück liegt hinter dem Gitter.'],['kapitaen','Knacke das Zahlenschloss. Dann lesen wir die Karte und finden den Schatz!']]]};
-async function goScene(n){setScene(n);const I=INTRO[n];if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
+async function goScene(n){const I=INTRO[n];if(I&&!S.done[I[0]]&&FILME[n])await FILME[n]();setScene(n);if(I&&!S.done[I[0]]){for(const l of I[1])await talk(l[0],l[1]);S.done[I[0]]=1;save()}}
 function setScene(n){S.scene=n;SCN.concat('pub').forEach(k=>{const e=$('#'+k);if(e)e.style.display=k===n?'':'none'})}
 function build(){$('#scene').innerHTML=HARBOR+PUB+HEXE+WERFT+TURM+HOEHLE;setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
