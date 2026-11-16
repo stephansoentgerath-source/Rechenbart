@@ -1,6 +1,6 @@
 # Arbeitsaufträge „Die Insel von Kapitän Rechenbart“
 
-Stand 15.11.2026 (abends). Diese Datei ist für die Arbeit mit einem einfachen Modell gedacht:
+Stand 16.11.2026. Diese Datei ist für die Arbeit mit einem einfachen Modell gedacht:
 einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 
 ## Regeln für jeden Auftrag
@@ -43,14 +43,11 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 `PAKETE` anhängen (`id` = Jahr-Monat, `name` = Monat und Themen). Nur die Schlüssel eintragen, die sich
 ändern. Lernwörter nur anfassen, wenn Stephan es ausdrücklich sagt (dann neue Liste in `LERNWOERTER`).
 
-**A2 Rechnen in Akt 2 einstellbar machen.** `genP`/`genM` (Suche nach `const genP=`) erzeugen Aufgaben
-mit Zehnerübergang (47 + 25). Im Elternbereich einen Schalter „Rechnen: leicht / mittel / schwer“ ergänzen
-(Spielstand `S.rechnen`, Vorgabe „mittel“). leicht = nur Zehnerzahlen dazu/weg (`zeT`/`zeM`),
-mittel = ohne Übergang, schwer = wie jetzt. **Wichtig:** Die Rechengeschichten der Kapitel 5–7 holen
-ihre Zahlen über `geschichten()` (direkt über `async function rechnen`). Die Stufe muss dort mit
-ausgewertet werden, sonst wirkt der Schalter dort nicht. Das Rechen-Duell (`duelTask`) bleibt unverändert.
+~~**A2 Rechnen in Akt 2 einstellbar machen.**~~ **Erledigt 16.11.2026.** Elternbereich „Rechnen ab Kapitel 5“
+(`S.rechnen`, Vorgabe **leicht** = Klassenstand): leicht = nur Zehnerzahlen dazu/weg, mittel = zweistellig ohne
+Übergang, schwer = mit Übergang. Umgesetzt über `rGen()` direkt über `geschichten()`.
 
-~~**A3 Rechengeschichten in die Pakete verlagern.**~~ **Erledigt 15.11.2026.** Die Geschichten von
+**A3 Rechengeschichten in die Pakete verlagern.**~~ **Erledigt 15.11.2026.** Die Geschichten von
 `see_r`, `affen_r`, `riff_r` stehen als `rechnen5` bis `rechnen7` in `inhalte.js`. `nebel_r` ist ein
 reines Rechen-Duell ohne Geschichten, ein `rechnen8` gibt es deshalb nicht.
 
@@ -79,6 +76,15 @@ Blinzeln/Zwinkern/Wedeln (Klassen `aug`, `zwink`, `schmunzel`, `wedel`, `fluegel
 eine Klasse am `body` und CSS `animation:none`. Bleiben sollen: Reaktionen nach Eingaben (`reagiere`,
 Duell), Überraschungen (`UEB`), Belohnungsspiele.
 
+**A11 Nomen finden mit Fallen.** Wie das Klassenblatt „Finde die 6 Nomen“: Beim Nomen-Angeln (Werft) auch
+Wörter anbieten, die keine Nomen sind, aber so aussehen (Großbuchstaben-Schreibweise wie BREIT, ALT, BÖSE, BILLIG,
+ARTIG, BUNT, DRECKIG, DOOF, DROLLIG, EITEL, DICK, ECHT). Nur Inhalte: `keinNomen` in `inhalte.js` ergänzen.
+
+**A12 Sätze würfeln (Schulsätze).** Für Geister-Schrift und Zauberbuch Sätze aus dem Schulalltag ergänzen, alles klein
+geschrieben, Nomen und Satzanfang müssen groß (Beispiel aus der Klasse: „heute habe ich meinen ball mitgebracht.“,
+„darf ich mal deine schere ausleihen?“, „ich kann meinen anspitzer nicht finden.“). Nur Inhalte in `inhalte.js`
+(`zauber`, `geisterschrift`), danach Stimmen erzeugen.
+
 ## B – Mittlere Aufträge (einfaches Modell, danach Stichprobe)
 
 **B1 Uhr-Anstieg glätten.** Stufen jetzt: 1 volle Stunde lesen, 2 stellen, 3 gemischt, 4 halb,
@@ -100,6 +106,13 @@ nachziehen. Moki ist schon nach dem echten Stofftier gezeichnet.
 ~~**B5 Fire-Tablet-Prüfliste.**~~ **Erledigt 15.11.2026:** `PRUEFLISTE.md`. Ergebnisse von Stephan
 abwarten; daraus ergeben sich ggf. A10 und ein Auftrag „Offline-Betrieb“ (Service Worker fehlt bisher).
 
+**B6 Zucker-Check bei Olga.** Passend zum Sachunterricht („Gesunde Ernährung – Der Zucker-Check“): Moritz schätzt,
+wie viele Zuckerwürfel in Limo, Apfel, Keks, Saft, Joghurt stecken (drei Antworten), Olga zeigt die Würfel. Werte
+nachschlagen und in `inhalte.js` ablegen, keine erfundenen Zahlen.
+
+**B7 Gefühle.** Passend zum Gefühlelied im Morgenkreis: „Wie fühlt sich Schlotter jetzt?“ – vier Gesichter (fröhlich,
+traurig, ängstlich, wütend) zum Antippen, kurze Situation dazu. Neue Gesichter als SVG, Situationen in `inhalte.js`.
+
 ## C – Für Fable (Neues, Dramaturgie)
 
 **C1 Akt 3: Kapitel 9 bis 11.** Je sechs Plätze, eigene Szenenbilder, neue Belohnungsspiele.
@@ -113,6 +126,27 @@ Sanduhr-Option über `SAND()`, Reaktionen nach den Regeln oben.
 
 **C3 Zweite Reise mit eigener Geschichte.** Bei „Reise 2“ nicht nur neue Aufgaben, sondern ein neuer
 Anlass (z. B. die Möwe hat die Karte geklaut) und zwei neue Filme.
+
+**C4 Kiosk mit echtem Geld (Piratenfest, Kapitel 11).** Wie der „Kinokiosk“ der Klasse: Kekse und Limo verkaufen,
+mit Euro-Münzen und -Scheinen passend bezahlen und Wechselgeld geben. Erst Beträge bis 10 €, dann bis 20 €.
+Geld kommt im Spiel bisher gar nicht vor – größte inhaltliche Lücke.
+
+**C5 Bausteine für Kapitel 9 und 10 (in C1 einplanen).**
+- Kapitel 9 Schildkröten-Strand: **Verdopplungs-Käfer/-Eier** – Dinge liegen immer im Doppelpack („4 und noch mal 4“),
+  wie das Klassenblatt „Mathemonsterchens Verdopplungsaufgaben“ (Zahlenraum bis 20).
+- Kapitel 10 Dschungel-Tempel: **Zehnerzahlen-Schloss** an der Geheimtür (30 + 44, 70 − 20, wie die Klassenblätter
+  „Zehnerzahlen plus und minus gemischt“) und eine **Quatschsatz-Tür**: nur der richtige Satz öffnet sie.
+
+**C2 ergänzt:** Rechen-Fechten als „Flink wie die Mäuse“ – Kopfrechnen bis 20 mit und ohne Zehnerübergang, die Klasse
+übt das ebenfalls mit Zeitvorgabe; Stufe wählbar, Sanduhr über `SAND()`.
+
+## Stand der Klasse (Lernlandkarte, abgerufen 16.11.2026; Link bei Stephan, nicht ins Repo)
+
+- Deutsch: Lernwörter 1–3 (im Spiel vollständig), Nomen und Satzanfänge groß, Nomen finden, Quatschsätze.
+- Mathe: Zahlenraum bis 100 nur mit Zehnerzahlen (ZE ± Z, Z ± Z); Kopfrechnen bis 20 mit und ohne Übergang;
+  Verdoppeln bis 20; „Flink wie die Mäuse“ mit Zeitvorgabe; Kinokiosk (Geld). Zweistellig mit Übergang noch nicht.
+- Sachunterricht: Gesunde Ernährung (Zucker-Check), „Das kleine WIR“, Gefühle (Morgenkreis).
+- Moki ist das Klassen-Kuscheltier.
 
 ## Bekannte Lücken
 
