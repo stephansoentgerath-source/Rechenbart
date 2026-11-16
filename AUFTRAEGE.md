@@ -24,6 +24,17 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 - Zeitdruck ist gewollt und wird trainiert, aber nur über die Sanduhr (`SAND()`, Stufen im
   Elternbereich). Ablaufen ohne Tadel: Krümel sagt „Macht nichts!“.
 
+## Lernprinzip Lernwörter (Vorgabe der Schule, Stand 11/2026)
+
+- Lernwörter sollen **nachhaltig** sitzen und **flexibel abrufbar** sein, nicht nur für einen Test.
+- Einmal Buchstabe für Buchstabe abschreiben reicht nicht: **mehrmals lesen, merken, mehrmals auswendig schreiben,
+  kontrollieren.**
+- Abfragen werden später auch **unangekündigt** geschrieben; geübt wird alles aus Klasse 2, nicht nur das neueste Blatt.
+- Umsetzung im Spiel: Lese-Diktat (lesen), Lernwörter üben (merken, abdecken, schreiben), Test-Diktat (auswendig
+  schreiben + selbst kontrollieren), **Wörter-Kartei** (`kartei()`, `heuteDran()`: 5 Fächer, Wiederholung nach
+  1/3/7/14 Tagen, max. 10 Wörter am Tag, Fehler zurück in Fach 1) und **Überraschungs-Wort** (`ueberraschungsWort()`
+  nach jeder 3. Abenteuer-Aufgabe). Neue Lern-Übungen sollen `kartei()` mit dem Ergebnis aufrufen.
+
 ## Aufbau in Kürze
 
 - `index.html`: Spiel. `SC` = Szenenbilder (SVG), `ACT` = Aktionen der Plätze, `OFFEN` = Freischaltung,

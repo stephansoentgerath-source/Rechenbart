@@ -393,6 +393,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Das Wort kommt bald wieder. Dann klappt es!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Das erste Kartenstück! Bring jetzt schnell das Essen zum Kapitän."
 },
 {
@@ -537,6 +541,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Richtig! Eine Dublone für dich."
+},
+{
+"who": "kruemel",
 "text": "Kräh! Schau auf den kleinen roten Zeiger. Auf welche Zahl zeigt er?"
 },
 {
@@ -578,6 +586,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Zähle die Schritte nochmal. Norden ist oben."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Überraschungs-Wort! Frau Pranger hat ein Wort für dich. Hol schnell Papier und Stift!"
 },
 {
 "who": "kruemel",
@@ -874,6 +886,10 @@
 {
 "who": "lehrerin",
 "text": "Gut gemacht! Ein paar Wörter üben wir jetzt nochmal."
+},
+{
+"who": "lehrerin",
+"text": "Heute ist kein Wort dran. Super! Du kannst trotzdem alle Lernwörter üben."
 },
 {
 "who": "lehrerin",
