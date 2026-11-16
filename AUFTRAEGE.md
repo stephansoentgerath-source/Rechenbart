@@ -160,7 +160,8 @@ Geld kommt im Spiel bisher gar nicht vor – größte inhaltliche Lücke.
 Wird **jeden Sonntag um 6:47 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich
 prüfen“, Umgebung „rechenbart“), damit neue Lernwörter **bis 9:30 Uhr im Spiel** sind – sonntagvormittags wird geübt.
 Neue Lernwörter kommen als **neues Blatt** in die bestehende Liste (erscheinen so sofort in Test-Diktat und Training),
-mit Lückenfüllern, Geschichte und Stimmen, und gehen nach automatischem Test direkt nach `main`. Bei Unsicherheit
+mit Lückenfüllern, Geschichte und Stimmen; fehlende Mama-Merk-Tipps für neue Lücken-Arten werden in `MAMA_TIPPS`
+(index.html) ergänzt. Danach automatischer Test und direkt nach `main`. Bei Unsicherheit
 (PDF unlesbar, Artikel unklar, Test rot) nur auf den Branch `lernwoerter-neu` – Stephan bekommt eine Push-Nachricht.
 Erinnerung zum Verlängern des OpenAI-Schlüssels: 8.12.2026 (geplante Aufgabe).
 
