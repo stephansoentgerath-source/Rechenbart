@@ -937,6 +937,8 @@ async function kessel(){await brief('Mixa braucht bunte Zaubertränke. Lies das 
 
 /* ---------- Lese-Diktat (Testvorbereitung) ---------- */
 
+/* Diktat: Nomen mit Begleiter vorsprechen (der Keks) – klingt sauberer und hilft beim Großschreiben */
+const mitArtikel=w=>{const W=WORDS.find(x=>x.w===w);return W&&W.a?W.a+' '+w:w};
 function sayWord(t){const o=S.speak;S.speak=true;speak(t,'lehrerin');S.speak=o}
 async function diktat(){busy=true;$('#hudnav').style.display='none';
  const k=await new Promise(r=>{panel(`<div class="ptitle">Lese-Diktat</div><div class="log" style="height:440px"><div class="ltext">Welche Geschichte willst du lesen?</div>
@@ -956,8 +958,8 @@ async function diktatRun(k){{const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(
   for(let i=0;i<ws.length;i++)await new Promise(r=>{
    panel(`<div class="ptitle">Diktat ${dots(i,ws.length)}</div><div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
    <div class="lrow"><button class="btn sec" id="dk-n">Nochmal hören</button><button class="btn" id="dk-f">Geschrieben!</button></div></div>`);
-   note('lehrerin',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);setTimeout(()=>sayWord(ws[i]),S.speak?2300:300);
-   $('#dk-n').onclick=()=>sayWord(ws[i]);$('#dk-f').onclick=()=>{hush();r()}});
+   note('lehrerin',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);setTimeout(()=>sayWord(mitArtikel(ws[i])),S.speak?2300:300);
+   $('#dk-n').onclick=()=>sayWord(mitArtikel(ws[i]));$('#dk-f').onclick=()=>{hush();r()}});
   const ok=await new Promise(r=>{panel(`<div class="ptitle">Diktat: Vergleiche!</div><div class="center ltext">Tippe alle Wörter an, die du richtig geschrieben hast.</div>
    <div class="dgrid">${ws.map((w,i)=>`<button class="dw" data-i="${i}">${i+1}. ${w}</button>`).join('')}</div><div class="center"><button class="btn" id="dk-e">Fertig verglichen</button></div>`);
    note('lehrerin','Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün.');
@@ -1076,9 +1078,9 @@ const mamaTipp=w=>{const W=WORDS.find(x=>x.w===w);return MAMA_TIPPS[W&&W.g?W.g[1
 async function diktatWort(w,kopf){const neu=!(S.kartei||{})[w];
  await new Promise(r=>{panel(`${kopf}<div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
   <div class="lrow"><button class="btn sec" id="td-n">Nochmal hören</button><button class="btn" id="td-f">Geschrieben!</button></div></div>`);
-  if(neu){note('mama',mamaTipp(w));setTimeout(()=>{if($('#td-f')){barHtml('lehrerin','Hör gut zu!',[]);sayWord(w)}},5200)}
-  else{barHtml('lehrerin','Hör gut zu!',[]);setTimeout(()=>sayWord(w),500)}
-  $('#td-n').onclick=()=>sayWord(w);$('#td-f').onclick=()=>{hush();r()}});
+  if(neu){note('mama',mamaTipp(w));setTimeout(()=>{if($('#td-f')){barHtml('lehrerin','Hör gut zu!',[]);sayWord(mitArtikel(w))}},5200)}
+  else{barHtml('lehrerin','Hör gut zu!',[]);setTimeout(()=>sayWord(mitArtikel(w)),500)}
+  $('#td-n').onclick=()=>sayWord(mitArtikel(w));$('#td-f').onclick=()=>{hush();r()}});
  return new Promise(r=>{panel(`${kopf}<div class="log"><div class="ltext">So schreibt man das Wort:</div><div class="lword">${w}</div>
   <div class="lrow"><button class="btn" id="td-r">Richtig geschrieben</button><button class="btn sec" id="td-w">Da war ein Fehler</button></div></div>${MINI()}`);
   note('lehrerin','Vergleiche Buchstabe für Buchstabe. Hast du es richtig geschrieben?');

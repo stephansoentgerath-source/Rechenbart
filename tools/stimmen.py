@@ -170,9 +170,16 @@ def sammeln():
     print(len(offen), 'Aufrufe ohne festen Text (z. B. mit Zahlen) – die spricht die Gerätestimme')
 
 # ---------------- Erzeugen ----------------
+# Aussprache-Hilfen: nur für die Stimme, der angezeigte Text (und der Schlüssel) bleibt unverändert.
+# Keks hat ein langes e – die KI sagt sonst „Kecks“.
+AUSSPRACHE = [(r'\bKeks', 'Kehks')]
+def sprechtext(text):
+    for a, b in AUSSPRACHE: text = re.sub(a, b, text)
+    return text
+
 def tts(who, text):
     stimme, regie = FIG[who]
-    body = {'model': 'gpt-4o-mini-tts', 'voice': stimme, 'input': text, 'response_format': 'mp3',
+    body = {'model': 'gpt-4o-mini-tts', 'voice': stimme, 'input': sprechtext(text), 'response_format': 'mp3',
             'instructions': regie + ' ' + KIND}
     req = urllib.request.Request('https://api.openai.com/v1/audio/speech', data=json.dumps(body).encode(),
                                  headers={'Content-Type': 'application/json', 'Authorization': 'Bearer proxy-injected'})
@@ -183,11 +190,32 @@ def tts(who, text):
             fehler = e
     raise fehler
 
+# Einzelwörter, die allein schlecht klingen (englisch, kurzer Vokal): mit Artikel sprechen lassen, Artikel abschneiden.
+MIT_ARTIKEL_SCHNEIDEN = {'Keks': 'der', 'Rüssel': 'der'}
+
+def artikel_ab(roh):
+    """Schneidet den Artikel ab: Schnitt am Ende der längsten Pause innerhalb der Aufnahme (zwischen Artikel und Wort)."""
+    r = subprocess.run(['ffmpeg', '-nostdin', '-hide_banner', '-i', str(roh), '-af', 'silencedetect=noise=-30dB:d=0.05', '-f', 'null', '-'],
+                       capture_output=True, text=True).stderr
+    st = [float(x) for x in re.findall(r'silence_start: ([0-9.]+)', r)]
+    en = [float(x) for x in re.findall(r'silence_end: ([0-9.]+)', r)]
+    dauer = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(roh)],
+                                 capture_output=True, text=True).stdout or 0)
+    pausen = [(s, e) for s, e in zip(st, en) if s > 0.1 and e < dauer - 0.25]   # ohne Anfangs- und Endstille
+    if not pausen: return
+    s, e = max(pausen, key=lambda p: p[1] - p[0])
+    schnitt = roh.with_suffix('.cut.mp3')
+    subprocess.run(['ffmpeg', '-nostdin', '-hide_banner', '-loglevel', 'error', '-y', '-ss', f'{max(0, e - 0.06):.3f}', '-i', str(roh), str(schnitt)], check=True)
+    schnitt.replace(roh)
+
 def eins(e):
     k = key(e['who'], e['text']); ziel = OUT / (k + '.mp3')
     if ziel.exists(): return k, 'da'
     ziel.parent.mkdir(parents=True, exist_ok=True)
-    roh = ziel.with_suffix('.roh.mp3'); roh.write_bytes(tts(e['who'], e['text']))
+    roh = ziel.with_suffix('.roh.mp3')
+    art = MIT_ARTIKEL_SCHNEIDEN.get(e['text']) if e['who'] == 'lehrerin' else None
+    roh.write_bytes(tts(e["who"], f"{art} … {e['text']}." if art else e["text"]))
+    if art: artikel_ab(roh)
     tempo = ',atempo=0.95' if e['who'] == 'lehrerin' and len(e['text']) > 60 else ''
     subprocess.run(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', str(roh), '-ac', '1', '-ar', '24000',
                     '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11' + tempo, '-b:a', '48k', str(ziel)], check=True)
