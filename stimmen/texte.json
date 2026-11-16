@@ -489,6 +489,22 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Heute hat Johanna Geburtstag! Alles Gute, Johanna! Zur Feier gibt es 10 Dublonen."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Heute hat Mama Geburtstag! Alles Gute, Mama! Zur Feier gibt es 10 Dublonen."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Heute hat Moritz Geburtstag! Alles Gute, Moritz! Hier sind 10 Dublonen für dich."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Heute hat Papa Geburtstag! Alles Gute, Papa! Zur Feier gibt es 10 Dublonen."
+},
+{
+"who": "kruemel",
 "text": "Kräh! Hier liegt eine Anleitung: Gespenster vertreiben. Lies sie genau!"
 },
 {
@@ -1278,6 +1294,10 @@
 {
 "who": "moritz",
 "text": "Mixa hat verloren. Vor Schreck fällt ihr Zauberstab in den Kessel."
+},
+{
+"who": "moritz",
+"text": "Moritz"
 },
 {
 "who": "moritz",

@@ -952,6 +952,25 @@ async function diktatRun(k){{const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(
    Moritz sitzt rechts, Papa links. Heft = Test-Diktat, Laptop = Lernwörter üben, Bücherregal = Lese-Diktat.
    Die Wanduhr zeigt die echte Uhrzeit. Nach einer Übung geht es zurück an den Tisch. */
 let HEIM=false,heimUhr=null;
+/* Geburtstage: werden im Elternbereich eingetragen (TT.MM, ohne Jahr) und NUR auf dem Gerät gespeichert (S.geb).
+   Am Geburtstag: Krone für das Geburtstagskind am Tisch, Wimpelkette, Krümel gratuliert, 10 Dublonen (einmal pro Jahr). */
+const FAMILIE=[['moritz','Moritz'],['johanna','Johanna'],['mama','Mama'],['papa','Papa']];
+const GEB_GRUSS={moritz:'Kräh! Heute hat Moritz Geburtstag! Alles Gute, Moritz! Hier sind 10 Dublonen für dich.',
+ johanna:'Kräh! Heute hat Johanna Geburtstag! Alles Gute, Johanna! Zur Feier gibt es 10 Dublonen.',
+ mama:'Kräh! Heute hat Mama Geburtstag! Alles Gute, Mama! Zur Feier gibt es 10 Dublonen.',
+ papa:'Kräh! Heute hat Papa Geburtstag! Alles Gute, Papa! Zur Feier gibt es 10 Dublonen.'};
+function gebHeute(){const g=S.geb||{},d=new Date(),h=d.getDate()+'.'+(d.getMonth()+1);
+ return FAMILIE.map(f=>f[0]).filter(k=>{const m=String(g[k]||'').match(/^(\d{1,2})\.(\d{1,2})/);return m&&(+m[1])+'.'+(+m[2])===h})}
+function krone(x,y,sc){return `<g transform="translate(${x},${y}) scale(${sc})"><path d="M-28 0L-32 -28L-15 -13L0 -34L15 -13L32 -28L28 0Z" fill="#f6c84a" stroke="#c98f1f" stroke-width="2.5"/>
+ <rect x="-28" y="-6" width="56" height="8" fill="#e0ae1f"/><circle cx="0" cy="-34" r="4.5" fill="#e0607a"/><circle cx="-32" cy="-28" r="3.5" fill="#4f9a4a"/><circle cx="32" cy="-28" r="3.5" fill="#3b78c4"/></g>`}
+function feier(wer){if(!wer.length)return'';const C=['#e0607a','#f6c84a','#4f9a4a','#3b78c4','#c99ad6'];
+ const pos={papa:[600,262,1],moritz:[775,300,.85],johanna:[462,308,.8],mama:[900,252,1]};
+ return `<path d="M330 44Q660 120 990 44" stroke="#8a6a44" stroke-width="2" fill="none"/>
+ ${[...Array(15)].map((_,i)=>{const t=(i+.5)/15,x=330+660*t,y=44+152*t*(1-t);return `<path d="M${x-12} ${y}L${x+12} ${y}L${x} ${y+26}Z" fill="${C[i%5]}"/>`}).join('')}
+ ${[...Array(40)].map((_,i)=>`<rect x="${(i*137)%1240+20}" y="${(i*71)%330+40}" width="7" height="11" fill="${C[i%5]}" transform="rotate(${i*37%90} ${(i*137)%1240+23} ${(i*71)%330+45})" opacity=".85"/>`).join('')}
+ <g transform="translate(620,116)"><rect x="-190" y="-26" width="380" height="48" rx="12" fill="#fff8e6" stroke="#e0607a" stroke-width="4"/>
+ <text y="9" text-anchor="middle" font-size="27" font-weight="700" fill="#8e3b3b">Alles Gute, ${wer.map(k=>FAMILIE.find(f=>f[0]===k)[1]).join(' und ')}!</text></g>
+ ${wer.map(k=>krone(...pos[k])).join('')}`}
 function regal(x,y,w,seed){const C=['#2f4f86','#3d3d46','#c9c2b6','#8e3b3b','#5d7a99','#e4dccd','#1f2a3a','#b7a07a'];let o='',i=x,k=seed;
  while(i<x+w-8){k=(k*37+11)%97;const b=8+k%7,h=34+k%22;o+=`<rect x="${i}" y="${y-h}" width="${b}" height="${h}" fill="${C[k%C.length]}"/>`;i+=b+1}
  return o+`<rect x="${x-4}" y="${y}" width="${w+8}" height="7" fill="#fbfaf7"/>`}
@@ -987,11 +1006,14 @@ ${schale(600,440,1.05)}${schale(775,442,1)}<g transform="translate(462,430)"><re
  <g stroke="#9cb4d8" stroke-width="1.5"><path d="M722 405H768M720 412H768M780 405H828M780 412H832"/></g><path d="M800 425L846 410" stroke="#e2a33b" stroke-width="5" stroke-linecap="round"/><rect x="700" y="388" width="150" height="45" fill="transparent"/></g>
 <g><rect x="858" y="340" width="18" height="56" rx="6" fill="#e3f0f6" stroke="#9db6c2" stroke-width="2"/><rect x="861" y="332" width="12" height="10" rx="2" fill="#4a7fb0"/></g>
 <g transform="translate(372,424) scale(.42)"><g class="wippe">${moki()}</g></g><g><path d="M430 400H500L506 418H424Z" fill="#fdfdfb" stroke="#c9c4b8" stroke-width="2"/><path d="M440 410q10 -8 18 0t18 0" stroke="#e0607a" stroke-width="3" fill="none"/><circle cx="488" cy="408" r="5" fill="#f6c84a"/><path d="M508 414l20 -6" stroke="#4f9a4a" stroke-width="4" stroke-linecap="round"/><path d="M510 420l20 -3" stroke="#3b78c4" stroke-width="4" stroke-linecap="round"/></g>
-${knopf2('lw',575,478,'Lernwörter üben',210)}${knopf2('test',815,478,'Test-Diktat',170)}${knopf2('lese',890,70,'Lese-Diktat',170)}
+${feier(gebHeute())}${knopf2('lw',575,478,'Lernwörter üben',210)}${knopf2('test',815,478,'Test-Diktat',170)}${knopf2('lese',890,70,'Lese-Diktat',170)}
 </svg>`}
 function zuhause(){HEIM=true;busy=true;$('#hudnav').style.display='none';
  panel(`<div class="heim">${heimSvg()}</div><button class="btn small" id="h-x" style="position:absolute;left:20px;top:14px;z-index:2">Zurück</button>`);
- note('kruemel','Kräh! Hausaufgaben-Zeit! Was übst du heute mit Papa?');
+ const geb=gebHeute();
+ if(geb.length){const jahr=new Date().getFullYear();S.gebG=S.gebG||{};const neu=geb.filter(k=>S.gebG[k]!==jahr);
+  neu.forEach(k=>{S.gebG[k]=jahr;S.coins+=10});save();sfx('fanfare');note('kruemel',GEB_GRUSS[geb[0]])}
+ else note('kruemel','Kräh! Hausaufgaben-Zeit! Was übst du heute mit Papa?');
  const weg=()=>{clearInterval(heimUhr);hush();closePanel()};
  $$('#panel [data-h]').forEach(g=>g.onclick=()=>{const f={test:testDiktat,lw:training,lese:diktat}[g.dataset.h];weg();f()});
  $('#h-x').onclick=()=>{weg();HEIM=false;busy=false;idle();showTitle()};
@@ -1541,6 +1563,7 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  <div><b>Spiel</b><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik</label>
  <label>Sanduhr (letztes Rechen-Duell, Lesen und Handeln): ${sel('e-ti',[[0,'aus'],[60,'gemütlich (60 s)'],[45,'normal (45 s)'],[30,'sportlich (30 s)']],SAND())}</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
  <label>Belohnungsspiele: ${sel('e-sw',[[0,'leicht'],[1,'mittel'],[2,'schwer']],SW())}</label>
+ <div style="margin-top:6px">Geburtstage (TT.MM, nur auf diesem Gerät):<br>${FAMILIE.map(([k,n])=>`<label style="display:inline-block;margin-right:10px">${n} <input id="e-g-${k}" value="${(S.geb||{})[k]||''}" placeholder="TT.MM" maxlength="6" style="width:84px;font:inherit;font-size:20px"></label>`).join('')}</div>
  <label>Rechnen: ${sel('e-re',[['leicht','leicht: Zehnerzahlen (46 + 30)'],['mittel','mittel: ohne Übergang (42 + 25)'],['schwer','schwer: mit Übergang (47 + 25)']],RSTUFE())}</label>
  <div style="margin-top:6px">${!hasTTS?'Stimme: <b>keine Sprachausgabe</b>':!deVoices().length?'Stimme: <b>keine deutsche Stimme gefunden</b>'
  :`<label>Stimme: ${sel('e-st',deVoices().map(v=>[v.name,v.name.replace(/^(Microsoft|Google|Amazon)\s*/,'').slice(0,34)]),voice?voice.name:'')}</label> <button class="btn small" id="e-sh">Probehören</button>`}</div>
@@ -1555,7 +1578,9 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  $('#e-fl').onclick=()=>{let L=[];try{L=JSON.parse(localStorage.getItem(FKEY)||'[]')}catch(e){}const w=window.open('','_blank');
   if(w){w.document.title='Fehlende Aufnahmen';w.document.body.innerHTML='<p>Diese Liste an Claude schicken (alles markieren, kopieren):</p><textarea style="width:100%;height:80vh">'+L.join('\n').replace(/</g,'&lt;')+'</textarea>'}};if($('#e-st')){$('#e-st').onchange=x=>{S.stimme=x.target.value;loadVoice();save();speak('Ahoi, Moritz! So klinge ich.','kruemel')};
   $('#e-sh').onclick=()=>{const old=S.speak;S.speak=true;speak('Ahoi, Moritz! Ich bin Kapitän Rechenbart. Har har!','kapitaen');S.speak=old}}$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=+x.target.value;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
- $('#e-sw').onchange=x=>{S.schwer=+x.target.value;save()};$('#e-re').onchange=x=>{S.rechnen=x.target.value;save()};$('#e-pk').onchange=x=>{S.paket=x.target.value;ladeInhalt();save()};
+ $('#e-sw').onchange=x=>{S.schwer=+x.target.value;save()};$('#e-re').onchange=x=>{S.rechnen=x.target.value;save()};
+ FAMILIE.forEach(([k])=>{const f=$('#e-g-'+k);if(f)f.onchange=()=>{const v=f.value.trim();S.geb=S.geb||{};
+  if(!v)delete S.geb[k];else if(/^\d{1,2}\.\d{1,2}\.?$/.test(v))S.geb[k]=v.replace(/\.$/,'');else{f.value=S.geb[k]||'';return}save()}});$('#e-pk').onchange=x=>{S.paket=x.target.value;ladeInhalt();save()};
  $('#e-lw').onchange=x=>{S.lw=x.target.value;S.lists=null;ladeInhalt();save();eltern()};
  $$('.e-l').forEach(c=>c.onchange=()=>{const v=$$('.e-l').filter(x=>x.checked).map(x=>+x.value);if(!v.length){c.checked=true;return}S.lists=v;save()});
  let neu=false;$('#e-n').onclick=x=>{if(!neu){neu=true;x.target.textContent='Alle Kapitel neu? Nochmal tippen';return}

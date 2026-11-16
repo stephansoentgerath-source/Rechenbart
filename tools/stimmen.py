@@ -142,6 +142,8 @@ def sammeln():
         if m: [add('kruemel', t) for t in literals(m.group(1))]
     for t in re.findall(r"film\('((?:[^'\\]|\\.)*)'", src): add('moritz', t)
     for t in re.findall(r"\n \w+:\['((?:[^'\\]|\\.)*)',[\d.]+,", src): add('kruemel', t)  # Überraschungen (UEB)
+    m = re.search(r'const GEB_GRUSS=\{(.*?)\};', src, re.S)  # Geburtstagsgrüße
+    if m: [add('kruemel', x) for x in re.findall(r":'((?:[^'\\]|\\.)*)'", m.group(1))]
     # Inhalte: Lernwörter und Geschichten (Lehrerin)
     for L in inh['L']:
         for w in L['woerter']:
