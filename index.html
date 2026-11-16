@@ -479,9 +479,9 @@ const schlotter=()=>`<g transform="translate(0,-74) scale(1.7)">${GEIST}</g><pat
 const DELFIN='<path d="M-90 -20q60 -60 150 -20q30 12 50 -10q0 40 -40 40q-80 30 -160 -10z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><path d="M-10 -52l20 -34l14 38z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><circle cx="-62" cy="-22" r="5" fill="#2b2a33"/><path d="M-84 -10q12 8 26 2" stroke="#2b2a33" stroke-width="3" fill="none"/>';
 const FEIND='<path d="M-70 0h140l-20 40h-100z" fill="#4a4a55" stroke="#2b2a33" stroke-width="4"/><rect x="-4" y="-92" width="8" height="92" fill="#2b2a33"/><path d="M4 -88q62 32 0 72z" fill="#8a5bb5" stroke="#2b2a33" stroke-width="3"/><circle cx="-32" cy="-14" r="13" fill="#e9b990" stroke="#2b2a33" stroke-width="3"/><path d="M-48 -22h32l-16 -18z" fill="#2b2a33"/><path d="M-38 -10q6 6 12 0" stroke="#2b2a33" stroke-width="2.5" fill="none"/>';
 const PORT={koko:`<svg viewBox="-55 -132 110 110">${koko()}</svg>`,schildi:`<svg viewBox="30 -94 100 100">${schildi()}</svg>`,schlotter:`<svg viewBox="-90 -222 180 180"><rect x="-90" y="-222" width="180" height="180" fill="#5a6478"/>${schlotter()}</svg>`,moki:`<svg viewBox="-56 -122 112 112">${moki()}</svg>`,hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
- kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,lehrerin:`<svg viewBox="-62 -268 124 124">${pranger()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
-const NAME={lehrerin:'Frau Pranger',moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
-const PITCH={lehrerin:1.1,kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
+ kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,lehrerin:`<svg viewBox="-62 -268 124 124">${pranger()}</svg>`,mama:`<svg viewBox="-64 -276 128 128">${mama()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
+const NAME={mama:'Mama',lehrerin:'Frau Pranger',moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
+const PITCH={mama:1.05,lehrerin:1.1,kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
 
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
@@ -856,7 +856,7 @@ async function training(){busy=true;$('#hudnav').style.display='none';
    S.mw[w.w]=(g&&ok)?(S.mw[w.w]||0)+1:Math.min(S.mw[w.w]||0,1);save();
    if(S.mw[w.w]===2&&g&&ok)await talk('kruemel',`Kräh! „${w.w}“ sitzt jetzt! Ab in die Schatzkiste!`);
    else if(!ok)await talk('lehrerin','Macht nichts! Das Wort kommt bald nochmal dran.')}
-  S.coins+=5;save();await talk('lehrerin','Super geübt! Du bekommst 5 Dublonen.')}
+  S.coins+=5;save();await talk('lehrerin','Super geübt! Du bekommst 5 Dublonen.');await talk('mama','Toll geübt, Moritz! Wollen wir nachher noch eine Runde machen?',['Ja!','Später'])}
  nachLernen()}
 
 /* ---------- Kapitel 2: Hexenhütte ---------- */
@@ -1014,7 +1014,8 @@ function zuhause(){HEIM=true;busy=true;$('#hudnav').style.display='none';
  const geb=gebHeute();
  if(geb.length){const jahr=new Date().getFullYear();S.gebG=S.gebG||{};const neu=geb.filter(k=>S.gebG[k]!==jahr);
   neu.forEach(k=>{S.gebG[k]=jahr;S.coins+=10});save();sfx('fanfare');note('kruemel',GEB_GRUSS[geb[0]])}
- else note('kruemel','Kräh! Hausaufgaben-Zeit! Was übst du heute mit Papa?');
+ else if(rand(0,1))note('kruemel','Kräh! Hausaufgaben-Zeit! Was übst du heute mit Mama und Papa?');
+ else note('mama',pick(['Na, Moritz? Wollen wir zusammen üben?','Hallo, mein Schatz! Was üben wir heute?','Komm, wir üben ein bisschen. Danach gibt es Kakao!']));
  const weg=()=>{clearInterval(heimUhr);hush();closePanel()};
  $$('#panel [data-h]').forEach(g=>g.onclick=()=>{const f={test:testDiktat,lw:training,lese:diktat}[g.dataset.h];weg();f()});
  $('#h-x').onclick=()=>{weg();HEIM=false;busy=false;idle();showTitle()};
@@ -1042,13 +1043,14 @@ async function testDiktat(){busy=true;$('#hudnav').style.display='none';
      <div class="lrow"><button class="btn" id="td-r">Richtig geschrieben</button><button class="btn sec" id="td-w">Da war ein Fehler</button></div></div>${MINI()}`);
      note('lehrerin','Vergleiche Buchstabe für Buchstabe. Hast du es richtig geschrieben?');
      $('#td-r').onclick=()=>{reagiere('jubel','hops');sfx('ok');note('lehrerin',pick(['Super!','Prima, das sitzt!','Richtig. Weiter so!']));setTimeout(()=>r(true),1300)};
-     $('#td-w').onclick=()=>{reagiere('oh','seufz');note('lehrerin','Kein Problem. Das Wort üben wir gleich nochmal.');setTimeout(()=>r(false),2200)}});
+     $('#td-w').onclick=()=>{reagiere('oh','seufz');note('mama',pick(['Mama-Tipp: Sprich das Wort langsam und schwing die Silben mit.','Mama-Tipp: Verlängere das Wort. Hund, Hunde. Dann hörst du das d.','Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal.','Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen.'].concat((WORDS.find(x=>x.w===w)||{}).a?['Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß.','Mama-Tipp: Denk an den Begleiter. Der, die oder das? Dann schreibst du groß.']:[])));setTimeout(()=>r(false),4500)}});
     const st=S.log[w]||(S.log[w]=[0,0]);st[ok?0:1]++;save();if(!ok)falsch.push(w)}
    closePanel();
    if(falsch.length){await talk('lehrerin',runde===1?'Gut gemacht! Ein paar Wörter üben wir jetzt nochmal.':'Fast geschafft! Diese Wörter kommen noch einmal.',['Los!']);ws=shuffle(falsch);runde++}
    else ws=[]}
   S.coins+=5;save();sfx('fanfare');
-  await talk('lehrerin',runde===1?'Alle Wörter richtig! Du bist bereit für den Test. Ich bin stolz auf dich! 5 Dublonen für dich.':'Geschafft! Jetzt sitzen alle Wörter. 5 Dublonen für dich.',['Juhu!'])}
+  await talk('lehrerin',runde===1?'Alle Wörter richtig! Du bist bereit für den Test. Ich bin stolz auf dich! 5 Dublonen für dich.':'Geschafft! Jetzt sitzen alle Wörter. 5 Dublonen für dich.',['Juhu!']);
+  await talk('mama','Das hast du super gemacht, Moritz! Ich bin stolz auf dich.',['Danke, Mama!'])}
  nachLernen()}
 
 /* ---------- Bausteine für Aufgaben ---------- */
@@ -1414,7 +1416,7 @@ async function finale(){musicOn();sfx('fanfare');cineOpen('<div style="position:
  await film('Die Truhe geht auf. Sie ist voller Gold und Kekse!',6000);await film('Krümel sitzt mittendrin. Der Kapitän tanzt vor Freude. Har har!',6500);
  await film('Moritz hat alle fünf Kartenstücke gefunden. Er ist jetzt ein echter Pirat und Rechen-Meister!',7500);
  if(!skip){$('#ccap').textContent='';$('#cine').insertAdjacentHTML('beforeend',`<div id="credits"><div class="roll"><h2>Die Insel von<br>Kapitän Rechenbart</h2>
- <p><small>Held und Schiffsjunge</small>Moritz</p><p><small>Idee, Aufgaben und Kapitän an Land</small>Papa</p><p><small>Daumen drücken und Kakao</small>Mama</p><p><small>Malerin am Hausaufgaben-Tisch</small>Johanna</p><p><small>Gezeichnet, gebaut und komponiert von</small>Claude</p><p><small>Titelbild und Schatzbild</small>gemalt von einer Bild-KI</p>
+ <p><small>Held und Schiffsjunge</small>Moritz</p><p><small>Idee, Aufgaben und Kapitän an Land</small>Papa</p><p><small>Übungs-Coach und Daumen drücken</small>Mama</p><p><small>Malerin am Hausaufgaben-Tisch</small>Johanna</p><p><small>Gezeichnet, gebaut und komponiert von</small>Claude</p><p><small>Titelbild und Schatzbild</small>gemalt von einer Bild-KI</p>
  <p><small>Lernwörter und Diktat</small>Frau Pranger</p><p><small>Klassentier und blinder Passagier</small>Moki</p><p><small>Kekse</small>Krümel (alle aufgefressen)</p><p><small>Keks-Diebin (erfolglos)</small>die Möwe</p><p><small>Zaubertränke</small>Hexe Mixa</p><p><small>Suppe</small>Wirtin Olga</p><p><small>Planken</small>Meister Hobel</p><p><small>Licht</small>Wärter Strahlemann</p><h2>Ende</h2><p>Har har!</p></div></div>`);$('#cine').appendChild($('#cskip'))}
  await cw(31000);hush();cineClose();musicOff();
  await talk('lehrerin','Moritz, ich habe von deinem Abenteuer gehört. Ich bin sehr stolz auf dich!',['Danke!'])}

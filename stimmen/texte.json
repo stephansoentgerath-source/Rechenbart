@@ -485,7 +485,7 @@
 },
 {
 "who": "kruemel",
-"text": "Kräh! Hausaufgaben-Zeit! Was übst du heute mit Papa?"
+"text": "Kräh! Hausaufgaben-Zeit! Was übst du heute mit Mama und Papa?"
 },
 {
 "who": "kruemel",
@@ -901,10 +901,6 @@
 },
 {
 "who": "lehrerin",
-"text": "Kein Problem. Das Wort üben wir gleich nochmal."
-},
-{
-"who": "lehrerin",
 "text": "Keks"
 },
 {
@@ -1158,6 +1154,54 @@
 {
 "who": "lehrerin",
 "text": "weiß"
+},
+{
+"who": "mama",
+"text": "Das hast du super gemacht, Moritz! Ich bin stolz auf dich."
+},
+{
+"who": "mama",
+"text": "Hallo, mein Schatz! Was üben wir heute?"
+},
+{
+"who": "mama",
+"text": "Komm, wir üben ein bisschen. Danach gibt es Kakao!"
+},
+{
+"who": "mama",
+"text": "Mama"
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Denk an den Begleiter. Der, die oder das? Dann schreibst du groß."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Sprich das Wort langsam und schwing die Silben mit."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Verlängere das Wort. Hund, Hunde. Dann hörst du das d."
+},
+{
+"who": "mama",
+"text": "Na, Moritz? Wollen wir zusammen üben?"
+},
+{
+"who": "mama",
+"text": "Toll geübt, Moritz! Wollen wir nachher noch eine Runde machen?"
 },
 {
 "who": "mixa",

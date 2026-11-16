@@ -29,6 +29,7 @@ FIG = {
  'schildi': ('sage', 'Sehr alte, weise und liebe Schildkröten-Oma. Langsam, gemütlich, sagt gern „Blubb“.'),
  'moki': ('verse', 'Kleiner, frecher Stoffaffe. Quirlig, lustig, sagt gern „Uh uh ah ah!“.'),
  'moritz': ('fable', 'Warmer, spannender Erzähler eines Kinder-Abenteuerfilms. Lebendig, nicht zu schnell.'),
+ 'mama': ('alloy', 'Warmherzige, geduldige Mama, die mit ihrem Sohn Hausaufgaben übt. Ruhig, ermutigend, lächelnd, nie streng.'),
  'lehrerin': ('nova', 'Frau Pranger, freundliche Grundschullehrerin von Moritz. Sehr klare, saubere Aussprache, ruhig und langsam. Einzelne Wörter deutlich mit kurzer Pause.'),
 }
 
