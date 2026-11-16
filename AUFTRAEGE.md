@@ -43,9 +43,11 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 `PAKETE` anhängen (`id` = Jahr-Monat, `name` = Monat und Themen). Nur die Schlüssel eintragen, die sich
 ändern. Lernwörter nur anfassen, wenn Stephan es ausdrücklich sagt (dann neue Liste in `LERNWOERTER`).
 
-~~**A2 Rechnen in Akt 2 einstellbar machen.**~~ **Erledigt 16.11.2026.** Elternbereich „Rechnen ab Kapitel 5“
-(`S.rechnen`, Vorgabe **leicht** = Klassenstand): leicht = nur Zehnerzahlen dazu/weg, mittel = zweistellig ohne
-Übergang, schwer = mit Übergang. Umgesetzt über `rGen()` direkt über `geschichten()`.
+~~**A2 Rechnen einstellbar machen.**~~ **Erledigt 16.11.2026.** Elternbereich „Rechnen“ (`S.rechnen`) gilt im
+ganzen Spiel: leicht = Zehnerzahlen dazu/weg (46 + 30), **mittel = zweistellig ohne Übergang (Vorgabe)**, schwer =
+mit Übergang. Alle Rechenaufgaben holen ihre Zahlen über `rGen(op, leichter)` (`leichter` = eine Stufe darunter, für
+Abwechslung); Duelle über `duelTask` (1 = Zehnerzahlen, 2 = Stufe darunter, 3 = Stufe). Neue Rechenaufgaben bitte
+immer über `rGen()` bauen, keine festen Zahlenbereiche.
 
 **A3 Rechengeschichten in die Pakete verlagern.**~~ **Erledigt 15.11.2026.** Die Geschichten von
 `see_r`, `affen_r`, `riff_r` stehen als `rechnen5` bis `rechnen7` in `inhalte.js`. `nebel_r` ist ein
@@ -142,9 +144,14 @@ Geld kommt im Spiel bisher gar nicht vor – größte inhaltliche Lücke.
 
 ## Stand der Klasse (Lernlandkarte, abgerufen 16.11.2026; Link bei Stephan, nicht ins Repo)
 
+Wird **jeden Sonntag 10:17 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich
+prüfen“, Umgebung „rechenbart“). Neue Lernwörter bereitet sie auf dem Branch `lernwoerter-neu` vor – erst nach
+Stephans OK nach `main` übernehmen.
+
 - Deutsch: Lernwörter 1–3 (im Spiel vollständig), Nomen und Satzanfänge groß, Nomen finden, Quatschsätze.
-- Mathe: Zahlenraum bis 100 nur mit Zehnerzahlen (ZE ± Z, Z ± Z); Kopfrechnen bis 20 mit und ohne Übergang;
-  Verdoppeln bis 20; „Flink wie die Mäuse“ mit Zeitvorgabe; Kinokiosk (Geld). Zweistellig mit Übergang noch nicht.
+- Mathe: Zahlenraum bis 100 mit Zehnerzahlen (ZE ± Z, Z ± Z) – laut Stephan sitzt das sicher; Kopfrechnen bis 20 mit
+  und ohne Übergang; Verdoppeln bis 20; „Flink wie die Mäuse“ mit Zeitvorgabe; Kinokiosk (Geld). Spiel-Vorgabe daher
+  „mittel“ (zweistellig ohne Übergang). Zweistellig mit Übergang kommt im Unterricht noch.
 - Sachunterricht: Gesunde Ernährung (Zucker-Check), „Das kleine WIR“, Gefühle (Morgenkreis).
 - Moki ist das Klassen-Kuscheltier.
 

@@ -806,11 +806,10 @@ async function training(){busy=true;$('#hudnav').style.display='none';
 
 /* ---------- Kapitel 2: Hexenhütte ---------- */
 const z=(a,b)=>rand(a,b)*10;
-function duelTask(n){let a,b,op='+';
- if(n===1){a=z(1,8);b=z(1,10-a/10)}
- else if(n===2){a=z(2,10);b=z(1,a/10-1);op='-'}
- else if(rand(0,1)){a=rand(11,79);if(a%10===0)a++;b=z(1,Math.floor((99-a)/10));if(rand(0,1))[a,b]=[b,a]}
- else{a=rand(31,99);if(a%10===0)a++;b=z(1,Math.floor(a/10)-1);op='-'}
+/* Duell-Aufgaben: 1 = Zehnerzahlen dazu/weg, 2 = eine Stufe unter der Rechen-Stufe, 3 = Rechen-Stufe (siehe rGen) */
+function duelTask(n){const op=rand(0,1)?'+':'-';let a,b;
+ if(n===1){[a,b]=(op==='+'?zeT:zeM)();if(op==='+'&&rand(0,1))[a,b]=[b,a]}
+ else[a,b]=rGen(op,n===2)();
  return{a,b,op,ans:op==='+'?a+b:a-b}}
 function duel(n,wer){wer=wer||'mixa';const gn=NAME[wer].split(' ').pop(),rt={};
  const fig=m=>wer==='schlotter'?`<g transform="scale(1.4)">${schlotter()}</g>`:mixa(m);
@@ -931,12 +930,13 @@ function choice(title,q,opts,hint){return new Promise(res=>{const col=opts.some(
   else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel','Kräh! Das ist Quatsch. Lies nochmal genau.')}})})}
 const zeT=()=>{let a=rand(11,79);if(a%10===0)a++;return[a,z(1,Math.floor((99-a)/10))]},zeM=()=>{let a=rand(31,99);if(a%10===0)a++;return[a,z(1,Math.floor(a/10)-1)]};
 /* Rechengeschichten aus inhalte.js: [Rechenart, Text mit {a} und {b}]. stufen je Aufgabe: 'ze' = nur Zehnerzahlen, sonst mit Übergang */
-/* Rechen-Stufe (Elternbereich, S.rechnen): leicht = nur Zehnerzahlen dazu/weg (Klassenstand), mittel = zweistellig ohne
-   Übergang, schwer = mit Übergang. Aufgaben, die in index.html mit 'ze' markiert sind, bleiben immer Zehnerzahlen. */
-const RSTUFE=()=>S.rechnen||'leicht';
+/* Rechen-Stufe für das ganze Spiel (Elternbereich, S.rechnen): leicht = Zehnerzahlen dazu/weg (46 + 30),
+   mittel = zweistellig ohne Übergang (42 + 25, Vorgabe), schwer = mit Übergang (47 + 25).
+   rGen(op, leichter): leichter = eine Stufe unter der eingestellten (für Abwechslung, z. B. mit 'ze' markierte Aufgaben). */
+const STUFEN=['leicht','mittel','schwer'],RSTUFE=()=>STUFEN.includes(S.rechnen)?S.rechnen:'mittel';
 const ohneP=()=>{let a,b;do{a=rand(21,68);b=rand(11,29)}while(a%10===0||b%10===0||a%10+b%10>9||a+b>99);return[a,b]},
  ohneM=()=>{let a,b;do{a=rand(35,98);b=rand(11,29)}while(a%10===0||b%10===0||a%10<b%10);return[a,b]};
-const rGen=(op,ze)=>{const st=RSTUFE();if(ze||st==='leicht')return op==='+'?zeT:zeM;if(st==='mittel')return op==='+'?ohneP:ohneM;return op==='+'?genP:genM};
+const rGen=(op,leichter)=>{const st=STUFEN[Math.max(0,STUFEN.indexOf(RSTUFE())-(leichter?1:0))];if(st==='leicht')return op==='+'?zeT:zeM;if(st==='mittel')return op==='+'?ohneP:ohneM;return op==='+'?genP:genM};
 const geschichten=(k,stufen)=>RG[k].map(([op,t],i)=>[op,(a,b)=>t.replace(/\{a\}/g,a).replace(/\{b\}/g,b),rGen(op,stufen[i]==='ze')]);
 async function rechnen(titel,aufg){for(let i=0;i<aufg.length;i++){const[op,f,g]=aufg[i],[a,b]=g();await askNumber(titel+' '+dots(i,aufg.length),f(a,b),a,op,b)}closePanel()}
 
@@ -1242,8 +1242,8 @@ async function orden(sc,noch,geben,name,danach){const c=SC[sc],d=S.done;if(!c.ta
 
 
 async function planken(){await brief('Meister Hobel braucht Material. Rechne aus, wie viel er braucht. Tippe die Zahl ein und drücke OK.');
- await rechnen('Planken flicken',[['+',(a,b)=>`Für das Schiff liegen ${a} Planken bereit. Meister Hobel bringt noch ${b} dazu. Wie viele Planken sind es jetzt?`,zeT],
-  ['-',(a,b)=>`Im Schiff sind ${a} Löcher. ${b} Löcher hast du schon geflickt. Wie viele Löcher sind noch offen?`,zeM],['-',(a,b)=>`In der Kiste sind ${a} Nägel. Du brauchst ${b} Nägel. Wie viele Nägel bleiben übrig?`,zeM]])}
+ await rechnen('Planken flicken',[['+',(a,b)=>`Für das Schiff liegen ${a} Planken bereit. Meister Hobel bringt noch ${b} dazu. Wie viele Planken sind es jetzt?`,rGen('+')],
+  ['-',(a,b)=>`Im Schiff sind ${a} Löcher. ${b} Löcher hast du schon geflickt. Wie viele Löcher sind noch offen?`,rGen('-',true)],['-',(a,b)=>`In der Kiste sind ${a} Nägel. Du brauchst ${b} Nägel. Wie viele Nägel bleiben übrig?`,rGen('-')]])}
 async function verben(){await brief('Krümel redet Quatsch! In jedem Satz fehlt ein Wort. Lies den Satz und tippe auf das Wort, das passt.');
  const v=shuffle(VERBEN).slice(0,5);for(let i=0;i<v.length;i++)await choice('Papageien-Quatsch '+dots(i,v.length),v[i][0],[v[i][1],v[i][2]],'Welches Wort passt in die Lücke?');closePanel()}
 async function nomen(){await brief('Wir angeln Namenwörter! Namenwörter sind Dinge, Tiere und Menschen. Davor passt der, die oder das. Tippe alle Namenwörter an.');
@@ -1259,13 +1259,13 @@ async function nomen(){await brief('Wir angeln Namenwörter! Namenwörter sind D
 async function flaschenpost(){await talk('kruemel','Kräh! Eine Flaschenpost! Die ist von Frau Pranger!');await talk('lehrerin','Ahoi, Moritz! Hier ist eine Geschichte mit deinen Lernwörtern. Lies sie laut vor. Dann diktiere ich dir ein paar Wörter.');await diktatRun(rand(0,2));closePanel()}
 async function quatsch(){await brief('Die Möwe erzählt Quatsch. Nur ein Satz stimmt. Lies alle Sätze und tippe auf den richtigen.');
  const q=shuffle(QUATSCH).slice(0,4);for(let i=0;i<q.length;i++)await choice('Alles Quatsch? '+dots(i,q.length),'Welcher Satz stimmt?',q[i],'Lies alle Sätze genau.');closePanel()}
-async function stufen(){await brief('Der Leuchtturm hat 100 Stufen. Rechne aus, auf welcher Stufe du stehst.');const t=()=>{const a=z(1,8);return[a,z(1,10-a/10)]},m=()=>{const a=z(3,10);return[a,z(1,a/10-1)]};
+async function stufen(){await brief('Der Leuchtturm hat 100 Stufen. Rechne aus, auf welcher Stufe du stehst.');const t=rGen('+',true),m=rGen('-',true);
  await rechnen('Treppe im Leuchtturm',[['+',(a,b)=>`Du stehst auf Stufe ${a}. Du steigst ${b} Stufen höher. Auf welcher Stufe bist du jetzt?`,t],
-  ['-',(a,b)=>`Du stehst auf Stufe ${a}. Du gehst ${b} Stufen nach unten. Auf welcher Stufe bist du jetzt?`,m],['+',(a,b)=>`Du bist auf Stufe ${a}. Bis zur Lampe sind es noch ${b} Stufen. Auf welcher Stufe ist die Lampe?`,zeT]]);await lampe()}
+  ['-',(a,b)=>`Du stehst auf Stufe ${a}. Du gehst ${b} Stufen nach unten. Auf welcher Stufe bist du jetzt?`,m],['+',(a,b)=>`Du bist auf Stufe ${a}. Bis zur Lampe sind es noch ${b} Stufen. Auf welcher Stufe ist die Lampe?`,rGen('+')]]);await lampe()}
 
 /* ---------- Kapitel 5: Schatzhöhle ---------- */
 async function schloss(){await brief('Das Zahlenschloss hat drei Zahlen. Rechne jede Aufgabe aus. Dann geht das Gitter auf.');
- const p=()=>{let a,b;do{a=rand(13,69);b=rand(6,29)}while(a+b>100||a%10+b%10<10);return[a,b]},m=()=>{let a,b;do{a=rand(31,95);b=rand(6,28)}while(a%10>=b%10);return[a,b]};
+ const p=rGen('+'),m=rGen('-');
  await rechnen('Zahlenschloss',[['+',(a,b)=>`Erste Zahl: Wie viel ist ${a} plus ${b}?`,p],['-',(a,b)=>`Zweite Zahl: Wie viel ist ${a} minus ${b}?`,m],['+',(a,b)=>`Dritte Zahl: Wie viel ist ${a} plus ${b}?`,p]])}
 const RI={N:['Norden',0,-1],O:['Osten',1,0],S:['Süden',0,1],W:['Westen',-1,0]};
 async function schatzkarte(){await brief('Jetzt ist die Karte ganz. Lies die Schritte selbst. Norden ist oben. Tippe dann auf das Feld, wo der Schatz liegt.');
@@ -1434,7 +1434,7 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  <div><b>Spiel</b><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik</label>
  <label>Sanduhr (letztes Rechen-Duell, Lesen und Handeln): ${sel('e-ti',[[0,'aus'],[60,'gemütlich (60 s)'],[45,'normal (45 s)'],[30,'sportlich (30 s)']],SAND())}</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
  <label>Belohnungsspiele: ${sel('e-sw',[[0,'leicht'],[1,'mittel'],[2,'schwer']],SW())}</label>
- <label>Rechnen ab Kapitel 5: ${sel('e-re',[['leicht','leicht (46 + 30)'],['mittel','mittel (42 + 25)'],['schwer','schwer (47 + 25)']],RSTUFE())}</label>
+ <label>Rechnen: ${sel('e-re',[['leicht','leicht: Zehnerzahlen (46 + 30)'],['mittel','mittel: ohne Übergang (42 + 25)'],['schwer','schwer: mit Übergang (47 + 25)']],RSTUFE())}</label>
  <div style="margin-top:6px">${!hasTTS?'Stimme: <b>keine Sprachausgabe</b>':!deVoices().length?'Stimme: <b>keine deutsche Stimme gefunden</b>'
  :`<label>Stimme: ${sel('e-st',deVoices().map(v=>[v.name,v.name.replace(/^(Microsoft|Google|Amazon)\s*/,'').slice(0,34)]),voice?voice.name:'')}</label> <button class="btn small" id="e-sh">Probehören</button>`}</div>
  <label><input type="checkbox" id="e-au"${S.aufnahmen!==false?' checked':''}>Aufgenommene Stimmen (${HAT_STIMME.size} Sätze)</label>
