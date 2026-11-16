@@ -240,7 +240,7 @@ body.aufgabe #scene,body.aufgabe #scene *{animation-play-state:paused!important}
 #title h1{position:absolute;left:0;right:0;top:22px;margin:0;text-align:center;font-size:64px;line-height:1.08;color:#8e3b3b;text-shadow:0 0 14px #fff,0 0 14px #fff,0 3px 0 #fff}
 #title h1 small{display:block;font-size:30px;color:#2b2a33;font-weight:700;margin-top:6px}
 #title svg{position:absolute;left:0;top:0;width:1280px;height:800px}
-.tbtns{position:absolute;left:0;right:0;bottom:0;padding:50px 0 22px;display:flex;justify-content:center;align-items:center;gap:30px;background:linear-gradient(transparent,#2b2118cc 55%)}
+.tbtns{position:absolute;left:0;right:0;bottom:0;padding:50px 0 22px;display:flex;justify-content:center;align-items:center;gap:20px;background:linear-gradient(transparent,#2b2118cc 55%)}
 .tbtns .btn.big{font-size:44px;padding:14px 50px}
 #pbtn{position:absolute;right:20px;bottom:18px;font-size:18px;padding:6px 12px}
 #eltern{height:800px;z-index:9;background:#22313aee;display:none;align-items:center;justify-content:center}
@@ -895,6 +895,33 @@ async function diktatRun(k){{const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(
   ws.forEach((w,i)=>{const st=S.log[w]||(S.log[w]=[0,0]);st[ok[i]?0:1]++});const n=ok.filter(x=>x).length;S.coins+=5;save();sfx(n===ws.length?'fanfare':'coin');
   await talk('lehrerin',n===ws.length?'Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!':`Du hast ${n} von ${ws.length} Wörtern richtig. Gut gemacht! Die anderen üben wir nochmal. 5 Dublonen für dich!`)}}
 
+/* ---------- Test-Diktat (Startbildschirm): Frau Pranger diktiert, das Wort erscheint erst zur Kontrolle ----------
+   Falsch geschriebene Wörter kommen in einer neuen Runde wieder, bis alle sitzen. Ergebnisse gehen in S.log (Wackelwörter). */
+async function testDiktat(){busy=true;$('#hudnav').style.display='none';
+ const k=await new Promise(r=>{panel(`<div class="ptitle">Test-Diktat</div><div class="log" style="height:440px"><div class="ltext">Welche Wörter sollen drankommen?</div>
+  <button class="btn" data-k="0" style="min-width:640px">Alle Lernwörter (${WORDS.length})</button>${BLATTK.map(b=>`<button class="btn sec" data-k="${b}" style="min-width:640px">${BLATT[b]}</button>`).join('')}<button class="btn small" id="td-x">Zurück</button></div>`);
+  note('lehrerin','Das ist wie im Test. Ich sage ein Wort, du schreibst es auf dein Papier. Danach zeige ich dir das Wort. Hol dir Papier und einen Stift!');
+  $$('[data-k]').forEach(b=>b.onclick=()=>r(+b.dataset.k));$('#td-x').onclick=()=>r(-1)});
+ if(k>=0){let ws=shuffle(WORDS.filter(w=>!k||w.l===k).map(w=>w.w)),runde=1;const gesamt=ws.length;
+  while(ws.length){const falsch=[];
+   for(let i=0;i<ws.length;i++){const w=ws[i],kopf=`<div class="ptitle">Test-Diktat${runde>1?' – nochmal':''} <span style="font-size:22px;color:#3a2c20">Wort ${i+1} von ${ws.length}</span></div>`;
+    await new Promise(r=>{panel(`${kopf}<div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
+     <div class="lrow"><button class="btn sec" id="td-n">Nochmal hören</button><button class="btn" id="td-f">Geschrieben!</button></div></div>`);
+     barHtml('lehrerin','Hör gut zu!',[]);setTimeout(()=>sayWord(w),500);
+     $('#td-n').onclick=()=>sayWord(w);$('#td-f').onclick=()=>{hush();r()}});
+    const ok=await new Promise(r=>{panel(`${kopf}<div class="log"><div class="ltext">So schreibt man das Wort:</div><div class="lword">${w}</div>
+     <div class="lrow"><button class="btn" id="td-r">Richtig geschrieben</button><button class="btn sec" id="td-w">Da war ein Fehler</button></div></div>${MINI()}`);
+     note('lehrerin','Vergleiche Buchstabe für Buchstabe. Hast du es richtig geschrieben?');
+     $('#td-r').onclick=()=>{reagiere('jubel','hops');sfx('ok');note('lehrerin',pick(['Super!','Prima, das sitzt!','Richtig. Weiter so!']));setTimeout(()=>r(true),1300)};
+     $('#td-w').onclick=()=>{reagiere('oh','seufz');note('lehrerin','Kein Problem. Das Wort üben wir gleich nochmal.');setTimeout(()=>r(false),2200)}});
+    const st=S.log[w]||(S.log[w]=[0,0]);st[ok?0:1]++;save();if(!ok)falsch.push(w)}
+   closePanel();
+   if(falsch.length){await talk('lehrerin',runde===1?'Gut gemacht! Ein paar Wörter üben wir jetzt nochmal.':'Fast geschafft! Diese Wörter kommen noch einmal.',['Los!']);ws=shuffle(falsch);runde++}
+   else ws=[]}
+  S.coins+=5;save();sfx('fanfare');
+  await talk('lehrerin',runde===1?'Alle Wörter richtig! Du bist bereit für den Test. Ich bin stolz auf dich! 5 Dublonen für dich.':'Geschafft! Jetzt sitzen alle Wörter. 5 Dublonen für dich.',['Juhu!'])}
+ closePanel();busy=false;idle();showTitle()}
+
 /* ---------- Bausteine für Aufgaben ---------- */
 function choice(title,q,opts,hint){return new Promise(res=>{const col=opts.some(o=>o.length>14);let lock=false;
  panel(`<div class="ptitle">${title}</div><div class="frage">${q}</div><div class="copts${col?' col':''}">${shuffle(opts.map((o,i)=>[o,i])).map(x=>`<button class="btn sec copt" data-r="${x[1]?0:1}">${x[0]}</button>`).join('')}</div><div class="center"><button class="btn small" id="ch-h">Krümel hilft lesen</button></div>`);
@@ -1389,10 +1416,10 @@ function goFull(){try{const d=document.documentElement,f=d.requestFullscreen||d.
  if(f&&!(document.fullscreenElement||document.webkitFullscreenElement)){const r=f.call(d,{navigationUI:'hide'});if(r&&r.catch)r.catch(()=>{})}}catch(e){}}
 function showTitle(){const t=$('#title');t.style.display='';
  t.innerHTML=`<h1>Die Insel von<br>Kapitän Rechenbart<small>${KAP[S.scene]||KAP.harbor}${S.reisen?' · Reise '+(S.reisen+1):''}</small></h1>
- <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Lernwörter üben</button><button class="btn sec" id="t-dik">Lese-Diktat</button></div>
+ <div class="tbtns"><button class="btn big" id="t-go">${S.done.intro?'Weiter spielen':'Spielen'}</button><button class="btn sec" id="t-log">Lernwörter üben</button><button class="btn sec" id="t-dik">Lese-Diktat</button><button class="btn sec" id="t-test">Test-Diktat</button></div>
  <button class="btn small" id="pbtn">Eltern</button>`;
  $('#t-go').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');idle();if(!S.done.intro)introFilm().then(intro)};
- $('#t-dik').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');diktat()};$('#t-log').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');training()};
+ $('#t-dik').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');diktat()};$('#t-test').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');testDiktat()};$('#t-log').onclick=()=>{goFull();t.style.display='none';speak(' ','moritz');training()};
  $('#pbtn').onclick=eltern}
 function eltern(){const e=$('#eltern');e.style.display='flex';
  const wack=Object.keys(S.log).filter(w=>S.log[w][1]>0).sort((a,b)=>S.log[b][1]-S.log[a][1]).map(w=>`${w} (${S.log[w][1]}×)`).join(', ')||'noch keine';

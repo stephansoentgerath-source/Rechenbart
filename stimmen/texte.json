@@ -717,6 +717,10 @@
 },
 {
 "who": "lehrerin",
+"text": "Alle Wörter richtig! Du bist bereit für den Test. Ich bin stolz auf dich! 5 Dublonen für dich."
+},
+{
+"who": "lehrerin",
 "text": "Alles klar, Moritz?"
 },
 {
@@ -738,6 +742,10 @@
 {
 "who": "lehrerin",
 "text": "Dachs"
+},
+{
+"who": "lehrerin",
+"text": "Das ist wie im Test. Ich sage ein Wort, du schreibst es auf dein Papier. Danach zeige ich dir das Wort. Hol dir Papier und einen Stift!"
 },
 {
 "who": "lehrerin",
@@ -821,6 +829,10 @@
 },
 {
 "who": "lehrerin",
+"text": "Fast geschafft! Diese Wörter kommen noch einmal."
+},
+{
+"who": "lehrerin",
 "text": "Fuchs"
 },
 {
@@ -833,7 +845,15 @@
 },
 {
 "who": "lehrerin",
+"text": "Geschafft! Jetzt sitzen alle Wörter. 5 Dublonen für dich."
+},
+{
+"who": "lehrerin",
 "text": "Gespenster mögen keine sauberen Schiffe. Feg das Deck mit dem Besen."
+},
+{
+"who": "lehrerin",
+"text": "Gut gemacht! Ein paar Wörter üben wir jetzt nochmal."
 },
 {
 "who": "lehrerin",
@@ -858,6 +878,10 @@
 {
 "who": "lehrerin",
 "text": "Jetzt läute die Schiffsglocke. Zieh dazu am roten Hebel."
+},
+{
+"who": "lehrerin",
+"text": "Kein Problem. Das Wort üben wir gleich nochmal."
 },
 {
 "who": "lehrerin",
@@ -894,6 +918,14 @@
 {
 "who": "lehrerin",
 "text": "Ohr"
+},
+{
+"who": "lehrerin",
+"text": "Prima, das sitzt!"
+},
+{
+"who": "lehrerin",
+"text": "Richtig. Weiter so!"
 },
 {
 "who": "lehrerin",
@@ -953,11 +985,19 @@
 },
 {
 "who": "lehrerin",
+"text": "Super!"
+},
+{
+"who": "lehrerin",
 "text": "Text"
 },
 {
 "who": "lehrerin",
 "text": "Unter Wasser ist es dunkel. Nimm die gelbe Lampe mit."
+},
+{
+"who": "lehrerin",
+"text": "Vergleiche Buchstabe für Buchstabe. Hast du es richtig geschrieben?"
 },
 {
 "who": "lehrerin",
