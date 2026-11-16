@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+stimmen/**/*.roh.mp3
+stimmen/**/*.v[0-9].mp3
+stimmen/**/*.r[0-9].mp3
