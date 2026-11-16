@@ -159,6 +159,7 @@ def sammeln():
             for b in liste: add('lehrerin', b[0])
         for k in (P.get('knopf') or []): add('lehrerin', k[0])
         for t in (P.get('witze') or []): add('kruemel', t)
+        for f, a in (P.get('kapitaenWitze') or []): add('kapitaen', f); add('kapitaen', a)
         for t in (P.get('moki') or []): add('moki', t)
     texte = sorted({'who': w, 'text': t} for w, t in S) if False else [{'who': w, 'text': t} for w, t in sorted(S)]
     (OUT).mkdir(exist_ok=True)

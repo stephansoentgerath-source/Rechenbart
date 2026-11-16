@@ -271,6 +271,19 @@ const PAKETE=[
    ["-","Am Riff schwimmen {a} Fische. {b} Fische schwimmen weg. Wie viele Fische sind noch da?"],
    ["+","Ein Seestern zählt {a} Muscheln und dann noch {b} Muscheln. Wie viele sind es zusammen?"]
   ],
+  /* Witze des Kapitäns: [Frage, Pointe]. Kurz, kindgerecht, frech, aber nie gemein. */
+  kapitaenWitze:[
+   ["Wie nennt man einen Piraten ohne Augenklappe?", "Einen Piraten mit zwei Augen! Har har!"],
+   ["Warum ist das Meer so nass?", "Weil die Fische sich nie abtrocknen! Har har!"],
+   ["Was sagt der große Stift zum kleinen Stift?", "Wachs mal, Stift! Har har!"],
+   ["Wo wohnen Katzen?", "Im Miezhaus! Har har!"],
+   ["Was ist grün und hüpft durch den Wald?", "Ein Rudel Gurken! Har har!"],
+   ["Was liegt am Strand und spricht ganz undeutlich?", "Eine Nuschel! Har har!"],
+   ["Welches Tier kann am besten rechnen?", "Der Tintenfisch. Der hat acht Arme zum Zählen! Har har!"],
+   ["Was sitzt auf dem Baum und ruft: Aha?", "Ein Uhu mit Schnupfen! Har har!"],
+   ["Wie heißt ein Pirat, der immer zu spät kommt?", "Kapitän Gleich-da! Har har!"],
+   ["Warum nehmen Piraten nie Kekse mit an Deck?", "Weil Krümel sonst alles wegfuttert! Har har!"]
+  ],
   witze:[
    "Was ist grün und klopft an die Tür? Ein Klopfsalat!",
    "Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!",

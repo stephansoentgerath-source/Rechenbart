@@ -29,7 +29,7 @@
 },
 {
 "who": "kapitaen",
-"text": "Ahoi Moritz! Wollen wir nochmal ins Logbuch schreiben?"
+"text": "Ahoi Moritz! Wollen wir ins Logbuch schreiben? Oder soll ich dir einen Witz erzählen?"
 },
 {
 "who": "kapitaen",
@@ -38,6 +38,10 @@
 {
 "who": "kapitaen",
 "text": "Ahoi, Moritz! Ich bin Kapitän Rechenbart. Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Ahoi, Seebär! Soll ich dir einen Witz erzählen?"
 },
 {
 "who": "kapitaen",
@@ -53,6 +57,10 @@
 },
 {
 "who": "kapitaen",
+"text": "Der Tintenfisch. Der hat acht Arme zum Zählen! Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Die Karte ist noch nicht ganz. Knacke erst das Zahlenschloss!"
 },
 {
@@ -65,11 +73,27 @@
 },
 {
 "who": "kapitaen",
+"text": "Ein Rudel Gurken! Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Ein Sturm zieht auf! Ich rufe dir Befehle zu. Lies sie genau und mach schnell!"
 },
 {
 "who": "kapitaen",
 "text": "Ein Stück hat Wirtin Olga in der Kneipe. Aber ohne Dublonen gibt sie nichts her."
+},
+{
+"who": "kapitaen",
+"text": "Ein Uhu mit Schnupfen! Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Eine Nuschel! Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Einen Piraten mit zwei Augen! Har har!"
 },
 {
 "who": "kapitaen",
@@ -89,7 +113,15 @@
 },
 {
 "who": "kapitaen",
+"text": "Har har! Gewonnen! Schau mal, wie viele Dublonen du gesammelt hast!"
+},
+{
+"who": "kapitaen",
 "text": "Har har! Gut gezielt und gut gerechnet. 5 Dublonen!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Lust auf ein Wettrennen? Mixa fliegt auf ihrem Besen gegen uns!"
 },
 {
 "who": "kapitaen",
@@ -105,7 +137,15 @@
 },
 {
 "who": "kapitaen",
+"text": "Im Miezhaus! Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Jetzt lies die Schatzkarte auf dem Stein!"
+},
+{
+"who": "kapitaen",
+"text": "Kapitän Gleich-da! Har har!"
 },
 {
 "who": "kapitaen",
@@ -141,6 +181,10 @@
 },
 {
 "who": "kapitaen",
+"text": "Wachs mal, Stift! Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Wann gibt es Essen? Schau auf die Uhr!"
 },
 {
@@ -153,11 +197,59 @@
 },
 {
 "who": "kapitaen",
+"text": "Warum ist das Meer so nass?"
+},
+{
+"who": "kapitaen",
+"text": "Warum nehmen Piraten nie Kekse mit an Deck?"
+},
+{
+"who": "kapitaen",
+"text": "Was ist grün und hüpft durch den Wald?"
+},
+{
+"who": "kapitaen",
+"text": "Was liegt am Strand und spricht ganz undeutlich?"
+},
+{
+"who": "kapitaen",
+"text": "Was sagt der große Stift zum kleinen Stift?"
+},
+{
+"who": "kapitaen",
+"text": "Was sitzt auf dem Baum und ruft: Aha?"
+},
+{
+"who": "kapitaen",
+"text": "Weil Krümel sonst alles wegfuttert! Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Weil die Fische sich nie abtrocknen! Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Welches Fass ist das richtige?"
 },
 {
 "who": "kapitaen",
+"text": "Welches Tier kann am besten rechnen?"
+},
+{
+"who": "kapitaen",
+"text": "Wie heißt ein Pirat, der immer zu spät kommt?"
+},
+{
+"who": "kapitaen",
+"text": "Wie nennt man einen Piraten ohne Augenklappe?"
+},
+{
+"who": "kapitaen",
 "text": "Willst du das Ende noch einmal sehen?"
+},
+{
+"who": "kapitaen",
+"text": "Wo wohnen Katzen?"
 },
 {
 "who": "koko",
@@ -214,6 +306,10 @@
 {
 "who": "kruemel",
 "text": "Blubb! Ein gelbes U-Boot. Wer sitzt da wohl drin?"
+},
+{
+"who": "kruemel",
+"text": "Das Schiff fährt von allein. Tippe dorthin, wo es fahren soll: oben, in die Mitte oder unten. Sammle Dublonen und weiche den Felsen aus! Alles klar, Käpt’n?"
 },
 {
 "who": "kruemel",
@@ -417,6 +513,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Den kannte ich schon. Aber egal, haha!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Der Nebel ist weg. Und da vorne liegt die Schatzinsel! Tippe oben auf Insel."
 },
 {
@@ -426,6 +526,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Der kleine Zeiger ist schon auf dem Weg zur nächsten Zahl."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Der war gut!"
 },
 {
 "who": "kruemel",
@@ -477,6 +581,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Erst die Aufgaben im Hafen, dann das Schiffsrennen!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Es gibt noch eine kleinere Zahl."
 },
 {
@@ -517,6 +625,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Ich lach mich schlapp!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Knapp daneben. Versuch es nochmal!"
 },
 {
@@ -534,6 +646,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Nicht ganz. Probier eine andere Tonne."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Noch einen, Käpt’n!"
 },
 {
 "who": "kruemel",
