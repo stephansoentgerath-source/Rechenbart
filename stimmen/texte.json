@@ -293,10 +293,6 @@
 },
 {
 "who": "kruemel",
-"text": "Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!"
-},
-{
-"who": "kruemel",
 "text": "Fast! Probier es noch einmal."
 },
 {
@@ -322,10 +318,6 @@
 {
 "who": "kruemel",
 "text": "Hast du es genauso geschrieben?"
-},
-{
-"who": "kruemel",
-"text": "Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift! Alles klar, Käpt’n?"
 },
 {
 "who": "kruemel",
@@ -373,10 +365,6 @@
 },
 {
 "who": "kruemel",
-"text": "Jetzt kommt das Diktat. Ich sage ein Wort. Du schreibst es auf dein Papier. Das Wort siehst du erst ganz am Schluss. Alles klar, Käpt’n?"
-},
-{
-"who": "kruemel",
 "text": "Klack! Der Automat spuckt eine Banane aus."
 },
 {
@@ -386,10 +374,6 @@
 {
 "who": "kruemel",
 "text": "Kräh!"
-},
-{
-"who": "kruemel",
-"text": "Kräh! Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!"
 },
 {
 "who": "kruemel",
@@ -473,6 +457,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Eine Flaschenpost! Die ist von Frau Pranger!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Eine Maus! Und die Katze schläft einfach weiter."
 },
 {
@@ -502,10 +490,6 @@
 {
 "who": "kruemel",
 "text": "Kräh! Ich bin Krümel. Der Kapitän vergisst alles. Sogar die Kekse in seinem Bart!"
-},
-{
-"who": "kruemel",
-"text": "Kräh! In der Flasche steckt eine Geschichte. Die lesen wir jetzt!"
 },
 {
 "who": "kruemel",
@@ -597,14 +581,6 @@
 },
 {
 "who": "kruemel",
-"text": "Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!"
-},
-{
-"who": "kruemel",
-"text": "Macht nichts! Das Wort kommt bald nochmal dran."
-},
-{
-"who": "kruemel",
 "text": "Macht nichts! Das Wort üben wir gleich nochmal."
 },
 {
@@ -653,10 +629,6 @@
 },
 {
 "who": "kruemel",
-"text": "Super geübt! Du bekommst 5 Dublonen."
-},
-{
-"who": "kruemel",
 "text": "Super geübt, Käpt’n!"
 },
 {
@@ -690,10 +662,6 @@
 {
 "who": "kruemel",
 "text": "Verdiene dir Dublonen im Hafen! Tippe auf die Ausrufezeichen."
-},
-{
-"who": "kruemel",
-"text": "Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün."
 },
 {
 "who": "kruemel",
@@ -738,6 +706,18 @@
 {
 "who": "lehrerin",
 "text": ". Oder:"
+},
+{
+"who": "lehrerin",
+"text": "Ahoi, Moritz! Hier ist eine Geschichte mit deinen Lernwörtern. Lies sie laut vor. Dann diktiere ich dir ein paar Wörter."
+},
+{
+"who": "lehrerin",
+"text": "Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!"
+},
+{
+"who": "lehrerin",
+"text": "Alles klar, Moritz?"
 },
 {
 "who": "lehrerin",
@@ -829,6 +809,10 @@
 },
 {
 "who": "lehrerin",
+"text": "Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!"
+},
+{
+"who": "lehrerin",
 "text": "Es wird dunkel. Mach die Lampe an. Sie ist gelb."
 },
 {
@@ -857,11 +841,19 @@
 },
 {
 "who": "lehrerin",
+"text": "Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift! Alles klar, Moritz?"
+},
+{
+"who": "lehrerin",
 "text": "Im Schiff ist Wasser. Schöpfe es mit dem roten Eimer heraus."
 },
 {
 "who": "lehrerin",
 "text": "Im Wald wohnt eine Hexe. Sie hat sechs Tiere. Ein Fuchs, ein Dachs und ein Ochse sind auch dabei. Heute will die Hexe einen Keks backen. Sie holt den Mixer. Dann liest sie den Text im Backbuch."
+},
+{
+"who": "lehrerin",
+"text": "Jetzt kommt das Diktat. Ich sage ein Wort. Du schreibst es auf dein Papier. Das Wort siehst du erst ganz am Schluss. Alles klar, Moritz?"
 },
 {
 "who": "lehrerin",
@@ -877,11 +869,23 @@
 },
 {
 "who": "lehrerin",
+"text": "Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!"
+},
+{
+"who": "lehrerin",
+"text": "Macht nichts! Das Wort kommt bald nochmal dran."
+},
+{
+"who": "lehrerin",
 "text": "Mixer"
 },
 {
 "who": "lehrerin",
 "text": "Moritz findet am Strand einen alten Stiefel. Daneben ist eine Spur im Sand. Wer war das? Moritz folgt der Spur eine ganze Stunde lang. Hinter einem großen Stein steht ein Stier. Der Stier sitzt auf einem Stuhl!"
+},
+{
+"who": "lehrerin",
+"text": "Moritz, ich habe von deinem Abenteuer gehört. Ich bin sehr stolz auf dich!"
 },
 {
 "who": "lehrerin",
@@ -945,11 +949,19 @@
 },
 {
 "who": "lehrerin",
+"text": "Super geübt! Du bekommst 5 Dublonen."
+},
+{
+"who": "lehrerin",
 "text": "Text"
 },
 {
 "who": "lehrerin",
 "text": "Unter Wasser ist es dunkel. Nimm die gelbe Lampe mit."
+},
+{
+"who": "lehrerin",
+"text": "Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün."
 },
 {
 "who": "lehrerin",

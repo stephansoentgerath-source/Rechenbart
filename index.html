@@ -340,6 +340,23 @@ function kapitaen(){return `
 <circle class="aug" ${vers()} cx="-16" cy="-264" r="4.5" fill="#2b2a33"/><circle cx="17" cy="-264" r="10" fill="#2b2a33"/><path d="M-40 -276L40 -258" stroke="#2b2a33" stroke-width="3"/>
 <path d="M-68 -284Q0 -302 68 -284Q42 -342 0 -346Q-42 -342 -68 -284Z" fill="#2b2a33"/><ellipse cx="0" cy="-284" rx="72" ry="10" fill="#2b2a33"/>
 <text x="0" y="-302" text-anchor="middle" font-size="30" font-weight="700" fill="#f6c84a">+ −</text>`}
+/* Frau Pranger, Moritz' Lehrerin: blondes, schulterlanges Haar, heller Teint, rosé Strickjacke, Buch in der Hand */
+function pranger(){return `
+<ellipse cx="0" cy="2" rx="48" ry="8" fill="#0002"/>
+<rect x="-24" y="-82" width="20" height="78" rx="8" fill="#5b6b8a"/><rect x="4" y="-82" width="20" height="78" rx="8" fill="#5b6b8a"/>
+<ellipse cx="-15" cy="-6" rx="16" ry="8" fill="#8e5a3c"/><ellipse cx="15" cy="-6" rx="16" ry="8" fill="#8e5a3c"/>
+<path d="M-38 -206Q-46 -256 0 -262Q46 -256 38 -206L44 -164Q30 -154 22 -172L-22 -172Q-30 -154 -44 -164Z" fill="#e3bf62"/>
+<ellipse cx="-46" cy="-138" rx="11" ry="38" fill="#e9a6a0" transform="rotate(10 -46 -138)"/><ellipse cx="46" cy="-138" rx="11" ry="38" fill="#e9a6a0" transform="rotate(-10 46 -138)"/>
+<path d="M-40 -80L-34 -176Q0 -190 34 -176L40 -80Z" fill="#e9a6a0"/><path d="M-14 -180L0 -150L14 -180Z" fill="#fff8ee"/>
+<path d="M-2 -150V-84" stroke="#d48f89" stroke-width="2.5"/><g fill="#fff8ee"><circle cx="-8" cy="-136" r="2.5"/><circle cx="-8" cy="-112" r="2.5"/></g>
+<circle cx="-52" cy="-102" r="9" fill="#f7dfcb"/><circle cx="50" cy="-100" r="9" fill="#f7dfcb"/><rect x="44" y="-128" width="28" height="36" rx="3" fill="#3b78c4" stroke="#2b2a33" stroke-width="2.5"/><path d="M49 -118h18M49 -110h14M49 -102h16" stroke="#fff8ee" stroke-width="2.5"/><path d="M44 -104q-6 2 -4 8" stroke="#f7dfcb" stroke-width="6" fill="none" stroke-linecap="round"/>
+<rect x="-8" y="-188" width="16" height="14" fill="#f7dfcb"/><circle cx="0" cy="-212" r="30" fill="#f7dfcb"/>
+<path d="M-31 -214Q-28 -248 0 -246Q28 -248 31 -214Q16 -232 -2 -228Q-18 -234 -31 -214Z" fill="#e3bf62"/>
+<g class="aug" ${vers()}><circle cx="-11" cy="-210" r="4" fill="#3d4a5a"/><circle cx="11" cy="-210" r="4" fill="#3d4a5a"/></g>
+<path d="M-17 -219q6 -3 11 0M6 -219q6 -3 11 0" stroke="#b8954a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+<path d="M-10 -197q10 9 20 0" stroke="#b5604f" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="-20" cy="-200" r="5.5" fill="#f2a99a" opacity=".5"/><circle cx="20" cy="-200" r="5.5" fill="#f2a99a" opacity=".5"/>
+<circle cx="-30" cy="-202" r="2.6" fill="#f6c84a"/><circle cx="30" cy="-202" r="2.6" fill="#f6c84a"/>`}
 function kruemel(){return `
 <path d="M-8 -22L-38 30L-20 32L2 -10Z" fill="#2a8f8f"/>
 <ellipse cx="0" cy="-45" rx="26" ry="36" fill="#e2572b"/><ellipse cx="7" cy="-38" rx="14" ry="23" fill="#f6c84a"/>
@@ -407,9 +424,9 @@ const schlotter=()=>`<g transform="translate(0,-74) scale(1.7)">${GEIST}</g><pat
 const DELFIN='<path d="M-90 -20q60 -60 150 -20q30 12 50 -10q0 40 -40 40q-80 30 -160 -10z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><path d="M-10 -52l20 -34l14 38z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><circle cx="-62" cy="-22" r="5" fill="#2b2a33"/><path d="M-84 -10q12 8 26 2" stroke="#2b2a33" stroke-width="3" fill="none"/>';
 const FEIND='<path d="M-70 0h140l-20 40h-100z" fill="#4a4a55" stroke="#2b2a33" stroke-width="4"/><rect x="-4" y="-92" width="8" height="92" fill="#2b2a33"/><path d="M4 -88q62 32 0 72z" fill="#8a5bb5" stroke="#2b2a33" stroke-width="3"/><circle cx="-32" cy="-14" r="13" fill="#e9b990" stroke="#2b2a33" stroke-width="3"/><path d="M-48 -22h32l-16 -18z" fill="#2b2a33"/><path d="M-38 -10q6 6 12 0" stroke="#2b2a33" stroke-width="2.5" fill="none"/>';
 const PORT={koko:`<svg viewBox="-55 -132 110 110">${koko()}</svg>`,schildi:`<svg viewBox="30 -94 100 100">${schildi()}</svg>`,schlotter:`<svg viewBox="-90 -222 180 180"><rect x="-90" y="-222" width="180" height="180" fill="#5a6478"/>${schlotter()}</svg>`,moki:`<svg viewBox="-56 -122 112 112">${moki()}</svg>`,hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
- kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
-const NAME={moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
-const PITCH={kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
+ kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,lehrerin:`<svg viewBox="-62 -268 124 124">${pranger()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
+const NAME={lehrerin:'Frau Pranger',moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
+const PITCH={lehrerin:1.1,kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
 
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
@@ -627,6 +644,7 @@ function talk(who,text,btns){btns=btns||['Weiter'];return new Promise(res=>{barH
  $$('#bar .btn').forEach(b=>b.onclick=()=>{hush();res(+b.dataset.b)})})}
 function note(who,text){barHtml(who,text,[]);speak(text,who,hl)}
 async function brief(text){while(await talk('kruemel',text+' Alles klar, Käpt’n?',['Ja!','Nochmal hören']));}
+async function briefL(text){while(await talk('lehrerin',text+' Alles klar, Moritz?',['Ja!','Nochmal hören']));}
 function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filter(k=>d[k]).length,n2=['buch','kessel'].filter(k=>d[k]).length,c=SC[sc];let t;
  if(c){const m=c.tasks.filter(k=>d[k]).length;t=!d[c.intro]?'':m<c.tasks.length?'Tippe auf ein Ausrufezeichen!':!d[c.key]?c.hint:sc==='hoehle'?'Du hast den Schatz gefunden! Du kannst alles nochmal üben.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.'}
  else t=sc==='hexe'?(!d.c2intro?'':n2<2?'Hilf der Hexe! Tippe auf ein Ausrufezeichen.':!d.duell3?'Fordere Mixa zum Rechen-Duell! Tippe sie an.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.')
@@ -774,7 +792,7 @@ function schatz(){return new Promise(res=>{const ws=WORDS,n=ws.filter(w=>lvl(w)>
  $$('[data-k]').forEach(b=>b.onclick=()=>res(+b.dataset.k));$('#sz-x').onclick=()=>res(-1)})}
 async function training(){busy=true;$('#hudnav').style.display='none';
  if(!S.mw)S.mw={};
- await brief('Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift!');
+ await briefL('Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift!');
  for(;;){const k=await schatz();if(k<0)break;
   const src=WORDS.filter(w=>!k||w.l===k);
   const ws=src.map(w=>[lvl(w)*10+Math.random()*9,w]).sort((a,b)=>a[0]-b[0]).slice(0,6).map(x=>x[1]);
@@ -782,8 +800,8 @@ async function training(){busy=true;$('#hudnav').style.display='none';
    const g=await gapOne(w,t);if(w.a)await artOne(w);const ok=await logOne(w,t);
    S.mw[w.w]=(g&&ok)?(S.mw[w.w]||0)+1:Math.min(S.mw[w.w]||0,1);save();
    if(S.mw[w.w]===2&&g&&ok)await talk('kruemel',`Kräh! „${w.w}“ sitzt jetzt! Ab in die Schatzkiste!`);
-   else if(!ok)await talk('kruemel','Macht nichts! Das Wort kommt bald nochmal dran.')}
-  S.coins+=5;save();await talk('kruemel','Super geübt! Du bekommst 5 Dublonen.')}
+   else if(!ok)await talk('lehrerin','Macht nichts! Das Wort kommt bald nochmal dran.')}
+  S.coins+=5;save();await talk('lehrerin','Super geübt! Du bekommst 5 Dublonen.')}
  closePanel();busy=false;idle();showTitle()}
 
 /* ---------- Kapitel 2: Hexenhütte ---------- */
@@ -853,29 +871,29 @@ function sayWord(t){const o=S.speak;S.speak=true;speak(t,'lehrerin');S.speak=o}
 async function diktat(){busy=true;$('#hudnav').style.display='none';
  const k=await new Promise(r=>{panel(`<div class="ptitle">Lese-Diktat</div><div class="log" style="height:440px"><div class="ltext">Welche Geschichte willst du lesen?</div>
   ${STORY.map((g,i)=>`<button class="btn${i?' sec':''}" data-g="${i}" style="min-width:640px">${g.t} <span style="font-weight:400;font-size:22px">(Blatt ${g.l})</span></button>`).join('')}<button class="btn small" id="dk-x">Zurück</button></div>`);
-  note('kruemel','Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!');
+  note('lehrerin','Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!');
   $$('[data-g]').forEach(b=>b.onclick=()=>r(+b.dataset.g));$('#dk-x').onclick=()=>r(-1)});
  if(k>=0)await diktatRun(k);
  closePanel();busy=false;idle();showTitle()}
 async function diktatRun(k){{const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(w=>w.w),re=new RegExp('(^|[^A-Za-zÄÖÜäöüß])('+lw.join('|')+')(?![A-Za-zÄÖÜäöüß])','g');
   for(let i=0;i<g.p.length;i++)await new Promise(r=>{
    panel(`<div class="ptitle">${g.t}<span style="font-size:22px;color:#3a2c20">Seite ${i+1} von ${g.p.length}</span></div><div class="lese">${g.p[i].replace(re,'$1<b>$2</b>')}</div>
-   <div class="lrow" style="justify-content:center"><button class="btn sec" id="dk-v">Krümel liest vor</button><button class="btn" id="dk-w">${i<g.p.length-1?'Weiter lesen':'Fertig gelesen'}</button></div>`);
-   note('kruemel','Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!');
+   <div class="lrow" style="justify-content:center"><button class="btn sec" id="dk-v">Frau Pranger liest vor</button><button class="btn" id="dk-w">${i<g.p.length-1?'Weiter lesen':'Fertig gelesen'}</button></div>`);
+   note('lehrerin','Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!');
    $('#dk-v').onclick=()=>sayWord(g.p[i]);$('#dk-w').onclick=()=>{hush();r()}});
-  await brief('Jetzt kommt das Diktat. Ich sage ein Wort. Du schreibst es auf dein Papier. Das Wort siehst du erst ganz am Schluss.');
+  await briefL('Jetzt kommt das Diktat. Ich sage ein Wort. Du schreibst es auf dein Papier. Das Wort siehst du erst ganz am Schluss.');
   const ws=shuffle(lw).slice(0,8);
   for(let i=0;i<ws.length;i++)await new Promise(r=>{
    panel(`<div class="ptitle">Diktat ${dots(i,ws.length)}</div><div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
    <div class="lrow"><button class="btn sec" id="dk-n">Nochmal hören</button><button class="btn" id="dk-f">Geschrieben!</button></div></div>`);
-   note('kruemel',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);setTimeout(()=>sayWord(ws[i]),S.speak?2300:300);
+   note('lehrerin',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);setTimeout(()=>sayWord(ws[i]),S.speak?2300:300);
    $('#dk-n').onclick=()=>sayWord(ws[i]);$('#dk-f').onclick=()=>{hush();r()}});
   const ok=await new Promise(r=>{panel(`<div class="ptitle">Diktat: Vergleiche!</div><div class="center ltext">Tippe alle Wörter an, die du richtig geschrieben hast.</div>
    <div class="dgrid">${ws.map((w,i)=>`<button class="dw" data-i="${i}">${i+1}. ${w}</button>`).join('')}</div><div class="center"><button class="btn" id="dk-e">Fertig verglichen</button></div>`);
-   note('kruemel','Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün.');
+   note('lehrerin','Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün.');
    $$('.dw').forEach(b=>b.onclick=()=>b.classList.toggle('good'));$('#dk-e').onclick=()=>r($$('.dw').map(b=>b.classList.contains('good')))});
   ws.forEach((w,i)=>{const st=S.log[w]||(S.log[w]=[0,0]);st[ok[i]?0:1]++});const n=ok.filter(x=>x).length;S.coins+=5;save();sfx(n===ws.length?'fanfare':'coin');
-  await talk('kruemel',n===ws.length?'Kräh! Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!':`Du hast ${n} von ${ws.length} Wörtern richtig. Gut gemacht! Die anderen üben wir nochmal. 5 Dublonen für dich!`)}}
+  await talk('lehrerin',n===ws.length?'Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!':`Du hast ${n} von ${ws.length} Wörtern richtig. Gut gemacht! Die anderen üben wir nochmal. 5 Dublonen für dich!`)}}
 
 /* ---------- Bausteine für Aufgaben ---------- */
 function choice(title,q,opts,hint){return new Promise(res=>{const col=opts.some(o=>o.length>14);let lock=false;
@@ -1205,7 +1223,7 @@ async function nomen(){await brief('Wir angeln Namenwörter! Namenwörter sind D
 
 /* ---------- Kapitel 4: Leuchtturm ---------- */
 
-async function flaschenpost(){await talk('kruemel','Kräh! In der Flasche steckt eine Geschichte. Die lesen wir jetzt!');await diktatRun(rand(0,2));closePanel()}
+async function flaschenpost(){await talk('kruemel','Kräh! Eine Flaschenpost! Die ist von Frau Pranger!');await talk('lehrerin','Ahoi, Moritz! Hier ist eine Geschichte mit deinen Lernwörtern. Lies sie laut vor. Dann diktiere ich dir ein paar Wörter.');await diktatRun(rand(0,2));closePanel()}
 async function quatsch(){await brief('Die Möwe erzählt Quatsch. Nur ein Satz stimmt. Lies alle Sätze und tippe auf den richtigen.');
  const q=shuffle(QUATSCH).slice(0,4);for(let i=0;i<q.length;i++)await choice('Alles Quatsch? '+dots(i,q.length),'Welcher Satz stimmt?',q[i],'Lies alle Sätze genau.');closePanel()}
 async function stufen(){await brief('Der Leuchtturm hat 100 Stufen. Rechne aus, auf welcher Stufe du stehst.');const t=()=>{const a=z(1,8);return[a,z(1,10-a/10)]},m=()=>{const a=z(3,10);return[a,z(1,a/10-1)]};
@@ -1234,8 +1252,9 @@ async function finale(){musicOn();sfx('fanfare');cineOpen('<div style="position:
  await film('Moritz hat alle fünf Kartenstücke gefunden. Er ist jetzt ein echter Pirat und Rechen-Meister!',7500);
  if(!skip){$('#ccap').textContent='';$('#cine').insertAdjacentHTML('beforeend',`<div id="credits"><div class="roll"><h2>Die Insel von<br>Kapitän Rechenbart</h2>
  <p><small>Held und Schiffsjunge</small>Moritz</p><p><small>Idee, Aufgaben und Kapitän an Land</small>Papa</p><p><small>Gezeichnet, gebaut und komponiert von</small>Claude</p><p><small>Titelbild und Schatzbild</small>gemalt von einer Bild-KI</p>
- <p><small>Klassentier und blinder Passagier</small>Moki</p><p><small>Kekse</small>Krümel (alle aufgefressen)</p><p><small>Keks-Diebin (erfolglos)</small>die Möwe</p><p><small>Zaubertränke</small>Hexe Mixa</p><p><small>Suppe</small>Wirtin Olga</p><p><small>Planken</small>Meister Hobel</p><p><small>Licht</small>Wärter Strahlemann</p><h2>Ende</h2><p>Har har!</p></div></div>`);$('#cine').appendChild($('#cskip'))}
- await cw(31000);hush();cineClose();musicOff()}
+ <p><small>Lernwörter und Diktat</small>Frau Pranger</p><p><small>Klassentier und blinder Passagier</small>Moki</p><p><small>Kekse</small>Krümel (alle aufgefressen)</p><p><small>Keks-Diebin (erfolglos)</small>die Möwe</p><p><small>Zaubertränke</small>Hexe Mixa</p><p><small>Suppe</small>Wirtin Olga</p><p><small>Planken</small>Meister Hobel</p><p><small>Licht</small>Wärter Strahlemann</p><h2>Ende</h2><p>Har har!</p></div></div>`);$('#cine').appendChild($('#cskip'))}
+ await cw(31000);hush();cineClose();musicOff();
+ await talk('lehrerin','Moritz, ich habe von deinem Abenteuer gehört. Ich bin sehr stolz auf dich!',['Danke!'])}
 
 /* ---------- Hafen ---------- */
 let busy=false;const MX={harbor:600,hexe:760,werft:560,turm:500,hoehle:640,see:600,affen:760,riff:540,nebel:560};

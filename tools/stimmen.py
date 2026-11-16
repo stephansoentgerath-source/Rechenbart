@@ -29,7 +29,7 @@ FIG = {
  'schildi': ('sage', 'Sehr alte, weise und liebe Schildkröten-Oma. Langsam, gemütlich, sagt gern „Blubb“.'),
  'moki': ('verse', 'Kleiner, frecher Stoffaffe. Quirlig, lustig, sagt gern „Uh uh ah ah!“.'),
  'moritz': ('fable', 'Warmer, spannender Erzähler eines Kinder-Abenteuerfilms. Lebendig, nicht zu schnell.'),
- 'lehrerin': ('nova', 'Freundliche Grundschullehrerin. Sehr klare, saubere Aussprache, ruhig und langsam. Einzelne Wörter deutlich mit kurzer Pause.'),
+ 'lehrerin': ('nova', 'Frau Pranger, freundliche Grundschullehrerin von Moritz. Sehr klare, saubere Aussprache, ruhig und langsam. Einzelne Wörter deutlich mit kurzer Pause.'),
 }
 
 def text_norm(t):
@@ -117,6 +117,8 @@ def sammeln():
             for t in ls: add(who, t)
     for a in calls(src, 'brief'):
         for t in literals(split_args(a)[0]): add('kruemel', t + ' Alles klar, Käpt’n?')
+    for a in calls(src, 'briefL'):
+        for t in literals(split_args(a)[0]): add('lehrerin', t + ' Alles klar, Moritz?')
     for a in calls(src, 'speak'):
         args = split_args(a)
         if len(args) >= 2 and lit_val(args[1]) in figuren:
@@ -201,6 +203,12 @@ def erzeugen(nur=None):
                 _, st = f.result(); neu += st == 'neu'
             except Exception as e:
                 fehl += 1; print('Fehler:', e)
+    if not nur:  # Aufnahmen, deren Satz es nicht mehr gibt, wegräumen
+        alle = json.loads((OUT / 'texte.json').read_text(encoding='utf-8'))
+        gueltig = {key(e['who'], e['text']) for e in alle}
+        weg = [f for f in OUT.glob('*/*.mp3') if str(f.relative_to(OUT))[:-4] not in gueltig]
+        for f in weg: f.unlink()
+        if weg: print(len(weg), 'veraltete Aufnahmen entfernt')
     print(neu, 'neu erzeugt,', fehl, 'Fehler,', manifest(), 'Aufnahmen insgesamt')
 
 def nachtrag(datei):
