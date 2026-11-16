@@ -30,6 +30,8 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
   `KAPITEL` = Inselkarte, `UHRK` = Uhr-Stufen, `genP/genM/zeT/zeM` = Rechenaufgaben,
   `geschichten()` = Rechengeschichten aus `inhalte.js` einsetzen, `TIER`/`LEBEN` = Tiere in den Szenen,
   `UEB` = einmalige Überraschung je Szene, `reagiere()`/`MINI()` = Moritz im Aufgabenfenster.
+  `zuhause()` = Hausaufgaben-Tisch (Startbildschirm „Hausaufgaben“: Heft = Test-Diktat, Laptop = Lernwörter üben,
+  Regal = Lese-Diktat, Wanduhr zeigt die echte Zeit); Lern-Übungen enden mit `nachLernen()`.
 - `PRUEFLISTE.md`: Liste zum Abhaken auf dem Fire Tablet.
 - `inhalte.js`: `LERNWOERTER` (Listen) und `PAKETE` (Lernpakete). Das erste Paket ist die Grundlage,
   weitere überschreiben nur einzelne Schlüssel. Anleitung steht oben in der Datei.
