@@ -41,7 +41,7 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 
 **A1 Neues Lernpaket aus Arbeitsblättern.** Stephan schickt Fotos. In `inhalte.js` ein neues Objekt an
 `PAKETE` anhängen (`id` = Jahr-Monat, `name` = Monat und Themen). Nur die Schlüssel eintragen, die sich
-ändern. Lernwörter nur anfassen, wenn Stephan es ausdrücklich sagt (dann neue Liste in `LERNWOERTER`).
+ändern. Lernwörter: neue Blätter der Klasse kommen über die Sonntags-Prüfung (siehe „Stand der Klasse“); sonst nur auf Stephans Wort.
 
 ~~**A2 Rechnen einstellbar machen.**~~ **Erledigt 16.11.2026.** Elternbereich „Rechnen“ (`S.rechnen`) gilt im
 ganzen Spiel: leicht = Zehnerzahlen dazu/weg (46 + 30), **mittel = zweistellig ohne Übergang (Vorgabe)**, schwer =
@@ -144,9 +144,12 @@ Geld kommt im Spiel bisher gar nicht vor – größte inhaltliche Lücke.
 
 ## Stand der Klasse (Lernlandkarte, abgerufen 16.11.2026; Link bei Stephan, nicht ins Repo)
 
-Wird **jeden Sonntag 10:17 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich
-prüfen“, Umgebung „rechenbart“). Neue Lernwörter bereitet sie auf dem Branch `lernwoerter-neu` vor – erst nach
-Stephans OK nach `main` übernehmen.
+Wird **jeden Sonntag um 6:47 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich
+prüfen“, Umgebung „rechenbart“), damit neue Lernwörter **bis 9:30 Uhr im Spiel** sind – sonntagvormittags wird geübt.
+Neue Lernwörter kommen als **neues Blatt** in die bestehende Liste (erscheinen so sofort in Test-Diktat und Training),
+mit Lückenfüllern, Geschichte und Stimmen, und gehen nach automatischem Test direkt nach `main`. Bei Unsicherheit
+(PDF unlesbar, Artikel unklar, Test rot) nur auf den Branch `lernwoerter-neu` – Stephan bekommt eine Push-Nachricht.
+Erinnerung zum Verlängern des OpenAI-Schlüssels: 8.12.2026 (geplante Aufgabe).
 
 - Deutsch: Lernwörter 1–3 (im Spiel vollständig), Nomen und Satzanfänge groß, Nomen finden, Quatschsätze.
 - Mathe: Zahlenraum bis 100 mit Zehnerzahlen (ZE ± Z, Z ± Z) – laut Stephan sitzt das sicher; Kopfrechnen bis 20 mit
