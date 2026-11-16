@@ -262,6 +262,7 @@ body.aufgabe #scene,body.aufgabe #scene *{animation-play-state:paused!important}
   <div id="eltern"></div>
 </div>
 <script src="inhalte.js"></script>
+<script src="stimmen/stimmen.js"></script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
 const rand=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
@@ -505,10 +506,27 @@ const deVoices=()=>{try{return speechSynthesis.getVoices().filter(v=>/^de/i.test
 const voiceRang=v=>(/neural|natural|premium|enhanced|wavenet|online/i.test(v.name)?4:0)+(/google/i.test(v.name)?2:0)+(/de-DE/i.test(v.lang)?1:0);
 function loadVoice(){const L=deVoices();voice=L.find(v=>v.name===S.stimme)||L.slice().sort((a,b)=>voiceRang(b)-voiceRang(a))[0]||null}
 if(hasTTS){loadVoice();try{speechSynthesis.onvoiceschanged=loadVoice}catch(e){}}
-function hush(){if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
-function speak(text,who,onword){hush();if(!S.speak||!hasTTS)return;
+/* ---------- Aufgenommene Stimmen (stimmen/<figur>/<schlüssel>.mp3) ----------
+   Schlüssel = FNV-1a über "figur|text" (Text ohne HTML, Leerraum zusammengefasst). Gleiche Rechnung in
+   tools/stimmen.py. Fehlt eine Aufnahme, spricht die Gerätestimme und der Satz landet in der Fehlliste. */
+const stimmText=t=>String(t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+function stimmKey(who,text){const t=who+'|'+stimmText(text);let h=0x811c9dc5;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return who+'/'+h.toString(16).padStart(8,'0')}
+const HAT_STIMME=typeof STIMMEN!=='undefined'?new Set(STIMMEN):new Set();
+let clip=null;const FKEY='rechenbart-fehlt';
+function fehlt(who,text){const t=stimmText(text);if(!/[a-zäöüß]{2}/i.test(t))return;try{const L=JSON.parse(localStorage.getItem(FKEY)||'[]'),e=who+'|'+t;if(!L.includes(e)&&L.length<800){L.push(e);localStorage.setItem(FKEY,JSON.stringify(L))}}catch(e){}}
+function hush(){if(clip){try{clip.pause()}catch(e){}clip=null}if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
+function speakTTS(text,who,onword){if(!hasTTS)return;
  try{const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';if(voice)u.voice=voice;u.rate=.9;u.pitch=PITCH[who]||1;
  if(onword)u.onboundary=e=>onword(e.charIndex);speechSynthesis.speak(u)}catch(e){}}
+function speak(text,who,onword){hush();if(!S.speak)return;who=who||'kruemel';
+ const k=stimmKey(who,text);
+ if(S.aufnahmen!==false&&HAT_STIMME.has(k)){const a=new Audio('stimmen/'+k+'.mp3');clip=a;
+  /* Wort-Markierung grob über die Abspielzeit */
+  if(onword)a.ontimeupdate=()=>{if(a.duration)onword(Math.floor(a.currentTime/a.duration*String(text).length))};
+  a.onerror=()=>{if(clip===a){clip=null;speakTTS(text,who,onword)}};
+  a.play().catch(()=>{if(clip===a){clip=null;speakTTS(text,who,onword)}});return}
+ if(S.aufnahmen!==false&&HAT_STIMME.size)fehlt(who,text);
+ speakTTS(text,who,onword)}
 
 /* ---------- Geräusche und Musik ---------- */
 let AC=null;
@@ -661,11 +679,11 @@ async function kanonen(){await brief('Jedes Wort gehört in ein Fass. Der ist bl
  let ns=pickWords(8,w=>w.a);const das=pool().filter(w=>w.a==='das'&&!ns.includes(w));das.forEach((w,i)=>{if(ns.length>i+1)ns[ns.length-1-i]=w});ns=shuffle(ns);
  for(let i=0;i<ns.length;i++)await new Promise(res=>{const w=ns[i];let lock=false;
   panel(`<div class="ptitle">Artikel-Kanone ${dots(i,ns.length)}</div><div class="kan"><div class="ball" id="ball">${w.w}</div><div class="faesser">${['der','die','das'].map(a=>`<button class="fass" data-a="${a}" style="background:${ART[a]}">${a}</button>`).join('')}</div></div>`);
-  note('kruemel','Der, die oder das?');speak(w.w,'kruemel');
+  note('kruemel','Der, die oder das?');speak(w.w,'lehrerin');
   $$('.fass').forEach(b=>b.onclick=()=>{if(lock)return;const ball=$('#ball');
    if(b.dataset.a===w.a){lock=true;ball.textContent=w.a+' '+w.w;ball.style.background=ART[w.a];
     const f=b.parentNode,dx=f.offsetLeft+b.offsetLeft+b.offsetWidth/2-(ball.offsetLeft+ball.offsetWidth/2);
-    ball.style.transform=`translate(${dx}px,-150px) scale(.72)`;speak(w.a+' '+w.w,'kruemel');setTimeout(res,1700)}
+    ball.style.transform=`translate(${dx}px,-150px) scale(.72)`;speak(w.a+' '+w.w,'lehrerin');setTimeout(res,1700)}
    else{b.classList.add('shake');b.disabled=true;note('kruemel',(sfx('bad'),pick(WRONG)))}})});
  closePanel();await reward('kanonen',20)}
 
@@ -674,9 +692,9 @@ async function gaps(n,title){const ws=pickWords(n);for(let i=0;i<ws.length;i++)a
 function gapOne(w,title){return new Promise(res=>{let lock=false,first=true;
   panel(`<div class="ptitle">${title}</div><div class="sign"><span>${w.g[0]}</span><span class="gap" id="gap">&nbsp;</span><span>${w.g[2]}</span></div>
   <div class="opts">${shuffle(w.o).map(o=>`<button class="btn plank" data-o="${o}">${o}</button>`).join('')}</div><div class="center"><button class="btn small" id="again">Wort hören</button></div>`);
-  note('kruemel','Welches Stück fehlt?');speak(w.w,'kruemel');$('#again').onclick=()=>speak(w.w,'kruemel');
+  note('kruemel','Welches Stück fehlt?');speak(w.w,'lehrerin');$('#again').onclick=()=>speak(w.w,'lehrerin');
   $$('.plank').forEach(b=>b.onclick=()=>{if(lock)return;
-   if(b.dataset.o===w.g[1]){lock=true;const g=$('#gap');g.textContent=w.g[1];g.classList.add('good');speak(w.w,'kruemel');setTimeout(()=>res(first),1500)}
+   if(b.dataset.o===w.g[1]){lock=true;const g=$('#gap');g.textContent=w.g[1];g.classList.add('good');speak(w.w,'lehrerin');setTimeout(()=>res(first),1500)}
    else{first=false;b.classList.add('shake');b.disabled=true;note('kruemel',(sfx('bad'),pick(WRONG)))}})})}
 
 /* ---------- Kompass ---------- */
@@ -730,9 +748,9 @@ async function logbuch(n){let q=pickWords(n),again=new Set();
  closePanel()}
 async function logOne(w,ti){
   panel(`<div class="ptitle">${ti}</div><div class="log"><div class="lword">${w.w}</div><div class="timer"><i id="ti"></i></div><div class="ltext">Schau dir das Wort genau an!</div></div>`);
-  note('kruemel','Schau genau hin. Gleich ist das Wort weg!');speak(w.w,'kruemel');await wait(60);$('#ti').style.width='0';await wait(5000);
+  note('kruemel','Schau genau hin. Gleich ist das Wort weg!');speak(w.w,'lehrerin');await wait(60);$('#ti').style.width='0';await wait(5000);
   panel(`<div class="ptitle">${ti}</div><div class="log"><div class="ltext">Schreib das Wort auf dein Papier!</div><div class="lrow"><button class="btn" id="lf">Fertig!</button><button class="btn sec" id="lh">Wort hören</button></div></div>`);
-  note('kruemel','Schreib das Wort auf dein Papier. Tippe dann auf Fertig.');$('#lh').onclick=()=>speak(w.w,'kruemel');
+  note('kruemel','Schreib das Wort auf dein Papier. Tippe dann auf Fertig.');$('#lh').onclick=()=>speak(w.w,'lehrerin');
   await new Promise(r=>$('#lf').onclick=r);
   panel(`<div class="ptitle">${ti}</div><div class="log"><div class="lword">${w.w}</div><div class="ltext">Vergleiche Buchstabe für Buchstabe.</div><div class="lrow"><button class="btn" id="ly">Richtig!</button><button class="btn sec" id="ln">Noch nicht</button></div></div>`);
   note('kruemel','Hast du es genauso geschrieben?');
@@ -744,9 +762,9 @@ async function logOne(w,ti){
 const lvl=w=>Math.min(2,(S.mw||{})[w.w]||0);
 function artOne(w){return new Promise(res=>{let lock=false;
  panel(`<div class="ptitle">Der, die oder das?</div><div class="kan"><div class="ball" id="ball" style="left:60px">${w.w}</div><div class="faesser">${['der','die','das'].map(a=>`<button class="fass" data-a="${a}" style="background:${ART[a]}">${a}</button>`).join('')}</div></div>`);
- note('kruemel','Welcher Artikel passt?');speak(w.w,'kruemel');
+ note('kruemel','Welcher Artikel passt?');speak(w.w,'lehrerin');
  $$('.fass').forEach(b=>b.onclick=()=>{if(lock)return;
-  if(b.dataset.a===w.a){lock=true;$('#ball').textContent=w.a+' '+w.w;$('#ball').style.background=ART[w.a];speak(w.a+' '+w.w,'kruemel');setTimeout(res,1300)}
+  if(b.dataset.a===w.a){lock=true;$('#ball').textContent=w.a+' '+w.w;$('#ball').style.background=ART[w.a];speak(w.a+' '+w.w,'lehrerin');setTimeout(res,1300)}
   else{b.classList.add('shake');b.disabled=true;note('kruemel',(sfx('bad'),pick(WRONG)))}})})}
 function schatz(){return new Promise(res=>{const ws=WORDS,n=ws.filter(w=>lvl(w)>=2).length;
  panel(`<div class="ptitle">Wörter-Schatzkiste <span style="font-size:24px;color:#3a2c20">${n} von ${ws.length} Wörtern sitzen</span></div>
@@ -831,7 +849,7 @@ async function kessel(){await brief('Mixa braucht bunte Zaubertränke. Lies das 
 
 /* ---------- Lese-Diktat (Testvorbereitung) ---------- */
 
-function sayWord(t){const o=S.speak;S.speak=true;speak(t,'kruemel');S.speak=o}
+function sayWord(t){const o=S.speak;S.speak=true;speak(t,'lehrerin');S.speak=o}
 async function diktat(){busy=true;$('#hudnav').style.display='none';
  const k=await new Promise(r=>{panel(`<div class="ptitle">Lese-Diktat</div><div class="log" style="height:440px"><div class="ltext">Welche Geschichte willst du lesen?</div>
   ${STORY.map((g,i)=>`<button class="btn${i?' sec':''}" data-g="${i}" style="min-width:640px">${g.t} <span style="font-weight:400;font-size:22px">(Blatt ${g.l})</span></button>`).join('')}<button class="btn small" id="dk-x">Zurück</button></div>`);
@@ -1365,13 +1383,17 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  <label>Sanduhr (letztes Rechen-Duell, Lesen und Handeln): ${sel('e-ti',[[0,'aus'],[60,'gemütlich (60 s)'],[45,'normal (45 s)'],[30,'sportlich (30 s)']],SAND())}</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
  <label>Belohnungsspiele: ${sel('e-sw',[[0,'leicht'],[1,'mittel'],[2,'schwer']],SW())}</label>
  <div style="margin-top:6px">${!hasTTS?'Stimme: <b>keine Sprachausgabe</b>':!deVoices().length?'Stimme: <b>keine deutsche Stimme gefunden</b>'
- :`<label>Stimme: ${sel('e-st',deVoices().map(v=>[v.name,v.name.replace(/^(Microsoft|Google|Amazon)\s*/,'').slice(0,34)]),voice?voice.name:'')}</label> <button class="btn small" id="e-sh">Probehören</button>`}</div></div>
+ :`<label>Stimme: ${sel('e-st',deVoices().map(v=>[v.name,v.name.replace(/^(Microsoft|Google|Amazon)\s*/,'').slice(0,34)]),voice?voice.name:'')}</label> <button class="btn small" id="e-sh">Probehören</button>`}</div>
+ <label><input type="checkbox" id="e-au"${S.aufnahmen!==false?' checked':''}>Aufgenommene Stimmen (${HAT_STIMME.size} Sätze)</label>
+ <div style="font-size:18px">Noch ohne Aufnahme gehört: <b id="e-fz">${(()=>{try{return JSON.parse(localStorage.getItem(FKEY)||'[]').length}catch(e){return 0}})()}</b> Sätze <button class="btn small" id="e-fl">Liste zeigen</button></div></div>
  <div><b>Lernen</b><label>Lernpaket: ${sel('e-pk',PAKETE.map(q=>[q.id,q.name]),aktPaket().id)}</label>
  <label>Lernwörter: ${sel('e-lw',LERNWOERTER.map(l=>[l.id,l.name]),aktLW().id)}</label>
  ${BLATTK.map(k=>`<label><input type="checkbox" class="e-l" value="${k}"${S.lists.includes(k)?' checked':''}>${BLATT[k]}</label>`).join('')}
  <div style="margin-top:6px"><b>Wackelwörter:</b> ${wack}</div><div><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen</div></div>
  <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-n">Neue Reise starten</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
- $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};if($('#e-st')){$('#e-st').onchange=x=>{S.stimme=x.target.value;loadVoice();save();speak('Ahoi, Moritz! So klinge ich.','kruemel')};
+ $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};$('#e-au').onchange=x=>{S.aufnahmen=x.target.checked;save()};
+ $('#e-fl').onclick=()=>{let L=[];try{L=JSON.parse(localStorage.getItem(FKEY)||'[]')}catch(e){}const w=window.open('','_blank');
+  if(w){w.document.title='Fehlende Aufnahmen';w.document.body.innerHTML='<p>Diese Liste an Claude schicken (alles markieren, kopieren):</p><textarea style="width:100%;height:80vh">'+L.join('\n').replace(/</g,'&lt;')+'</textarea>'}};if($('#e-st')){$('#e-st').onchange=x=>{S.stimme=x.target.value;loadVoice();save();speak('Ahoi, Moritz! So klinge ich.','kruemel')};
   $('#e-sh').onclick=()=>{const old=S.speak;S.speak=true;speak('Ahoi, Moritz! Ich bin Kapitän Rechenbart. Har har!','kapitaen');S.speak=old}}$('#e-so').onchange=x=>{S.sound=x.target.checked;save()};$('#e-mu').onchange=x=>{S.music=x.target.checked;if(!S.music)musicOff();save()};$('#e-ti').onchange=x=>{S.timer=+x.target.value;save()};$('#e-sp').onchange=x=>{S.speak=x.target.checked;setTon();save()};
  $('#e-sw').onchange=x=>{S.schwer=+x.target.value;save()};$('#e-pk').onchange=x=>{S.paket=x.target.value;ladeInhalt();save()};
  $('#e-lw').onchange=x=>{S.lw=x.target.value;S.lists=null;ladeInhalt();save();eltern()};

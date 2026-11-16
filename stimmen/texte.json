@@ -1,0 +1,1382 @@
+[
+{
+"who": "hobel",
+"text": "Danke, Moritz! Das Schiff ist wieder dicht. Hier ist dein Kartenstück!"
+},
+{
+"who": "hobel",
+"text": "Ein Kartenstück? Ja, das habe ich als Flicken benutzt. Hilf mir, dann bekommst du es!"
+},
+{
+"who": "hobel",
+"text": "Erst die Arbeit! Flicke die Planken, hör dir Krümels Quatsch an und angle die Namenwörter."
+},
+{
+"who": "hobel",
+"text": "Moin! Ich bin Meister Hobel, der Schiffsbauer. Mein Schiff hat lauter Löcher!"
+},
+{
+"who": "hobel",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "hobel",
+"text": "Wann machen wir Pause? Schau auf die Uhr!"
+},
+{
+"who": "kapitaen",
+"text": "Aber ich vergesse immer alles. Schreib die wichtigen Wörter in dein Logbuch!"
+},
+{
+"who": "kapitaen",
+"text": "Ahoi Moritz! Wollen wir nochmal ins Logbuch schreiben?"
+},
+{
+"who": "kapitaen",
+"text": "Ahoi! Ich bin Kapitän Rechenbart. Du bist bestimmt Moritz, mein neuer Schiffsjunge!"
+},
+{
+"who": "kapitaen",
+"text": "Ahoi, Moritz! Ich bin Kapitän Rechenbart. Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Alarm! Die Stinkstiefel-Bande will unsere Kekse klauen!"
+},
+{
+"who": "kapitaen",
+"text": "An Bord gibt es immer Arbeit. Hilf mir, Schiffsjunge! Und pass auf die Stinkstiefel-Bande auf."
+},
+{
+"who": "kapitaen",
+"text": "Bravo, Moritz! Ein Kartenstück haben wir. Vier fehlen noch. Das nächste hat die Hexe Mixa! Folge dem Wegweiser."
+},
+{
+"who": "kapitaen",
+"text": "Die Karte ist noch nicht ganz. Knacke erst das Zahlenschloss!"
+},
+{
+"who": "kapitaen",
+"text": "Die Truhe ist noch zu. Wir müssen erst die Karte lesen!"
+},
+{
+"who": "kapitaen",
+"text": "Du hast Dublonen! Geh zu Olga in die Kneipe."
+},
+{
+"who": "kapitaen",
+"text": "Ein Sturm zieht auf! Ich rufe dir Befehle zu. Lies sie genau und mach schnell!"
+},
+{
+"who": "kapitaen",
+"text": "Ein Stück hat Wirtin Olga in der Kneipe. Aber ohne Dublonen gibt sie nichts her."
+},
+{
+"who": "kapitaen",
+"text": "Erst die Arbeit, Schiffsjunge! Proviant zählen, Wörter angeln und den Sturm überstehen."
+},
+{
+"who": "kapitaen",
+"text": "Har har! Das Gitter ist offen. Die Karte ist wieder ganz!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Das ist die Schatzhöhle. Das letzte Kartenstück liegt hinter dem Gitter."
+},
+{
+"who": "kapitaen",
+"text": "Har har! Du bist ein echter Seebär, Moritz. Dafür gibt es einen Orden!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Gut gezielt und gut gerechnet. 5 Dublonen!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Volltreffer!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Öffne die Truhe, Moritz!"
+},
+{
+"who": "kapitaen",
+"text": "Ich habe meine Schatzkarte in fünf Stücke gerissen und gut versteckt. Zu gut! Ich weiß nicht mehr, wo."
+},
+{
+"who": "kapitaen",
+"text": "Jetzt lies die Schatzkarte auf dem Stein!"
+},
+{
+"who": "kapitaen",
+"text": "Knacke das Zahlenschloss. Dann lesen wir die Karte und finden den Schatz!"
+},
+{
+"who": "kapitaen",
+"text": "Knacke zuerst das Zahlenschloss am Gitter!"
+},
+{
+"who": "kapitaen",
+"text": "Krümel, hol neue Kekse!"
+},
+{
+"who": "kapitaen",
+"text": "Leinen los! Wir segeln zur Schatzinsel. Aber das Meer ist groß und wild."
+},
+{
+"who": "kapitaen",
+"text": "Mitten ins Fass! Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Mmmh, lecker! Und mein Kartenstück ist auch da!"
+},
+{
+"who": "kapitaen",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "kapitaen",
+"text": "Verdiene dir erst Dublonen im Hafen. Tippe auf die Ausrufezeichen!"
+},
+{
+"who": "kapitaen",
+"text": "Wann gibt es Essen? Schau auf die Uhr!"
+},
+{
+"who": "kapitaen",
+"text": "Wann sind wir da? Schau auf die Uhr!"
+},
+{
+"who": "kapitaen",
+"text": "Wann öffnen wir die Truhe? Schau auf die Uhr!"
+},
+{
+"who": "kapitaen",
+"text": "Welches Fass ist das richtige?"
+},
+{
+"who": "kapitaen",
+"text": "Willst du das Ende noch einmal sehen?"
+},
+{
+"who": "koko",
+"text": "Das ist mein Bananen-Automat. Er hat drei Schlösser. Lies jeden Zettel genau!"
+},
+{
+"who": "koko",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "koko",
+"text": "Uh uh ah ah! Du bist klug wie ein Affe. Hier ist dein Orden und Proviant für die Reise!"
+},
+{
+"who": "koko",
+"text": "Uh uh! Erst rechnen, dann die Gegenteile, dann der Automat."
+},
+{
+"who": "koko",
+"text": "Uh uh! Willkommen auf der Affeninsel. Ich bin Königin Koko."
+},
+{
+"who": "koko",
+"text": "Wann gibt es Bananen? Schau auf die Uhr!"
+},
+{
+"who": "koko",
+"text": "Wer Wasser und Bananen für die Reise will, muss erst meine Aufgaben lösen."
+},
+{
+"who": "kruemel",
+"text": "Ahoi! Ich bin Krümel, der Papagei."
+},
+{
+"who": "kruemel",
+"text": "Ahoi, Moritz! So klinge ich."
+},
+{
+"who": "kruemel",
+"text": "Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Auf dem Bananen-Markt wird gerechnet. Tippe die Zahl ein und drücke OK. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Auf der Kiste klebt ein Zettel. Lies ihn selbst!"
+},
+{
+"who": "kruemel",
+"text": "Auf der Steintafel stehen deine Lernwörter. Aber die Fische haben Stücke abgeknabbert. Tippe auf das richtige Stück. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Blubb! Ein gelbes U-Boot. Wer sitzt da wohl drin?"
+},
+{
+"who": "kruemel",
+"text": "Das Zahlenschloss hat drei Zahlen. Rechne jede Aufgabe aus. Dann geht das Gitter auf. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Das hast du schon geschafft! Willst du nochmal üben?"
+},
+{
+"who": "kruemel",
+"text": "Der Delfin nimmt dich mit! Tippe auf Springen, wenn eine Boje kommt. Für jede Boje gibt es eine Dublone. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Der Kapitän hat Hunger. Hier ist sein Zettel. Den liest du selbst!"
+},
+{
+"who": "kruemel",
+"text": "Der Kapitän will wissen, wie viele Kekse er hat. Rechne aus. Tippe die Zahl ein und drücke OK. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Der Koch zählt den Proviant. Rechne aus und tippe die Zahl ein. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Der Kompass hat seine Buchstaben verloren. Norden ist immer oben. Dann geht es im Kreis herum: Norden, Osten, Süden, Westen. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Der Leuchtturm hat 100 Stufen. Rechne aus, auf welcher Stufe du stehst. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Der Strand ist wieder sauber! Müll gehört niemals ins Meer. Die Tiere könnten ihn fressen."
+},
+{
+"who": "kruemel",
+"text": "Der, die oder das?"
+},
+{
+"who": "kruemel",
+"text": "Die Affen machen immer das Gegenteil! Lies die Frage und tippe auf das Gegenteil. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Fässer rollen über den Steg! Tippe auf Springen, wenn ein Fass kommt. Für jedes Fass gibt es eine Dublone. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Kanone schießt mit alten Keksen! Rechne die Aufgabe aus. Tippe dann auf das Fass mit dem richtigen Ergebnis. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Muschel sammelt Perlen. Rechne aus, wie viele es sind. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Möwe erzählt Quatsch. Nur ein Satz stimmt. Lies alle Sätze und tippe auf den richtigen. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Planken sind durcheinander. Tippe sie der Reihe nach an: erst die kleinste Zahl, zum Schluss die größte. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Sanduhr ist leer. Macht nichts! Lies in Ruhe zu Ende."
+},
+{
+"who": "kruemel",
+"text": "Die Sanduhr läuft. Du hast genug Zeit."
+},
+{
+"who": "kruemel",
+"text": "Diesmal läuft eine Sanduhr. Keine Sorge: Du hast viel Zeit. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Erst liest du eine Geschichte laut vor. Danach diktiere ich dir Wörter daraus. Hol dir Papier und einen Stift!"
+},
+{
+"who": "kruemel",
+"text": "Fast! Probier es noch einmal."
+},
+{
+"who": "kruemel",
+"text": "Fehler versteckt. Vergleiche die Bilder und tippe die Fehler an!"
+},
+{
+"who": "kruemel",
+"text": "Führe Moritz zum großen Keks! Tippe auf die Pfeile. Sammle unterwegs Dublonen."
+},
+{
+"who": "kruemel",
+"text": "Gespenster-Jagd! Tippe auf die kleinen Gespenster. Dann machen sie Puff. Aber Vorsicht: Krümel ist kein Gespenst! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Grün mit Stern heißt: Das Wort sitzt! Welche Wörter willst du üben?"
+},
+{
+"who": "kruemel",
+"text": "Halt! Das ist kein Müll. Das gehört an den Strand."
+},
+{
+"who": "kruemel",
+"text": "Hast du es genauso geschrieben?"
+},
+{
+"who": "kruemel",
+"text": "Hier übst du die Wörter für deinen Test. Bei jedem Wort setzt du erst das fehlende Stück ein. Dann schreibst du es auf Papier. Hol dir Papier und einen Stift! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Hilf Olga! In jedem Wort fehlt ein Stück. Tippe auf das richtige Stück. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Hol dir Papier und einen Stift. Du siehst ein Wort. Dann ist es weg. Schreib es auf dein Papier. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Hoppla! Da ist ein Krümel verrutscht. Nochmal!"
+},
+{
+"who": "kruemel",
+"text": "Im Geisterbuch ist alles klein geschrieben. Tippe alle Wörter an, die groß sein müssen: das erste Wort im Satz und alle Namenwörter. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Im Netz zappeln Wörter! Wir angeln nur Tunwörter. Ein Tunwort sagt, was man tut: laufen, lachen, essen. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Im rechten Bild sind"
+},
+{
+"who": "kruemel",
+"text": "In welche Tonne gehört das?"
+},
+{
+"who": "kruemel",
+"text": "Jede richtige Antwort füllt deinen Trank. Bei einem Fehler bekommt Mixa einen Punkt. Wer zuerst 5 Punkte hat, gewinnt. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Jede richtige Antwort füllt deinen Trank. Bei einem Fehler bekommt Schlotter einen Punkt. Wer zuerst 5 Punkte hat, gewinnt. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Jedes Wort gehört in ein Fass. Der ist blau. Die ist rot. Das ist grün. Tippe auf das richtige Fass. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Jetzt ist die Karte ganz. Lies die Schritte selbst. Norden ist oben. Tippe dann auf das Feld, wo der Schatz liegt. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Jetzt kommt das Diktat. Ich sage ein Wort. Du schreibst es auf dein Papier. Das Wort siehst du erst ganz am Schluss. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Klack! Der Automat spuckt eine Banane aus."
+},
+{
+"who": "kruemel",
+"text": "Klick! Die Kiste geht auf."
+},
+{
+"who": "kruemel",
+"text": "Kräh!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Alle Wörter richtig! Du bist bereit für den Test. 5 Dublonen für dich!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Da steht ein Wegweiser. Den musst du selbst lesen!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Daneben. Rechne nochmal."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das Höhlenbild ist die Überraschung. Erst das Schloss und die Karte!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das Labyrinth ist die Überraschung. Erst die drei Aufgaben!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das erste Kartenstück! Bring jetzt schnell das Essen zum Kapitän."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das ist Quatsch. Lies nochmal genau."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das ist kein Namenwort."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das stimmt nicht. Lies den Satz nochmal genau."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das wollte er nicht. Lies den Zettel nochmal genau."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Der Nebel ist weg. Und da vorne liegt die Schatzinsel! Tippe oben auf Insel."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Der ist ja gar nicht gruselig. Der will nur spielen."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Der kleine Zeiger ist schon auf dem Weg zur nächsten Zahl."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Die Karte sah aus wie ein Keks!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Die Werkzeugkiste ist die Überraschung. Erst die drei Aufgaben!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Die wollen unsere Kekse klauen. Aber erst die Arbeit!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Dieses Wort bleibt klein."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Drei Kartenstücke! Das nächste hat der Leuchtturmwärter. Tippe oben auf Insel!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Ein Geisterschiff! Mir zittern die Federn."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Ein Ufo! Das glaubt mir keiner."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Ein Wal! Und er macht eine Dusche."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Eine Maus! Und die Katze schläft einfach weiter."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Eine Seeschlange! Zum Glück ist sie freundlich."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Erst das Zauberbuch und der Kessel. Dann gibt es die Überraschung!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Es gibt noch eine kleinere Zahl."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Es wird neblig. Tippe oben auf Insel. Hoffentlich spukt es nicht!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Genau da liegt der Schatz!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Hier liegt eine Anleitung: Gespenster vertreiben. Lies sie genau!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Ich bin Krümel. Der Kapitän vergisst alles. Sogar die Kekse in seinem Bart!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! In der Flasche steckt eine Geschichte. Die lesen wir jetzt!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Knapp daneben. Versuch es nochmal!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Land in Sicht: die Affeninsel! Tippe oben auf Insel."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Mixa liebt Rechen-Duelle. Aber erst braucht sie Hilfe mit ihrem Zauberbuch und ihrem Kessel."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Mixas Besen fliegt mal wieder allein."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Nicht ganz. Probier eine andere Tonne."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Richtig!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Schau auf den kleinen roten Zeiger. Auf welche Zahl zeigt er?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Schon wieder ein Ufo? Die suchen bestimmt Kekse!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! So ein dicker Nebel. Und was ist das für ein altes Schiff?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! So viele Fledermäuse! Kopf einziehen!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Tippe auf die Ausrufezeichen. Zum Schluss wartet eine Überraschung!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Vier Kartenstücke! Jetzt segeln wir zur Schatzinsel. Tippe oben auf Insel!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Was? Kekse nur manchmal? Skandal!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Weiter geht es zum Korallenriff. Tippe oben auf Insel."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Wo steht der große blaue Zeiger: auf der 3 oder auf der 9?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Zwei Kartenstücke! Das nächste liegt in der Werft. Da müssen wir Planken flicken. Tippe oben auf Insel!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Zähle die Schritte nochmal. Norden ist oben."
+},
+{
+"who": "kruemel",
+"text": "Krümel redet Quatsch! In jedem Satz fehlt ein Wort. Lies den Satz und tippe auf das Wort, das passt. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Lies das Rezept selbst. Tippe dann auf zwei Flaschen."
+},
+{
+"who": "kruemel",
+"text": "Lies den Zettel selbst. Tippe dann auf der Karte an, was der Kapitän möchte."
+},
+{
+"who": "kruemel",
+"text": "Lies die Schritte. Zähle die Felder. Tippe auf das Feld mit dem Schatz."
+},
+{
+"who": "kruemel",
+"text": "Lies genau. Dann tippe auf das Richtige."
+},
+{
+"who": "kruemel",
+"text": "Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!"
+},
+{
+"who": "kruemel",
+"text": "Macht nichts! Das Wort kommt bald nochmal dran."
+},
+{
+"who": "kruemel",
+"text": "Macht nichts! Das Wort üben wir gleich nochmal."
+},
+{
+"who": "kruemel",
+"text": "Mampf, mampf! Kräh! Der beste Keks der Welt. Danke, Käpt’n!"
+},
+{
+"who": "kruemel",
+"text": "Meister Hobel braucht Material. Rechne aus, wie viel er braucht. Tippe die Zahl ein und drücke OK. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Mixa braucht bunte Zaubertränke. Lies das Rezept. Tippe dann auf zwei Flaschen und mische die richtige Farbe. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Mixas Zaubersprüche sind klein geschrieben. So wirken sie nicht! Tippe alle Wörter an, die groß sein müssen: das erste Wort im Satz und alle Namenwörter. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Oh nein! Am Strand liegt Müll. Tippe allen Müll an und sammle ihn ein. Aber Vorsicht: Die Tiere und Muscheln bleiben am Strand! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Olga kocht gesund. Hilf ihr beim Sortieren! Was soll man oft essen? Und was nur manchmal? Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Passt der, die oder das davor? Dann ist es ein Namenwort."
+},
+{
+"who": "kruemel",
+"text": "Rrrr! Die Kiste bleibt zu. Lies den Zettel nochmal und fang von vorne an."
+},
+{
+"who": "kruemel",
+"text": "Schau genau hin. Gleich ist das Wort weg!"
+},
+{
+"who": "kruemel",
+"text": "Schreib das Wort auf dein Papier. Tippe dann auf Fertig."
+},
+{
+"who": "kruemel",
+"text": "Stark gemacht!"
+},
+{
+"who": "kruemel",
+"text": "Super geübt! Du bekommst 5 Dublonen."
+},
+{
+"who": "kruemel",
+"text": "Super geübt, Käpt’n!"
+},
+{
+"who": "kruemel",
+"text": "Super! Jetzt sortieren wir den Müll. Jedes Stück kommt in die richtige Tonne."
+},
+{
+"who": "kruemel",
+"text": "Säbel-Training mit dem Holzsäbel! Tippe auf die Kokosnüsse. Aber Vorsicht: Krümel ist keine Kokosnuss! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Tippe alle Wörter an, die groß sein müssen."
+},
+{
+"who": "kruemel",
+"text": "Tippe auf die Boote der Stinkstiefel-Bande. Dann schießt unsere Kanone einen alten Keks, und sie drehen um. Lass keines an unser Schiff! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Tippe auf die Zahl für den kleinen Zeiger."
+},
+{
+"who": "kruemel",
+"text": "Tippe die Zahl ein. Dann drücke OK."
+},
+{
+"who": "kruemel",
+"text": "Uh uh ah ah! Ein Affe an der Liane!"
+},
+{
+"who": "kruemel",
+"text": "Verdiene dir Dublonen im Hafen! Tippe auf die Ausrufezeichen."
+},
+{
+"who": "kruemel",
+"text": "Vergleiche Buchstabe für Buchstabe. Tippe die richtigen Wörter an. Dann werden sie grün."
+},
+{
+"who": "kruemel",
+"text": "Volltreffer, Käpt’n!"
+},
+{
+"who": "kruemel",
+"text": "Was ist Müll? Tippe es an!"
+},
+{
+"who": "kruemel",
+"text": "Was ist grün und klopft an die Tür? Ein Klopfsalat!"
+},
+{
+"who": "kruemel",
+"text": "Was machen Piraten am Computer? Sie drücken die Enter-Taste!"
+},
+{
+"who": "kruemel",
+"text": "Welche Zahl ist die kleinste?"
+},
+{
+"who": "kruemel",
+"text": "Welcher Artikel passt?"
+},
+{
+"who": "kruemel",
+"text": "Welches Stück fehlt?"
+},
+{
+"who": "kruemel",
+"text": "Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!"
+},
+{
+"who": "kruemel",
+"text": "Wir angeln Namenwörter! Namenwörter sind Dinge, Tiere und Menschen. Davor passt der, die oder das. Tippe alle Namenwörter an. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Wohin soll die Reise gehen?"
+},
+{
+"who": "lehrerin",
+"text": ". Oder:"
+},
+{
+"who": "lehrerin",
+"text": "Anleitung: Gespenster vertreiben. Gespenster mögen kein Licht. Mach die gelbe Lampe an."
+},
+{
+"who": "lehrerin",
+"text": "Axt"
+},
+{
+"who": "lehrerin",
+"text": "Da steht: Nimm extra viel Zucker! Der Fuchs will helfen. Er holt mit der Axt Holz für den Ofen. Der Dachs und der Ochse boxen aus Spaß vor der Tür. Bald ist der Keks fertig. Er ist so groß wie ein Rad! Alle sechs Tiere essen mit."
+},
+{
+"who": "lehrerin",
+"text": "Da tritt Krümel mit dem Fuß in die Farbe. Oh nein! Jetzt ist sein Fuß grün. Er will schnell zum Wasser rennen. Überall sind bunte Flecken. Der Kapitän lacht: Dein Bild ist schön! Nur mein Bart bleibt weiß und mein Hut bleibt schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Dachs"
+},
+{
+"who": "lehrerin",
+"text": "Der richtige Knopf hat die Farbe vom Meer."
+},
+{
+"who": "lehrerin",
+"text": "Der richtige Knopf hat die Farbe von Gras."
+},
+{
+"who": "lehrerin",
+"text": "Die Geister-Musik kommt aus einer Kiste. Mach die Kiste zu, die nicht rot und nicht grün ist."
+},
+{
+"who": "lehrerin",
+"text": "Die Kiste klemmt. Zieh am grünen Hebel."
+},
+{
+"who": "lehrerin",
+"text": "Die Perle ist schmutzig. Putze sie vorsichtig mit dem Tuch."
+},
+{
+"who": "lehrerin",
+"text": "Die Perle liegt in einer Kiste. Sie liegt nicht in der roten und nicht in der blauen."
+},
+{
+"who": "lehrerin",
+"text": "Drücke den Knopf mit der Farbe einer Banane. Dann den roten."
+},
+{
+"who": "lehrerin",
+"text": "Drücke den Knopf, der so gelb ist wie die Sonne."
+},
+{
+"who": "lehrerin",
+"text": "Drücke den Knopf, der so rot ist wie eine Tomate."
+},
+{
+"who": "lehrerin",
+"text": "Drücke den grünen Knopf."
+},
+{
+"who": "lehrerin",
+"text": "Drücke erst den blauen Knopf und dann den gelben."
+},
+{
+"who": "lehrerin",
+"text": "Drücke nicht Rot, nicht Blau und nicht Gelb."
+},
+{
+"who": "lehrerin",
+"text": "Drücke nicht den roten Knopf. Drücke den blauen."
+},
+{
+"who": "lehrerin",
+"text": "Drücke zuerst Gelb. Dann Grün. Dann Rot."
+},
+{
+"who": "lehrerin",
+"text": "Drücke zuerst den roten Knopf. Drücke dann den blauen Knopf."
+},
+{
+"who": "lehrerin",
+"text": "Drücke zweimal den blauen Knopf."
+},
+{
+"who": "lehrerin",
+"text": "Er schaut in einen Spiegel. Ein Strahl der Sonne fällt auf die Spitze von seinem Horn. Der Stier lacht. Er sagt: Das ist mein liebstes Spiel! Moritz lacht auch. So ein Spaß! Dann gibt er dem Stier den Stiefel zurück."
+},
+{
+"who": "lehrerin",
+"text": "Es wird dunkel. Mach die Lampe an. Sie ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Farbe"
+},
+{
+"who": "lehrerin",
+"text": "Fuchs"
+},
+{
+"who": "lehrerin",
+"text": "Fuß"
+},
+{
+"who": "lehrerin",
+"text": "Geschafft! Hol dir zur Belohnung einen Keks aus der blauen Kiste."
+},
+{
+"who": "lehrerin",
+"text": "Gespenster mögen keine sauberen Schiffe. Feg das Deck mit dem Besen."
+},
+{
+"who": "lehrerin",
+"text": "Hexe"
+},
+{
+"who": "lehrerin",
+"text": "Im Schiff ist Wasser. Schöpfe es mit dem roten Eimer heraus."
+},
+{
+"who": "lehrerin",
+"text": "Im Wald wohnt eine Hexe. Sie hat sechs Tiere. Ein Fuchs, ein Dachs und ein Ochse sind auch dabei. Heute will die Hexe einen Keks backen. Sie holt den Mixer. Dann liest sie den Text im Backbuch."
+},
+{
+"who": "lehrerin",
+"text": "Jetzt läute die Schiffsglocke. Zieh dazu am roten Hebel."
+},
+{
+"who": "lehrerin",
+"text": "Keks"
+},
+{
+"who": "lehrerin",
+"text": "Krümel will ein Bild malen. Er holt jede Farbe, die er hat: rot, gelb, blau und grün. Er malt einen Elefanten. Der Rüssel wird blau. Ein Ohr wird rot, das andere Ohr wird gelb."
+},
+{
+"who": "lehrerin",
+"text": "Mixer"
+},
+{
+"who": "lehrerin",
+"text": "Moritz findet am Strand einen alten Stiefel. Daneben ist eine Spur im Sand. Wer war das? Moritz folgt der Spur eine ganze Stunde lang. Hinter einem großen Stein steht ein Stier. Der Stier sitzt auf einem Stuhl!"
+},
+{
+"who": "lehrerin",
+"text": "Ochse"
+},
+{
+"who": "lehrerin",
+"text": "Ohr"
+},
+{
+"who": "lehrerin",
+"text": "Rüssel"
+},
+{
+"who": "lehrerin",
+"text": "Spaß"
+},
+{
+"who": "lehrerin",
+"text": "Spiegel"
+},
+{
+"who": "lehrerin",
+"text": "Spiel"
+},
+{
+"who": "lehrerin",
+"text": "Spitze"
+},
+{
+"who": "lehrerin",
+"text": "Spur"
+},
+{
+"who": "lehrerin",
+"text": "Stein"
+},
+{
+"who": "lehrerin",
+"text": "Stiefel"
+},
+{
+"who": "lehrerin",
+"text": "Stier"
+},
+{
+"who": "lehrerin",
+"text": "Strahl"
+},
+{
+"who": "lehrerin",
+"text": "Stuhl"
+},
+{
+"who": "lehrerin",
+"text": "Stunde"
+},
+{
+"who": "lehrerin",
+"text": "Sturm! Das Deck ist nass. Wisch es mit dem Tuch trocken."
+},
+{
+"who": "lehrerin",
+"text": "Text"
+},
+{
+"who": "lehrerin",
+"text": "Unter Wasser ist es dunkel. Nimm die gelbe Lampe mit."
+},
+{
+"who": "lehrerin",
+"text": "Zieh das Segel ein. Dazu ziehst du den gelben Hebel. Nicht den grünen!"
+},
+{
+"who": "lehrerin",
+"text": "blau"
+},
+{
+"who": "lehrerin",
+"text": "boxen"
+},
+{
+"who": "lehrerin",
+"text": "das Ohr"
+},
+{
+"who": "lehrerin",
+"text": "das Spiel"
+},
+{
+"who": "lehrerin",
+"text": "der Dachs"
+},
+{
+"who": "lehrerin",
+"text": "der Fuchs"
+},
+{
+"who": "lehrerin",
+"text": "der Fuß"
+},
+{
+"who": "lehrerin",
+"text": "der Keks"
+},
+{
+"who": "lehrerin",
+"text": "der Mixer"
+},
+{
+"who": "lehrerin",
+"text": "der Ochse"
+},
+{
+"who": "lehrerin",
+"text": "der Rüssel"
+},
+{
+"who": "lehrerin",
+"text": "der Spaß"
+},
+{
+"who": "lehrerin",
+"text": "der Spiegel"
+},
+{
+"who": "lehrerin",
+"text": "der Stein"
+},
+{
+"who": "lehrerin",
+"text": "der Stiefel"
+},
+{
+"who": "lehrerin",
+"text": "der Stier"
+},
+{
+"who": "lehrerin",
+"text": "der Strahl"
+},
+{
+"who": "lehrerin",
+"text": "der Stuhl"
+},
+{
+"who": "lehrerin",
+"text": "der Text"
+},
+{
+"who": "lehrerin",
+"text": "die Axt"
+},
+{
+"who": "lehrerin",
+"text": "die Farbe"
+},
+{
+"who": "lehrerin",
+"text": "die Hexe"
+},
+{
+"who": "lehrerin",
+"text": "die Spitze"
+},
+{
+"who": "lehrerin",
+"text": "die Spur"
+},
+{
+"who": "lehrerin",
+"text": "die Stunde"
+},
+{
+"who": "lehrerin",
+"text": "extra"
+},
+{
+"who": "lehrerin",
+"text": "gelb"
+},
+{
+"who": "lehrerin",
+"text": "grün"
+},
+{
+"who": "lehrerin",
+"text": "rennen"
+},
+{
+"who": "lehrerin",
+"text": "rot"
+},
+{
+"who": "lehrerin",
+"text": "schwarz"
+},
+{
+"who": "lehrerin",
+"text": "sechs"
+},
+{
+"who": "lehrerin",
+"text": "weiß"
+},
+{
+"who": "mixa",
+"text": "Bereit für das erste Duell? Wir rechnen plus mit Zehnerzahlen!"
+},
+{
+"who": "mixa",
+"text": "Das letzte Duell! Plus und minus, mit großen Zahlen. Gewinnst du, bekommst du das Kartenstück!"
+},
+{
+"who": "mixa",
+"text": "Du willst noch ein Duell? Hihi! Sehr gerne!"
+},
+{
+"who": "mixa",
+"text": "Erst die Arbeit, dann das Duell! Repariere mein Zauberbuch und mische meinen Trank."
+},
+{
+"who": "mixa",
+"text": "Hihi! Besuch! Ich bin Mixa, die Hexe. Und du bist der Schiffsjunge Moritz?"
+},
+{
+"who": "mixa",
+"text": "Hihi! Diesmal war ich schneller. Willst du eine Revanche?"
+},
+{
+"who": "mixa",
+"text": "Hihi! In meiner Küche stimmt etwas nicht. Findest du die Fehler?"
+},
+{
+"who": "mixa",
+"text": "Ja, ich habe ein Stück von der Schatzkarte. Aber ich gebe es nur einem echten Rechen-Meister!"
+},
+{
+"who": "mixa",
+"text": "Nicht schlecht, Schiffsjunge! Du bekommst 10 Dublonen. Aber das nächste Duell wird schwerer!"
+},
+{
+"who": "mixa",
+"text": "Schon wieder gewonnen! Du bist ein echter Rechen-Meister."
+},
+{
+"who": "mixa",
+"text": "Unglaublich! Du hast mich dreimal besiegt. Hier ist dein Kartenstück, Rechen-Meister!"
+},
+{
+"who": "mixa",
+"text": "Wann ist der Trank fertig? Schau auf die Uhr!"
+},
+{
+"who": "mixa",
+"text": "Zweites Duell! Jetzt rechnen wir minus. Hihi!"
+},
+{
+"who": "moki",
+"text": "Hast du eine Banane? Nein? Schade."
+},
+{
+"who": "moki",
+"text": "Ich habe dem Kapitän einen Keks aus dem Bart geklaut. Pssst!"
+},
+{
+"who": "moki",
+"text": "In deiner Klasse ist es schöner. Aber hier gibt es mehr Kokosnüsse!"
+},
+{
+"who": "moki",
+"text": "Moki hat ein Rätsel für dich. Willst du es lösen?"
+},
+{
+"who": "moki",
+"text": "Moki sieht alles. Moki sagt nichts. Außer für Bananen."
+},
+{
+"who": "moki",
+"text": "Psst, Moritz! Das ist meine Tante. Sei nett zu ihr."
+},
+{
+"who": "moki",
+"text": "Uh uh ah ah! Du hast mich gefunden! Ich bin Moki. Hier sind 3 Dublonen für dich."
+},
+{
+"who": "moki",
+"text": "Uh uh ah ah! Ich bin Moki. Ich bin heimlich mitgefahren!"
+},
+{
+"who": "moki",
+"text": "Uh uh ah ah! Richtig! Eine Dublone für dich."
+},
+{
+"who": "moritz",
+"text": "Blubb, blubb, PENG! Der Trank spritzt überall hin."
+},
+{
+"who": "moritz",
+"text": "Bonk! Krümel hat die Palme nicht gesehen."
+},
+{
+"who": "moritz",
+"text": "Das ist Kapitän Rechenbart. Er hat eine Schatzkarte. Darauf ist er sehr stolz."
+},
+{
+"who": "moritz",
+"text": "Der Kapitän braucht Hilfe. Zum Glück ist ein neuer Schiffsjunge an Bord: Moritz!"
+},
+{
+"who": "moritz",
+"text": "Der Kapitän erschrickt. Aber Fledermäuse sind ganz lieb. Sie fressen nur Insekten."
+},
+{
+"who": "moritz",
+"text": "Die Truhe geht auf. Sie ist voller Gold und Kekse!"
+},
+{
+"who": "moritz",
+"text": "Flatter, flatter! Viele Fledermäuse fliegen heraus."
+},
+{
+"who": "moritz",
+"text": "Hatschi! Oh nein! Die Karte ist zerrissen. Der Wind trägt die Stücke über die ganze Insel."
+},
+{
+"who": "moritz",
+"text": "Jetzt hat Mixa bunte Haare. Hihi! Das gefällt ihr sogar."
+},
+{
+"who": "moritz",
+"text": "Krümel isst den Keks. Mampf!"
+},
+{
+"who": "moritz",
+"text": "Krümel sitzt mittendrin. Der Kapitän tanzt vor Freude. Har har!"
+},
+{
+"who": "moritz",
+"text": "Mixa hat verloren. Vor Schreck fällt ihr Zauberstab in den Kessel."
+},
+{
+"who": "moritz",
+"text": "Moritz hat alle fünf Kartenstücke gefunden. Er ist jetzt ein echter Pirat und Rechen-Meister!"
+},
+{
+"who": "moritz",
+"text": "Moritz und Krümel gehen durch den Dschungel. Krümel fliegt voraus."
+},
+{
+"who": "moritz",
+"text": "Moritz und der Kapitän kommen zur dunklen Schatzhöhle."
+},
+{
+"who": "moritz",
+"text": "Nichts passiert! Und da vorne ist schon die Hexenhütte."
+},
+{
+"who": "moritz",
+"text": "Und eine freche Möwe klaut auch noch ein Stück!"
+},
+{
+"who": "olga",
+"text": "Ahoi Moritz! Ich bin Olga. Oh nein! Krümel hat Löcher in meine Speisekarte gepickt!"
+},
+{
+"who": "olga",
+"text": "Danke! Jetzt ist die Karte wieder heil."
+},
+{
+"who": "olga",
+"text": "Die Keks-Flagge! Damit bist du ein echter Pirat."
+},
+{
+"who": "olga",
+"text": "Halt! Ohne Dublonen gibt es nichts. Erledige erst alle drei Aufgaben im Hafen!"
+},
+{
+"who": "olga",
+"text": "Hm, überleg nochmal!"
+},
+{
+"who": "olga",
+"text": "Oft essen oder nur manchmal?"
+},
+{
+"who": "olga",
+"text": "Schön, dich zu sehen, Moritz! Was möchtest du machen?"
+},
+{
+"who": "olga",
+"text": "Stimmt genau! Hier ist das Essen. Und schau mal, was unter meinem Tresen lag!"
+},
+{
+"who": "olga",
+"text": "Willkommen in meinem Laden! Was darf es sein?"
+},
+{
+"who": "schildi",
+"text": "Blubb! So ein fleißiger Taucher. Hier ist dein Orden. Und fahr vorsichtig: Da vorne ist Nebel."
+},
+{
+"who": "schildi",
+"text": "Blubb. Erst die Perlen, die Steintafel und die Kiste, junger Mann."
+},
+{
+"who": "schildi",
+"text": "Blubb. Guten Tag, junger Mann. Ich bin Oma Schildi und schon hundert Jahre alt."
+},
+{
+"who": "schildi",
+"text": "In einer alten Kiste liegt meine schönste Perle. Ich habe dir aufgeschrieben, wie du sie findest."
+},
+{
+"who": "schildi",
+"text": "Mein Riff ist das schönste im ganzen Meer. Hilf mir ein wenig, dann zeige ich dir den Weg."
+},
+{
+"who": "schildi",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "schildi",
+"text": "Wann kommt die Flut? Schau auf die Uhr!"
+},
+{
+"who": "schlotter",
+"text": "Buhuhu! Gewonnen! Aber du darfst es nochmal versuchen."
+},
+{
+"who": "schlotter",
+"text": "Buhuuu! Erst das Duell, das Geisterbuch und die Anleitung."
+},
+{
+"who": "schlotter",
+"text": "Buhuuu! Ich bin Käpt’n Schlotter, der Schrecken der Meere!"
+},
+{
+"who": "schlotter",
+"text": "Buhuuu! Wer mich im Rechnen schlägt, vor dem zittere ich. Ein Duell!"
+},
+{
+"who": "schlotter",
+"text": "Hilfe! Licht! Ein sauberes Deck! Eine Glocke! Ihr seid ja richtige Profis."
+},
+{
+"who": "schlotter",
+"text": "Ihr seid die mutigsten Piraten, die ich kenne. Hier ist ein Orden. Und nehmt bitte den Papagei wieder mit!"
+},
+{
+"who": "schlotter",
+"text": "Oh nein! Jetzt zittere ich wirklich."
+},
+{
+"who": "schlotter",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "schlotter",
+"text": "Wann ist Geisterstunde? Schau auf die Uhr!"
+},
+{
+"who": "schlotter",
+"text": "Äh, ihr habt doch keinen Papagei dabei? Vor Papageien habe ich nämlich Angst."
+},
+{
+"who": "strahl",
+"text": "Ahoi da unten! Ich bin Wärter Strahlemann. Mein Leuchtturm braucht Hilfe."
+},
+{
+"who": "strahl",
+"text": "Die Lampe leuchtet wieder! Du kannst gut lesen, Moritz. Alle Schiffe finden jetzt den Weg."
+},
+{
+"who": "strahl",
+"text": "Du bist oben! Aber die Lampe ist kaputt. Hier ist die Anleitung. Lies jeden Schritt genau!"
+},
+{
+"who": "strahl",
+"text": "Eine Möwe hat mir ein Kartenstück gebracht. Du bekommst es, wenn du mir hilfst."
+},
+{
+"who": "strahl",
+"text": "Erst die Arbeit! Lies die Flaschenpost, hör der Möwe zu und steig die Treppe hoch."
+},
+{
+"who": "strahl",
+"text": "Mein Licht strahlt wieder! Hier ist das Kartenstück von der Möwe."
+},
+{
+"who": "strahl",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "strahl",
+"text": "Wann geht das Licht an? Schau auf die Uhr!"
+}
+]

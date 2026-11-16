@@ -15,6 +15,12 @@ einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
   Überlegens Ruhe, Reaktion nur nach einer Eingabe (`reagiere('jubel','hops')` bzw.
   `reagiere('oh','seufz')`, Moritz im Fenster über `MINI()`). Szenen dürfen leben, im offenen
   Aufgabenfenster steht die Szene still (Klasse `aufgabe` am `body`). Neue Tiere in `TIER`/`LEBEN`.
+- Stimmen: Gesprochene Sätze liegen als MP3 in `stimmen/<figur>/`. Wer Texte ändert oder neue Sätze
+  einbaut (auch Lernpakete, A1), ruft danach `python3 tools/stimmen.py sammeln` und
+  `python3 tools/stimmen.py erzeugen` auf (nur in der Cloud-Umgebung „rechenbart“, dort steckt der
+  OpenAI-Schlüssel; der Schlüssel läuft am 15.12.2026 ab). Stimmen und Regie je Figur stehen oben in
+  `tools/stimmen.py`. Fehlliste aus dem Elternbereich nachtragen: `tools/stimmen.py nachtrag datei.txt`.
+  Der Kapitän ist vorerst KI (Stephans Aufnahmen liegen bewusst NICHT im öffentlichen Repo).
 - Zeitdruck ist gewollt und wird trainiert, aber nur über die Sanduhr (`SAND()`, Stufen im
   Elternbereich). Ablaufen ohne Tadel: Krümel sagt „Macht nichts!“.
 
