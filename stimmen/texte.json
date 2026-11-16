@@ -1189,6 +1189,14 @@
 },
 {
 "who": "mama",
+"text": "Mama-Tipp: Am Anfang hörst du schp. Du schreibst aber Sp."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Am Anfang hörst du scht. Du schreibst aber St."
+},
+{
+"who": "mama",
 "text": "Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen."
 },
 {
@@ -1197,11 +1205,67 @@
 },
 {
 "who": "mama",
+"text": "Mama-Tipp: Ein langes i schreibst du meistens ie."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Ein neues Wort! Hör genau hin und schwing die Silben mit."
+},
+{
+"who": "mama",
 "text": "Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß."
 },
 {
 "who": "mama",
+"text": "Mama-Tipp: Fahr mit dem Finger unter dem Wort entlang und vergleiche jeden Buchstaben."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Hörst du b oder p? Verlängere das Wort, zum Beispiel gelb, gelbe."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: In diesem Wort hörst du ks. Hier schreibst du aber chs."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: In diesem Wort hörst du ks. Hier schreibst du ein x."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: In diesem Wort hörst du ks. Hier schreibst du wirklich k und s."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: In diesem Wort steckt ein h, das man nicht hört. Merk es dir gut!"
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Nach einem kurzen Laut kommt oft ein doppelter Buchstabe."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Nach einem kurzen Laut schreibst du ss."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Nach einem kurzen Laut schreibst du tz."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Nach einem langen Laut, nach au und ei, schreibst du ß."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Nach r, l und n schreibst du nur z, nie tz."
+},
+{
+"who": "mama",
 "text": "Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal."
+},
+{
+"who": "mama",
+"text": "Mama-Tipp: Sprich beim Schreiben leise mit."
 },
 {
 "who": "mama",

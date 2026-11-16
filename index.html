@@ -1039,17 +1039,35 @@ function heuteDran(){const h=heuteStr(),K=S.kartei||{},alle=shuffle(WORDS.map(w=
  const faellig=alle.filter(w=>K[w]&&K[w].d<=h).sort((x,y)=>K[x].f-K[y].f),neu=alle.filter(w=>!K[w]);
  return faellig.concat(neu).slice(0,10)}
 
+/* Mamas Merk-Tipps vor NEUEN Wörtern (noch nie in der Kartei): passend zur kniffligen Stelle des Wortes
+   (Lücke aus inhalte.js, z. B. ["Fu","chs",""]). Neue Lücken-Arten hier ergänzen; sonst gilt der Tipp unter "_". */
+const MAMA_TIPPS={x:'Mama-Tipp: In diesem Wort hörst du ks. Hier schreibst du ein x.',
+ chs:'Mama-Tipp: In diesem Wort hörst du ks. Hier schreibst du aber chs.',
+ ks:'Mama-Tipp: In diesem Wort hörst du ks. Hier schreibst du wirklich k und s.',
+ Sp:'Mama-Tipp: Am Anfang hörst du schp. Du schreibst aber Sp.',
+ St:'Mama-Tipp: Am Anfang hörst du scht. Du schreibst aber St.',
+ tz:'Mama-Tipp: Nach einem kurzen Laut schreibst du tz.',
+ 'ß':'Mama-Tipp: Nach einem langen Laut, nach au und ei, schreibst du ß.',
+ ss:'Mama-Tipp: Nach einem kurzen Laut schreibst du ss.',
+ ie:'Mama-Tipp: Ein langes i schreibst du meistens ie.',
+ h:'Mama-Tipp: In diesem Wort steckt ein h, das man nicht hört. Merk es dir gut!',
+ nn:'Mama-Tipp: Nach einem kurzen Laut kommt oft ein doppelter Buchstabe.',
+ z:'Mama-Tipp: Nach r, l und n schreibst du nur z, nie tz.',
+ b:'Mama-Tipp: Hörst du b oder p? Verlängere das Wort, zum Beispiel gelb, gelbe.',
+ _:'Mama-Tipp: Ein neues Wort! Hör genau hin und schwing die Silben mit.'};
+const mamaTipp=w=>{const W=WORDS.find(x=>x.w===w);return MAMA_TIPPS[W&&W.g?W.g[1]:'_']||MAMA_TIPPS._};
 /* Ein Wort diktieren und kontrollieren lassen (Test-Diktat und Überraschungs-Wort). Liefert true/false. */
-async function diktatWort(w,kopf){
+async function diktatWort(w,kopf){const neu=!(S.kartei||{})[w];
  await new Promise(r=>{panel(`${kopf}<div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
   <div class="lrow"><button class="btn sec" id="td-n">Nochmal hören</button><button class="btn" id="td-f">Geschrieben!</button></div></div>`);
-  barHtml('lehrerin','Hör gut zu!',[]);setTimeout(()=>sayWord(w),500);
+  if(neu){note('mama',mamaTipp(w));setTimeout(()=>{if($('#td-f')){barHtml('lehrerin','Hör gut zu!',[]);sayWord(w)}},5200)}
+  else{barHtml('lehrerin','Hör gut zu!',[]);setTimeout(()=>sayWord(w),500)}
   $('#td-n').onclick=()=>sayWord(w);$('#td-f').onclick=()=>{hush();r()}});
  return new Promise(r=>{panel(`${kopf}<div class="log"><div class="ltext">So schreibt man das Wort:</div><div class="lword">${w}</div>
   <div class="lrow"><button class="btn" id="td-r">Richtig geschrieben</button><button class="btn sec" id="td-w">Da war ein Fehler</button></div></div>${MINI()}`);
   note('lehrerin','Vergleiche Buchstabe für Buchstabe. Hast du es richtig geschrieben?');
   $('#td-r').onclick=()=>{reagiere('jubel','hops');sfx('ok');note('lehrerin',pick(['Super!','Prima, das sitzt!','Richtig. Weiter so!']));setTimeout(()=>r(true),1300)};
-  $('#td-w').onclick=()=>{reagiere('oh','seufz');note('mama',pick(['Mama-Tipp: Sprich das Wort langsam und schwing die Silben mit.','Mama-Tipp: Verlängere das Wort. Hund, Hunde. Dann hörst du das d.','Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal.','Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen.'].concat((WORDS.find(x=>x.w===w)||{}).a?['Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß.','Mama-Tipp: Denk an den Begleiter. Der, die oder das? Dann schreibst du groß.']:[])));setTimeout(()=>r(false),4500)}})}
+  $('#td-w').onclick=()=>{reagiere('oh','seufz');note('mama',pick(['Mama-Tipp: Sprich das Wort langsam und schwing die Silben mit.','Mama-Tipp: Verlängere das Wort. Hund, Hunde. Dann hörst du das d.','Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal.','Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen.','Mama-Tipp: Sprich beim Schreiben leise mit.','Mama-Tipp: Fahr mit dem Finger unter dem Wort entlang und vergleiche jeden Buchstaben.'].concat((WORDS.find(x=>x.w===w)||{}).a?['Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß.','Mama-Tipp: Denk an den Begleiter. Der, die oder das? Dann schreibst du groß.']:[])));setTimeout(()=>r(false),4500)}})}
 
 /* ---------- Test-Diktat: Frau Pranger diktiert, das Wort erscheint erst zur Kontrolle ----------
    Auswahl: „Heute dran“ (Kartei), alle Lernwörter oder ein Blatt. Nur die erste Antwort zählt für die Kartei;
