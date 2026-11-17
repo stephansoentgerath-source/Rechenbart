@@ -593,6 +593,10 @@ function stimmKey(who,text){const t=who+'|'+stimmText(text);let h=0x811c9dc5;for
 const HAT_STIMME=typeof STIMMEN!=='undefined'?new Set(STIMMEN):new Set();
 let clip=null;const FKEY='rechenbart-fehlt';
 function fehlt(who,text){const t=stimmText(text);if(!/[a-zäöüß]{2}/i.test(t))return;try{const L=JSON.parse(localStorage.getItem(FKEY)||'[]'),e=who+'|'+t;if(!L.includes(e)&&L.length<800){L.push(e);localStorage.setItem(FKEY,JSON.stringify(L))}}catch(e){}}
+/* Läuft gerade eine Sprachausgabe? (Aufnahme oder Gerätestimme) */
+const sprichtGerade=()=>!!(clip&&!clip.ended&&!clip.error)||(hasTTS&&(()=>{try{return speechSynthesis.speaking}catch(e){return false}})());
+/* Nach einer gesprochenen Rückmeldung weitermachen: mindestens ms warten, dann bis die Stimme fertig ist (höchstens 8 s mehr) */
+function weiter(fn,ms){const warte=n=>{if(sprichtGerade()&&n<40)setTimeout(()=>warte(n+1),200);else fn()};setTimeout(()=>warte(0),ms)}
 function hush(){if(clip){try{clip.pause()}catch(e){}clip=null}if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
 function speakTTS(text,who,onword){if(!hasTTS)return;
  try{const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';if(voice)u.voice=voice;u.rate=.9;u.pitch=PITCH[who]||1;
@@ -750,7 +754,7 @@ function askNumber(title,text,a,op,b){return new Promise(res=>{const ans=op==='+
  $('#again').onclick=()=>speak(text,'kruemel');const A=$('#ans');
  $$('.key').forEach(k=>k.onclick=()=>{if(lock)return;const c=k.dataset.k;A.classList.remove('bad');
   if(c==='⌫')val=val.slice(0,-1);else if(c==='OK'){if(!val)return;
-   if(+val===ans){lock=true;reagiere('jubel','hops');A.classList.add('good');note('kruemel',(sfx('ok'),pick(RIGHT)));setTimeout(res,1400)}
+   if(+val===ans){lock=true;reagiere('jubel','hops');A.classList.add('good');note('kruemel',(sfx('ok'),pick(RIGHT)));weiter(res,1400)}
    else{tries++;reagiere('oh','seufz');A.classList.add('bad');val='';note('kruemel',(sfx('bad'),pick(WRONG)));
     $('#hint').innerHTML=tries===1?(op==='+'?blocks(a)+blocks(b):blocks(a)+`<span>Nimm ${b} weg.</span>`):stepHint(a,op,b);
     setTimeout(()=>{A.textContent='?';A.classList.remove('bad')},700);return}}
@@ -810,7 +814,7 @@ function order(o){return new Promise(res=>{const t=`Ich möchte ${MENU[o[0]][2]|
  note('kruemel','Lies den Zettel selbst. Tippe dann auf der Karte an, was der Kapitän möchte.');$('#zh').onclick=()=>speak(t,'kruemel');
  $$('.row').forEach(r=>r.onclick=()=>{if(lock)return;const i=+r.dataset.i;if(sel.includes(i)){sel=sel.filter(x=>x!==i);r.classList.remove('sel');return}
   sel.push(i);r.classList.add('sel');if(sel.length<2)return;lock=true;
-  if(o.every(x=>sel.includes(x))){$$('.row.sel').forEach(x=>x.classList.add('good'));note('kruemel',(sfx('ok'),pick(RIGHT)));setTimeout(res,1500)}
+  if(o.every(x=>sel.includes(x))){$$('.row.sel').forEach(x=>x.classList.add('good'));note('kruemel',(sfx('ok'),pick(RIGHT)));weiter(res,1500)}
   else{note('kruemel','Kräh! Das wollte er nicht. Lies den Zettel nochmal genau.');setTimeout(()=>{$$('.row').forEach(x=>x.classList.remove('sel'));sel=[];lock=false},900)}})})}
 async function pub(){$('#harbor').style.display='none';$('#pub').style.display='';$('#hudnav').style.display='none';
  if(S.done.karte){const r=await talk('olga','Schön, dich zu sehen, Moritz! Was möchtest du machen?',['In die Küche','Speisekarte flicken','Nichts']);
@@ -899,10 +903,10 @@ function duel(n,wer){wer=wer||'mixa';const gn=NAME[wer].split(' ').pop(),rt={};
   cur=duelTask(n);val='';A.textContent='?';A.className='ans';$('#hint').textContent='';$('#dq').textContent=`${cur.a} ${sym()} ${cur.b} =`;
   note(wer,`${cur.a} ${cur.op==='+'?'plus':'minus'} ${cur.b}`);lock=false;
   if(T){const t=$('#dt');t.style.transition='none';t.style.width='100%';void t.offsetWidth;t.style.transition=`width ${T}s linear`;t.style.width='0';to=setTimeout(()=>miss('Die Sanduhr ist leer. Macht nichts!'),T*1000)}}
- function miss(msg){lock=true;clearTimeout(to);she++;score();react('m','oh','seufz');react('x','jubel','hops');A.classList.add('bad');$('#hint').textContent=`${cur.a} ${sym()} ${cur.b} = ${cur.ans}`;note('kruemel',msg);setTimeout(next,3200)}
+ function miss(msg){lock=true;clearTimeout(to);she++;score();react('m','oh','seufz');react('x','jubel','hops');A.classList.add('bad');$('#hint').textContent=`${cur.a} ${sym()} ${cur.b} = ${cur.ans}`;note('kruemel',msg);weiter(next,3200)}
  $$('.key').forEach(k=>k.onclick=()=>{if(lock)return;const c=k.dataset.k;
   if(c==='⌫')val=val.slice(0,-1);else if(c==='OK'){if(!val)return;
-   if(+val===cur.ans){lock=true;clearTimeout(to);if(T)$('#dt').style.transition='none';me++;score();react('m','jubel','hops');react('x','grr',wer==='schlotter'?'zitter':'grr');A.classList.add('good');note('kruemel',(sfx('ok'),pick(RIGHT)));setTimeout(next,1500)}
+   if(+val===cur.ans){lock=true;clearTimeout(to);if(T)$('#dt').style.transition='none';me++;score();react('m','jubel','hops');react('x','grr',wer==='schlotter'?'zitter':'grr');A.classList.add('good');note('kruemel',(sfx('ok'),pick(RIGHT)));weiter(next,1500)}
    else{sfx('bad');miss(`Hoppla! Der Punkt geht an ${gn}. Schau dir die Lösung an.`)}return}
   else if(val.length<3)val+=c;A.textContent=val||'?'});
  score();next()})}
@@ -930,7 +934,7 @@ async function kessel(){await brief('Mixa braucht bunte Zaubertränke. Lies das 
   $$('.fl').forEach(b=>b.onclick=()=>{if(lock)return;const f=b.dataset.f;if(sel.includes(f)){sel=sel.filter(x=>x!==f);b.classList.remove('sel');return}
    sel.push(f);b.classList.add('sel');if(sel.length<2)return;lock=true;const erg=MISCH[sel.slice().sort().join('+')];
    $('#saft').setAttribute('fill',FARBE[erg]);$('#blub').setAttribute('fill',FARBE[erg]);
-   if(erg===ziel){note('kruemel',`Kräh! ${cap(sel[0])} und ${sel[1]} wird ${erg}. Richtig!`);setTimeout(res,2600)}
+   if(erg===ziel){note('kruemel',`Kräh! ${cap(sel[0])} und ${sel[1]} wird ${erg}. Richtig!`);weiter(res,2600)}
    else{note('kruemel',`Hoppla! ${cap(sel[0])} und ${sel[1]} wird ${erg}. Probier es nochmal!`);
     setTimeout(()=>{$$('.fl').forEach(x=>x.classList.remove('sel'));sel=[];lock=false;$('#saft').setAttribute('fill','#9a9a9a');$('#blub').setAttribute('fill','#9a9a9a')},2600)}})});
  closePanel();await reward('kessel',15)}
@@ -958,7 +962,7 @@ async function diktatRun(k){{const g=STORY[k],lw=WORDS.filter(w=>w.l===g.l).map(
   for(let i=0;i<ws.length;i++)await new Promise(r=>{
    panel(`<div class="ptitle">Diktat ${dots(i,ws.length)}</div><div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
    <div class="lrow"><button class="btn sec" id="dk-n">Nochmal hören</button><button class="btn" id="dk-f">Geschrieben!</button></div></div>`);
-   note('lehrerin',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);setTimeout(()=>sayWord(mitArtikel(ws[i])),S.speak?2300:300);
+   note('lehrerin',`Wort ${i+1} von ${ws.length}. Hör gut zu!`);weiter(()=>{if($('#dk-f'))sayWord(mitArtikel(ws[i]))},S.speak?1500:300);
    $('#dk-n').onclick=()=>sayWord(mitArtikel(ws[i]));$('#dk-f').onclick=()=>{hush();r()}});
   const ok=await new Promise(r=>{panel(`<div class="ptitle">Diktat: Vergleiche!</div><div class="center ltext">Tippe alle Wörter an, die du richtig geschrieben hast.</div>
    <div class="dgrid">${ws.map((w,i)=>`<button class="dw" data-i="${i}">${i+1}. ${w}</button>`).join('')}</div><div class="center"><button class="btn" id="dk-e">Fertig verglichen</button></div>`);
@@ -1078,14 +1082,14 @@ const mamaTipp=w=>{const W=WORDS.find(x=>x.w===w);return MAMA_TIPPS[W&&W.g?W.g[1
 async function diktatWort(w,kopf){const neu=!(S.kartei||{})[w];
  await new Promise(r=>{panel(`${kopf}<div class="log"><div class="ohr">👂</div><div class="ltext">Hör genau zu. Schreib das Wort auf dein Papier.</div>
   <div class="lrow"><button class="btn sec" id="td-n">Nochmal hören</button><button class="btn" id="td-f">Geschrieben!</button></div></div>`);
-  if(neu){note('mama',mamaTipp(w));setTimeout(()=>{if($('#td-f')){barHtml('lehrerin','Hör gut zu!',[]);sayWord(mitArtikel(w))}},5200)}
+  if(neu){note('mama',mamaTipp(w));weiter(()=>{if($('#td-f')){barHtml('lehrerin','Hör gut zu!',[]);sayWord(mitArtikel(w))}},1500)}
   else{barHtml('lehrerin','Hör gut zu!',[]);setTimeout(()=>sayWord(mitArtikel(w)),500)}
   $('#td-n').onclick=()=>sayWord(mitArtikel(w));$('#td-f').onclick=()=>{hush();r()}});
  return new Promise(r=>{panel(`${kopf}<div class="log"><div class="ltext">So schreibt man das Wort:</div><div class="lword">${w}</div>
   <div class="lrow"><button class="btn" id="td-r">Richtig geschrieben</button><button class="btn sec" id="td-w">Da war ein Fehler</button></div></div>${MINI()}`);
   note('lehrerin','Vergleiche Buchstabe für Buchstabe. Hast du es richtig geschrieben?');
-  $('#td-r').onclick=()=>{reagiere('jubel','hops');sfx('ok');note('lehrerin',pick(['Super!','Prima, das sitzt!','Richtig. Weiter so!']));setTimeout(()=>r(true),1300)};
-  $('#td-w').onclick=()=>{reagiere('oh','seufz');note('mama',pick(['Mama-Tipp: Sprich das Wort langsam und schwing die Silben mit.','Mama-Tipp: Verlängere das Wort. Hund, Hunde. Dann hörst du das d.','Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal.','Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen.','Mama-Tipp: Sprich beim Schreiben leise mit.','Mama-Tipp: Fahr mit dem Finger unter dem Wort entlang und vergleiche jeden Buchstaben.'].concat((WORDS.find(x=>x.w===w)||{}).a?['Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß.','Mama-Tipp: Denk an den Begleiter. Der, die oder das? Dann schreibst du groß.']:[])));setTimeout(()=>r(false),4500)}})}
+  $('#td-r').onclick=()=>{reagiere('jubel','hops');sfx('ok');note('lehrerin',pick(['Super!','Prima, das sitzt!','Richtig. Weiter so!']));weiter(()=>r(true),1300)};
+  $('#td-w').onclick=()=>{reagiere('oh','seufz');note('mama',pick(['Mama-Tipp: Sprich das Wort langsam und schwing die Silben mit.','Mama-Tipp: Verlängere das Wort. Hund, Hunde. Dann hörst du das d.','Mama-Tipp: Schau dir das Wort genau an. Dann deck es ab und schreib es nochmal.','Mama-Tipp: Das ist ein Merkwort. Das üben wir gleich nochmal zusammen.','Mama-Tipp: Sprich beim Schreiben leise mit.','Mama-Tipp: Fahr mit dem Finger unter dem Wort entlang und vergleiche jeden Buchstaben.'].concat((WORDS.find(x=>x.w===w)||{}).a?['Mama-Tipp: Es ist ein Nomen. Nomen schreibst du groß.','Mama-Tipp: Denk an den Begleiter. Der, die oder das? Dann schreibst du groß.']:[])));weiter(()=>r(false),4500)}})}
 
 /* ---------- Test-Diktat: Frau Pranger diktiert, das Wort erscheint erst zur Kontrolle ----------
    Auswahl: „Heute dran“ (Kartei), alle Lernwörter oder ein Blatt. Nur die erste Antwort zählt für die Kartei;
@@ -1301,7 +1305,7 @@ async function kekskanone(){await brief('Die Kanone schießt mit alten Keksen! R
   panel(`<div class="ptitle">Keks-Kanone ${dots(i,8)}</div><div class="kan"><div class="ball" id="ball" style="background:#d9a55a;color:#2b2a33;border:6px solid #8c6234">${t.a} ${t.op==='+'?'+':'−'} ${t.b}</div><div class="faesser">${shuffle([...set]).map(v=>`<button class="fass" data-r="${v===t.ans?1:0}" style="background:#a9793f">${v}</button>`).join('')}</div></div>`);
   note('kapitaen','Welches Fass ist das richtige?');speak(`${t.a} ${t.op==='+'?'plus':'minus'} ${t.b}`,'kapitaen');
   $$('.fass').forEach(b=>b.onclick=()=>{if(lock)return;const ball=$('#ball');if(b.dataset.r==='1'){lock=true;const f=b.parentNode,dx=f.offsetLeft+b.offsetLeft+b.offsetWidth/2-(ball.offsetLeft+ball.offsetWidth/2);
-    sfx('kanone');ball.style.transform=`translate(${dx}px,0) scale(.3) rotate(540deg)`;setTimeout(()=>sfx('splash'),350);setTimeout(()=>{b.textContent='Treffer!';b.style.fontSize='34px';sfx('ok')},500);note('kapitaen',pick(['Har har! Volltreffer!','Mitten ins Fass! Har har!','Krümel, hol neue Kekse!']));setTimeout(res,1900)}
+    sfx('kanone');ball.style.transform=`translate(${dx}px,0) scale(.3) rotate(540deg)`;setTimeout(()=>sfx('splash'),350);setTimeout(()=>{b.textContent='Treffer!';b.style.fontSize='34px';sfx('ok')},500);note('kapitaen',pick(['Har har! Volltreffer!','Mitten ins Fass! Har har!','Krümel, hol neue Kekse!']));weiter(res,1900)}
    else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel','Kräh! Daneben. Rechne nochmal.')}})});
  closePanel()}
 function saebel(sk){return new Promise(res=>{const gs=sk==='geist';musicOn();const c=$('#cine'),G=900,NS=18+SW()*5,obs=[];let made=0,hit=0,last=0,tsp=0,msgT=0,fin=false;
@@ -1362,7 +1366,7 @@ function lesen(titel,text,opts,extra,keep,T){return new Promise(res=>{let lock=f
 function knopf(){return new Promise(res=>{const[text,seq]=pick(KNOPF);let i=0,lock=false;
  panel(`<div class="ptitle">Die Kiste ist verschlossen</div><div class="lesez"><div class="zt">Drücke hier zum Öffnen:</div>${text}</div><div class="dinge">${shuffle(['rot','blau','grün','gelb']).map(c=>`<button class="ding" data-c="${c}">${ding('knopf',c)}</button>`).join('')}</div><div class="center" style="margin-top:14px"><button class="btn small" id="le-h">Krümel hilft lesen</button></div>${MINI()}`);
  window._kn=seq;note('kruemel','Auf der Kiste klebt ein Zettel. Lies ihn selbst!');$('#le-h').onclick=()=>sayWord(text);
- $$('.ding').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.c===seq[i]){i++;sfx('coin');if(i===seq.length){lock=true;reagiere('jubel','hops');sfx('ok');note('kruemel','Klick! Die Kiste geht auf.');setTimeout(res,1500)}}
+ $$('.ding').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.c===seq[i]){i++;sfx('coin');if(i===seq.length){lock=true;reagiere('jubel','hops');sfx('ok');note('kruemel','Klick! Die Kiste geht auf.');weiter(res,1500)}}
   else{i=0;reagiere('oh','seufz');b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);sfx('bad');note('kruemel','Rrrr! Die Kiste bleibt zu. Lies den Zettel nochmal und fang von vorne an.')}})})}
 const ORT={hexe:'zur Hexenhütte',werft:'zur Werft',turm:'zum Leuchtturm',hoehle:'zur Schatzhöhle'},ORTN={hexe:'Hexenhütte',werft:'Werft',turm:'Leuchtturm',hoehle:'Schatzhöhle'};
 async function wegweiser(ziel){const R=[['nach links',-90],['geradeaus',0],['nach rechts',90],['zurück',180]],pl=shuffle(Object.keys(ORT)),zi=pl.indexOf(ziel),o=R.map((r,i)=>['pfeil',r[1],`Kräh! Da geht es ${ORT[pl[i]]}. Lies nochmal!`]);
@@ -1396,12 +1400,12 @@ async function uhr(st){const U=UHRK[st];await brief(UHRTXT[U.t]);const wer=U.w,f
   if(stellen){panel(`<div class="ptitle">Die Uhr stellen ${dots(i,5)}</div><div class="uhrw">${zifferblatt(h,0,2)}<div class="lesez" style="max-width:520px;margin:0">${NAME[wer]} sagt:<br><b>Stell die Uhr auf ${h} Uhr.</b></div></div>`);
    note('kruemel','Tippe auf die Zahl für den kleinen Zeiger.');
    $$('.uzahl').forEach(z=>z.onclick=()=>{if(lock)return;const kl=$('#uklein');kl.style.display='';kl.setAttribute('transform',`rotate(${z.dataset.n*30})`);
-    if(+z.dataset.n===h){lock=true;sfx('ok');note('kruemel',`Richtig! Es ist ${h} Uhr.`);setTimeout(res,1900)}else{sfx('bad');note('kruemel',`Kräh! Jetzt ist es ${z.dataset.n} Uhr. Wir brauchen ${h} Uhr.`)}})}
+    if(+z.dataset.n===h){lock=true;sfx('ok');note('kruemel',`Richtig! Es ist ${h} Uhr.`);weiter(res,1900)}else{sfx('bad');note('kruemel',`Kräh! Jetzt ist es ${z.dataset.n} Uhr. Wir brauchen ${h} Uhr.`)}})}
   else{const t=zeit(h,m),set=new Set([t]),alt=[zeit(h%12+1,m),zeit((h+10)%12+1,m),zeit(h,m===0?30:0),zeit(h,m===15?45:m===45?15:m),`${h%12+1} Uhr`];
    shuffle(alt).forEach(x=>{if(set.size<3)set.add(x)});
    panel(`<div class="ptitle">Wie spät ist es? ${dots(i,5)}</div><div class="uhrw">${zifferblatt(h,m)}<div class="copts">${shuffle([...set]).map(x=>`<button class="btn sec copt" data-r="${x===t?1:0}">${x}</button>`).join('')}</div></div>`);
    note(wer,frage+' Schau auf die Uhr!');
-   $$('.copt').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');note('kruemel',`Richtig! Es ist ${t}.`);setTimeout(res,1900)}
+   $$('.copt').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');note('kruemel',`Richtig! Es ist ${t}.`);weiter(res,1900)}
     else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel',m===0?'Kräh! Schau auf den kleinen roten Zeiger. Auf welche Zahl zeigt er?':m===30?'Kräh! Der kleine Zeiger ist schon auf dem Weg zur nächsten Zahl.':'Kräh! Wo steht der große blaue Zeiger: auf der 3 oder auf der 9?')}})}});
  closePanel()}
 
@@ -1477,7 +1481,7 @@ async function schatzkarte(){await brief('Jetzt ist die Karte ganz. Lies die Sch
   ${[...Array(W*H)].map((_,i)=>{const cx=i%W,cy=Math.floor(i/W);return `<rect class="hot zelle" data-t="${cx===x&&cy===y?1:0}" x="${cx*100}" y="${cy*110}" width="100" height="110" style="fill:#f1dfb4" stroke="#a9793f" stroke-width="3"/>`}).join('')}
   <circle cx="${sx*100+50}" cy="${sy*110+55}" r="30" fill="#3b78c4" stroke="#2b2a33" stroke-width="4" pointer-events="none"/></svg></div>`);
   note('kruemel','Lies die Schritte. Zähle die Felder. Tippe auf das Feld mit dem Schatz.');$('#zh').onclick=()=>sayWord(t);
-  $$('.zelle').forEach(c=>c.onclick=()=>{if(lock)return;if(c.dataset.t==='1'){lock=true;c.style.fill='#f6c84a';sfx('ok');note('kruemel','Kräh! Genau da liegt der Schatz!');setTimeout(res,2000)}
+  $$('.zelle').forEach(c=>c.onclick=()=>{if(lock)return;if(c.dataset.t==='1'){lock=true;c.style.fill='#f6c84a';sfx('ok');note('kruemel','Kräh! Genau da liegt der Schatz!');weiter(res,2000)}
    else{c.style.fill='#f3c0bb';setTimeout(()=>c.style.fill='#f1dfb4',700);sfx('bad');note('kruemel','Kräh! Zähle die Schritte nochmal. Norden ist oben.')}})});
  closePanel()}
 async function finale(){musicOn();sfx('truhe');setTimeout(()=>sfx('fanfare'),900);cineOpen('<div style="position:absolute;inset:0;background:#2a2333 url(schluss.jpg) center/cover"></div>');

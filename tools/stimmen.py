@@ -15,7 +15,8 @@ import json, os, re, struct, subprocess, sys, urllib.request, concurrent.futures
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / 'stimmen'
 KIND = ('Das Publikum ist ein siebenjähriges Kind, also deutlich und nicht zu schnell. '
-        'Sprich reines Hochdeutsch ohne englischen Akzent.')
+        'Sprich reines Hochdeutsch ohne englischen Akzent. '
+        'Mach nach jedem Satz (nach Punkt, Ausrufezeichen oder Fragezeichen) eine kurze, deutliche Pause.')
 # Figur -> (OpenAI-Stimme, Regie)
 FIG = {
  'kapitaen': ('onyx', 'Gutmütiger alter Piratenkapitän mit tiefer, rauer Stimme. Warm, lacht gern („Har har!“), ein bisschen brummig und vergesslich.'),
@@ -175,7 +176,8 @@ def sammeln():
 AUSSPRACHE = [(r'\bKeks', 'Kehks')]
 def sprechtext(text):
     for a, b in AUSSPRACHE: text = re.sub(a, b, text)
-    return text
+    # Satzende -> Zeilenumbruch: die Stimme macht dort eine hörbare Pause
+    return re.sub(r'([.!?])\s+(?=\S)', r'\1\n\n', text)
 
 def tts(who, text):
     stimme, regie = FIG[who]
@@ -207,6 +209,52 @@ def artikel_ab(roh):
     schnitt = roh.with_suffix('.cut.mp3')
     subprocess.run(['ffmpeg', '-nostdin', '-hide_banner', '-loglevel', 'error', '-y', '-ss', f'{max(0, e - 0.06):.3f}', '-i', str(roh), str(schnitt)], check=True)
     schnitt.replace(roh)
+
+# ---------- Satzpausen verlängern ----------
+# Die KI-Stimme macht zwischen Sätzen nur ~0,5 s Pause. Stille mitten in der Aufnahme, die länger als PAUSE_MIN dauert
+# (Satzende; Kommas sind kürzer), wird um PAUSE_PLUS verlängert. stimmen/pausen.json merkt bearbeitete Dateien.
+PAUSE_MIN, PAUSE_PLUS, SR = 0.28, 0.4, 24000
+def pausen_dehnen(datei):
+    import numpy as np
+    raw = subprocess.run(['ffmpeg', '-nostdin', '-hide_banner', '-loglevel', 'error', '-i', str(datei), '-f', 's16le', '-ac', '1', '-ar', str(SR), '-'],
+                         capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, dtype=np.int16).astype(np.float32)
+    if len(x) < SR // 2: return 0
+    fen = SR // 100                                    # 10-ms-Fenster
+    n = len(x) // fen
+    rms = np.sqrt((x[:n * fen].reshape(n, fen) ** 2).mean(axis=1))
+    still = rms < 400                                  # ca. -38 dBFS
+    laeufe, i = [], 0
+    while i < n:
+        if still[i]:
+            j = i
+            while j < n and still[j]: j += 1
+            laeufe.append((i, j)); i = j
+        else: i += 1
+    innen = [(a, b) for a, b in laeufe if a > 0 and b < n and (b - a) / 100 >= PAUSE_MIN]
+    if not innen: return 0
+    teile, pos = [], 0
+    for a, b in innen:
+        mitte = (a + b) // 2 * fen
+        teile += [x[pos:mitte], np.zeros(int(PAUSE_PLUS * SR), dtype=np.float32)]; pos = mitte
+    teile.append(x[pos:])
+    y = np.concatenate(teile).astype(np.int16).tobytes()
+    tmp = pathlib.Path(str(datei) + '.p.mp3')
+    subprocess.run(['ffmpeg', '-nostdin', '-hide_banner', '-loglevel', 'error', '-y', '-f', 's16le', '-ar', str(SR), '-ac', '1', '-i', '-',
+                    '-b:a', '48k', str(tmp)], input=y, check=True)
+    tmp.replace(datei)
+    return len(innen)
+
+def pausen_alle():
+    liste = OUT / 'pausen.json'
+    fertig = json.loads(liste.read_text()) if liste.exists() else {}   # Schlüssel -> Dateigröße nach dem Dehnen
+    n = d = 0
+    for f in sorted(OUT.glob('*/*.mp3')):
+        k = str(f.relative_to(OUT))[:-4]
+        if fertig.get(k) == f.stat().st_size: continue
+        d += pausen_dehnen(f); fertig[k] = f.stat().st_size; n += 1
+    liste.write_text(json.dumps(dict(sorted(fertig.items())), indent=0))
+    print(n, 'Aufnahmen bearbeitet,', d, 'Satzpausen verlängert')
 
 def eins(e):
     k = key(e['who'], e['text']); ziel = OUT / (k + '.mp3')
@@ -243,6 +291,7 @@ def erzeugen(nur=None):
         weg = [f for f in OUT.glob('*/*.mp3') if str(f.relative_to(OUT))[:-4] not in gueltig]
         for f in weg: f.unlink()
         if weg: print(len(weg), 'veraltete Aufnahmen entfernt')
+    pausen_alle()
     print(neu, 'neu erzeugt,', fehl, 'Fehler,', manifest(), 'Aufnahmen insgesamt')
 
 def nachtrag(datei):
@@ -261,4 +310,5 @@ if __name__ == '__main__':
     elif a[0] == 'erzeugen': erzeugen(set(a[2].split(',')) if len(a) > 2 and a[1] == '--nur' else None)
     elif a[0] == 'nachtrag': nachtrag(a[1])
     elif a[0] == 'manifest': print(manifest())
+    elif a[0] == 'pausen': pausen_alle()
     else: print(__doc__)
