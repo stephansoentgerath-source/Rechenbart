@@ -143,8 +143,9 @@ html,body{margin:0;height:100%;background:#22313a;overflow:hidden;font-family:An
 .orte{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:20px}
 .kap12{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:680px;margin-top:20px}
 .kap12 .btn{font-size:21px;padding:10px 6px;min-width:0}.kap12 .btn:disabled{opacity:.4}
-.ecard.breit{width:1180px;display:grid;grid-template-columns:1fr 1fr;gap:6px 40px;font-size:22px}
-.ecard.breit h2,.ecard.breit .lrow{grid-column:1/3}.ecard select{font:inherit;font-size:21px;padding:4px 8px;max-width:100%}
+.ecard.breit{width:1180px;display:grid;grid-template-columns:1fr 1fr;gap:4px 40px;font-size:19px;padding:18px 34px;max-height:780px;overflow-y:auto;box-sizing:border-box}
+.ecard.breit h2{margin-bottom:4px}.ecard.breit label{margin:5px 0}.ecard.breit input[type=checkbox]{width:22px;height:22px}.ecard.breit select{font-size:18px;padding:2px 6px}.ecard.breit .lrow{margin-top:10px}
+.ecard.breit h2{grid-column:1/3}.ecard.breit .lrow{margin-top:24px}.ecard select{font:inherit;font-size:21px;padding:4px 8px;max-width:100%}
 .orte .btn{min-width:560px}.orte .btn:disabled{opacity:.4}
 #credits{position:absolute;inset:0;background:#1d1826cc;overflow:hidden;color:#fbeed3;text-align:center}
 .roll{position:absolute;left:0;right:0;top:0;font-size:38px;line-height:1.6;animation:roll 60s linear forwards}
@@ -1649,7 +1650,7 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  <div><b>Spiel</b><label><input type="checkbox" id="e-sp"${S.speak?' checked':''}>Vorlesen (Sprachausgabe)</label><label><input type="checkbox" id="e-so"${S.sound!==false?' checked':''}>Geräusche</label><label><input type="checkbox" id="e-mu"${S.music!==false?' checked':''}>Musik</label>
  <label>Sanduhr (letztes Rechen-Duell, Lesen und Handeln): ${sel('e-ti',[[0,'aus'],[60,'gemütlich (60 s)'],[45,'normal (45 s)'],[30,'sportlich (30 s)']],SAND())}</label><label><input type="checkbox" id="e-al"${S.alle?' checked':''}>Alle Kapitel freischalten (zum Ausprobieren)</label>
  <label>Belohnungsspiele: ${sel('e-sw',[[0,'leicht'],[1,'mittel'],[2,'schwer']],SW())}</label>
- <div style="margin-top:6px">Geburtstage (TT.MM, nur auf diesem Gerät):<br>${FAMILIE.map(([k,n])=>`<label style="display:inline-block;margin-right:10px">${n} <input id="e-g-${k}" value="${(S.geb||{})[k]||''}" placeholder="TT.MM" maxlength="6" style="width:84px;font:inherit;font-size:20px"></label>`).join('')}</div>
+ <div style="margin-top:6px">Geburtstage (TT.MM, nur auf diesem Gerät):<br>${FAMILIE.map(([k,n])=>`<label style="display:inline-block;margin-right:10px">${n} <input id="e-g-${k}" value="${(S.geb||{})[k]||''}" placeholder="TT.MM" maxlength="6" style="width:76px;font:inherit;font-size:18px"></label>`).join('')}</div>
  <label>Rechnen: ${sel('e-re',[['leicht','leicht: Zehnerzahlen (46 + 30)'],['mittel','mittel: ohne Übergang (42 + 25)'],['schwer','schwer: mit Übergang (47 + 25)']],RSTUFE())}</label>
  <div style="margin-top:6px">${!hasTTS?'Stimme: <b>keine Sprachausgabe</b>':!deVoices().length?'Stimme: <b>keine deutsche Stimme gefunden</b>'
  :`<label>Stimme: ${sel('e-st',deVoices().map(v=>[v.name,v.name.replace(/^(Microsoft|Google|Amazon)\s*/,'').slice(0,34)]),voice?voice.name:'')}</label> <button class="btn small" id="e-sh">Probehören</button>`}</div>
@@ -1659,8 +1660,8 @@ function eltern(){const e=$('#eltern');e.style.display='flex';
  <label><input type="checkbox" id="e-uw"${S.uwort!==false?' checked':''}>Überraschungs-Wort im Abenteuer (nach jeder 3. Aufgabe)</label><label>Lernpaket: ${sel('e-pk',PAKETE.map(q=>[q.id,q.name]),aktPaket().id)}</label>
  <label>Lernwörter: ${sel('e-lw',LERNWOERTER.map(l=>[l.id,l.name]),aktLW().id)}</label>
  ${BLATTK.map(k=>`<label><input type="checkbox" class="e-l" value="${k}"${S.lists.includes(k)?' checked':''}>${BLATT[k]}</label>`).join('')}
- <div style="margin-top:6px"><b>Wackelwörter:</b> ${wack}</div><div><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen</div></div>
- <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-n">Neue Reise starten</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div>`;
+ <div style="margin-top:6px"><b>Wackelwörter:</b> ${wack}</div><div><b>Training:</b> ${WORDS.filter(w=>lvl(w)>=2).length} von ${WORDS.length} Wörtern sitzen</div>
+ <div class="lrow"><button class="btn small" id="e-t">Stimme testen</button><button class="btn small" id="e-n">Neue Reise starten</button><button class="btn small" id="e-r">Spielstand löschen</button><button class="btn" id="e-c">Fertig</button></div></div></div>`;
  $('#e-al').onchange=x=>{S.alle=x.target.checked;save()};$('#e-au').onchange=x=>{S.aufnahmen=x.target.checked;save()};
  $('#e-fl').onclick=()=>{let L=[];try{L=JSON.parse(localStorage.getItem(FKEY)||'[]')}catch(e){}const w=window.open('','_blank');
   if(w){w.document.title='Fehlende Aufnahmen';w.document.body.innerHTML='<p>Diese Liste an Claude schicken (alles markieren, kopieren):</p><textarea style="width:100%;height:80vh">'+L.join('\n').replace(/</g,'&lt;')+'</textarea>'}};if($('#e-st')){$('#e-st').onchange=x=>{S.stimme=x.target.value;loadVoice();save();speak('Ahoi, Moritz! So klinge ich.','kruemel')};
