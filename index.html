@@ -716,10 +716,12 @@ function race(){return new Promise(res=>{musicOn();const c=$('#cine'),LY=[330,48
 /* ---------- Leiste unten ---------- */
 function spans(t){let i=0;return t.split(' ').map(w=>{const s=`<span data-c="${i}">${w}</span>`;i+=w.length+1;return s}).join(' ')}
 function hl(ci){let cur=null;$$('#bar .tx span').forEach(s=>{s.classList.remove('hl');if(+s.dataset.c<=ci)cur=s});if(cur)cur.classList.add('hl')}
-function barHtml(who,text,btns){$('#bar').innerHTML=`<div class="port">${PORT[who]}</div><div class="say"><div class="nm">${NAME[who]}</div><div class="tx">${spans(text)}</div></div><div class="bb">${btns.map((b,i)=>`<button class="btn${i?' sec':''}" data-b="${i}">${b}</button>`).join('')}</div>`}
+/* Wartet eine Sprechblase auf einen Knopf (talk), darf ein Hinweis ohne Knöpfe (note) sie nicht überschreiben –
+   sonst verschwindet „Weiter“ und das Spiel hängt (z. B. Doppeltipp nach der letzten Antwort). */
+function barHtml(who,text,btns){if(!btns.length&&document.querySelector('#bar .btn[data-talk]'))return false;$('#bar').innerHTML=`<div class="port">${PORT[who]}</div><div class="say"><div class="nm">${NAME[who]}</div><div class="tx">${spans(text)}</div></div><div class="bb">${btns.map((b,i)=>`<button class="btn${i?' sec':''}" data-b="${i}">${b}</button>`).join('')}</div>`}
 function talk(who,text,btns){btns=btns||['Weiter'];return new Promise(res=>{barHtml(who,text,btns);speak(text,who,hl);
- $$('#bar .btn').forEach(b=>b.onclick=()=>{hush();res(+b.dataset.b)})})}
-function note(who,text){barHtml(who,text,[]);speak(text,who,hl)}
+ $$('#bar .btn').forEach(b=>{b.dataset.talk=1;b.onclick=()=>{b.parentNode&&b.parentNode.querySelectorAll('.btn').forEach(x=>delete x.dataset.talk);hush();res(+b.dataset.b)}})})}
+function note(who,text){if(barHtml(who,text,[])===false)return;speak(text,who,hl)}
 async function brief(text){while(await talk('kruemel',text+' Alles klar, Käpt’n?',['Ja!','Nochmal hören']));}
 async function briefL(text){while(await talk('lehrerin',text+' Alles klar, Moritz?',['Ja!','Nochmal hören']));}
 function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filter(k=>d[k]).length,n2=['buch','kessel'].filter(k=>d[k]).length,c=SC[sc];let t;
