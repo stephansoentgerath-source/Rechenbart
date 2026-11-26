@@ -284,6 +284,89 @@ const PAKETE=[
    ["Wie heißt ein Pirat, der immer zu spät kommt?", "Kapitän Gleich-da! Har har!"],
    ["Warum nehmen Piraten nie Kekse mit an Deck?", "Weil Krümel sonst alles wegfuttert! Har har!"]
   ],
+  /* ===== Akt 3 (Kapitel 9 bis 11) ===== */
+  /* Einmaleins: [Text mit {a} und {b}, feste Zahl für b oder 0]. {a} = Anzahl der Gruppen, {b} = so viele in jeder Gruppe.
+     doppel: Verdoppeln bis 20, nur {a}. mal9 = Zweier und Zehner, mal10 = Fünfer, mal11 = alles gemischt. */
+  mal:{
+   doppel:[
+    "Im ersten Nest liegen {a} Eier. Im zweiten Nest liegen genauso viele. Wie viele Eier sind es zusammen?",
+    "Krümel findet {a} Muscheln. Moki findet genauso viele. Wie viele Muscheln sind es zusammen?",
+    "Oma Schildi hat {a} Enkel. Ihre Schwester hat genauso viele. Wie viele Enkel sind es zusammen?"
+   ],
+   mal9:[
+    ["In {a} Nestern liegen je {b} Eier. Wie viele Eier sind es?", 0],
+    ["{a} Krebse haben je 2 Scheren. Wie viele Scheren sind es?", 2],
+    ["{a} Möwen stehen am Strand. Jede hat 2 Beine. Wie viele Beine sind es?", 2],
+    ["{a} Kinder ziehen je 2 Schuhe aus. Wie viele Schuhe liegen im Sand?", 2],
+    ["In {a} Eimern sind je {b} Muscheln. Wie viele Muscheln sind es?", 0],
+    ["Krümel hat {a} Tüten mit je 10 Keksen. Wie viele Kekse hat er?", 10],
+    ["{a} Schildkröten-Babys haben je {b} Flecken. Wie viele Flecken sind es?", 0]
+   ],
+   mal10:[
+    ["Ein Stern an der Tempeltür hat 5 Zacken. Wie viele Zacken haben {a} Sterne?", 5],
+    ["{a} Affen zeigen je eine Hand. Jede Hand hat 5 Finger. Wie viele Finger sind es?", 5],
+    ["Auf {a} Steinen sind je {b} Punkte. Wie viele Punkte sind es?", 0],
+    ["{a} Körbe mit je {b} Bananen. Wie viele Bananen sind es?", 0],
+    ["Im Tempel hängen {a} Ketten mit je {b} Perlen. Wie viele Perlen sind es?", 0],
+    ["{a} Blumen haben je 5 Blätter. Wie viele Blätter sind es?", 5]
+   ],
+   mal11:[
+    ["An {a} Tischen sitzen je {b} Piraten. Wie viele Piraten sind es?", 0],
+    ["Auf {a} Tellern liegen je {b} Würstchen. Wie viele Würstchen sind es?", 0],
+    ["{a} Kuchen haben je {b} Kerzen. Wie viele Kerzen sind es?", 0],
+    ["Olga backt {a} Bleche mit je {b} Keksen. Wie viele Kekse sind es?", 0],
+    ["{a} Piraten haben je 2 Ohren. Wie viele Ohren hören die Musik?", 2]
+   ]
+  },
+  /* Silben verbinden: [erste Silbe, zweite Silbe, Bild]. Bilder sind Emojis. */
+  silben:[
+   ["Ku","chen","🍰"], ["Kro","ne","👑"], ["Lö","we","🦁"], ["Kä","se","🧀"], ["Fuß","ball","⚽"], ["Vo","gel","🐦"],
+   ["Ap","fel","🍎"], ["En","te","🦆"], ["Wol","ke","☁️"], ["Kat","ze","🐱"], ["Schne","cke","🐌"], ["Ta","sche","👜"],
+   ["Mu","schel","🐚"], ["Pin","sel","🖌️"], ["Kür","bis","🎃"], ["Ha","se","🐰"], ["Bir","ne","🍐"], ["Glo","cke","🔔"]
+  ],
+  /* Satzhälften verbinden: [Anfang, Ende]. Jedes Ende darf nur zu seinem Anfang passen. */
+  satzhaelften:[
+   ["Die Maus","frisst gern Käse."], ["Das Haus","hat ein rotes Dach."], ["Der Vogel","baut ein Nest."], ["Der Fisch","schwimmt im Wasser."],
+   ["Die Kuh","gibt Milch."], ["Der Hund","bellt laut."], ["Die Sonne","scheint hell."], ["Das Schiff","segelt über das Meer."],
+   ["Der Bäcker","backt Brot."], ["Die Biene","macht Honig."], ["Der Mond","leuchtet in der Nacht."], ["Das Auto","fährt auf der Straße."],
+   ["Der Schneemann","schmilzt in der Sonne."], ["Die Katze","schnurrt leise."], ["Krümel","ist ein Papagei."], ["Der Apfel","wächst am Baum."],
+   ["Die Schnecke","kriecht langsam."], ["Der Kapitän","steht am Steuerrad."]
+  ],
+  /* Kreuze an: Sätze zu den Bildern. Die Reihenfolge gehört zur Zeichnung im Spiel, bitte nicht umstellen. */
+  bildsaetze:{
+   flasche:["Die Flasche ist voll.","Die Flasche ist leer.","Die Flasche ist halb voll."],
+   lampe:["Die Lampe ist an.","Die Lampe ist aus."],
+   katze:["Die Katze sitzt auf dem Tisch.","Die Katze sitzt unter dem Tisch.","Die Katze sitzt neben dem Tisch."],
+   aepfel:["Im Korb liegen zwei Äpfel.","Im Korb liegen drei Äpfel.","Im Korb liegen vier Äpfel."],
+   ball:["Der Ball ist rot.","Der Ball ist blau.","Der Ball ist gelb."],
+   fenster:["Das Fenster ist offen.","Das Fenster ist zu."],
+   vogel:["Der Vogel sitzt auf dem Dach.","Der Vogel fliegt über dem Haus.","Der Vogel sitzt neben dem Haus."],
+   fische:["Im Glas schwimmt ein Fisch.","Im Glas schwimmen zwei Fische.","Im Glas schwimmen drei Fische."]
+  },
+  /* Richtig oder falsch: [Satz, 1 = richtig, 0 = falsch] */
+  richtigFalsch:[
+   ["Eulen jagen Mäuse.",1], ["Brot wird gebacken.",1], ["Delfine können malen.",0], ["Fische haben Beine.",0], ["Hosen haben zwei Nasen.",0],
+   ["Wir leben auf der Erde.",1], ["Eine Pizza ist aus Gummi.",0], ["Raben können fliegen.",1], ["Tomaten sind lila.",0], ["Moritz ist ein Name.",1],
+   ["Schnee ist kalt.",1], ["Die Sonne ist ein Keks.",0], ["Kühe geben Milch.",1], ["Ein Jahr hat zwölf Monate.",1], ["Eine Woche hat zehn Tage.",0],
+   ["Schildkröten tragen einen Panzer.",1], ["Bananen wachsen im Meer.",0], ["Im Winter ist es oft kalt.",1], ["Ein Dreieck hat vier Ecken.",0],
+   ["Fische leben im Wasser.",1], ["Hunde können bellen.",1], ["Piraten essen Steine zum Frühstück.",0], ["Ein Fahrrad hat zwei Räder.",1],
+   ["Elefanten passen in eine Streichholzschachtel.",0], ["Der Mond ist aus Käse.",0], ["Bienen machen Honig.",1], ["Zwei plus zwei ist fünf.",0],
+   ["Mit einer Schere kann man schneiden.",1], ["Gespenster wohnen im Kühlschrank.",0], ["Eine Hand hat fünf Finger.",1]
+  ],
+  /* Lies und male: Dinge im Strandbild [Kennung im Bild, Name mit Artikel] und Farben (Lernwörter Blatt 3) */
+  malen:{
+   objekte:[["schildkroete","Die Schildkröte"],["eimer","Der Eimer"],["ball","Der Ball"],["muschel","Die Muschel"],["schirm","Der Sonnenschirm"],["segel","Das Segel"],["krebs","Der Krebs"],["handtuch","Das Handtuch"]],
+   farben:["rot","gelb","blau","grün","schwarz","weiß"]
+  },
+  /* Rezepte für das Piratenfest: Schritte [Text, Zutat, Anzahl]. Zutaten: apfel banane erdbeere traube birne orange kiwi zitrone tomate kaese pilz mais ananas fisch */
+  rezepte:[
+   {name:"Olgas Obstsalat", zutaten:["apfel","banane","erdbeere","traube","birne","zitrone"],
+    schritte:[["Lege 3 Äpfel in die Schüssel.","apfel",3],["Gib 2 Bananen dazu.","banane",2],["Jetzt kommen 5 Erdbeeren hinein.","erdbeere",5],["Nimm keine Zitrone! Lege 4 Trauben dazu.","traube",4]],
+    ende:"Mmmh! Der beste Obstsalat der ganzen Insel!"},
+   {name:"Piraten-Pizza", zutaten:["tomate","kaese","pilz","mais","ananas","fisch"],
+    schritte:[["Belege die Pizza mit 4 Tomaten.","tomate",4],["Lege 2 Stücke Käse darauf.","kaese",2],["Der Kapitän mag keine Pilze. Lege 3 Stücke Ananas darauf.","ananas",3],["Zum Schluss kommt 1 Fisch obendrauf.","fisch",1]],
+    ende:"Har har! Eine Pizza mit Fisch und Ananas. Echt piratig!"}
+  ],
   witze:[
    "Was ist grün und klopft an die Tür? Ein Klopfsalat!",
    "Wie nennt man einen Keks unter einem Baum? Ein schattiges Plätzchen!",

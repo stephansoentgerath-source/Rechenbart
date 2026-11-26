@@ -1,6 +1,6 @@
 # Arbeitsaufträge „Die Insel von Kapitän Rechenbart“
 
-Stand 16.11.2026. Diese Datei ist für die Arbeit mit einem einfachen Modell gedacht:
+Stand 26.11.2026. Diese Datei ist für die Arbeit mit einem einfachen Modell gedacht:
 einen Auftrag nennen („Mach Auftrag A3 aus AUFTRAEGE.md“), fertig.
 
 ## Regeln für jeden Auftrag
@@ -130,7 +130,7 @@ traurig, ängstlich, wütend) zum Antippen, kurze Situation dazu. Neue Gesichter
 
 ## C – Für Fable (Neues, Dramaturgie)
 
-**C1 Akt 3: Kapitel 9 bis 11.** Je sechs Plätze, eigene Szenenbilder, neue Belohnungsspiele.
+~~**C1 Akt 3: Kapitel 9 bis 11.**~~ **Erledigt 26.11.2026** (siehe „Akt 3“ unten). Ursprünglicher Plan:
 - 9 Schildkröten-Strand: Umwelt, Müll trennen, Schildkröten zum Meer bringen (greift `akt2.jpg` auf).
 - 10 Dschungel-Tempel: Rätsel, Wegweiser, Anleitungen lesen, Geheimtür.
 - 11 Piratenfest: Kochen nach Rezept, Musik (Rhythmus nachtippen), Uhr „Wann beginnt das Fest?“.
@@ -155,6 +155,26 @@ Geld kommt im Spiel bisher gar nicht vor – größte inhaltliche Lücke.
 **C2 ergänzt:** Rechen-Fechten als „Flink wie die Mäuse“ – Kopfrechnen bis 20 mit und ohne Zehnerübergang, die Klasse
 übt das ebenfalls mit Zeitvorgabe; Stufe wählbar, Sanduhr über `SAND()`.
 
+## Akt 3 (Kapitel 9–11), Stand 26.11.2026
+
+Vorbild: Arbeitsheft-Seiten „Lies und male“, „Verbinde“ (Satzhälften, Silben), „Kreuze an“ (Bild–Satz, richtig/falsch).
+Jedes Kapitel: Rechnen, Sprache, Lesen und Handeln, Uhr, **Wiederholungs-Truhe** (statt Wissens-Kiste), Belohnungsspiel, Orden.
+
+| Kapitel | Rechnen | Sprache | Lesen und Handeln | Uhr | Bonus |
+|---|---|---|---|---|---|
+| 9 Schildkröten-Strand (Oma Schildi) | Verdoppeln + Einmaleins 2er/10er mit Punktefeld | Silben verbinden (Bilder) | Lies und male (Farben = Lernwörter Blatt 3) | großen Zeiger stellen (voll, halb, Viertel) | Babys zum Meer bringen |
+| 10 Dschungel-Tempel (Tukan Tuki, neue Figur) | 5er-Reihe, gemischt, Tauschaufgaben | Satzhälften verbinden | Kreuze an: welcher Satz passt zum Bild | 5-Minuten-Schritte („20 nach 3“) | Tempel-Memory |
+| 11 Piratenfest (Olga, Kapitän) | Einmaleins gemischt + Einmaleins-Duell gegen den Kapitän | Richtig oder falsch (Fest-Zeitung) | Rezept lesen und kochen (Mengen zählen) | Zeitspannen („Wann ist es zu Ende?“) | Trommel-Echo |
+
+- **Einmaleins:** nur Kernreihen 1·2, 1·5, 1·10 und Verdoppeln. Bild-Hilfe: Punktefeld `feld(a,b)`; Fehler-Hilfe: erst Punktefeld,
+  dann „Zähle in 5er-Schritten“. `askNumber(…, op '·', …, bild)` und `duel('mal', wer)` können Mal-Aufgaben.
+  Weitere Reihen (3, 4 …) erst, wenn die Klasse so weit ist: `malListe(key, reihen, …)` nimmt beliebige Reihen.
+- **Wiederholungs-Truhe** (`wiederholung(kap)`): sechs gemischte Aufgaben aus allen früheren Kapiteln (Plus, Minus, Artikel,
+  Lernwort-Lücke, Uhr, Gegenteil, Wissen, Nomen, Verben, ab Kapitel 10 auch Einmaleins) und **immer ein Lernwort-Diktat mit Kartei**.
+- **Inhalte** in `inhalte.js`: `mal` (Einmaleins-Geschichten), `silben`, `satzhaelften`, `bildsaetze` (Reihenfolge gehört zur Zeichnung!),
+  `richtigFalsch`, `malen`, `rezepte`. Neue Einträge funktionieren ohne Code-Änderung, außer neue Bilder bei `bildsaetze`/`malen`.
+- Schatzhöhle ist erst nach Kapitel 11 offen (wer sie schon begonnen hat, behält den Zugang).
+
 ## Stand der Klasse (Lernlandkarte, abgerufen 16.11.2026; Link bei Stephan, nicht ins Repo)
 
 Wird **jeden Sonntag um 6:47 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich
@@ -176,5 +196,5 @@ Erinnerung zum Verlängern des OpenAI-Schlüssels: 8.12.2026 (geplante Aufgabe).
 
 - Alles ist nur am Computer getestet (Chrome, automatischer Durchlauf), nicht auf dem Fire Tablet.
 - Geräusche und Musik hat noch niemand außer Stephan und Moritz gehört.
-- Kapitel 9 bis 11 fehlen (auf der Inselkarte als „bald“); nach Kapitel 8 geht es direkt in die Schatzhöhle.
+- Akt 3 ist nur automatisch durchgespielt; Emojis (Silben, Rezept, Memory) auf dem Fire Tablet prüfen.
 - Kein Offline-Betrieb: ohne WLAN startet das Spiel vermutlich nicht (kein Service Worker).

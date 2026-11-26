@@ -261,6 +261,29 @@ body.aufgabe #scene,body.aufgabe #scene *{animation-play-state:paused!important}
 .ecard label{display:block;margin:8px 0}
 .ecard input{width:26px;height:26px;vertical-align:-4px;margin-right:10px}
 .ecard .lrow{margin-top:16px;gap:14px;flex-wrap:wrap}
+
+/* ---------- Akt 3 ---------- */
+.feld{display:inline-flex;flex-direction:column;gap:5px;padding:8px 12px;background:#fff8e6;border:3px solid #a9793f;border-radius:10px;margin:4px 0 8px}
+.frow{display:flex;gap:5px}.frow i{width:18px;height:18px;border-radius:50%;background:#d24a43;display:block}.frow i.f5{margin-left:10px}
+.num .story{margin-bottom:4px}
+.vb{position:relative;display:flex;justify-content:space-between;gap:120px;padding:0 40px}.vbl{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.vcol{display:flex;flex-direction:column;gap:14px;flex:1}.vcol:last-of-type{align-items:flex-start}
+.vk{font:inherit;font-size:34px;font-weight:700;padding:10px 22px;border-radius:14px;border:3px solid #a9793f;background:#fff;box-shadow:0 4px 0 #a9793f;color:#2b2a33;text-align:left;min-height:66px}
+.vk.sel{background:#fbe3a0;border-color:#c98f1f}.vk:disabled{color:#2b2a33;opacity:1}.vbild{font-size:40px;margin-right:16px;vertical-align:-4px}
+.silb .vk{font-size:34px;min-width:220px;padding:4px 18px;min-height:58px}.silb .vcol{gap:10px}.silb .vbild{font-size:34px}.silb .vcol:last-of-type .vk{min-width:150px}
+.bsw{display:flex;gap:40px;align-items:center;justify-content:center;margin:20px 0}.bsb{width:420px;height:364px;flex:none;background:#fff8e6;border:4px solid #a9793f;border-radius:14px}
+.bso{display:flex;flex-direction:column;gap:18px}.bsk{font-size:32px!important;text-align:left;min-width:620px}.kx{display:inline-block;width:34px;height:34px;border:3px solid #2b2a33;border-radius:6px;margin-right:16px;vertical-align:-6px;text-align:center;line-height:30px;font-size:30px;background:#fff}
+.malw{display:flex;gap:24px;align-items:flex-start;margin-top:6px}.mall{width:500px;flex:none}.malsvg{width:640px;height:420px;border:4px solid #a9793f;border-radius:12px;background:#fff}
+.mzeile{font-size:28px;padding:6px 10px;border-radius:10px;margin-bottom:4px;opacity:.55}.mzeile.akt{opacity:1;background:#fff8e6;border:3px solid #a9793f;font-weight:700}.mzeile.fertig{opacity:.8}
+.mbox{display:inline-block;width:24px;height:24px;border:3px solid #2b2a33;border-radius:5px;margin-right:12px;vertical-align:-4px;background:#fff}.mzeile.fertig .mbox{background:#4f9a4a}
+.mpal{display:flex;gap:12px;margin:14px 0}.mfb{width:66px;height:66px;border-radius:50%;border:4px solid #2b2a33}.mfb.sel{outline:6px solid #f6c84a;outline-offset:3px}
+.mal{fill:#efe8da;cursor:pointer}.blink1{fill:#f3c0bb!important}
+.rzw{display:flex;gap:30px;justify-content:center;align-items:flex-start}.rzz{display:grid;grid-template-columns:repeat(3,110px);gap:12px}
+.rzb{font-size:58px;width:110px;height:100px;border-radius:16px;border:3px solid #a9793f;background:#fff;box-shadow:0 4px 0 #a9793f}
+.rzs{width:520px}.schuessel{min-height:200px;border:5px solid #3b78c4;border-radius:0 0 200px 200px;background:#dff0fb;font-size:40px;padding:14px 30px;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;justify-content:center;margin-bottom:14px}
+.mem{display:grid;grid-template-columns:repeat(4,150px);gap:16px;justify-content:center;margin-top:16px}
+.mk{height:120px;border-radius:16px;border:4px solid #6b6555;background:#a7a08f repeating-linear-gradient(45deg,#a7a08f 0 12px,#b5ae9c 12px 24px);font-size:70px}.mk span{visibility:hidden}.mk.auf{background:#fff8e6}.mk.auf span{visibility:visible}
+.trom{display:flex;gap:60px;justify-content:center;margin:70px 0 50px}.tb{width:210px;height:210px;border-radius:50%;border:8px solid #2b2a33;box-shadow:0 12px 0 #2b2a33;transition:transform .08s}.tb.hau{transform:translateY(10px) scale(.95);box-shadow:0 2px 0 #2b2a33;filter:brightness(1.25)}
 </style>
 </head>
 <body>
@@ -288,12 +311,13 @@ let S={coins:0,done:{},lists:[1,2,3],speak:true,log:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 /* ---------- Inhalte aus inhalte.js: Lernwörter-Liste und Lernpaket ---------- */
-let TUN,KEINTUN,GEGENT,GSCHRIFT,BEFEHLE,WORDS,STORY,BLATTN,BLATT,BLATTK,SPELLS,VERBEN,NOMEN,KEINNOMEN,QUATSCH,WISSEN,OFT,SELTEN,ERN,KNOPF,RAETSEL,MOKI,JOKES,RG,KWITZE;
+let MAL,SILBEN,SATZH,BS,RF,MALEN,REZEPTE,TUN,KEINTUN,GEGENT,GSCHRIFT,BEFEHLE,WORDS,STORY,BLATTN,BLATT,BLATTK,SPELLS,VERBEN,NOMEN,KEINNOMEN,QUATSCH,WISSEN,OFT,SELTEN,ERN,KNOPF,RAETSEL,MOKI,JOKES,RG,KWITZE;
 const aktLW=()=>LERNWOERTER.find(l=>l.id===S.lw)||LERNWOERTER[0],aktPaket=()=>PAKETE.find(q=>q.id===S.paket)||PAKETE[PAKETE.length-1];
 function ladeInhalt(){const L=aktLW(),B=PAKETE[0],P=aktPaket(),g=k=>P[k]||B[k];
  WORDS=L.woerter.map(a=>({l:a[0],w:a[1],a:a[2],g:a[3],o:a[4]}));STORY=L.geschichten;BLATTN=L.blaetter;BLATTK=Object.keys(BLATTN).map(Number);BLATT={0:'Alle Wörter'};BLATTK.forEach(k=>BLATT[k]=`Blatt ${k}: ${BLATTN[k]}`);
  if(!S.lists||!S.lists.some(k=>BLATTK.includes(k)))S.lists=BLATTK.slice();
- SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze');KWITZE=g('kapitaenWitze')||[];TUN=g('tun');KEINTUN=g('keinTun');GEGENT=g('gegenteile');GSCHRIFT=g('geisterschrift');BEFEHLE=Object.assign({},B.befehle,P.befehle);RG={};['rechnen5','rechnen6','rechnen7'].forEach(k=>RG[k]=g(k))}
+ SPELLS=g('zauber');VERBEN=g('verben');NOMEN=g('nomen');KEINNOMEN=g('keinNomen');QUATSCH=g('quatsch');WISSEN=Object.assign({},B.wissen,P.wissen);OFT=g('oftEssen');SELTEN=g('seltenEssen');ERN=g('ernaehrung');KNOPF=g('knopf');RAETSEL=g('raetsel');MOKI=g('moki');JOKES=g('witze');KWITZE=g('kapitaenWitze')||[];TUN=g('tun');KEINTUN=g('keinTun');GEGENT=g('gegenteile');GSCHRIFT=g('geisterschrift');BEFEHLE=Object.assign({},B.befehle,P.befehle);RG={};['rechnen5','rechnen6','rechnen7'].forEach(k=>RG[k]=g(k));
+ MAL=g('mal')||{};SILBEN=g('silben')||[];SATZH=g('satzhaelften')||[];BS=g('bildsaetze')||{};RF=g('richtigFalsch')||[];MALEN=g('malen')||{objekte:[],farben:[]};REZEPTE=g('rezepte')||[]}
 ladeInhalt();
 const SW=()=>S.schwer==null?1:S.schwer;
 /* Sanduhr in Sekunden: 0 = aus. Stufe im Elternbereich (S.timer), Vorgabe 45 */
@@ -487,10 +511,10 @@ const GEIST='<path d="M-40 40V-10a40 40 0 0 1 80 0V40l-14 -12l-13 12l-13 -12l-13
 const schlotter=()=>{const d=vers();return `<g class="kicher" ${d}><g transform="translate(0,-74) scale(1.7)">${GEIST}</g><path d="M-70 -150Q0 -168 70 -150Q44 -206 0 -210Q-44 -206 -70 -150Z" fill="#2b2a33"/><ellipse cx="0" cy="-150" rx="74" ry="9" fill="#2b2a33"/><path d="M-12 -182h24M0 -194v24" stroke="#fff" stroke-width="4"/></g>${blase(d,72,-215,'Buuuh!')}`};
 const DELFIN='<path d="M-90 -20q60 -60 150 -20q30 12 50 -10q0 40 -40 40q-80 30 -160 -10z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><path d="M-10 -52l20 -34l14 38z" fill="#6f8fb8" stroke="#2b2a33" stroke-width="4"/><circle cx="-62" cy="-22" r="5" fill="#2b2a33"/><path d="M-84 -10q12 8 26 2" stroke="#2b2a33" stroke-width="3" fill="none"/>';
 const FEIND='<path d="M-70 0h140l-20 40h-100z" fill="#4a4a55" stroke="#2b2a33" stroke-width="4"/><rect x="-4" y="-92" width="8" height="92" fill="#2b2a33"/><path d="M4 -88q62 32 0 72z" fill="#8a5bb5" stroke="#2b2a33" stroke-width="3"/><circle cx="-32" cy="-14" r="13" fill="#e9b990" stroke="#2b2a33" stroke-width="3"/><path d="M-48 -22h32l-16 -18z" fill="#2b2a33"/><path d="M-38 -10q6 6 12 0" stroke="#2b2a33" stroke-width="2.5" fill="none"/>';
-const PORT={koko:`<svg viewBox="-55 -132 110 110">${koko()}</svg>`,schildi:`<svg viewBox="30 -94 100 100">${schildi()}</svg>`,schlotter:`<svg viewBox="-90 -222 180 180"><rect x="-90" y="-222" width="180" height="180" fill="#5a6478"/>${schlotter()}</svg>`,moki:`<svg viewBox="-56 -122 112 112">${moki()}</svg>`,hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
+const PORT={get tuki(){return `<svg viewBox="-50 -140 160 160">${tuki()}</svg>`},koko:`<svg viewBox="-55 -132 110 110">${koko()}</svg>`,schildi:`<svg viewBox="30 -94 100 100">${schildi()}</svg>`,schlotter:`<svg viewBox="-90 -222 180 180"><rect x="-90" y="-222" width="180" height="180" fill="#5a6478"/>${schlotter()}</svg>`,moki:`<svg viewBox="-56 -122 112 112">${moki()}</svg>`,hobel:`<svg viewBox="-80 -302 160 160">${hobel()}</svg>`,strahl:`<svg viewBox="-80 -306 160 160">${strahl()}</svg>`,mixa:`<svg viewBox="-95 -362 190 190">${mixa()}</svg>`,get moritz(){return `<svg viewBox="-66 -286 132 132">${moritz()}</svg>`},kapitaen:`<svg viewBox="-90 -352 180 180">${kapitaen()}</svg>`,
  kruemel:`<svg viewBox="-50 -128 112 112">${kruemel()}</svg>`,lehrerin:`<svg viewBox="-62 -268 124 124">${pranger()}</svg>`,mama:`<svg viewBox="-64 -276 128 128">${mama()}</svg>`,olga:`<svg viewBox="-72 -240 144 144">${olga()}</svg>`};
-const NAME={mama:'Mama',lehrerin:'Frau Pranger',moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
-const PITCH={mama:1.05,lehrerin:1.1,kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
+const NAME={tuki:'Tukan Tuki',mama:'Mama',lehrerin:'Frau Pranger',moritz:'Moritz',kapitaen:'Kapitän Rechenbart',kruemel:'Krümel',olga:'Wirtin Olga',mixa:'Hexe Mixa',koko:'Königin Koko',schildi:'Oma Schildi',schlotter:'Käpt’n Schlotter',moki:'Moki',hobel:'Meister Hobel',strahl:'Wärter Strahlemann'};
+const PITCH={tuki:1.3,mama:1.05,lehrerin:1.1,kapitaen:.6,kruemel:1.6,olga:1.15,mixa:1.35,koko:1.4,schildi:.7,schlotter:.5,moki:1.5,hobel:.8,strahl:.9,moritz:1};
 
 /* ---------- Szenen ---------- */
 const mark=(id,x,y)=>`<g id="m-${id}" class="mark" transform="translate(${x},${y})"><g class="pu"><circle r="24" fill="#f6c84a" stroke="#2b2a33" stroke-width="4"/><text y="12" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2a33">!</text></g></g>`;
@@ -724,13 +748,14 @@ function talk(who,text,btns){btns=btns||['Weiter'];return new Promise(res=>{barH
 function note(who,text){if(barHtml(who,text,[])===false)return;speak(text,who,hl)}
 async function brief(text){while(await talk('kruemel',text+' Alles klar, Käpt’n?',['Ja!','Nochmal hören']));}
 async function briefL(text){while(await talk('lehrerin',text+' Alles klar, Moritz?',['Ja!','Nochmal hören']));}
+const ORDEN=['k5','k6','k7','k8','k9','k10','k11'];
 function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filter(k=>d[k]).length,n2=['buch','kessel'].filter(k=>d[k]).length,c=SC[sc];let t;
  if(c){const m=c.tasks.filter(k=>d[k]).length;t=!d[c.intro]?'':m<c.tasks.length?'Tippe auf ein Ausrufezeichen!':!d[c.key]?c.hint:sc==='hoehle'?'Du hast den Schatz gefunden! Du kannst alles nochmal üben.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.'}
  else t=sc==='hexe'?(!d.c2intro?'':n2<2?'Hilf der Hexe! Tippe auf ein Ausrufezeichen.':!d.duell3?'Fordere Mixa zum Rechen-Duell! Tippe sie an.':'Geschafft! Tippe oben auf Insel. Dort geht es weiter.')
   :(!d.intro?'':n<3?'Tippe auf ein Ausrufezeichen im Hafen!':!d.karte?'Geh zur Kneipe!':!d.logbuch?'Bring das Essen zum Kapitän!':'Kapitel 1 geschafft! Folge dem Wegweiser zur Hexe.');
- $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span>${['k5','k6','k7','k8'].some(k=>d[k])?`<span class="stat">Orden: ${['k5','k6','k7','k8'].filter(k=>d[k]).length}</span>`:''}</div><div class="tx" style="margin-top:10px">${t}</div></div>`;
+ $('#bar').innerHTML=`<div class="port">${PORT.moritz}</div><div class="say"><div class="idle"><span class="stat"><i class="coin"></i>${S.coins} Dublonen</span><span class="stat">Kartenstücke: ${hat().filter(x=>x).length} von 5</span>${ORDEN.some(k=>d[k])?`<span class="stat">Orden: ${ORDEN.filter(k=>d[k]).length}</span>`:''}</div><div class="tx" style="margin-top:10px">${t}</div></div>`;
  const M=[['kisten',d.kisten,1],['kanonen',d.kanonen,1],['kompass',d.kompass,1],['tuer',d.karte&&d.kueche,n>=3],['schild',0,d.logbuch],['schiff',d.rennen,n>=3],['kapitaen',0,d.karte&&!d.logbuch],
-  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['muell',d.muell,1],['uhr1',d.uhr1,1],['uhr2',d.uhr2,1],['uhr3',d.uhr3,1],['uhr4',d.uhr4,1],['uhr5',d.uhr5,1],['uhr6',d.uhr6,1],['uhr7',d.uhr7,1],['uhr8',d.uhr8,1],['uhr9',d.uhr9,1],['wissen6',d.wissen6,1],['wissen7',d.wissen7,1],['wissen8',d.wissen8,1],['wissen9',d.wissen9,1],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];
+  ['buch',d.buch,1],['kessel',d.kessel,1],['mixa',d.duell3,n2>=2],['muell',d.muell,1],['uhr1',d.uhr1,1],['uhr2',d.uhr2,1],['uhr3',d.uhr3,1],['uhr4',d.uhr4,1],['uhr5',d.uhr5,1],['uhr6',d.uhr6,1],['uhr7',d.uhr7,1],['uhr8',d.uhr8,1],['uhr9',d.uhr9,1],['wissen6',d.wissen6,1],['wissen7',d.wissen7,1],['wissen8',d.wissen8,1],['wissen9',d.wissen9,1],['wissen1',d.wissen1,1],['wissen2',d.wissen2,1],['wissen3',d.wissen3,1],['wissen4',d.wissen4,1],['wissen5',d.wissen5,1],['fehler1',d.fehler1,n2>=2]];['uhr10','uhr11','uhr12','wh9','wh10','wh11'].forEach(k=>M.push([k,d[k],1]));
  Object.keys(SC).forEach(k=>{const q=SC[k],all=q.tasks.every(x=>d[x]);q.tasks.forEach(x=>M.push([x,d[x],1]));M.push([q.bonus,d[q.bonus],all],[q.npc,d[q.key],all])});
  M.forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
  ['g-schild','h-schild'].forEach(i=>{const e=$('#'+i);if(e)e.style.display=d.logbuch?'':'none'});
@@ -751,8 +776,8 @@ function stepHint(a,op,b){const t=Math.floor(b/10)*10,o=b%10;
  if(op==='+'){if(!t&&a%10+b<10)return `Tipp: Rechne nur die Einer: ${a%10} + ${b} = ${a%10+b}.`;if(!t){const f=10-a%10;return `Tipp: ${a} + ${f} = ${a+f}. Dann noch + ${b-f}.`}return `Tipp: Rechne erst ${a} + ${t} = ${a+t}. Dann noch + ${o}.`}
  if(!t&&a%10>=b)return `Tipp: Rechne nur die Einer: ${a%10} − ${b} = ${a%10-b}.`;if(!t){const f=a%10;return f?`Tipp: ${a} − ${f} = ${a-f}. Dann noch − ${b-f}.`:`Tipp: Zähle von ${a} rückwärts.`}
  return o?`Tipp: Rechne erst ${a} − ${t} = ${a-t}. Dann noch − ${o}.`:`Tipp: Nimm ${t/10} Zehner weg.`}
-function askNumber(title,text,a,op,b){return new Promise(res=>{const ans=op==='+'?a+b:a-b;let val='',tries=0,lock=false;
- panel(`<div class="num"><div class="numl"><div class="ptitle">${title}</div><p class="story">${text}</p><div class="eq">${a} ${op==='+'?'+':'−'} ${b} = <span id="ans" class="ans">?</span></div><div id="hint" class="hint"></div><button class="btn small" id="again">Nochmal hören</button>${MINI()}</div>
+function askNumber(title,text,a,op,b,bild){return new Promise(res=>{const ans=op==='+'?a+b:op==='·'?a*b:a-b;let val='',tries=0,lock=false;
+ panel(`<div class="num"><div class="numl"><div class="ptitle">${title}</div><p class="story">${text}</p>${bild||''}<div class="eq">${a} ${op==='+'?'+':op==='·'?'·':'−'} ${b} = <span id="ans" class="ans">?</span></div><div id="hint" class="hint"></div><button class="btn small" id="again">Nochmal hören</button>${MINI()}</div>
  <div class="pad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'OK'].map(k=>`<button class="key${k==='OK'?' ok':''}" data-k="${k}">${k}</button>`).join('')}</div></div>`);
  note('kruemel','Tippe die Zahl ein. Dann drücke OK.');speak(text,'kruemel');
  $('#again').onclick=()=>speak(text,'kruemel');const A=$('#ans');
@@ -760,7 +785,7 @@ function askNumber(title,text,a,op,b){return new Promise(res=>{const ans=op==='+
   if(c==='⌫')val=val.slice(0,-1);else if(c==='OK'){if(!val)return;
    if(+val===ans){lock=true;reagiere('jubel','hops');A.classList.add('good');note('kruemel',(sfx('ok'),pick(RIGHT)));weiter(res,1400)}
    else{tries++;reagiere('oh','seufz');A.classList.add('bad');val='';note('kruemel',(sfx('bad'),pick(WRONG)));
-    $('#hint').innerHTML=tries===1?(op==='+'?blocks(a)+blocks(b):blocks(a)+`<span>Nimm ${b} weg.</span>`):stepHint(a,op,b);
+    $('#hint').innerHTML=op==='·'?(tries===1&&!bild?feld(a,b):`<span>Zähle in ${b}er-Schritten: ${[...Array(a-1)].map((_,i)=>b*(i+1)).join(', ')}, ?</span>`):tries===1?(op==='+'?blocks(a)+blocks(b):blocks(a)+`<span>Nimm ${b} weg.</span>`):stepHint(a,op,b);
     setTimeout(()=>{A.textContent='?';A.classList.remove('bad')},700);return}}
   else if(val.length<3)val+=c;A.textContent=val||'?'})})}
 async function kisten(){await brief('Der Kapitän will wissen, wie viele Kekse er hat. Rechne aus. Tippe die Zahl ein und drücke OK.');
@@ -886,26 +911,26 @@ async function training(){busy=true;$('#hudnav').style.display='none';
 /* ---------- Kapitel 2: Hexenhütte ---------- */
 const z=(a,b)=>rand(a,b)*10;
 /* Duell-Aufgaben: 1 = Zehnerzahlen dazu/weg, 2 = eine Stufe unter der Rechen-Stufe, 3 = Rechen-Stufe (siehe rGen) */
-function duelTask(n){const op=rand(0,1)?'+':'-';let a,b;
+function duelTask(n){if(n==='mal'){const b=pick([2,5,10]),a=rand(2,10);return rand(0,1)?{a,b,op:'·',ans:a*b}:{a:b,b:a,op:'·',ans:a*b}}const op=rand(0,1)?'+':'-';let a,b;
  if(n===1){[a,b]=(op==='+'?zeT:zeM)();if(op==='+'&&rand(0,1))[a,b]=[b,a]}
  else[a,b]=rGen(op,n===2)();
  return{a,b,op,ans:op==='+'?a+b:a-b}}
 function duel(n,wer){wer=wer||'mixa';const gn=NAME[wer].split(' ').pop(),rt={};
- const fig=m=>wer==='schlotter'?`<g transform="scale(1.4)">${schlotter()}</g>`:mixa(m);
+ const fig=m=>wer==='schlotter'?`<g transform="scale(1.4)">${schlotter()}</g>`:wer==='kapitaen'?kapitaen():mixa(m);
  /* Reaktion einer Figur: m = Moritz, x = Gegner. Nach 1,6 s wieder normal. */
  const react=(w,mood,cls)=>{const g=$(w==='m'?'#dfm':'#dfx');if(!g)return;g.innerHTML=w==='m'?moritz(mood):fig(mood);g.setAttribute('class',cls);
   clearTimeout(rt[w]);rt[w]=setTimeout(()=>{if(!g.isConnected)return;g.innerHTML=w==='m'?moritz():fig();g.removeAttribute('class')},1600)};
  return new Promise(res=>{let me=0,she=0,val='',lock=true,cur,to=null;const T=n===3?SAND():0;
- panel(`<div class="num"><div class="numl"><div class="ptitle">Rechen-Duell ${n}</div><div class="duel">
+ panel(`<div class="num"><div class="numl"><div class="ptitle">${n==='mal'?'Einmaleins-Duell':'Rechen-Duell '+n}</div><div class="duel">
  <div class="pot">Moritz<div class="glas"><i id="pm" style="background:#4f9a4a"></i></div><b id="sm">0</b></div>
  <div class="pot">${gn}<div class="glas"><i id="px" style="background:#6b4a8e"></i></div><b id="sx">0</b></div>
  <div class="dq">${T?'<div class="timer"><i id="dt"></i></div>':''}<div class="eq"><span id="dq"></span> <span id="ans" class="ans">?</span></div><div id="hint" class="hint"></div><div class="buehne"><svg viewBox="-230 -362 460 370"><g transform="translate(-115,0)"><g id="dfm">${moritz()}</g></g><g transform="translate(115,0)"><g id="dfx">${fig()}</g></g></svg></div></div></div></div>
  <div class="pad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'OK'].map(k=>`<button class="key${k==='OK'?' ok':''}" data-k="${k}">${k}</button>`).join('')}</div></div>`);
- const A=$('#ans'),sym=()=>cur.op==='+'?'+':'−';
+ const A=$('#ans'),sym=()=>cur.op==='+'?'+':cur.op==='·'?'·':'−';
  function score(){$('#pm').style.height=me*20+'%';$('#px').style.height=she*20+'%';$('#sm').textContent=me;$('#sx').textContent=she}
  function next(){if(me>=5||she>=5){setTimeout(()=>res(me>=5),600);return}
   cur=duelTask(n);val='';A.textContent='?';A.className='ans';$('#hint').textContent='';$('#dq').textContent=`${cur.a} ${sym()} ${cur.b} =`;
-  note(wer,`${cur.a} ${cur.op==='+'?'plus':'minus'} ${cur.b}`);lock=false;
+  note(wer,`${cur.a} ${cur.op==='+'?'plus':cur.op==='·'?'mal':'minus'} ${cur.b}`);lock=false;
   if(T){const t=$('#dt');t.style.transition='none';t.style.width='100%';void t.offsetWidth;t.style.transition=`width ${T}s linear`;t.style.width='0';to=setTimeout(()=>miss('Die Sanduhr ist leer. Macht nichts!'),T*1000)}}
  function miss(msg){lock=true;clearTimeout(to);she++;score();react('m','oh','seufz');react('x','jubel','hops');A.classList.add('bad');$('#hint').textContent=`${cur.a} ${sym()} ${cur.b} = ${cur.ans}`;note('kruemel',msg);weiter(next,3200)}
  $$('.key').forEach(k=>k.onclick=()=>{if(lock)return;const c=k.dataset.k;
@@ -1390,7 +1415,7 @@ async function lampe(){await talk('strahl','Du bist oben! Aber die Lampe ist kap
 /* ---------- Die Uhr ---------- */
 function zifferblatt(h,m,klick){const a=(h%12+m/60)*30,b=m*6;return `<svg viewBox="-115 -115 230 230"><circle r="108" fill="#fff8e6" stroke="#6d4a26" stroke-width="10"/>
  ${[...Array(12)].map((_,i)=>{const n=i+1,w=n*30*Math.PI/180,x=Math.sin(w)*82,y=-Math.cos(w)*82;return (klick?`<circle class="uzahl" data-n="${n}" cx="${x}" cy="${y}" r="19" fill="#f6c84a" stroke="#2b2a33" stroke-width="2"/>`:'')+`<text x="${x}" y="${y+9}" text-anchor="middle" font-size="26" font-weight="700" fill="#2b2a33" pointer-events="none">${n}</text>`}).join('')}
- <g transform="rotate(${b})"><path d="M0 8V-74" stroke="#3b78c4" stroke-width="6" stroke-linecap="round"/></g><g id="uklein" transform="rotate(${a})" style="${klick&&klick!==1?'display:none':''}"><path d="M0 8V-46" stroke="#d24a43" stroke-width="9" stroke-linecap="round"/></g><circle r="7" fill="#2b2a33"/></svg>`}
+ <g id="ugross" transform="rotate(${b})" style="${klick===3?'display:none':''}"><path d="M0 8V-74" stroke="#3b78c4" stroke-width="6" stroke-linecap="round"/></g><g id="uklein" transform="rotate(${a})" style="${klick===2?'display:none':''}"><path d="M0 8V-46" stroke="#d24a43" stroke-width="9" stroke-linecap="round"/></g><circle r="7" fill="#2b2a33"/></svg>`}
 const zeit=(h,m)=>m===0?`${h} Uhr`:m===30?`halb ${h%12+1}`:m===15?`Viertel nach ${h}`:`Viertel vor ${h%12+1}`;
 const UHRTXT={1:'Die Uhr hat zwei Zeiger. Der kleine rote Zeiger zeigt die Stunde. Steht der große blaue Zeiger auf der 12, ist es genau eine volle Stunde.',
  2:'Jetzt stellst du die Uhr selbst. Der große blaue Zeiger steht auf der 12. Tippe auf die Zahl, auf die der kleine rote Zeiger zeigen soll.',
@@ -1768,12 +1793,12 @@ const NEBEL=`<svg id="nebel" viewBox="0 0 1280 620" style="display:none"><rect w
 <g transform="translate(640,500)"><g class="wippe" opacity=".95">${schlotter()}</g></g>${mokiG(1040,470)}<path d="M1010 404q30 -30 60 0v70h-60z" fill="#fff" opacity=".55"/>${uk(9,771,262)}${wk(9,330,566)}
 ${mark('nebel_r',220,296)}${mark('nebel_s',450,312)}${mark('schlotter',640,244)}${mark('nebel_l',910,266)}${mark('geister',1130,216)}<g class="fg">${schildchen(1180,468,'Geisterstunde','täglich 12 Uhr')}</g>${morG('nebel',560)}
 ${whot(9,330,566)}${mokiH(1040,470)}${hot('nebel_r',150,320,140,150)}${hot('nebel_s',390,330,120,150)}${hot('schlotter',565,270,150,240)}${hot('nebel_l',850,300,120,180)}${hot('geister',1050,220,160,130)}</svg>`;
-const SCN=['harbor','hexe','werft','turm','see','affen','riff','nebel','hoehle'];
-const KAP={harbor:'Kapitel 1: Der Hafen',hexe:'Kapitel 2: Die Hexenhütte',werft:'Kapitel 3: Die Werft',turm:'Kapitel 4: Der Leuchtturm',hoehle:'Kapitel 12: Die Schatzhöhle',see:'Kapitel 5: Auf hoher See',affen:'Kapitel 6: Die Affeninsel',riff:'Kapitel 7: Das Korallenriff',nebel:'Kapitel 8: Die Nebelbank'};
+const SCN=['harbor','hexe','werft','turm','see','affen','riff','nebel','strand','tempel','fest','hoehle'];
+const KAP={harbor:'Kapitel 1: Der Hafen',hexe:'Kapitel 2: Die Hexenhütte',werft:'Kapitel 3: Die Werft',turm:'Kapitel 4: Der Leuchtturm',hoehle:'Kapitel 12: Die Schatzhöhle',see:'Kapitel 5: Auf hoher See',affen:'Kapitel 6: Die Affeninsel',riff:'Kapitel 7: Das Korallenriff',nebel:'Kapitel 8: Die Nebelbank',strand:'Kapitel 9: Der Schildkröten-Strand',tempel:'Kapitel 10: Der Dschungel-Tempel',fest:'Kapitel 11: Das Piratenfest'};
 /* Alle zwölf Kapitel. null = Szene ist noch nicht gebaut. */
 const KAPITEL=[['harbor','1 Der Hafen'],['hexe','2 Die Hexenhütte'],['werft','3 Die Werft'],['turm','4 Der Leuchtturm'],['see','5 Auf hoher See'],['affen','6 Die Affeninsel'],['riff','7 Das Korallenriff'],['nebel','8 Die Nebelbank'],
- [null,'9 Der Schildkröten-Strand'],[null,'10 Der Dschungel-Tempel'],[null,'11 Das Piratenfest'],['hoehle','12 Die Schatzhöhle']];
-const OFFEN={harbor:d=>1,hexe:d=>d.logbuch,werft:d=>d.duell3,turm:d=>d.k3,see:d=>d.k4,affen:d=>d.k5,riff:d=>d.k6,nebel:d=>d.k7,hoehle:d=>d.k8};
+ ['strand','9 Der Schildkröten-Strand'],['tempel','10 Der Dschungel-Tempel'],['fest','11 Das Piratenfest'],['hoehle','12 Die Schatzhöhle']];
+const OFFEN={harbor:d=>1,hexe:d=>d.logbuch,werft:d=>d.duell3,turm:d=>d.k3,see:d=>d.k4,affen:d=>d.k5,riff:d=>d.k6,nebel:d=>d.k7,strand:d=>d.k8,tempel:d=>d.k9,fest:d=>d.k10,hoehle:d=>d.k11||d.schloss};
 const offen=k=>S.alle||OFFEN[k](S.done);
 const SC={werft:{intro:'c3intro',tasks:['planken','verben','nomen'],bonus:'sortieren',npc:'hobel',key:'k3',hint:'Sprich mit Meister Hobel!'},
  turm:{intro:'c4intro',tasks:['flaschenpost','quatsch','stufen'],bonus:'labyrinth',npc:'strahl',key:'k4',hint:'Sprich mit dem Leuchtturmwärter!'},
@@ -1846,7 +1871,299 @@ function ueberraschung(n){const u=UEB[n],g=$('#ue-'+n);if(!u||!g)return;S.done['
  g.innerHTML=u[2];if(u[3])sfx(u[3]);const m=g.querySelector('.u-main');if(m)m.addEventListener('animationend',e=>{if(e.target===m)g.innerHTML=''},{once:false});
  setTimeout(()=>{if(S.scene!==n||!ueRuhig())return;sfx('kraeh');note('kruemel',u[0]);setTimeout(()=>{const t=$('#bar .tx'),k=x=>x.replace(/\s+/g,'');if(ueRuhig()&&t&&k(t.textContent)===k(u[0]))idle()},5000)},Math.min(2500,u[1]*400))}
 setInterval(()=>{const n=S.scene;if(!UEB[n]||S.done['ue_'+n]||!ueRuhig())return;UEZ[n]=(UEZ[n]||0)+1;if(UEZ[n]>=8){UEZ[n]=0;ueberraschung(n)}},1000);
-function build(){$('#scene').innerHTML=[HARBOR,PUB,HEXE,WERFT,TURM,HOEHLE,SEE,AFFEN,RIFF,NEBEL].map(leben).join('');setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
+/* ============================================================================
+   AKT 3: Kapitel 9 bis 11 – Schildkröten-Strand, Dschungel-Tempel, Piratenfest
+   Neue Bausteine: kleines Einmaleins, Uhr (Minutenzeiger, 5-Minuten, Zeitspannen),
+   Lies und male, Verbinden (Silben, Satzhälften), Kreuze an (Bild und Satz),
+   Richtig oder falsch, Rezept lesen, Wiederholungs-Truhe (alte Aufgaben + Lernwörter-Kartei).
+   Inhalte (Sätze, Wörter) stehen in inhalte.js, Zeichnungen und Logik hier.
+   ============================================================================ */
+
+/* ---------- Kleines Einmaleins ---------- */
+/* Punktefeld: a Reihen mit je b Punkten; nach 5 Punkten eine kleine Lücke (Kraft der Fünf) */
+const feld=(a,b)=>`<div class="feld">${[...Array(a)].map(()=>`<div class="frow">${[...Array(b)].map((_,j)=>`<i${j===5?' class="f5"':''}></i>`).join('')}</div>`).join('')}</div>`;
+/* Aufgaben aus inhalte.js: [Text mit {a} und {b}, feste Zahl b oder 0]. reihen = erlaubte Reihen (2, 5, 10) */
+function malListe(key,reihen,n,bildBis){const T=shuffle(MAL[key]||[]),out=[];let i=0;
+ while(out.length<n&&T.length){const[t,fb]=T[i%T.length];i++;const b=fb||pick(reihen);if(fb&&!reihen.includes(fb)&&i<T.length*3)continue;
+  const a=rand(2,b===10?9:10);out.push(['·',()=>t.replace(/\{a\}/g,a).replace(/\{b\}/g,b),()=>[a,b],out.length<bildBis])}
+ return out}
+async function malRechnen(titel,aufg){for(let i=0;i<aufg.length;i++){const[op,f,g,bild]=aufg[i],[a,b]=g();await askNumber(titel+' '+dots(i,aufg.length),f(a,b),a,op,b,bild?feld(a,b):'')}closePanel()}
+/* Verdoppeln bis 20: als Plus-Aufgabe a + a */
+const doppel=key=>{const t=pick(MAL[key]);return['+',a=>t.replace(/\{a\}/g,a),()=>{const a=rand(3,10);return[a,a]}]};
+async function tausch(n){for(let i=0;i<n;i++){const b=pick([2,5,10]);let a=rand(2,9);if(a===b)a++;
+  await choice('Tauschaufgaben '+dots(i,n),`Was ergibt das Gleiche wie <b>${a} · ${b}</b>?`,[`${b} · ${a}`,`${a} + ${b}`,`${b} + ${b}`],'Tausche die Zahlen. Das Ergebnis bleibt gleich.')}closePanel()}
+
+/* ---------- Uhr: Minutenzeiger, 5-Minuten-Schritte, Zeitspannen ---------- */
+const zeit5=(h,m)=>{const n=h%12+1;return m===0||m===15||m===30||m===45?zeit(h,m):m<30?`${m} nach ${h}`:`${60-m} vor ${n}`};
+const plusH=(h,d)=>(h-1+d)%12+1;
+/* Eine Leseaufgabe: Uhr zeigt h:m, drei Antworten */
+function uhrLesen(titel,h,m,frage,wer,alt){return new Promise(res=>{const t=zeit5(h,m),set=new Set([t]);let lock=false;
+ shuffle(alt||[zeit5(plusH(h,1),m),zeit5(h,m===0?30:0),zeit5(h,(60-m)%60||15),zeit5(plusH(h,11),m)]).forEach(x=>{if(set.size<3)set.add(x)});
+ panel(`<div class="ptitle">${titel}</div><div class="uhrw">${zifferblatt(h,m)}<div class="copts">${shuffle([...set]).map(x=>`<button class="btn sec copt" data-r="${x===t?1:0}">${x}</button>`).join('')}</div></div>`);
+ note(wer||'kruemel',frage||'Wie spät ist es? Schau auf die Uhr!');
+ $$('.copt').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');sfx('ok');note('kruemel',`Richtig! Es ist ${t}.`);weiter(res,1900)}
+  else{b.classList.add('shake');b.disabled=true;sfx('bad');note('kruemel','Kräh! Schau zuerst auf den großen blauen Zeiger. Jede Zahl sind 5 Minuten.')}})})}
+/* Großen Zeiger stellen: kleiner Zeiger steht schon richtig, Moritz tippt die Zahl für den großen */
+function uhrStellen(titel,h,m,wer){return new Promise(res=>{const t=zeit5(h,m),ziel=m===0?12:m/5;let lock=false;
+ panel(`<div class="ptitle">${titel}</div><div class="uhrw">${zifferblatt(h,m,3)}<div class="lesez" style="max-width:520px;margin:0">${NAME[wer]} sagt:<br><b>Stell die Uhr auf ${t}.</b></div></div>`);
+ note('kruemel','Der kleine Zeiger steht schon. Tippe auf die Zahl für den großen Zeiger.');
+ $$('.uzahl').forEach(z=>z.onclick=()=>{if(lock)return;const n=+z.dataset.n,gr=$('#ugross');gr.style.display='';gr.setAttribute('transform',`rotate(${n*30})`);
+  if(n===ziel){lock=true;sfx('ok');note('kruemel',`Richtig! Es ist ${t}.`);weiter(res,1900)}
+  else{sfx('bad');note('kruemel',`Kräh! Jetzt sind es ${n===12?0:n*5} Minuten. Wir brauchen ${m} Minuten.`)}})})}
+/* Zeitspanne: Wann ist es zu Ende? / Wie lange dauert es noch? */
+function uhrSpanne(i){const h=rand(1,10),halb=rand(0,1)?30:0,d=rand(1,3),S1=zeit5(h,halb),E=zeit5(plusH(h,d),halb);
+ if(i%2===0)return choice('Wie lange dauert das Fest? '+dots(i,5),`Das Fest beginnt um <b>${S1}</b>. Es dauert <b>${d} ${d>1?'Stunden':'Stunde'}</b>. Wann ist es zu Ende?`,[E,zeit5(plusH(h,d+1),halb),zeit5(plusH(h,d),halb?0:30)],'Zähle die Stunden weiter. Der große Zeiger bleibt, wo er ist.');
+ return choice('Wie lange noch? '+dots(i,5),`Jetzt ist es <b>${S1}</b>. Um <b>${E}</b> beginnt das Feuerwerk. Wie lange musst du noch warten?`,[`${d} ${d>1?'Stunden':'Stunde'}`,`${d+1} Stunden`,d>1?`${d-1} ${d-1>1?'Stunden':'Stunde'}`:'eine halbe Stunde'],'Zähle von der ersten Uhrzeit weiter, Stunde für Stunde.')}
+async function uhrPlus(st){const wer={10:'schildi',11:'tuki',12:'olga'}[st];
+ if(st===10){await brief('Jetzt stellst du den großen Zeiger. Auf der 12 ist es eine volle Stunde. Auf der 6 ist es halb. Auf der 3 Viertel nach, auf der 9 Viertel vor.');
+  for(let i=0;i<6;i++){const h=rand(1,12),m=pick([0,15,30,45]);if(i%2)await uhrStellen('Die Uhr stellen '+dots(i,6),h,m,wer);else await uhrLesen('Wann schlüpfen die Babys? '+dots(i,6),h,m,'Wann schlüpfen die Babys? Schau auf die Uhr!',wer)}}
+ if(st===11){await brief('Der große Zeiger springt in Fünfer-Schritten. Jede Zahl sind 5 Minuten. Auf der 4 sind es 20 Minuten. Auf der 8 fehlen noch 20 Minuten bis zur vollen Stunde.');
+  for(let i=0;i<6;i++){const h=rand(1,12),m=pick([5,10,20,40,50,55]);if(i===2||i===5)await uhrStellen('Die Uhr stellen '+dots(i,6),h,m,wer);else await uhrLesen('Wann öffnet der Tempel? '+dots(i,6),h,m,'Wann öffnet der Tempel? Schau auf die Uhr!',wer,[`${m<30?m:60-m} ${m<30?'vor':'nach'} ${m<30?plusH(h,1):h}`,zeit5(plusH(h,1),m),m<30?`${m===10?20:10} nach ${h}`:`${m===50?20:10} vor ${plusH(h,1)}`])}}
+ if(st===12){await brief('Olga plant das Fest. Lies genau und rechne mit Stunden. Eine Stunde später: Der kleine Zeiger geht eine Zahl weiter.');
+  for(let i=0;i<5;i++)await uhrSpanne(i)}
+ closePanel()}
+
+/* ---------- Verbinden: Silben oder Satzhälften ---------- */
+function verbinden(titel,paare,frage,mitBild){return new Promise(res=>{const n=paare.length,re=shuffle(paare.map((_,i)=>i));let sel=null,left=n;
+ panel(`<div class="ptitle">${titel}</div><div class="center ltext" style="margin:0 0 10px">${frage}</div><div class="vb${mitBild?' silb':''}"><svg class="vbl"></svg>
+ <div class="vcol">${paare.map((p,i)=>`<button class="vk vl" data-i="${i}">${mitBild?`<span class="vbild">${p[2]}</span>`:''}${p[0]}</button>`).join('')}</div>
+ <div class="vcol">${re.map(i=>`<button class="vk vr" data-i="${i}">${paare[i][1]}</button>`).join('')}</div></div>
+ <div class="center" style="margin-top:10px"><button class="btn small" id="vb-h">Krümel hilft lesen</button></div>${MINI()}`);
+ note('kruemel',mitBild?'Tippe auf ein Bild. Dann tippe auf die passende Silbe.':'Tippe auf einen Satzanfang. Dann tippe auf das passende Ende.');
+ $('#vb-h').onclick=()=>sayWord(paare.map(p=>mitBild?p[0]+p[1]:p[0]+' '+p[1]).join('. '));
+ const L=$('.vbl'),linie=(a,b)=>{const x1=a.offsetLeft+a.offsetWidth,y1=a.offsetTop+a.offsetHeight/2,x2=b.offsetLeft,y2=b.offsetTop+b.offsetHeight/2;
+  L.insertAdjacentHTML('beforeend',`<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" stroke="#4f9a4a" stroke-width="6" fill="none" stroke-linecap="round"/>`)};
+ $$('.vk').forEach(b=>b.onclick=()=>{if(b.disabled||!left)return;
+  if(!sel||sel.classList.contains('vl')===b.classList.contains('vl')){$$('.vk').forEach(x=>x.classList.remove('sel'));sel=b;b.classList.add('sel');return}
+  const l=sel.classList.contains('vl')?sel:b,r=l===sel?b:sel;sel.classList.remove('sel');sel=null;
+  if(l.dataset.i===r.dataset.i){l.disabled=r.disabled=true;l.classList.add('goodb');r.classList.add('goodb');linie(l,r);reagiere('jubel','hops');sfx('ok');
+   if(mitBild)speak(paare[+l.dataset.i][0]+paare[+l.dataset.i][1],'lehrerin');if(--left===0)weiter(res,1600)}
+  else{reagiere('oh','seufz');r.classList.add('shake');setTimeout(()=>r.classList.remove('shake'),450);sfx('bad');note('kruemel',mitBild?'Kräh! Sprich beide Silben zusammen. Passt das zum Bild?':'Kräh! Lies den ganzen Satz. Ergibt das Sinn?')}})})}
+async function silbenRunde(){for(let r=0;r<2;r++){const p=[],enden=new Set(),anf=new Set();
+  for(const s of shuffle(SILBEN)){if(p.length<5&&!enden.has(s[1])&&!anf.has(s[0])){p.push(s);enden.add(s[1]);anf.add(s[0])}}
+  await verbinden('Silben-Muscheln '+dots(r,2),p,'Welche Silben gehören zusammen?',true)}closePanel()}
+async function satzRunde(){for(let r=0;r<2;r++)await verbinden('Satz-Steine '+dots(r,2),shuffle(SATZH).slice(0,4),'Welches Ende passt zum Anfang?');closePanel()}
+
+/* ---------- Kreuze an: Welcher Satz passt zum Bild? ---------- */
+const KATZE=`<g><ellipse cx="0" cy="0" rx="30" ry="18" fill="#ee8a2e" stroke="#2b2a33" stroke-width="3"/><circle cx="-28" cy="-16" r="15" fill="#ee8a2e" stroke="#2b2a33" stroke-width="3"/><path d="M-40 -26l3 -14l8 10zM-24 -30l5 -12l5 12z" fill="#ee8a2e" stroke="#2b2a33" stroke-width="3"/><circle cx="-33" cy="-18" r="2.5" fill="#2b2a33"/><circle cx="-23" cy="-18" r="2.5" fill="#2b2a33"/><path d="M28 -4q20 -10 14 -30" stroke="#2b2a33" stroke-width="6" fill="none" stroke-linecap="round"/></g>`;
+const FISCHLEIN=c=>`<g><path d="M-18 0q18 -14 34 0q-16 14 -34 0zM-18 0l-12 -10v20z" fill="${c}" stroke="#2b2a33" stroke-width="2.5"/><circle cx="8" cy="-3" r="2.5" fill="#2b2a33"/></g>`;
+const VOGEL=`<g><ellipse cx="0" cy="0" rx="18" ry="13" fill="#3b78c4" stroke="#2b2a33" stroke-width="3"/><circle cx="14" cy="-10" r="9" fill="#3b78c4" stroke="#2b2a33" stroke-width="3"/><path d="M22 -10l10 3l-10 3z" fill="#f6c84a"/><circle cx="16" cy="-12" r="2" fill="#2b2a33"/></g>`;
+const BILD={
+ flasche:v=>`<path d="M135 40h30v40q30 20 30 60v100h-90v-100q0 -40 30 -60z" fill="#e8f4f8" stroke="#2b2a33" stroke-width="5"/>${v===1?'':`<path d="M108 ${v===0?110:180}h84v58h-84z" fill="#6fb6e0" opacity=".85"/>`}<rect x="132" y="28" width="36" height="16" rx="4" fill="#d24a43" stroke="#2b2a33" stroke-width="4"/>`,
+ lampe:v=>`${v===0?'<g stroke="#f6c84a" stroke-width="6" stroke-linecap="round"><path d="M150 40v-24M90 70l-18 -16M210 70l18 -16M70 120h-24M230 120h24"/></g>':''}<circle cx="150" cy="120" r="56" fill="${v===0?'#fff2a0':'#cfcfcf'}" stroke="#2b2a33" stroke-width="5"/><rect x="128" y="170" width="44" height="40" rx="6" fill="#8b929a" stroke="#2b2a33" stroke-width="5"/><path d="M110 236h80" stroke="#6d4a26" stroke-width="10"/>`,
+ katze:v=>`<rect x="60" y="130" width="180" height="16" fill="#b98a4e" stroke="#2b2a33" stroke-width="4"/><path d="M76 146v90M224 146v90" stroke="#6d4a26" stroke-width="10"/><path d="M0 238h300" stroke="#a9793f" stroke-width="4"/><g transform="translate(${[150,150,268][v]},${[110,218,218][v]}) scale(${v===2?.85:1})">${KATZE}</g>`,
+ aepfel:v=>`<path d="M60 160h180l-22 70h-136z" fill="#c9a36b" stroke="#2b2a33" stroke-width="5"/>${[...Array(v+2)].map((_,i)=>`<g transform="translate(${150+(i-(v+1)/2)*42},${140-(i%2)*14})"><circle r="22" fill="#d24a43" stroke="#2b2a33" stroke-width="3"/><path d="M0 -22q4 -12 12 -14" stroke="#6d4a26" stroke-width="4" fill="none"/></g>`).join('')}`,
+ ball:v=>`<circle cx="150" cy="135" r="80" fill="${['#d24a43','#3b78c4','#f6c84a'][v]}" stroke="#2b2a33" stroke-width="5"/><path d="M78 110q72 40 144 0" stroke="#fff" stroke-width="12" fill="none"/>`,
+ fenster:v=>`<rect x="70" y="40" width="160" height="190" fill="#8fd1f0" stroke="#6d4a26" stroke-width="8"/>${v===0?'<path d="M70 40l-40 20v190l40 -20zM230 40l40 20v190l-40 -20z" fill="#cde9f6" stroke="#6d4a26" stroke-width="6"/>':'<path d="M150 40v190M70 135h160" stroke="#6d4a26" stroke-width="8"/>'}`,
+ vogel:v=>`<path d="M70 140l80 -60l80 60z" fill="#d24a43" stroke="#2b2a33" stroke-width="5"/><rect x="85" y="140" width="130" height="100" fill="#f1dfb4" stroke="#2b2a33" stroke-width="5"/><rect x="135" y="180" width="32" height="60" fill="#8c6234" stroke="#2b2a33" stroke-width="4"/><g transform="translate(${[150,150,262][v]},${[64,26,226][v]})">${VOGEL}</g>${v===1?'<path d="M128 22q-10 -12 -22 -6M128 22q8 -14 20 -8" stroke="#2b2a33" stroke-width="3" fill="none"/>':''}`,
+ fische:v=>`<path d="M60 70q-30 80 20 160h140q50 -80 20 -160z" fill="#cfeaf6" stroke="#2b2a33" stroke-width="5"/><path d="M52 110h196" stroke="#6fb6e0" stroke-width="4"/>${[...Array(v+1)].map((_,i)=>`<g transform="translate(${150+(i-v/2)*62},${160+(i%2)*30})">${FISCHLEIN(['#ee8a2e','#f6c84a','#d24a43'][i])}</g>`).join('')}`};
+async function bildSatz(n){const keys=shuffle(Object.keys(BILD).filter(k=>BS[k]));
+ for(let i=0;i<n;i++){const k=keys[i%keys.length],L=BS[k],v=rand(0,L.length-1),fremd=pick(BS[pick(keys.filter(x=>x!==k))]);
+  const opts=[L[v]].concat(shuffle(L.filter((_,j)=>j!==v)).slice(0,L.length>2?2:1));if(opts.length<3)opts.push(fremd);
+  await new Promise(res=>{let lock=false;
+   panel(`<div class="ptitle">Kreuze an ${dots(i,n)}</div><div class="bsw"><svg viewBox="0 0 300 260" class="bsb">${BILD[k](v)}</svg><div class="bso">${shuffle(opts).map(o=>`<button class="btn sec copt bsk" data-r="${o===L[v]?1:0}"><span class="kx"></span>${o}</button>`).join('')}</div></div>
+   <div class="center"><button class="btn small" id="bs-h">Krümel hilft lesen</button></div>${MINI()}`);
+   note('kruemel','Schau dir das Bild genau an. Welcher Satz passt?');$('#bs-h').onclick=()=>sayWord(opts.join(' Oder: '));
+   $$('.bsk').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');b.querySelector('.kx').textContent='✕';reagiere('jubel','hops');sfx('ok');speak(L[v],'lehrerin');weiter(res,1500)}
+    else{b.disabled=true;b.classList.add('shake');reagiere('oh','seufz');sfx('bad');note('kruemel','Kräh! Schau nochmal genau auf das Bild.')}})})}
+ closePanel()}
+
+/* ---------- Richtig oder falsch? ---------- */
+async function richtigFalsch(titel,n){const q=shuffle(RF).slice(0,n);
+ for(let i=0;i<q.length;i++)await new Promise(res=>{let lock=false;const[s,w]=q[i];
+  panel(`<div class="ptitle">${titel} ${dots(i,q.length)}</div><div class="frage" style="margin:60px 0 40px">${s}</div><div class="copts"><button class="btn sec copt rf" data-r="${w?1:0}">richtig ✓</button><button class="btn sec copt rf" data-r="${w?0:1}">falsch ✗</button></div>
+  <div class="center"><button class="btn small" id="rf-h">Krümel hilft lesen</button></div>${MINI()}`);
+  note('kruemel','Stimmt der Satz? Oder ist er Quatsch?');$('#rf-h').onclick=()=>sayWord(s);
+  $$('.rf').forEach(b=>b.onclick=()=>{if(lock)return;if(b.dataset.r==='1'){lock=true;b.classList.add('goodb');reagiere('jubel','hops');sfx('ok');note('kruemel',w?'Kräh! Stimmt genau!':'Kräh! Genau, das ist Quatsch!');weiter(res,1500)}
+   else{b.disabled=true;b.classList.add('shake');reagiere('oh','seufz');sfx('bad');note('kruemel','Kräh! Lies den Satz nochmal. Kann das sein?')}})});
+ closePanel()}
+
+/* ---------- Lies und male ---------- */
+const MALBILD=o=>{const p=(id,d)=>`<path class="mal" data-o="${id}" d="${d}" stroke="#2b2a33" stroke-width="4"/>`;return `<svg viewBox="0 0 640 420" class="malsvg"><rect width="640" height="150" fill="#eef6fb"/><path d="M0 150h640v40H0z" fill="#bfe0ec"/><rect y="190" width="640" height="230" fill="#f7ecd2"/>
+ <circle cx="560" cy="64" r="40" fill="none" stroke="#e0b84a" stroke-width="4" stroke-dasharray="6 6"/>
+ ${p('segel','M110 40v100h-70z')}<path d="M24 150h110l-14 22h-82z" fill="#fff" stroke="#2b2a33" stroke-width="4"/><path d="M110 40v112" stroke="#2b2a33" stroke-width="4"/>
+ ${p('schirm','M220 120q70 -80 140 0z')}<path d="M290 120v150" stroke="#2b2a33" stroke-width="5"/>
+ ${p('handtuch','M330 300h140l-10 60h-140z')}
+ ${p('ball','M560 300a34 34 0 1 0 0.1 0z')}
+ ${p('eimer','M180 290h60l-8 70h-44z')}<path d="M184 292q26 -40 52 0" stroke="#2b2a33" stroke-width="4" fill="none"/>
+ ${p('schildkroete','M40 370q0 -60 70 -60t70 60z')}<circle cx="192" cy="358" r="14" fill="#fff8e6" stroke="#2b2a33" stroke-width="4"/><circle cx="196" cy="354" r="2.5" fill="#2b2a33"/>
+ ${p('muschel','M478 405q30 -60 60 0z')}
+ ${p('krebs','M590 395a30 18 0 1 0 0.1 0z')}<path d="M562 380l-14 -16M618 380l14 -16" stroke="#2b2a33" stroke-width="4"/><circle cx="582" cy="378" r="3" fill="#2b2a33"/><circle cx="598" cy="378" r="3" fill="#2b2a33"/></svg>`};
+const MFARBE={rot:'#d24a43',gelb:'#f6c84a',blau:'#3b78c4','grün':'#4f9a4a',schwarz:'#2b2a33','weiß':'#ffffff'};
+async function liesUndMale(){const O=shuffle(MALEN.objekte).slice(0,6),F=MALEN.farben;const auf=O.map(o=>[o,pick(F)]);let k=0,farbe=null;
+ await new Promise(res=>{panel(`<div class="ptitle">Lies und male</div><div class="malw"><div class="mall">${auf.map(([o,f],i)=>`<div class="mzeile" id="mz${i}"><span class="mbox"></span>${o[1]} ist ${f}.</div>`).join('')}
+  <div class="mpal">${F.map(f=>`<button class="mfb" data-f="${f}" style="background:${MFARBE[f]}"></button>`).join('')}</div><button class="btn small" id="ml-h">Krümel hilft lesen</button></div>${MALBILD()}</div>`);
+  const zeig=()=>{$$('.mzeile').forEach((z,i)=>z.classList.toggle('akt',i===k))};zeig();
+  note('kruemel','Lies den Satz. Tippe auf die Farbe. Dann tippe auf das Ding im Bild.');$('#ml-h').onclick=()=>sayWord(`${auf[k][0][1]} ist ${auf[k][1]}.`);
+  $$('.mfb').forEach(b=>b.onclick=()=>{$$('.mfb').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');farbe=b.dataset.f});
+  $$('.mal').forEach(m=>m.onclick=()=>{if(k>=auf.length)return;if(!farbe){note('kruemel','Kräh! Tippe zuerst auf eine Farbe.');return}
+   const[o,f]=auf[k];if(m.dataset.o!==o[0]){sfx('bad');m.classList.add('blink1');setTimeout(()=>m.classList.remove('blink1'),500);note('kruemel','Kräh! Lies nochmal: Was sollst du anmalen?');return}
+   if(farbe!==f){sfx('bad');note('kruemel','Kräh! Das Ding stimmt. Aber lies nochmal die Farbe!');return}
+   m.style.fill=MFARBE[f];sfx('ok');$('#mz'+k).classList.add('fertig');k++;zeig();if(k===auf.length){note('kruemel','Kräh! Was für ein schönes Bild!');weiter(res,1800)}})});
+ closePanel()}
+
+/* ---------- Rezept lesen (Piratenfest) ---------- */
+const ZUTAT={apfel:'🍎',banane:'🍌',erdbeere:'🍓',traube:'🍇',birne:'🍐',orange:'🍊',kiwi:'🥝',zitrone:'🍋',tomate:'🍅',kaese:'🧀',pilz:'🍄',mais:'🌽',ananas:'🍍',fisch:'🐟'};
+async function rezept(){const R=pick(REZEPTE),zut=R.zutaten,inSch=[];
+ for(let i=0;i<R.schritte.length;i++){const[txt,ding,anz]=R.schritte[i];
+  await new Promise(res=>{let neu=[],lock=false;
+   panel(`<div class="ptitle">${R.name} ${dots(i,R.schritte.length)}</div><div class="lesez">${txt}</div><div class="rzw"><div class="rzz">${zut.map(z=>`<button class="rzb" data-z="${z}">${ZUTAT[z]}</button>`).join('')}</div>
+   <div class="rzs"><div class="schuessel" id="sch">${inSch.map(z=>ZUTAT[z]).join('')}</div><div class="lrow" style="justify-content:center"><button class="btn small" id="rz-z">Eins zurück</button><button class="btn" id="rz-f">Fertig</button></div></div></div>
+   <div class="center"><button class="btn small" id="rz-h">Krümel hilft lesen</button></div>`);
+   note('olga','Lies genau, wie viele. Tippe so oft auf die Zutat.');$('#rz-h').onclick=()=>sayWord(txt);
+   const zeig=()=>$('#sch').innerHTML=inSch.concat(neu).map(z=>`<span>${ZUTAT[z]}</span>`).join('');
+   $$('.rzb').forEach(b=>b.onclick=()=>{if(lock||neu.length>=12)return;neu.push(b.dataset.z);sfx('coin');zeig()});
+   $('#rz-z').onclick=()=>{if(lock)return;neu.pop();zeig()};
+   $('#rz-f').onclick=()=>{if(lock)return;const ok=neu.length===anz&&neu.every(z=>z===ding)||(anz===0&&!neu.length);
+    if(ok){lock=true;inSch.push(...neu);sfx('ok');note('olga',pick(['Prima! Genau richtig.','Lecker! Weiter geht es.','Gut gelesen, Moritz!']));weiter(res,1500)}
+    else{sfx('bad');const z=neu.filter(x=>x===ding).length;note('olga',neu.some(x=>x!==ding)?'Hoppla! Da ist eine falsche Zutat drin. Lies nochmal.':z<anz?'Da fehlt noch etwas. Zähle nochmal.':'Das ist zu viel. Zähle nochmal.');neu=[];zeig()}}})}
+ closePanel();sfx('fanfare');await talk('olga',R.ende)}
+
+/* ---------- Wiederholungs-Truhe: alte Aufgaben gemischt, immer mit einem Lernwort für die Kartei ---------- */
+async function wiederholung(kap){await talk('kruemel','Kräh! Die Wiederholungs-Truhe! Darin liegen Aufgaben von früher.');
+ const typen=['rechnen','minus','artikel','luecke','uhr','gegenteil','wissen','nomen','verb'].concat(kap>=10?['mal','mal']:[]);
+ const plan=shuffle(['diktat'].concat(shuffle(typen).slice(0,5)));const T=i=>'Wiederholung '+dots(i,plan.length);
+ for(let i=0;i<plan.length;i++){const p=plan[i];
+  if(p==='diktat'){const d=heuteDran(),w=d.length?d[0]:pick(WORDS).w;await talk('lehrerin','Ein Lernwort für dich! Hol Papier und Stift.',['Hab ich!']);
+   const ok=await diktatWort(w,`<div class="ptitle">${T(i)}</div>`);kartei(w,ok);const st=S.log[w]||(S.log[w]=[0,0]);st[ok?0:1]++;save()}
+  else if(p==='rechnen'||p==='minus'){const op=p==='rechnen'?'+':'-',[a,b]=rGen(op)();await askNumber(T(i),`Wie viel ist ${a} ${op==='+'?'plus':'minus'} ${b}?`,a,op,b)}
+  else if(p==='mal'){const a=rand(2,10),b=pick([2,5,10]);await askNumber(T(i),`Wie viel ist ${a} mal ${b}?`,a,'·',b)}
+  else if(p==='artikel'){const w=pick(WORDS.filter(x=>x.a));if(w)await artOne(w)}
+  else if(p==='luecke')await gapOne(pick(pool()),'Lernwort-Lücke');
+  else if(p==='uhr'){const h=rand(1,12),m=pick(kap>=10?[0,15,30,45,10,20,40]:[0,15,30,45]);await uhrLesen(T(i),h,m)}
+  else if(p==='gegenteil'){const g=pick(GEGENT);await choice(T(i),`Was ist das Gegenteil von <b style="color:#8e3b3b">${g[0]}</b>?`,g.slice(1),'Was ist das Gegenteil?')}
+  else if(p==='wissen'){const k=pick(Object.keys(WISSEN)),q=pick(WISSEN[k][1]);await choice(T(i),q[0],q.slice(1,4),'Was weißt du noch?');closePanel();await talk('kruemel','Kräh! '+q[4])}
+  else if(p==='nomen')await choice(T(i),'Welches Wort ist ein Namenwort?',[pick(NOMEN)].concat(shuffle(KEINNOMEN).slice(0,2)),'Passt der, die oder das davor?');
+  else if(p==='verb'){const v=pick(VERBEN);await choice(T(i),v[0],[v[1],v[2]],'Welches Wort passt in die Lücke?')}
+  closePanel()}}
+
+/* ---------- Belohnungsspiele Akt 3 ---------- */
+/* Schildkröten zum Meer bringen: Möwen antippen, bevor sie ein Baby schnappen */
+const BABY=`<g><ellipse cx="0" cy="0" rx="20" ry="15" fill="#6f9a4f" stroke="#2b2a33" stroke-width="3"/><path d="M-12 -2h24M0 -14v28" stroke="#4d7a34" stroke-width="2.5"/><circle cx="0" cy="-20" r="8" fill="#9bc26b" stroke="#2b2a33" stroke-width="3"/><circle cx="-3" cy="-22" r="1.8" fill="#2b2a33"/><circle cx="3" cy="-22" r="1.8" fill="#2b2a33"/></g>`;
+const MOEWE3=`<g><path class="flap" d="M-40 0q20 -24 40 0q20 -24 40 0" stroke="#2b2a33" stroke-width="5" fill="#fff" stroke-linejoin="round"/><circle cx="0" cy="2" r="8" fill="#fff" stroke="#2b2a33" stroke-width="3"/><path d="M0 8l5 8l-10 0z" fill="#f6c84a"/></g>`;
+function kroeten(){return new Promise(res=>{musicOn();const c=$('#cine'),bs=[],ms=[],NB=12+SW()*2;let made=0,saved=0,lost=0,last=0,tb=.3,fin=false,msgT=0;
+ c.innerHTML=`<svg viewBox="0 0 1280 800" id="krsvg"><rect width="1280" height="800" fill="#f2deb0"/><rect width="1280" height="170" fill="#4a9aa6"/>${WAVES(150)}<path d="M0 170q320 30 640 0t640 0v20H0z" fill="#e6f3f6" opacity=".7"/>
+ <g fill="#e3c88f">${[...Array(10)].map((_,i)=>`<ellipse cx="${80+i*125}" cy="${740+(i%2)*20}" rx="46" ry="16"/>`).join('')}</g><g id="kr"></g></svg><div id="rhud">Im Meer: <span id="kc">0</span></div><div id="rmsg" style="font-size:54px;top:300px"></div>`;c.style.display='block';
+ const g=$('#kr'),msg=$('#rmsg'),el=h=>{const e=document.createElementNS('http://www.w3.org/2000/svg','g');e.innerHTML=h;g.appendChild(e);return e};
+ function frame(now){if(!last)last=now;const dt=Math.min(.05,(now-last)/1000);last=now;tb-=dt;msgT-=dt;if(msgT<0&&!fin)msg.textContent='';
+  if(made<NB&&tb<=0){bs.push({x:rand(100,1180),y:760,v:42+SW()*8+rand(0,14),e:el(BABY),st:0});made++;tb=Math.max(1.1,2.4-SW()*.3)}
+  const lebend=bs.filter(b=>!b.st);
+  if(lebend.length&&ms.filter(m=>!m.st).length<1+SW()&&Math.random()<dt*.5){const z=pick(lebend);const m={z,x:z.x+(rand(0,1)?-700:700),y:-60,t:0,st:0};
+   m.e=el(`<rect x="-60" y="-50" width="120" height="100" fill="transparent"/>${MOEWE3}`);m.e.style.cursor='pointer';
+   m.e.onpointerdown=()=>{if(m.st)return;m.st=1;sfx('kraeh');msg.textContent=pick(['Husch!','Weg da!','Lass die Kleinen!']);msgT=.8};m.x0=m.x;m.y0=m.y;ms.push(m)}
+  bs.forEach(b=>{if(b.st)return;b.y-=b.v*dt;b.e.setAttribute('transform',`translate(${b.x},${b.y}) scale(${1.6+Math.sin(now/120+b.x)*.06})`);
+   if(b.y<175){b.st=1;saved++;$('#kc').textContent=saved;sfx('splash');b.e.remove()}});
+  ms.forEach(m=>{if(m.st===1){m.y-=520*dt;m.x+=(m.x>m.z.x?1:-1)*300*dt;m.e.setAttribute('transform',`translate(${m.x},${m.y})`);if(m.y<-120){m.st=2;m.e.remove()}return}if(m.st)return;
+   m.t+=dt/(4.2-SW()*.6);const tx=m.z.x,ty=m.z.y-30;m.x=m.x0+(tx-m.x0)*Math.min(1,m.t);m.y=m.y0+(ty-m.y0)*Math.min(1,m.t)*Math.min(1,m.t);
+   m.e.setAttribute('transform',`translate(${m.x},${m.y})`);
+   if(m.z.st){m.st=1;return}
+   if(m.t>=1){m.st=2;m.e.remove();m.z.st=2;lost++;m.z.e.remove();sfx('bad');msg.textContent='Oh nein! Die Möwe war schneller.';msgT=1.4}});
+  if(made>=NB&&bs.every(b=>b.st)&&!fin){fin=true;ms.forEach(m=>m.e&&m.e.remove());msg.textContent=`${saved} Babys sind im Meer!`;sfx('fanfare');setTimeout(()=>{musicOff();c.style.display='none';c.innerHTML='';res(saved)},2600)}
+  if(!fin)requestAnimationFrame(frame)}
+ requestAnimationFrame(frame)})}
+/* Tempel-Memory: Paare finden */
+function memory(){return new Promise(res=>{const B=shuffle(['🐒','🦜','🐍','🐸','🦋','🍌','🌺','🗿']).slice(0,4+SW()*2),K=shuffle(B.concat(B));let auf=[],paare=0,lock=false,zuege=0;
+ panel(`<div class="ptitle">Tempel-Memory <span style="font-size:24px;color:#3a2c20" id="mzug"></span></div><div class="mem">${K.map((e,i)=>`<button class="mk" data-i="${i}"><span>${e}</span></button>`).join('')}</div>`);
+ note('tuki','Finde immer zwei gleiche Bilder!');
+ $$('.mk').forEach(b=>b.onclick=()=>{if(lock||b.classList.contains('auf'))return;b.classList.add('auf');auf.push(b);sfx('coin');
+  if(auf.length<2)return;zuege++;$('#mzug').textContent=zuege+' Züge';const[x,y]=auf;auf=[];
+  if(K[x.dataset.i]===K[y.dataset.i]){x.classList.add('goodb');y.classList.add('goodb');sfx('ok');if(++paare===B.length){note('tuki','Tuki tuki! Alle Paare gefunden!');setTimeout(()=>res(zuege),1800)}}
+  else{lock=true;setTimeout(()=>{x.classList.remove('auf');y.classList.remove('auf');lock=false},950)}})})}
+/* Trommel-Echo: Rhythmus anhören und nachtippen */
+function trommel(){return new Promise(res=>{const TR=[['#d24a43',196],['#3b78c4',147],['#f6c84a',247]];let seq=[],pos=0,lock=true,stufe=0;const ZIEL=5+SW();
+ panel(`<div class="ptitle">Trommel-Echo <span style="font-size:24px;color:#3a2c20" id="tst"></span></div><div class="trom">${TR.map((t,i)=>`<button class="tb" data-i="${i}" style="background:${t[0]}"></button>`).join('')}</div>
+ <div class="center"><button class="btn small" id="tr-n">Nochmal hören</button></div>`);
+ const schlag=i=>{const b=$$('.tb')[i];if(!b)return;b.classList.add('hau');setTimeout(()=>b.classList.remove('hau'),260);const A=ac();if(A&&S.sound!==false){const t=A.currentTime;tone(TR[i][1],t,.28,'sine',.6,TR[i][1]*.55);tone(TR[i][1]*2,t,.06,'triangle',.25)}};
+ const vor=()=>{lock=true;pos=0;note('olga','Hör gut zu!');seq.forEach((x,j)=>setTimeout(()=>schlag(x),500+j*620));setTimeout(()=>{if(!$('.trom'))return;lock=false;note('olga','Jetzt du!')},500+seq.length*620)};
+ const neu=()=>{stufe++;$('#tst').textContent=`Runde ${stufe} von ${ZIEL-1}`;seq.push(rand(0,2));if(seq.length<2)seq.push(rand(0,2));vor()};
+ $('#tr-n').onclick=()=>{if(!lock)vor()};
+ $$('.tb').forEach(b=>b.onpointerdown=()=>{if(lock)return;const i=+b.dataset.i;schlag(i);
+  if(i!==seq[pos]){lock=true;sfx('bad');note('olga','Fast! Hör nochmal zu.');setTimeout(vor,1300);return}
+  if(++pos===seq.length){lock=true;sfx('ok');if(seq.length>=ZIEL){note('olga','Bravo! Du bist ein echter Fest-Trommler!');setTimeout(()=>res(stufe),1600)}else setTimeout(neu,1200)}});
+ setTimeout(neu,600)})}
+
+/* ---------- Figur: Tukan Tuki (Tempelwächter) ---------- */
+const tuki=()=>{const d=vers();return `<g class="kicher" ${d}><ellipse cx="0" cy="2" rx="40" ry="6" fill="#0002"/><path d="M-14 0v-16M14 0v-16" stroke="#e08a2e" stroke-width="5"/>
+ <path d="M-30 -18q-6 -70 26 -96q34 -10 40 30q4 40 -16 66z" fill="#26242c" stroke="#2b2a33" stroke-width="4"/><path d="M8 -108q20 4 22 34q0 20 -12 30q-14 -24 -10 -64z" fill="#fff8e6"/>
+ <path d="M-22 -40q-16 10 -18 26q14 0 26 -12z" fill="#3a3842"/><circle cx="12" cy="-104" r="9" fill="#9fd4f0" stroke="#2b2a33" stroke-width="2.5"/><circle class="aug" cx="14" cy="-104" r="4" fill="#2b2a33"/>
+ <path d="M18 -116q60 -6 78 18q-30 14 -78 6z" fill="#f6a43a" stroke="#2b2a33" stroke-width="3.5"/><path d="M18 -102q50 4 78 -4q-18 22 -78 14z" fill="#e0602e" stroke="#2b2a33" stroke-width="3"/><path d="M86 -106q10 4 10 8" stroke="#2b2a33" stroke-width="3" fill="none"/></g>`};
+
+/* ---------- Szenen ---------- */
+const truhe=(id,x,y)=>`<g transform="translate(${x},${y})"><rect x="-44" y="-40" width="88" height="44" rx="6" fill="#8c3b2e" stroke="#2b2a33" stroke-width="4"/><path d="M-44 -40q0 -26 44 -26t44 26z" fill="#a4483a" stroke="#2b2a33" stroke-width="4"/><rect x="-8" y="-46" width="16" height="18" rx="3" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/><text y="-2" text-anchor="middle" font-size="18" font-weight="700" fill="#fff8e6">1 2 3</text></g>`+mark(id,x,y-100)+hot(id,x-60,y-80,120,100);
+const NEST=(x,y)=>`<g transform="translate(${x},${y})"><ellipse rx="70" ry="22" fill="#e3c88f" stroke="#a9793f" stroke-width="4"/><g fill="#fff8e6" stroke="#2b2a33" stroke-width="2.5"><ellipse cx="-26" cy="-8" rx="13" ry="16"/><ellipse cx="0" cy="-12" rx="13" ry="16"/><ellipse cx="26" cy="-8" rx="13" ry="16"/><ellipse cx="-13" cy="4" rx="13" ry="16"/><ellipse cx="13" cy="4" rx="13" ry="16"/></g></g>`;
+const STRAND=`<svg id="strand" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="230" fill="#cfe8ef"/><circle cx="160" cy="90" r="50" fill="#f8d66b"/>${wolke(140)}
+<rect y="200" width="1280" height="110" fill="#4a9aa6"/><path d="M0 300q160 -22 320 0t320 0t320 0t320 0v320H0z" fill="#f2deb0"/>
+<path d="M1060 330q20 -150 -10 -250" stroke="#8c6234" stroke-width="16" fill="none"/><g fill="#4f9a4a"><path d="M1050 84q-70 -20 -120 30q60 -10 120 -30z"/><path d="M1050 84q60 -40 130 -10q-70 0 -130 10z"/><path d="M1050 84q10 -60 60 -80q-30 40 -60 80z"/><path d="M1050 84q-40 -50 -100 -50q50 20 100 50z"/></g>
+${NEST(220,450)}<g transform="translate(440,420)"><path d="M-40 30q40 -70 80 0z" fill="#f3b6c0" stroke="#2b2a33" stroke-width="4"/><path d="M-60 40q20 -30 40 0z" fill="#f7d5db" stroke="#2b2a33" stroke-width="3"/><path d="M30 44q18 -26 36 0z" fill="#fff" stroke="#2b2a33" stroke-width="3"/></g>
+<g transform="translate(640,500) scale(1.1)">${schildi()}</g>
+<g transform="translate(890,330)"><path d="M-50 140l30 -140h40l30 140" stroke="#6d4a26" stroke-width="7" fill="none"/><rect x="-46" y="0" width="92" height="76" fill="#fff8e6" stroke="#2b2a33" stroke-width="4"/><circle cx="-18" cy="30" r="12" fill="#d24a43"/><circle cx="12" cy="44" r="12" fill="#3b78c4"/><circle cx="22" cy="16" r="10" fill="#f6c84a"/></g>
+<g transform="translate(1150,300)">${[0,1,2].map(i=>`<g transform="translate(${i*40-40},${(i%2)*14}) scale(.8)">${BABY}</g>`).join('')}</g>
+${mokiG(1000,230,.55)}${uk(10,560,300)}${truhe('wh9',330,560)}
+${mark('st_r',220,370)}${mark('st_s',440,330)}${mark('schildi2',640,350)}${mark('st_l',890,280)}${mark('kroeten',1150,230)}<g class="fg">${schildchen(112,560,'Schildkröten-Strand','Bitte Nester nicht betreten')}</g>${morG('strand',760)}
+${mokiH(1000,230)}${hot('st_r',140,400,160,90)}${hot('st_s',380,360,130,100)}${hot('schildi2',545,420,210,100)}${hot('st_l',830,320,120,160)}${hot('kroeten',1070,250,180,90)}</svg>`;
+const TEMPEL=`<svg id="tempel" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#9fd0a8"/><rect width="1280" height="200" fill="#cfe8d6"/>
+<g fill="#3f7a4a"><ellipse cx="80" cy="200" rx="160" ry="110"/><ellipse cx="1210" cy="190" rx="170" ry="120"/><ellipse cx="300" cy="120" rx="120" ry="70"/><ellipse cx="980" cy="110" rx="130" ry="70"/></g>
+<g fill="#a7a08f" stroke="#6b6555" stroke-width="5"><path d="M380 430h520v-60H380z"/><path d="M430 370h420v-60H430z"/><path d="M480 310h320v-60H480z"/><path d="M530 250h220v-60H530z"/></g>
+<rect x="590" y="330" width="100" height="100" rx="8" fill="#4a4436" stroke="#2b2a33" stroke-width="5"/><path d="M600 340h80v80h-80z" fill="none" stroke="#a7a08f" stroke-width="4" stroke-dasharray="10 8"/>
+<path d="M300 0q20 160 -10 330M980 0q-30 120 10 300M180 0q30 90 0 170" stroke="#3f7a4a" stroke-width="7" fill="none"/><g fill="#4f9a4a"><ellipse cx="292" cy="160" rx="14" ry="8"/><ellipse cx="982" cy="140" rx="14" ry="8"/><ellipse cx="190" cy="90" rx="14" ry="8"/></g>
+<path d="M0 450q640 -40 1280 0v170H0z" fill="#8c6a43"/>
+<g transform="translate(220,430)"><rect x="-60" y="-110" width="120" height="110" rx="10" fill="#a7a08f" stroke="#2b2a33" stroke-width="4"/><g fill="#2b2a33">${[0,1,2].map(r=>[0,1,2,3,4].map(c=>`<circle cx="${-40+c*20}" cy="${-84+r*26}" r="6"/>`).join('')).join('')}</g></g>
+<g transform="translate(470,470)"><path d="M-70 0l10 -50h50l-6 50z" fill="#a7a08f" stroke="#2b2a33" stroke-width="4"/><path d="M0 0l6 -50h56l8 50z" fill="#bdb6a3" stroke="#2b2a33" stroke-width="4"/></g>
+<g transform="translate(640,190)"><rect x="-30" y="-6" width="60" height="16" fill="#6b6555"/>${tuki()}</g>
+<g transform="translate(860,470)"><rect x="-70" y="-120" width="140" height="120" fill="#f1dfb4" stroke="#6d4a26" stroke-width="6"/><circle cx="-30" cy="-70" r="16" fill="#d24a43"/><path d="M10 -40l20 -40l20 40z" fill="#3b78c4"/></g>
+<g transform="translate(1100,450)"><rect x="-40" y="0" width="80" height="20" fill="#6b6555"/><path d="M-26 0q-6 -60 26 -80q32 20 26 80z" fill="#f6c84a" stroke="#a9793f" stroke-width="5"/><circle cx="-8" cy="-46" r="5" fill="#2b2a33"/><circle cx="8" cy="-46" r="5" fill="#2b2a33"/></g>
+${mokiG(980,330,.55)}${uk(11,370,300)}${truhe('wh10',760,600)}
+${mark('te_r',220,280)}${mark('te_s',470,370)}${mark('tuki',640,40)}${mark('te_l',860,310)}${mark('memory',1100,330)}${morG('tempel',560)}
+${mokiH(980,330)}${hot('te_r',150,310,140,130)}${hot('te_s',390,400,160,80)}${hot('tuki',590,70,160,130)}${hot('te_l',780,340,160,140)}${hot('memory',1040,350,120,120)}</svg>`;
+const FEST=`<svg id="fest" viewBox="0 0 1280 620" style="display:none"><rect width="1280" height="620" fill="#f6c99a"/><rect width="1280" height="260" fill="#f5b38a"/><circle cx="1100" cy="120" r="56" fill="#f8d66b" opacity=".9"/>
+<path d="M0 60q320 80 640 0t640 0" stroke="#6d4a26" stroke-width="3" fill="none"/>${[...Array(13)].map((_,i)=>`<g transform="translate(${i*100+40},${60+Math.sin(i*1.1)*24+(i%2?20:4)})"><path d="M-14 0h28l-14 30z" fill="${['#d24a43','#f6c84a','#3b78c4','#4f9a4a'][i%4]}"/></g>`).join('')}
+<rect y="300" width="1280" height="320" fill="#c9a36b"/><path d="M0 300h1280" stroke="#8c6234" stroke-width="6"/>
+<g transform="translate(220,430)"><rect x="-110" y="0" width="220" height="16" fill="#8c6234" stroke="#2b2a33" stroke-width="4"/><path d="M-90 16v60M90 16v60" stroke="#6d4a26" stroke-width="10"/><g fill="#fff8e6" stroke="#2b2a33" stroke-width="3">${[-70,-25,20,65].map(x=>`<ellipse cx="${x}" cy="-4" rx="18" ry="6"/>`).join('')}</g><circle cx="-25" cy="-16" r="10" fill="#d24a43"/><path d="M50 -10q15 -30 30 0z" fill="#e0ae1f"/></g>
+<g transform="translate(460,330)"><rect x="-60" y="0" width="120" height="150" fill="#fff8e6" stroke="#6d4a26" stroke-width="6"/><text x="0" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#8e3b3b">Fest-Zeitung</text><path d="M-44 56h88M-44 80h88M-44 104h60M-44 128h80" stroke="#8b929a" stroke-width="5"/><path d="M0 150v60" stroke="#6d4a26" stroke-width="8"/></g>
+<g transform="translate(710,560) scale(.85)">${olga()}</g>
+<g transform="translate(890,470)"><path d="M-60 -50q0 70 60 70t60 -70z" fill="#3b78c4" stroke="#2b2a33" stroke-width="5"/><g font-size="34">${['🍎','🍌','🍓'].map((e,i)=>`<text x="${-40+i*30}" y="-48">${e}</text>`).join('')}</g></g>
+<g transform="translate(1110,470)">${['#d24a43','#3b78c4','#f6c84a'].map((c,i)=>`<g transform="translate(${(i-1)*70},${i===1?-20:0})"><rect x="-26" y="-10" width="52" height="60" fill="${c}" stroke="#2b2a33" stroke-width="4"/><ellipse cx="0" cy="-10" rx="26" ry="10" fill="#fff8e6" stroke="#2b2a33" stroke-width="4"/></g>`).join('')}</g>
+<g transform="translate(318,600) scale(.72)" class="kapfig">${kapitaen()}</g>
+${mokiG(1220,300,.5)}${uk(12,1000,250)}${truhe('wh11',120,600)}
+${mark('fe_r',220,330)}${mark('fe_s',460,290)}${mark('olgaf',710,330)}${mark('fe_l',890,340)}${mark('trommel',1110,350)}${morG('fest',560)}
+${mokiH(1220,300)}${hot('fe_r',110,360,220,150)}${hot('fe_s',390,320,120,160)}${hot('olgaf',640,370,140,210)}${hot('fe_l',820,380,140,110)}${hot('trommel',1010,380,200,140)}</svg>`;
+
+/* ---------- Verdrahtung ---------- */
+Object.assign(MX,{strand:760,tempel:560,fest:575});
+Object.assign(POS,{st_r:300,st_s:470,schildi2:760,st_l:800,kroeten:1060,uhr10:640,wh9:420,te_r:300,te_s:540,tuki:640,te_l:780,memory:1040,uhr11:450,wh10:840,fe_r:330,fe_s:540,olgaf:780,fe_l:800,trommel:1000,uhr12:920,wh11:200});
+Object.assign(SC,{strand:{intro:'c9intro',tasks:['st_r','st_s','st_l'],bonus:'kroeten',npc:'schildi2',wer:'schildi',key:'k9',hint:'Sprich mit Oma Schildi!'},
+ tempel:{intro:'c10intro',tasks:['te_r','te_s','te_l'],bonus:'memory',npc:'tuki',wer:'tuki',key:'k10',hint:'Sprich mit Tukan Tuki!'},
+ fest:{intro:'c11intro',tasks:['fe_r','fe_s','fe_l'],bonus:'trommel',npc:'olgaf',wer:'olga',key:'k11',hint:'Sprich mit Wirtin Olga!'}});
+Object.assign(INTRO,{strand:['c9intro',[['kruemel','Kräh! Wir sind auf der Schatzinsel! Und wer liegt da im Sand?'],['schildi','Blubb. Guten Tag, junger Mann. Ich mache hier Urlaub.'],['schildi','Meine Enkel schlüpfen bald aus den Eiern. Hilfst du mir, auf sie aufzupassen?']]],
+ tempel:['c10intro',[['tuki','Tuki tuki! Halt! Wer will in meinen Tempel?'],['tuki','Ich bin Tuki, der Tempelwächter. Hier kommt nur rein, wer Rätsel lösen kann.'],['moki','Psst, Moritz! Tuki ist streng. Aber er mag Bananen.']]],
+ fest:['c11intro',[['olga','Ahoi, Moritz! Heute ist das große Piratenfest!'],['olga','Ich habe so viel zu tun. Tische decken, kochen, Musik machen. Hilfst du mir?'],['kapitaen','Har har! Erst das Fest, dann der Schatz. Ein Pirat braucht Kraft!']]]});
+Object.assign(ACT,{
+ st_r:T('st_r',async()=>{await brief('Mal heißt: immer gleich viele. 3 mal 2 heißt: 3 Nester mit je 2 Eiern. Rechne aus und tippe die Zahl ein.');
+  await malRechnen('Eier zählen',[doppel('doppel')].concat(malListe('mal9',[2,10],5,3)))}),
+ st_s:T('st_s',async()=>{await brief('Die Wellen haben die Wörter zerrissen. Jedes Bild hat zwei Silben. Verbinde die erste Silbe mit der zweiten.');await silbenRunde()}),
+ st_l:T('st_l',async()=>{await talk('schildi','Blubb. Ich wünsche mir ein Bild vom Strand. Lies genau, wie es aussehen soll.');await liesUndMale();await talk('schildi','Das hänge ich in mein Schneckenhaus. Äh, Schildkrötenhaus.')}),
+ uhr10:T('uhr10',()=>uhrPlus(10),10),wh9:T('wh9',()=>wiederholung(9),10),
+ kroeten:BON('strand','kroeten',async()=>{await brief('Die Babys krabbeln zum Meer. Aber die Möwen haben Hunger! Tippe auf die Möwen, dann fliegen sie weg.');const n=await kroeten();S.coins+=Math.floor(n/2)},'Kräh! Die Babys schlüpfen später. Erst die drei Aufgaben!'),
+ schildi2:()=>orden('strand','Blubb. Erst die Eier zählen, die Silben und das Bild, junger Mann.','Blubb! Meine Enkel sind sicher im Meer. Hier ist dein Orden, Moritz.','Der Schildkröten-Orden','Kräh! Hinter dem Strand liegt ein alter Tempel. Tippe oben auf Insel!'),
+ te_r:T('te_r',async()=>{await brief('Im Tempel ist alles in Fünfer-Reihen gebaut. Rechne mit der Fünfer-Reihe. Tipp: 5 mal 2 ist 10. Die Hälfte von 10 mal 5 ist 25.');
+  await malRechnen('Tempel-Steine',malListe('mal10',[5],4,2).concat(malListe('mal10',[2,10],2,0)));await tausch(3)}),
+ te_s:T('te_s',async()=>{await brief('Die Steintafeln sind zerbrochen. Verbinde jeden Satzanfang mit dem passenden Ende.');await satzRunde()}),
+ te_l:T('te_l',async()=>{await talk('tuki','An der Wand hängen alte Bilder. Nur wer genau liest, darf weiter.');await bildSatz(6)}),
+ uhr11:T('uhr11',()=>uhrPlus(11),10),wh10:T('wh10',()=>wiederholung(10),10),
+ memory:BON('tempel','memory',async()=>{await memory()},'Kräh! Das Memory ist die Überraschung. Erst die drei Aufgaben!'),
+ tuki:()=>orden('tempel','Tuki tuki! Erst die Fünfer-Steine, die Satz-Tafeln und die Bilder.','Tuki tuki! Du darfst in meinen Tempel. Und hier ist ein Orden für dich!','Der Tempel-Orden','Kräh! Ich höre Musik! Da ist ein Fest. Tippe oben auf Insel!'),
+ fe_r:T('fe_r',async()=>{await brief('Wir decken die Festtafel. Rechne mal. Danach fordert dich der Kapitän zum Einmaleins-Duell heraus!');
+  await malRechnen('Festtafel',malListe('mal11',[2,5,10],4,1));await brief('Einmaleins-Duell! Jede richtige Antwort füllt deinen Trank. Wer zuerst 5 Punkte hat, gewinnt.');
+  for(;;){const win=await duel('mal','kapitaen');closePanel();if(win)break;await talk('kapitaen','Har har! Diesmal war ich schneller. Nochmal!')}await talk('kapitaen','Har har! Du bist ja ein Einmaleins-Pirat!')}),
+ fe_s:T('fe_s',async()=>{await brief('In der Fest-Zeitung steht viel Quatsch. Lies jeden Satz. Stimmt er? Dann tippe auf richtig. Sonst auf falsch.');await richtigFalsch('Fest-Zeitung',8)}),
+ fe_l:T('fe_l',async()=>{await talk('olga','Wir kochen für das Fest! Hier ist mein Rezept. Lies jeden Schritt genau.');await rezept()}),
+ uhr12:T('uhr12',()=>uhrPlus(12),10),wh11:T('wh11',()=>wiederholung(11),10),
+ trommel:BON('fest','trommel',async()=>{await brief('Trommel-Echo! Olga trommelt vor. Hör gut zu und trommle genau nach.');await trommel()},'Kräh! Die Musik kommt zum Schluss. Erst die drei Aufgaben!'),
+ olgaf:()=>orden('fest','Erst die Festtafel, die Zeitung und das Essen, Moritz!','Was für ein Fest! Du warst mein bester Helfer. Hier ist dein Orden.','Der Fest-Orden','Kräh! Jetzt aber schnell zur Schatzhöhle! Tippe oben auf Insel.')});
+Object.assign(LEBEN,{strand:TIER.moewe(0,120,5)+TIER.flosse(600,250),tempel:TIER.falter(380,180,'#f6c84a')+TIER.falter(900,230,'#d24a43',5),fest:TIER.moewe(0,180,3)});
+SPIELE.push(['Babys retten',d=>d.kroeten,async()=>{S.coins+=Math.floor(await kroeten()/2)}],['Tempel-Memory',d=>d.memory,async()=>{await memory();closePanel()}],['Trommel-Echo',d=>d.trommel,async()=>{await trommel();closePanel()}]);
+
+function build(){$('#scene').innerHTML=[HARBOR,PUB,HEXE,WERFT,TURM,HOEHLE,SEE,AFFEN,RIFF,NEBEL,STRAND,TEMPEL,FEST].map(leben).join('');setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
 $('#b-insel').onclick=insel;$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
 let lastW=0,lastH=0;

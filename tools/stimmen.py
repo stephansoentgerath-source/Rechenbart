@@ -28,6 +28,7 @@ FIG = {
  'strahl': ('ballad', 'Alter, freundlicher Leuchtturmwärter. Ruhig, ein wenig schrullig, erzählt gern.'),
  'koko': ('alloy', 'Fröhliche, etwas eitle Affenkönigin. Verspielt, majestätisch, sagt gern „Uh uh ah ah!“.'),
  'schildi': ('sage', 'Sehr alte, weise und liebe Schildkröten-Oma. Langsam, gemütlich, sagt gern „Blubb“.'),
+ 'tuki': ('ballad', 'Strenger, aber gutmütiger Tukan, Wächter eines Dschungel-Tempels. Wichtigtuerisch, singende Vogelstimme, sagt gern „Tuki tuki!“.'),
  'moki': ('verse', 'Kleiner, frecher Stoffaffe. Quirlig, lustig, sagt gern „Uh uh ah ah!“.'),
  'moritz': ('fable', 'Warmer, spannender Erzähler eines Kinder-Abenteuerfilms. Lebendig, nicht zu schnell.'),
  'mama': ('sage', 'Warmherzige, geduldige Mama mit weicher, heller Frauenstimme, die mit ihrem Sohn Hausaufgaben übt. Ruhig, ermutigend, lächelnd, nie streng.'),
@@ -162,6 +163,17 @@ def sammeln():
         for t in (P.get('witze') or []): add('kruemel', t)
         for f, a in (P.get('kapitaenWitze') or []): add('kapitaen', f); add('kapitaen', a)
         for t in (P.get('moki') or []): add('moki', t)
+        # Akt 3: Lese-Aufgaben (Frau Pranger liest auf Wunsch vor), Rezepte (Olga)
+        for t in (P.get('richtigFalsch') or []): add('lehrerin', t[0])
+        for liste in (P.get('bildsaetze') or {}).values():
+            for t in liste: add('lehrerin', t)
+        for sl in (P.get('silben') or []): add('lehrerin', sl[0] + sl[1])
+        M = P.get('malen') or {}
+        for o in M.get('objekte', []):
+            for f in M.get('farben', []): add('lehrerin', o[1] + ' ist ' + f + '.')
+        for R in (P.get('rezepte') or []):
+            add('olga', R['ende'])
+            for st in R['schritte']: add('lehrerin', st[0])
     texte = sorted({'who': w, 'text': t} for w, t in S) if False else [{'who': w, 'text': t} for w, t in sorted(S)]
     (OUT).mkdir(exist_ok=True)
     (OUT / 'texte.json').write_text(json.dumps(texte, ensure_ascii=False, indent=0), encoding='utf-8')
