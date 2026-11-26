@@ -175,6 +175,16 @@ Jedes Kapitel: Rechnen, Sprache, Lesen und Handeln, Uhr, **Wiederholungs-Truhe**
   `richtigFalsch`, `malen`, `rezepte`. Neue Einträge funktionieren ohne Code-Änderung, außer neue Bilder bei `bildsaetze`/`malen`.
 - Schatzhöhle ist erst nach Kapitel 11 offen (wer sie schon begonnen hat, behält den Zugang).
 
+## Bordtier (Piraten-Haustier), Stand 26.11.2026
+
+Knopf „Bordtier“ oben (mit „!“, wenn das Tier etwas braucht). Moritz brütet ein Ei aus (10× tippen), wählt Krake, Krabbe
+oder Drache und gibt einen Namen. Satt, Laune und Sauber sinken in echter Zeit (Stunden, nachts langsamer), alle 3 Stunden
+ein Klecks. **Das Tier stirbt nie**, es wird höchstens maulig. Füttern = Wunsch lesen und zählen („Ich möchte drei Fische!“),
+kostet 1 Dublone (Seetang gratis); zu viel = Rülpser, Kekse = Krümel ist beleidigt. Spielen = so oft kitzeln, wie es sagt.
+Waschen = Kleckse antippen und fünfmal schrubben. Nachts (21–7 Uhr) schläft es. Pflegepunkte lassen es wachsen:
+Baby → Schiffsjunge (Kopftuch, ab 12) → Pirat (Hut und Augenklappe, ab 40). Spielstand `S.tier`, Code `bordtier()`.
+Ideen für später: Kunststücke ab Stufe Pirat, Bordtier begleitet Moritz in die Szenen, Fotoalbum.
+
 ## Stand der Klasse (Lernlandkarte, abgerufen 16.11.2026; Link bei Stephan, nicht ins Repo)
 
 Wird **jeden Sonntag um 6:47 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich

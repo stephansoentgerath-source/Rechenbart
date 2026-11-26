@@ -109,7 +109,19 @@
 },
 {
 "who": "kapitaen",
+"text": "Har har! Diesmal war ich schneller. Nochmal!"
+},
+{
+"who": "kapitaen",
 "text": "Har har! Du bist ein echter Seebär, Moritz. Dafür gibt es einen Orden!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Du bist ja ein Einmaleins-Pirat!"
+},
+{
+"who": "kapitaen",
+"text": "Har har! Erst das Fest, dann der Schatz. Ein Pirat braucht Kraft!"
 },
 {
 "who": "kapitaen",
@@ -309,6 +321,10 @@
 },
 {
 "who": "kruemel",
+"text": "Da ist ein Riss! Weiter!"
+},
+{
+"who": "kruemel",
 "text": "Das Schiff fährt von allein. Tippe dorthin, wo es fahren soll: oben, in die Mitte oder unten. Sammle Dublonen und weiche den Felsen aus! Alles klar, Käpt’n?"
 },
 {
@@ -349,11 +365,23 @@
 },
 {
 "who": "kruemel",
+"text": "Der große Zeiger springt in Fünfer-Schritten. Jede Zahl sind 5 Minuten. Auf der 4 sind es 20 Minuten. Auf der 8 fehlen noch 20 Minuten bis zur vollen Stunde. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Der kleine Zeiger steht schon. Tippe auf die Zahl für den großen Zeiger."
+},
+{
+"who": "kruemel",
 "text": "Der, die oder das?"
 },
 {
 "who": "kruemel",
 "text": "Die Affen machen immer das Gegenteil! Lies die Frage und tippe auf das Gegenteil. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Babys krabbeln zum Meer. Aber die Möwen haben Hunger! Tippe auf die Möwen, dann fliegen sie weg. Alles klar, Käpt’n?"
 },
 {
 "who": "kruemel",
@@ -385,7 +413,23 @@
 },
 {
 "who": "kruemel",
+"text": "Die Steintafeln sind zerbrochen. Verbinde jeden Satzanfang mit dem passenden Ende. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Die Wellen haben die Wörter zerrissen. Jedes Bild hat zwei Silben. Verbinde die erste Silbe mit der zweiten. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
 "text": "Diesmal läuft eine Sanduhr. Keine Sorge: Du hast viel Zeit. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Einmaleins-Duell! Jede richtige Antwort füllt deinen Trank. Wer zuerst 5 Punkte hat, gewinnt. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Es muss warm bleiben. Tippe ganz oft darauf, dann schlüpft es."
 },
 {
 "who": "kruemel",
@@ -437,7 +481,15 @@
 },
 {
 "who": "kruemel",
+"text": "Im Tempel ist alles in Fünfer-Reihen gebaut. Rechne mit der Fünfer-Reihe. Tipp: 5 mal 2 ist 10. Die Hälfte von 10 mal 5 ist 25. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
 "text": "Im rechten Bild sind"
+},
+{
+"who": "kruemel",
+"text": "In der Fest-Zeitung steht viel Quatsch. Lies jeden Satz. Stimmt er? Dann tippe auf richtig. Sonst auf falsch. Alles klar, Käpt’n?"
 },
 {
 "who": "kruemel",
@@ -461,6 +513,10 @@
 },
 {
 "who": "kruemel",
+"text": "Jetzt stellst du den großen Zeiger. Auf der 12 ist es eine volle Stunde. Auf der 6 ist es halb. Auf der 3 Viertel nach, auf der 9 Viertel vor. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
 "text": "Klack! Der Automat spuckt eine Banane aus."
 },
 {
@@ -478,6 +534,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Daneben. Rechne nochmal."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Das Ding stimmt. Aber lies nochmal die Farbe!"
 },
 {
 "who": "kruemel",
@@ -513,6 +573,22 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Dein Bordtier freut sich, dich zu sehen!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Dein Bordtier hat Hunger!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Dein Bordtier ist gelangweilt. Spiel mit ihm!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Dein Bordtier ist gewachsen!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Den kannte ich schon. Aber egal, haha!"
 },
 {
@@ -538,6 +614,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Die Werkzeugkiste ist die Überraschung. Erst die drei Aufgaben!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Die Wiederholungs-Truhe! Darin liegen Aufgaben von früher."
 },
 {
 "who": "kruemel",
@@ -589,6 +669,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Es wackelt!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Es wird neblig. Tippe oben auf Insel. Hoffentlich spukt es nicht!"
 },
 {
@@ -597,7 +681,19 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Genau richtig gezählt!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Genau, das ist Quatsch!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Hausaufgaben-Zeit! Was übst du heute mit Mama und Papa?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! He! Das sind MEINE Kekse!"
 },
 {
 "who": "kruemel",
@@ -621,11 +717,35 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Hinter dem Strand liegt ein alter Tempel. Tippe oben auf Insel!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Ich bin Krümel. Der Kapitän vergisst alles. Sogar die Kekse in seinem Bart!"
 },
 {
 "who": "kruemel",
+"text": "Kräh! Ich höre Musik! Da ist ein Fest. Tippe oben auf Insel!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Ich lach mich schlapp!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Igitt, hier muss mal sauber gemacht werden!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Im Ei sind drei Tiere! Du darfst eins aussuchen."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Jetzt aber schnell zur Schatzhöhle! Tippe oben auf Insel."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Jetzt glänzt es wie ein Goldstück!"
 },
 {
 "who": "kruemel",
@@ -637,11 +757,27 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Lies den Satz nochmal. Kann das sein?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Lies den ganzen Satz. Ergibt das Sinn?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Lies nochmal: Was sollst du anmalen?"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Mixa liebt Rechen-Duelle. Aber erst braucht sie Hilfe mit ihrem Zauberbuch und ihrem Kessel."
 },
 {
 "who": "kruemel",
 "text": "Kräh! Mixas Besen fliegt mal wieder allein."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Na, wie geht es deinem Bordtier?"
 },
 {
 "who": "kruemel",
@@ -665,7 +801,23 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Schau mal, was ich am Strand gefunden habe! Ein Ei!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Schau nochmal genau auf das Bild."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Schau zuerst auf den großen blauen Zeiger. Jede Zahl sind 5 Minuten."
+},
+{
+"who": "kruemel",
 "text": "Kräh! Schon wieder ein Ufo? Die suchen bestimmt Kekse!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Seetang macht satt. Aber lecker ist anders."
 },
 {
 "who": "kruemel",
@@ -677,11 +829,27 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Sprich beide Silben zusammen. Passt das zum Bild?"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Stimmt genau!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Tippe auf die Ausrufezeichen. Zum Schluss wartet eine Überraschung!"
 },
 {
 "who": "kruemel",
+"text": "Kräh! Tippe zuerst auf eine Farbe."
+},
+{
+"who": "kruemel",
 "text": "Kräh! Vier Kartenstücke! Jetzt segeln wir zur Schatzinsel. Tippe oben auf Insel!"
+},
+{
+"who": "kruemel",
+"text": "Kräh! Was für ein schönes Bild!"
 },
 {
 "who": "kruemel",
@@ -690,6 +858,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Weiter geht es zum Korallenriff. Tippe oben auf Insel."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Wir sind auf der Schatzinsel! Und wer liegt da im Sand?"
 },
 {
 "who": "kruemel",
@@ -717,6 +889,10 @@
 },
 {
 "who": "kruemel",
+"text": "Lies den Satz. Tippe auf die Farbe. Dann tippe auf das Ding im Bild."
+},
+{
+"who": "kruemel",
 "text": "Lies den Zettel selbst. Tippe dann auf der Karte an, was der Kapitän möchte."
 },
 {
@@ -729,7 +905,15 @@
 },
 {
 "who": "kruemel",
+"text": "Lies, was es möchte. Tippe so oft auf das Essen."
+},
+{
+"who": "kruemel",
 "text": "Macht nichts! Das Wort üben wir gleich nochmal."
+},
+{
+"who": "kruemel",
+"text": "Mal heißt: immer gleich viele. 3 mal 2 heißt: 3 Nester mit je 2 Eiern. Rechne aus und tippe die Zahl ein. Alles klar, Käpt’n?"
 },
 {
 "who": "kruemel",
@@ -757,11 +941,31 @@
 },
 {
 "who": "kruemel",
+"text": "Olga plant das Fest. Lies genau und rechne mit Stunden. Eine Stunde später: Der kleine Zeiger geht eine Zahl weiter. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
 "text": "Passt der, die oder das davor? Dann ist es ein Namenwort."
 },
 {
 "who": "kruemel",
+"text": "Pssst! Es ist Nacht. Dein Bordtier schläft."
+},
+{
+"who": "kruemel",
+"text": "Pssst! Es ist Nacht. Lass es schlafen."
+},
+{
+"who": "kruemel",
+"text": "Pssst! Gute Nacht."
+},
+{
+"who": "kruemel",
 "text": "Rrrr! Die Kiste bleibt zu. Lies den Zettel nochmal und fang von vorne an."
+},
+{
+"who": "kruemel",
+"text": "Schau dir das Bild genau an. Welcher Satz passt?"
 },
 {
 "who": "kruemel",
@@ -773,7 +977,19 @@
 },
 {
 "who": "kruemel",
+"text": "Schreib einen Namen. Oder nimm meinen Vorschlag."
+},
+{
+"who": "kruemel",
+"text": "Schrubbe dein Bordtier: Tippe fünfmal darauf."
+},
+{
+"who": "kruemel",
 "text": "Stark gemacht!"
+},
+{
+"who": "kruemel",
+"text": "Stimmt der Satz? Oder ist er Quatsch?"
 },
 {
 "who": "kruemel",
@@ -793,7 +1009,19 @@
 },
 {
 "who": "kruemel",
+"text": "Tippe auf das Ei!"
+},
+{
+"who": "kruemel",
+"text": "Tippe auf dein Bordtier. Zähle mit!"
+},
+{
+"who": "kruemel",
 "text": "Tippe auf die Boote der Stinkstiefel-Bande. Dann schießt unsere Kanone einen alten Keks, und sie drehen um. Lass keines an unser Schiff! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Tippe auf die Kleckse."
 },
 {
 "who": "kruemel",
@@ -801,7 +1029,19 @@
 },
 {
 "who": "kruemel",
+"text": "Tippe auf ein Bild. Dann tippe auf die passende Silbe."
+},
+{
+"who": "kruemel",
+"text": "Tippe auf einen Satzanfang. Dann tippe auf das passende Ende."
+},
+{
+"who": "kruemel",
 "text": "Tippe die Zahl ein. Dann drücke OK."
+},
+{
+"who": "kruemel",
+"text": "Trommel-Echo! Olga trommelt vor. Hör gut zu und trommle genau nach. Alles klar, Käpt’n?"
 },
 {
 "who": "kruemel",
@@ -849,6 +1089,10 @@
 },
 {
 "who": "kruemel",
+"text": "Wir decken die Festtafel. Rechne mal. Danach fordert dich der Kapitän zum Einmaleins-Duell heraus! Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
 "text": "Wohin soll die Reise gehen?"
 },
 {
@@ -877,7 +1121,31 @@
 },
 {
 "who": "lehrerin",
+"text": "Apfel"
+},
+{
+"who": "lehrerin",
 "text": "Axt"
+},
+{
+"who": "lehrerin",
+"text": "Bananen wachsen im Meer."
+},
+{
+"who": "lehrerin",
+"text": "Belege die Pizza mit 4 Tomaten."
+},
+{
+"who": "lehrerin",
+"text": "Bienen machen Honig."
+},
+{
+"who": "lehrerin",
+"text": "Birne"
+},
+{
+"who": "lehrerin",
+"text": "Brot wird gebacken."
 },
 {
 "who": "lehrerin",
@@ -893,7 +1161,183 @@
 },
 {
 "who": "lehrerin",
+"text": "Das Fenster ist offen."
+},
+{
+"who": "lehrerin",
+"text": "Das Fenster ist zu."
+},
+{
+"who": "lehrerin",
+"text": "Das Handtuch ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Das Handtuch ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Das Handtuch ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Das Handtuch ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Das Handtuch ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Das Handtuch ist weiß."
+},
+{
+"who": "lehrerin",
+"text": "Das Segel ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Das Segel ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Das Segel ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Das Segel ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Das Segel ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Das Segel ist weiß."
+},
+{
+"who": "lehrerin",
 "text": "Das ist wie im Test. Ich sage ein Wort, du schreibst es auf dein Papier. Danach zeige ich dir das Wort. Hol dir Papier und einen Stift!"
+},
+{
+"who": "lehrerin",
+"text": "Delfine können malen."
+},
+{
+"who": "lehrerin",
+"text": "Der Ball ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Der Ball ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Der Ball ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Der Ball ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Der Ball ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Der Ball ist weiß."
+},
+{
+"who": "lehrerin",
+"text": "Der Eimer ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Der Eimer ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Der Eimer ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Der Eimer ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Der Eimer ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Der Eimer ist weiß."
+},
+{
+"who": "lehrerin",
+"text": "Der Kapitän mag keine Pilze. Lege 3 Stücke Ananas darauf."
+},
+{
+"who": "lehrerin",
+"text": "Der Krebs ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Der Krebs ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Der Krebs ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Der Krebs ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Der Krebs ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Der Krebs ist weiß."
+},
+{
+"who": "lehrerin",
+"text": "Der Mond ist aus Käse."
+},
+{
+"who": "lehrerin",
+"text": "Der Sonnenschirm ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Der Sonnenschirm ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Der Sonnenschirm ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Der Sonnenschirm ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Der Sonnenschirm ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Der Sonnenschirm ist weiß."
+},
+{
+"who": "lehrerin",
+"text": "Der Vogel fliegt über dem Haus."
+},
+{
+"who": "lehrerin",
+"text": "Der Vogel sitzt auf dem Dach."
+},
+{
+"who": "lehrerin",
+"text": "Der Vogel sitzt neben dem Haus."
 },
 {
 "who": "lehrerin",
@@ -905,11 +1349,67 @@
 },
 {
 "who": "lehrerin",
+"text": "Die Flasche ist halb voll."
+},
+{
+"who": "lehrerin",
+"text": "Die Flasche ist leer."
+},
+{
+"who": "lehrerin",
+"text": "Die Flasche ist voll."
+},
+{
+"who": "lehrerin",
 "text": "Die Geister-Musik kommt aus einer Kiste. Mach die Kiste zu, die nicht rot und nicht grün ist."
 },
 {
 "who": "lehrerin",
+"text": "Die Katze sitzt auf dem Tisch."
+},
+{
+"who": "lehrerin",
+"text": "Die Katze sitzt neben dem Tisch."
+},
+{
+"who": "lehrerin",
+"text": "Die Katze sitzt unter dem Tisch."
+},
+{
+"who": "lehrerin",
 "text": "Die Kiste klemmt. Zieh am grünen Hebel."
+},
+{
+"who": "lehrerin",
+"text": "Die Lampe ist an."
+},
+{
+"who": "lehrerin",
+"text": "Die Lampe ist aus."
+},
+{
+"who": "lehrerin",
+"text": "Die Muschel ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Die Muschel ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Die Muschel ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Die Muschel ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Die Muschel ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Die Muschel ist weiß."
 },
 {
 "who": "lehrerin",
@@ -918,6 +1418,34 @@
 {
 "who": "lehrerin",
 "text": "Die Perle liegt in einer Kiste. Sie liegt nicht in der roten und nicht in der blauen."
+},
+{
+"who": "lehrerin",
+"text": "Die Schildkröte ist blau."
+},
+{
+"who": "lehrerin",
+"text": "Die Schildkröte ist gelb."
+},
+{
+"who": "lehrerin",
+"text": "Die Schildkröte ist grün."
+},
+{
+"who": "lehrerin",
+"text": "Die Schildkröte ist rot."
+},
+{
+"who": "lehrerin",
+"text": "Die Schildkröte ist schwarz."
+},
+{
+"who": "lehrerin",
+"text": "Die Schildkröte ist weiß."
+},
+{
+"who": "lehrerin",
+"text": "Die Sonne ist ein Keks."
 },
 {
 "who": "lehrerin",
@@ -961,6 +1489,42 @@
 },
 {
 "who": "lehrerin",
+"text": "Ein Dreieck hat vier Ecken."
+},
+{
+"who": "lehrerin",
+"text": "Ein Fahrrad hat zwei Räder."
+},
+{
+"who": "lehrerin",
+"text": "Ein Jahr hat zwölf Monate."
+},
+{
+"who": "lehrerin",
+"text": "Ein Lernwort für dich! Hol Papier und Stift."
+},
+{
+"who": "lehrerin",
+"text": "Eine Hand hat fünf Finger."
+},
+{
+"who": "lehrerin",
+"text": "Eine Pizza ist aus Gummi."
+},
+{
+"who": "lehrerin",
+"text": "Eine Woche hat zehn Tage."
+},
+{
+"who": "lehrerin",
+"text": "Elefanten passen in eine Streichholzschachtel."
+},
+{
+"who": "lehrerin",
+"text": "Ente"
+},
+{
+"who": "lehrerin",
 "text": "Er schaut in einen Spiegel. Ein Strahl der Sonne fällt auf die Spitze von seinem Horn. Der Stier lacht. Er sagt: Das ist mein liebstes Spiel! Moritz lacht auch. So ein Spaß! Dann gibt er dem Stier den Stiefel zurück."
 },
 {
@@ -973,6 +1537,10 @@
 },
 {
 "who": "lehrerin",
+"text": "Eulen jagen Mäuse."
+},
+{
+"who": "lehrerin",
 "text": "Farbe"
 },
 {
@@ -981,11 +1549,23 @@
 },
 {
 "who": "lehrerin",
+"text": "Fische haben Beine."
+},
+{
+"who": "lehrerin",
+"text": "Fische leben im Wasser."
+},
+{
+"who": "lehrerin",
 "text": "Fuchs"
 },
 {
 "who": "lehrerin",
 "text": "Fuß"
+},
+{
+"who": "lehrerin",
+"text": "Fußball"
 },
 {
 "who": "lehrerin",
@@ -1001,7 +1581,23 @@
 },
 {
 "who": "lehrerin",
+"text": "Gespenster wohnen im Kühlschrank."
+},
+{
+"who": "lehrerin",
+"text": "Gib 2 Bananen dazu."
+},
+{
+"who": "lehrerin",
+"text": "Glocke"
+},
+{
+"who": "lehrerin",
 "text": "Gut gemacht! Ein paar Wörter üben wir jetzt nochmal."
+},
+{
+"who": "lehrerin",
+"text": "Hase"
 },
 {
 "who": "lehrerin",
@@ -1017,11 +1613,51 @@
 },
 {
 "who": "lehrerin",
+"text": "Hosen haben zwei Nasen."
+},
+{
+"who": "lehrerin",
+"text": "Hunde können bellen."
+},
+{
+"who": "lehrerin",
+"text": "Im Glas schwimmen drei Fische."
+},
+{
+"who": "lehrerin",
+"text": "Im Glas schwimmen zwei Fische."
+},
+{
+"who": "lehrerin",
+"text": "Im Glas schwimmt ein Fisch."
+},
+{
+"who": "lehrerin",
+"text": "Im Korb liegen drei Äpfel."
+},
+{
+"who": "lehrerin",
+"text": "Im Korb liegen vier Äpfel."
+},
+{
+"who": "lehrerin",
+"text": "Im Korb liegen zwei Äpfel."
+},
+{
+"who": "lehrerin",
 "text": "Im Schiff ist Wasser. Schöpfe es mit dem roten Eimer heraus."
 },
 {
 "who": "lehrerin",
 "text": "Im Wald wohnt eine Hexe. Sie hat sechs Tiere. Ein Fuchs, ein Dachs und ein Ochse sind auch dabei. Heute will die Hexe einen Keks backen. Sie holt den Mixer. Dann liest sie den Text im Backbuch."
+},
+{
+"who": "lehrerin",
+"text": "Im Winter ist es oft kalt."
+},
+{
+"who": "lehrerin",
+"text": "Jetzt kommen 5 Erdbeeren hinein."
 },
 {
 "who": "lehrerin",
@@ -1033,7 +1669,15 @@
 },
 {
 "who": "lehrerin",
+"text": "Katze"
+},
+{
+"who": "lehrerin",
 "text": "Keks"
+},
+{
+"who": "lehrerin",
+"text": "Krone"
 },
 {
 "who": "lehrerin",
@@ -1041,11 +1685,43 @@
 },
 {
 "who": "lehrerin",
+"text": "Kuchen"
+},
+{
+"who": "lehrerin",
+"text": "Käse"
+},
+{
+"who": "lehrerin",
+"text": "Kühe geben Milch."
+},
+{
+"who": "lehrerin",
+"text": "Kürbis"
+},
+{
+"who": "lehrerin",
+"text": "Lege 2 Stücke Käse darauf."
+},
+{
+"who": "lehrerin",
+"text": "Lege 3 Äpfel in die Schüssel."
+},
+{
+"who": "lehrerin",
 "text": "Lies laut vor. Die roten Wörter sind deine Lernwörter. Schau sie dir gut an!"
 },
 {
 "who": "lehrerin",
+"text": "Löwe"
+},
+{
+"who": "lehrerin",
 "text": "Macht nichts! Das Wort kommt bald nochmal dran."
+},
+{
+"who": "lehrerin",
+"text": "Mit einer Schere kann man schneiden."
 },
 {
 "who": "lehrerin",
@@ -1057,7 +1733,19 @@
 },
 {
 "who": "lehrerin",
+"text": "Moritz ist ein Name."
+},
+{
+"who": "lehrerin",
 "text": "Moritz, ich habe von deinem Abenteuer gehört. Ich bin sehr stolz auf dich!"
+},
+{
+"who": "lehrerin",
+"text": "Muschel"
+},
+{
+"who": "lehrerin",
+"text": "Nimm keine Zitrone! Lege 4 Trauben dazu."
 },
 {
 "who": "lehrerin",
@@ -1065,11 +1753,27 @@
 },
 {
 "who": "lehrerin",
+"text": "Oder:"
+},
+{
+"who": "lehrerin",
 "text": "Ohr"
 },
 {
 "who": "lehrerin",
+"text": "Pinsel"
+},
+{
+"who": "lehrerin",
+"text": "Piraten essen Steine zum Frühstück."
+},
+{
+"who": "lehrerin",
 "text": "Prima, das sitzt!"
+},
+{
+"who": "lehrerin",
+"text": "Raben können fliegen."
 },
 {
 "who": "lehrerin",
@@ -1078,6 +1782,18 @@
 {
 "who": "lehrerin",
 "text": "Rüssel"
+},
+{
+"who": "lehrerin",
+"text": "Schildkröten tragen einen Panzer."
+},
+{
+"who": "lehrerin",
+"text": "Schnecke"
+},
+{
+"who": "lehrerin",
+"text": "Schnee ist kalt."
 },
 {
 "who": "lehrerin",
@@ -1137,7 +1853,15 @@
 },
 {
 "who": "lehrerin",
+"text": "Tasche"
+},
+{
+"who": "lehrerin",
 "text": "Text"
+},
+{
+"who": "lehrerin",
+"text": "Tomaten sind lila."
 },
 {
 "who": "lehrerin",
@@ -1153,7 +1877,27 @@
 },
 {
 "who": "lehrerin",
+"text": "Vogel"
+},
+{
+"who": "lehrerin",
+"text": "Wir leben auf der Erde."
+},
+{
+"who": "lehrerin",
+"text": "Wolke"
+},
+{
+"who": "lehrerin",
 "text": "Zieh das Segel ein. Dazu ziehst du den gelben Hebel. Nicht den grünen!"
+},
+{
+"who": "lehrerin",
+"text": "Zum Schluss kommt 1 Fisch obendrauf."
+},
+{
+"who": "lehrerin",
+"text": "Zwei plus zwei ist fünf."
 },
 {
 "who": "lehrerin",
@@ -1477,6 +2221,10 @@
 },
 {
 "who": "moki",
+"text": "Psst, Moritz! Tuki ist streng. Aber er mag Bananen."
+},
+{
+"who": "moki",
 "text": "Uh uh ah ah! Du hast mich gefunden! Ich bin Moki. Hier sind 3 Dublonen für dich."
 },
 {
@@ -1565,7 +2313,23 @@
 },
 {
 "who": "olga",
+"text": "Ahoi, Moritz! Heute ist das große Piratenfest!"
+},
+{
+"who": "olga",
+"text": "Bravo! Du bist ein echter Fest-Trommler!"
+},
+{
+"who": "olga",
+"text": "Da fehlt noch etwas. Zähle nochmal."
+},
+{
+"who": "olga",
 "text": "Danke! Jetzt ist die Karte wieder heil."
+},
+{
+"who": "olga",
+"text": "Das ist zu viel. Zähle nochmal."
 },
 {
 "who": "olga",
@@ -1573,7 +2337,23 @@
 },
 {
 "who": "olga",
+"text": "Erst die Festtafel, die Zeitung und das Essen, Moritz!"
+},
+{
+"who": "olga",
+"text": "Fast! Hör nochmal zu."
+},
+{
+"who": "olga",
+"text": "Gut gelesen, Moritz!"
+},
+{
+"who": "olga",
 "text": "Halt! Ohne Dublonen gibt es nichts. Erledige erst alle drei Aufgaben im Hafen!"
+},
+{
+"who": "olga",
+"text": "Har har! Eine Pizza mit Fisch und Ananas. Echt piratig!"
 },
 {
 "who": "olga",
@@ -1581,7 +2361,43 @@
 },
 {
 "who": "olga",
+"text": "Hoppla! Da ist eine falsche Zutat drin. Lies nochmal."
+},
+{
+"who": "olga",
+"text": "Hör gut zu!"
+},
+{
+"who": "olga",
+"text": "Ich habe so viel zu tun. Tische decken, kochen, Musik machen. Hilfst du mir?"
+},
+{
+"who": "olga",
+"text": "Jetzt du!"
+},
+{
+"who": "olga",
+"text": "Lecker! Weiter geht es."
+},
+{
+"who": "olga",
+"text": "Lies genau, wie viele. Tippe so oft auf die Zutat."
+},
+{
+"who": "olga",
+"text": "Mmmh! Der beste Obstsalat der ganzen Insel!"
+},
+{
+"who": "olga",
 "text": "Oft essen oder nur manchmal?"
+},
+{
+"who": "olga",
+"text": "Prima! Genau richtig."
+},
+{
+"who": "olga",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
 },
 {
 "who": "olga",
@@ -1593,11 +2409,27 @@
 },
 {
 "who": "olga",
+"text": "Was für ein Fest! Du warst mein bester Helfer. Hier ist dein Orden."
+},
+{
+"who": "olga",
 "text": "Willkommen in meinem Laden! Was darf es sein?"
+},
+{
+"who": "olga",
+"text": "Wir kochen für das Fest! Hier ist mein Rezept. Lies jeden Schritt genau."
+},
+{
+"who": "schildi",
+"text": "Blubb! Meine Enkel sind sicher im Meer. Hier ist dein Orden, Moritz."
 },
 {
 "who": "schildi",
 "text": "Blubb! So ein fleißiger Taucher. Hier ist dein Orden. Und fahr vorsichtig: Da vorne ist Nebel."
+},
+{
+"who": "schildi",
+"text": "Blubb. Erst die Eier zählen, die Silben und das Bild, junger Mann."
 },
 {
 "who": "schildi",
@@ -1609,11 +2441,27 @@
 },
 {
 "who": "schildi",
+"text": "Blubb. Guten Tag, junger Mann. Ich mache hier Urlaub."
+},
+{
+"who": "schildi",
+"text": "Blubb. Ich wünsche mir ein Bild vom Strand. Lies genau, wie es aussehen soll."
+},
+{
+"who": "schildi",
+"text": "Das hänge ich in mein Schneckenhaus. Äh, Schildkrötenhaus."
+},
+{
+"who": "schildi",
 "text": "In einer alten Kiste liegt meine schönste Perle. Ich habe dir aufgeschrieben, wie du sie findest."
 },
 {
 "who": "schildi",
 "text": "Mein Riff ist das schönste im ganzen Meer. Hilf mir ein wenig, dann zeige ich dir den Weg."
+},
+{
+"who": "schildi",
+"text": "Meine Enkel schlüpfen bald aus den Eiern. Hilfst du mir, auf sie aufzupassen?"
 },
 {
 "who": "schildi",
@@ -1694,5 +2542,37 @@
 {
 "who": "strahl",
 "text": "Wann geht das Licht an? Schau auf die Uhr!"
+},
+{
+"who": "tuki",
+"text": "An der Wand hängen alte Bilder. Nur wer genau liest, darf weiter."
+},
+{
+"who": "tuki",
+"text": "Finde immer zwei gleiche Bilder!"
+},
+{
+"who": "tuki",
+"text": "Ich bin Tuki, der Tempelwächter. Hier kommt nur rein, wer Rätsel lösen kann."
+},
+{
+"who": "tuki",
+"text": "Schön, dich zu sehen, Moritz! Du kannst hier alles nochmal üben."
+},
+{
+"who": "tuki",
+"text": "Tuki tuki! Alle Paare gefunden!"
+},
+{
+"who": "tuki",
+"text": "Tuki tuki! Du darfst in meinen Tempel. Und hier ist ein Orden für dich!"
+},
+{
+"who": "tuki",
+"text": "Tuki tuki! Erst die Fünfer-Steine, die Satz-Tafeln und die Bilder."
+},
+{
+"who": "tuki",
+"text": "Tuki tuki! Halt! Wer will in meinen Tempel?"
 }
 ]

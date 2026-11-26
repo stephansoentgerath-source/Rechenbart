@@ -284,12 +284,31 @@ body.aufgabe #scene,body.aufgabe #scene *{animation-play-state:paused!important}
 .mem{display:grid;grid-template-columns:repeat(4,150px);gap:16px;justify-content:center;margin-top:16px}
 .mk{height:120px;border-radius:16px;border:4px solid #6b6555;background:#a7a08f repeating-linear-gradient(45deg,#a7a08f 0 12px,#b5ae9c 12px 24px);font-size:70px}.mk span{visibility:hidden}.mk.auf{background:#fff8e6}.mk.auf span{visibility:visible}
 .trom{display:flex;gap:60px;justify-content:center;margin:70px 0 50px}.tb{width:210px;height:210px;border-radius:50%;border:8px solid #2b2a33;box-shadow:0 12px 0 #2b2a33;transition:transform .08s}.tb.hau{transform:translateY(10px) scale(.95);box-shadow:0 2px 0 #2b2a33;filter:brightness(1.25)}
+
+/* ---------- Bordtier ---------- */
+.tierw{display:flex;gap:30px;align-items:center;justify-content:center;margin-top:6px}.tbuehne{position:relative}
+.tsvg{width:700px;height:444px;border:4px solid #a9793f;border-radius:16px;background:#cfe8ef;touch-action:manipulation}.tsvg.klein{width:360px;height:346px}
+.tseite{width:400px;display:flex;flex-direction:column;gap:14px}.tknoepfe{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tknoepfe .btn{font-size:26px;padding:10px 8px;min-width:0}
+.tbar{display:flex;align-items:center;gap:10px;font-size:22px}.tbar span{font-size:30px;width:40px}.tb2{flex:1;height:22px;border:3px solid #2b2a33;border-radius:12px;background:#fff;overflow:hidden}.tb2 i{display:block;height:100%}.tbar b{width:90px}
+.tmuenz{font-size:24px;display:flex;align-items:center;gap:8px}
+.tblase{display:none;position:absolute;left:50%;top:14px;transform:translateX(-50%);background:#fff;border:4px solid #2b2a33;border-radius:24px;padding:10px 24px;font-size:34px;font-weight:700;white-space:nowrap}
+.tblase:after{content:"";position:absolute;left:50%;bottom:-16px;border:12px solid transparent;border-top-color:#2b2a33;border-bottom:0}
+.twahl{display:flex;gap:30px;justify-content:center;margin-top:30px}.tw{width:340px;height:420px;border-radius:20px;border:4px solid #a9793f;background:#fff8e6;box-shadow:0 6px 0 #a9793f;font:inherit;font-size:34px}.tw svg{width:300px;height:300px}
+.tname{font:inherit;font-size:48px;font-weight:700;width:420px;padding:10px 20px;border:4px solid #a9793f;border-radius:14px;margin-bottom:20px}
+#tsc,#ei{transform-box:fill-box;transform-origin:50% 100%}
+.tbob{animation:tbob 2.4s ease-in-out infinite}@keyframes tbob{50%{transform:translateY(-8px) scale(1.02,.98)}}
+.thops{animation:thops .45s ease-out}@keyframes thops{40%{transform:translateY(-40px) scale(.95,1.08)}}
+.twackel{animation:twackel .5s ease-in-out 2}@keyframes twackel{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+#tsc.tdreh{transform-origin:50% 50%;animation:tdreh 1s ease-in-out}@keyframes tdreh{50%{transform:translateY(-30px) rotate(180deg)}100%{transform:rotate(360deg)}}
+.wackel{animation:twackel .3s ease-in-out}
+.tentakel path{transform-box:fill-box;transform-origin:50% 0;animation:tent 1.8s ease-in-out infinite alternate}.tentakel path:nth-child(2n){animation-delay:-.9s}@keyframes tent{to{transform:rotate(8deg)}}
+.zzz{animation:zzz 2.4s ease-in-out infinite}@keyframes zzz{50%{transform:translateY(-14px);opacity:.6}}
 </style>
 </head>
 <body>
 <div id="stage">
   <div id="scene"></div>
-  <div id="hud"><button id="b-ton">Vorlesen: an</button><span id="hudnav"><button id="b-insel">Insel</button><button id="b-home">Start</button></span></div>
+  <div id="hud"><button id="b-ton">Vorlesen: an</button><span id="hudnav"><button id="b-tier">Bordtier</button><button id="b-insel">Insel</button><button id="b-home">Start</button></span></div>
   <div id="panel"></div>
   <div id="bar"></div>
   <div id="cine"></div>
@@ -759,7 +778,7 @@ function idle(){const d=S.done,sc=S.scene,n=['kisten','kanonen','kompass'].filte
  Object.keys(SC).forEach(k=>{const q=SC[k],all=q.tasks.every(x=>d[x]);q.tasks.forEach(x=>M.push([x,d[x],1]));M.push([q.bonus,d[q.bonus],all],[q.npc,d[q.key],all])});
  M.forEach(([k,ok,vis])=>{const m=$('#m-'+k);if(!m)return;m.classList.toggle('done',!!ok);m.querySelector('text').textContent=ok?'★':'!';m.style.display=vis?'':'none'});
  ['g-schild','h-schild'].forEach(i=>{const e=$('#'+i);if(e)e.style.display=d.logbuch?'':'none'});
- $('#hudnav').style.display='';save()}
+ $('#hudnav').style.display='';const bt=$('#b-tier');if(bt)bt.textContent=tierSorgen()?'Bordtier !':'Bordtier';save()}
 const WRONG=['Kräh! Knapp daneben. Versuch es nochmal!','Hoppla! Da ist ein Krümel verrutscht. Nochmal!','Fast! Probier es noch einmal.'];
 const RIGHT=['Kräh! Richtig!','Volltreffer, Käpt’n!','Stark gemacht!'];
 const panel=h=>{const p=$('#panel');p.innerHTML=h;p.style.display='block';document.body.classList.add('aufgabe')};
@@ -2062,7 +2081,7 @@ function kroeten(){return new Promise(res=>{musicOn();const c=$('#cine'),bs=[],m
   if(!fin)requestAnimationFrame(frame)}
  requestAnimationFrame(frame)})}
 /* Tempel-Memory: Paare finden */
-function memory(){return new Promise(res=>{const B=shuffle(['🐒','🦜','🐍','🐸','🦋','🍌','🌺','🗿']).slice(0,4+SW()*2),K=shuffle(B.concat(B));let auf=[],paare=0,lock=false,zuege=0;
+function memory(){return new Promise(res=>{const B=shuffle(['🐒','🐢','🐍','🐸','🦋','🍌','🌺','🗿']).slice(0,4+SW()*2),K=shuffle(B.concat(B));let auf=[],paare=0,lock=false,zuege=0;
  panel(`<div class="ptitle">Tempel-Memory <span style="font-size:24px;color:#3a2c20" id="mzug"></span></div><div class="mem">${K.map((e,i)=>`<button class="mk" data-i="${i}"><span>${e}</span></button>`).join('')}</div>`);
  note('tuki','Finde immer zwei gleiche Bilder!');
  $$('.mk').forEach(b=>b.onclick=()=>{if(lock||b.classList.contains('auf'))return;b.classList.add('auf');auf.push(b);sfx('coin');
@@ -2163,9 +2182,132 @@ Object.assign(ACT,{
 Object.assign(LEBEN,{strand:TIER.moewe(0,120,5)+TIER.flosse(600,250),tempel:TIER.falter(380,180,'#f6c84a')+TIER.falter(900,230,'#d24a43',5),fest:TIER.moewe(0,180,3)});
 SPIELE.push(['Babys retten',d=>d.kroeten,async()=>{S.coins+=Math.floor(await kroeten()/2)}],['Tempel-Memory',d=>d.memory,async()=>{await memory();closePanel()}],['Trommel-Echo',d=>d.trommel,async()=>{await trommel();closePanel()}]);
 
+/* ============================================================================
+   BORDTIER – Moritz' Piraten-Haustier
+   Ei ausbrüten, Tier wählen (Krake, Krabbe, Drache), Namen geben. Hunger, Laune und Sauberkeit sinken
+   langsam in echter Zeit (Stunden). Das Tier stirbt NIE, es wird höchstens maulig.
+   Füttern = lesen + zählen („Ich möchte drei Fische!“), kostet 1 Dublone (Seetang gratis).
+   Wächst mit Pflege: Baby -> Schiffsjunge (Kopftuch) -> Pirat (Hut, Augenklappe). Nachts (21–7 Uhr) schläft es.
+   Spielstand: S.tier
+   ============================================================================ */
+const TART={krake:['Krake','#8a5bb5','Kraki'],krabbe:['Krabbe','#d24a43','Kneifi'],drache:['Drache','#4f9a4a','Fauchi']};
+const ZAHLW=['null','ein','zwei','drei','vier','fünf'];
+const TFUTTER={fisch:['🐟','Fische','Fisch'],banane:['🍌','Bananen','Banane'],keks:['🍪','Kekse','Keks'],seetang:['🌿','Seetang','Seetang']};
+const tierNacht=()=>{const h=new Date().getHours();return h>=21||h<7};
+function tierZeit(){const T=S.tier;if(!T||!T.art)return;const jetzt=Date.now(),h=Math.min(48,(jetzt-(T.zeit||jetzt))/36e5);T.zeit=jetzt;
+ const f=tierNacht()?.4:1;T.satt=Math.max(0,T.satt-h*6*f);T.froh=Math.max(0,T.froh-h*4*f);
+ T.kt=(T.kt||0)+h;while(T.kt>=3){T.kt-=3;T.kleckse=Math.min(3,(T.kleckse||0)+1)}T.sauber=Math.max(0,100-(T.kleckse||0)*30-(T.dreck||0));save()}
+const tierStufe=()=>{const p=(S.tier||{}).pflege||0;return p>=40?2:p>=12?1:0};
+const tierSorgen=()=>{const T=S.tier;if(!T)return true;if(!T.art)return true;tierZeit();return T.satt<30||T.froh<30||(T.kleckse||0)>0};
+/* Zeichnung: Körper je Art, Gesicht je Stimmung, Zubehör je Stufe */
+function tierBild(art,mood,stufe){const c=TART[art][1];
+ const auge=mood==='schlaf'||mood==='lachen'?`<path d="M-30 -42q10 -10 20 0M10 -42q10 -10 20 0" stroke="#2b2a33" stroke-width="5" fill="none" stroke-linecap="round"/>`
+  :mood==='igitt'?`<path d="M-32 -48l18 8l-18 8M32 -48l-18 8l18 8" stroke="#2b2a33" stroke-width="5" fill="none" stroke-linecap="round"/>`
+  :`<circle cx="-20" cy="-42" r="12" fill="#fff" stroke="#2b2a33" stroke-width="3"/><circle cx="20" cy="-42" r="12" fill="#fff" stroke="#2b2a33" stroke-width="3"/><circle class="aug" cx="${mood==='hunger'?-18:-17}" cy="${mood==='muede'?-38:-41}" r="6" fill="#2b2a33"/><circle class="aug" cx="${mood==='hunger'?22:23}" cy="${mood==='muede'?-38:-41}" r="6" fill="#2b2a33"/>${mood==='muede'?'<path d="M-34 -46h28M6 -46h28" stroke="'+c+'" stroke-width="10"/>':''}`;
+ const mund=mood==='lachen'?'<path d="M-22 -18q22 34 44 0z" fill="#8e3b3b" stroke="#2b2a33" stroke-width="4"/><path d="M-12 -2q12 8 24 0" fill="#f08bb0"/>'
+  :mood==='hunger'?'<ellipse cx="0" cy="-12" rx="10" ry="12" fill="#8e3b3b" stroke="#2b2a33" stroke-width="4"/>'
+  :mood==='igitt'?'<path d="M-18 -10q18 -14 36 0" stroke="#2b2a33" stroke-width="5" fill="none"/><path d="M6 -10q4 14 10 2" fill="#f08bb0" stroke="#2b2a33" stroke-width="3"/>'
+  :mood==='maulig'?'<path d="M-16 -6q16 -14 32 0" stroke="#2b2a33" stroke-width="5" fill="none" stroke-linecap="round"/>'
+  :mood==='schlaf'?'<ellipse cx="0" cy="-14" rx="6" ry="4" fill="#8e3b3b"/>':'<path d="M-18 -18q18 20 36 0" stroke="#2b2a33" stroke-width="5" fill="none" stroke-linecap="round"/>';
+ const wange=`<ellipse cx="-36" cy="-22" rx="8" ry="5" fill="#f08bb0" opacity=".6"/><ellipse cx="36" cy="-22" rx="8" ry="5" fill="#f08bb0" opacity=".6"/>`;
+ const koerper={
+  krake:`<g class="tentakel">${[-50,-30,-10,10,30,50].map((x,i)=>`<path d="M${x} 10q${i%2?14:-14} 40 ${i%2?-6:6} 70" stroke="${c}" stroke-width="16" fill="none" stroke-linecap="round"/>`).join('')}</g><ellipse cx="0" cy="-30" rx="62" ry="60" fill="${c}" stroke="#2b2a33" stroke-width="4"/><circle cx="-30" cy="-70" r="7" fill="#fff" opacity=".35"/>`,
+  krabbe:`<g stroke="#2b2a33" stroke-width="4">${[-1,1].map(s=>`<path d="M${s*50} 0l${s*30} 30M${s*54} -14l${s*34} 14M${s*48} 14l${s*22} 30" stroke="${c}" stroke-width="9" stroke-linecap="round"/><g class="schere" style="transform-origin:${s*60}px -30px"><circle cx="${s*84}" cy="-60" r="22" fill="${c}"/><path d="M${s*84} -60l${s*24} -14" stroke="#f2deb0" stroke-width="6"/></g><path d="M${s*44} -20l${s*30} -26" stroke="${c}" stroke-width="10"/>`).join('')}</g><ellipse cx="0" cy="-20" rx="64" ry="44" fill="${c}" stroke="#2b2a33" stroke-width="4"/>`,
+  drache:`<path d="M50 0q60 0 64 -40l-10 6l-2 -14z" fill="${c}" stroke="#2b2a33" stroke-width="4"/><g class="fluegel"><path d="M-40 -60q-60 -40 -70 10q30 -10 50 10z" fill="#9bd18b" stroke="#2b2a33" stroke-width="4"/></g><path d="M-20 -96l8 -22l10 20M10 -98l10 -20l6 22" fill="#f6c84a" stroke="#2b2a33" stroke-width="3"/><ellipse cx="0" cy="-36" rx="58" ry="62" fill="${c}" stroke="#2b2a33" stroke-width="4"/><ellipse cx="0" cy="-6" rx="34" ry="26" fill="#cfe8a8"/><path d="M-30 20v10M30 20v10" stroke="#2b2a33" stroke-width="10" stroke-linecap="round"/>`};
+ const zub=stufe===2?`<path d="M-58 -82q58 -46 116 0q-10 -40 -58 -44q-48 4 -58 44z" fill="#2b2a33"/><path d="M-62 -80h124" stroke="#2b2a33" stroke-width="10" stroke-linecap="round"/><text x="0" y="-92" text-anchor="middle" font-size="22" fill="#fff">☠</text><path d="M-40 -56l60 -10" stroke="#2b2a33" stroke-width="3"/><ellipse cx="20" cy="-42" rx="15" ry="13" fill="#2b2a33"/>`
+  :stufe===1?`<path d="M-56 -70q56 -40 112 0q-56 -12 -112 0z" fill="#d24a43" stroke="#2b2a33" stroke-width="3"/><path d="M50 -72l20 10l-6 -20z" fill="#d24a43" stroke="#2b2a33" stroke-width="3"/><g fill="#fff"><circle cx="-20" cy="-74" r="3"/><circle cx="10" cy="-78" r="3"/><circle cx="34" cy="-72" r="3"/></g>`:'';
+ return `${koerper[art]}${wange}${auge}${mund}${zub}`}
+const EI=(risse)=>`<ellipse cx="0" cy="-60" rx="56" ry="70" fill="#fff8e6" stroke="#2b2a33" stroke-width="4"/><g fill="#7cc6e8"><circle cx="-20" cy="-90" r="9"/><circle cx="24" cy="-60" r="11"/><circle cx="-16" cy="-30" r="8"/></g>${risse>=1?'<path d="M-40 -70l14 10l10 -14l12 12l10 -10" stroke="#2b2a33" stroke-width="4" fill="none"/>':''}${risse>=2?'<path d="M-8 -110l8 14l-10 10l12 10" stroke="#2b2a33" stroke-width="4" fill="none"/>':''}`;
+
+async function bordtier(){if(busy)return;busy=true;hush();$('#hudnav').style.display='none';
+ try{S.tier=S.tier||{art:null,ei:0};if(!S.tier.art)await tierSchluepfen();if(S.tier.art)await tierZimmer()}finally{closePanel();busy=false;idle()}}
+async function tierSchluepfen(){const T=S.tier;
+ if(!T.gesehen){await talk('kruemel','Kräh! Schau mal, was ich am Strand gefunden habe! Ein Ei!');await talk('kruemel','Es muss warm bleiben. Tippe ganz oft darauf, dann schlüpft es.');T.gesehen=1;save()}
+ const ok=await new Promise(res=>{panel(`<div class="ptitle">Das geheimnisvolle Ei</div><div class="tierw"><svg viewBox="-160 -200 320 240" class="tsvg"><ellipse cx="0" cy="6" rx="110" ry="22" fill="#c9a36b"/><g id="ei">${EI(0)}</g></svg></div><div class="center"><button class="btn small" id="t-x">Später</button></div>`);
+  note('kruemel','Tippe auf das Ei!');let n=T.ei||0;const g=$('#ei');
+  g.onpointerdown=()=>{n++;T.ei=n;sfx('coin');g.setAttribute('class','');void g.getBBox();g.setAttribute('class','wackel');g.innerHTML=EI(n>=6?2:n>=3?1:0);
+   if(n===3)note('kruemel','Kräh! Es wackelt!');if(n===6)note('kruemel','Da ist ein Riss! Weiter!');if(n>=10){g.onpointerdown=null;sfx('fanfare');setTimeout(()=>res(true),700)}};
+  $('#t-x').onclick=()=>{save();res(false)}});
+ if(!ok)return;
+ const art=await new Promise(res=>{panel(`<div class="ptitle">Wer soll schlüpfen?</div><div class="twahl">${Object.keys(TART).map(k=>`<button class="tw" data-a="${k}"><svg viewBox="-130 -150 260 250">${tierBild(k,'froh',0)}</svg><b>${TART[k][0]}</b></button>`).join('')}</div>`);
+  note('kruemel','Kräh! Im Ei sind drei Tiere! Du darfst eins aussuchen.');$$('.tw').forEach(b=>b.onclick=()=>res(b.dataset.a))});
+ const name=await new Promise(res=>{panel(`<div class="ptitle">Wie soll dein ${TART[art][0]} heißen?</div><div class="tierw"><svg viewBox="-130 -150 260 250" class="tsvg klein">${tierBild(art,'lachen',0)}</svg>
+  <div><input id="t-name" maxlength="10" value="${TART[art][2]}" class="tname"><div class="lrow" style="justify-content:center"><button class="btn" id="t-ok">Fertig</button></div></div></div>`);
+  note('kruemel','Schreib einen Namen. Oder nimm meinen Vorschlag.');const f=$('#t-name');f.onfocus=()=>f.select();
+  $('#t-ok').onclick=()=>{const v=f.value.trim().replace(/[<>&"]/g,'');res(v?v[0].toUpperCase()+v.slice(1):TART[art][2])}});
+ Object.assign(T,{art,name,satt:70,froh:80,sauber:100,kleckse:0,pflege:0,zeit:Date.now(),geboren:new Date().toISOString().slice(0,10)});save();
+ await talk('kruemel',`Kräh! Willkommen an Bord, ${name}! Du musst gut für ${name} sorgen. Füttern, spielen und waschen!`)}
+
+async function tierZimmer(){const T=S.tier;tierZeit();let mood='froh',raus=false,akt=null,schlaeft=tierNacht(),moodT=null;
+ const stimmung=()=>schlaeft?'schlaf':T.satt<30?'hunger':(T.kleckse||0)>1?'igitt':T.froh<30?'maulig':'froh';
+ const balk=(n,ic,w)=>`<div class="tbar"><span>${ic}</span><div class="tb2"><i style="width:${Math.round(w)}%;background:${w<30?'#d24a43':w<60?'#f6c84a':'#4f9a4a'}"></i></div><b>${n}</b></div>`;
+ panel(`<div class="ptitle">${T.name} <span style="font-size:24px;color:#3a2c20">${['Baby','Schiffsjunge','Pirat'][tierStufe()]} · ${TART[T.art][0]}</span></div>
+ <div class="tierw"><div class="tbuehne" id="tb"><svg viewBox="-260 -230 520 330" class="tsvg"><rect x="-260" y="-230" width="520" height="330" fill="#cfe8ef"/><rect x="-260" y="40" width="520" height="60" fill="#c9a36b"/><g id="tklecks"></g><g transform="translate(0,22)"><g id="tsc"><g id="tfig"></g></g></g><g id="tfx"></g><g id="tnacht"></g></svg><div class="tblase" id="tbl"></div></div>
+ <div class="tseite"><div id="tbars"></div><div class="tknoepfe"><button class="btn" id="t-f">Füttern</button><button class="btn sec" id="t-s">Spielen</button><button class="btn sec" id="t-w">Waschen</button><button class="btn sec" id="t-l">Licht</button><button class="btn small" id="t-z">Zurück</button></div><div class="tmuenz"><i class="coin"></i> <span id="tco">${S.coins}</span> Dublonen</div></div></div>`);
+ const fig=$('#tfig'),sc=$('#tsc'),bl=$('#tbl'),fx=$('#tfx');
+ const male=m=>{fig.innerHTML=tierBild(T.art,m||stimmung(),tierStufe())};
+ const zeig=()=>{male(mood==='froh'?null:mood);$('#tbars').innerHTML=balk('Satt','🍽️',T.satt)+balk('Laune','😊',T.froh)+balk('Sauber','✨',T.sauber);$('#tco').textContent=S.coins;
+  $('#tnacht').innerHTML=schlaeft?'<rect x="-260" y="-230" width="520" height="330" fill="#1d2440" opacity=".55"/><text x="80" y="-120" font-size="44" fill="#fff" class="zzz">Z z z</text>':'';
+  $('#tklecks').innerHTML=[...Array(T.kleckse||0)].map((_,i)=>`<g class="tkl" data-i="${i}" transform="translate(${[-170,160,-110][i]},${[70,66,80][i]})">${T.art==='krake'?'<path d="M-24 0q-6 -26 20 -22q24 -8 26 14q12 18 -16 18q-22 8 -30 -10z" fill="#2b2a33"/>':T.art==='krabbe'?'<path d="M-26 6q0 -26 26 -26t26 26z" fill="#a9793f"/><path d="M-8 -16q8 -14 16 0" fill="#a9793f"/>':'<g fill="#555"><circle r="16"/><circle cx="18" cy="-8" r="13"/><circle cx="-16" cy="-10" r="11"/></g>'}<text y="-28" text-anchor="middle" font-size="22">💨</text></g>`).join('');
+  $$('.tkl').forEach(k=>k.onpointerdown=()=>{if(akt!=='waschen')return sag('Igitt! Nimm den Schwamm. Tippe auf Waschen.');T.kleckse=Math.max(0,T.kleckse-1);T.sauber=Math.min(100,T.sauber+30);sfx('splash');save();zeig()})};
+ const sag=(t,ms)=>{bl.textContent=t;bl.style.display='block';clearTimeout(sag.t);sag.t=setTimeout(()=>bl.style.display='none',ms||2600)};
+ const gesicht=(m,ms,cls)=>{mood=m;sc.setAttribute('class',cls||'tbob');male(m);clearTimeout(moodT);moodT=setTimeout(()=>{if(!fig.isConnected)return;mood='froh';sc.setAttribute('class','tbob');male()},ms||1600)};
+ const fxBild=(h,ms)=>{fx.innerHTML=h;setTimeout(()=>{if(fx.isConnected)fx.innerHTML=''},ms||1500)};
+ zeig();sc.setAttribute('class','tbob');
+ /* Begrüßung */
+ if(schlaeft)note('kruemel','Pssst! Es ist Nacht. Dein Bordtier schläft.');
+ else if(T.satt<30){note('kruemel','Kräh! Dein Bordtier hat Hunger!');sag('Mein Bauch knurrt!')}
+ else if((T.kleckse||0)>0){note('kruemel','Kräh! Igitt, hier muss mal sauber gemacht werden!');sag('Hihi, das war ich!')}
+ else if(T.froh<30){note('kruemel','Kräh! Dein Bordtier ist gelangweilt. Spiel mit ihm!');sag('Mir ist langweilig!')}
+ else{note('kruemel',pick(['Kräh! Dein Bordtier freut sich, dich zu sehen!','Kräh! Na, wie geht es deinem Bordtier?']));sag(pick(['Ahoi!','Da bist du ja!','Ich hab dich vermisst!']))}
+ const wach=()=>{if(!schlaeft)return true;if(tierNacht()){sag('Schnarch… lass mich schlafen…');note('kruemel','Pssst! Es ist Nacht. Lass es schlafen.');return false}schlaeft=false;zeig();return true};
+ /* Antippen: zufälliger Gag */
+ $('#tb').onpointerdown=e=>{if(e.target.closest('.tkl')||akt)return;if(!wach())return;
+  if(akt==='waschen')return;const r=Math.random();
+  if(r<.25){gesicht('lachen',1400,'thops');sfx('kraeh');sag(pick(['Hihihi!','Das kitzelt!','Nochmal!']));T.froh=Math.min(100,T.froh+3)}
+  else if(r<.45){gesicht('igitt',1200,'twackel');fxBild('<text x="60" y="-120" font-size="54">💨</text><text x="70" y="-60" font-size="26" font-weight="700" fill="#2b2a33">PUPS!</text>');sfx('bad');sag('Ups! Das war ich nicht!')}
+  else if(r<.6){gesicht('lachen',1200,'thops');sag(pick(['Arrr! Ich bin ein Pirat!','Wo ist der Schatz?','Ich will auch eine Augenklappe!']))}
+  else if(r<.75){gesicht('muede',1600);fxBild('<text x="-20" y="-150" font-size="40">💦</text>');sag('Hatschi!')}
+  else{gesicht('froh',1200,'thops');sag(pick(['Ahoi!','Hast du was zu essen?','Spielst du mit mir?']))}};
+ /* Füttern: Wunsch lesen und so oft tippen */
+ $('#t-f').onclick=async()=>{if(akt||!wach())return;akt='futter';
+  const sorte=pick(['fisch','banane','keks']),n=rand(1,T.satt>80?2:4);const F=TFUTTER[sorte];
+  sag(`Ich möchte ${n===1?(sorte==='banane'?'eine':'einen'):ZAHLW[n]} ${n===1?F[2]:F[1]}!`,60000);note('kruemel','Lies, was es möchte. Tippe so oft auf das Essen.');
+  const lad=$('.tknoepfe');const alt=lad.innerHTML;let gez=0;
+  lad.innerHTML=Object.keys(TFUTTER).map(k=>`<button class="btn sec tfu" data-k="${k}">${TFUTTER[k][0]} ${k==='seetang'?'gratis':'1 <i class="coin"></i>'}</button>`).join('')+`<button class="btn" id="t-ff">Fertig</button>`;
+  const fertig=()=>new Promise(res=>{const z={};
+   $$('.tfu').forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(k!=='seetang'){if(S.coins<1){sag('Du hast keine Dublonen mehr! Seetang ist gratis.');return}S.coins--}z[k]=(z[k]||0)+1;gez++;sfx('coin');
+    fxBild(`<text x="${rand(-60,40)}" y="-60" font-size="50">${TFUTTER[k][0]}</text>`,600);gesicht('lachen',500);$('#tco').textContent=S.coins});
+   $('#t-ff').onclick=()=>res(z)});
+  const z=await fertig();lad.innerHTML=alt;bindKnoepfe();bl.style.display='none';
+  const wunsch=z[sorte]||0,anderes=Object.keys(z).filter(k=>k!==sorte).reduce((s,k)=>s+z[k],0);
+  if(!gez){sag('Hm? Gar nichts?');akt=null;return}
+  if(wunsch===n&&!anderes){T.satt=Math.min(100,T.satt+30);T.froh=Math.min(100,T.froh+8);T.pflege=(T.pflege||0)+1;gesicht('lachen',1800,'thops');sfx('ok');sag(pick(['Mmmh! Genau richtig!','Lecker! Danke!','Mampf mampf!']));note('kruemel','Kräh! Genau richtig gezählt!')}
+  else if(wunsch>n){T.satt=Math.min(100,T.satt+35);gesicht('igitt',1800,'twackel');fxBild('<text x="40" y="-110" font-size="34" font-weight="700" fill="#2b2a33">BÖÖÖRPS!</text>');sfx('bad');sag('Uff! Das war zu viel!');note('kruemel',`Kräh! Es wollte nur ${n}. Jetzt hat es Bauchweh.`)}
+  else if(z.seetang&&!wunsch){T.satt=Math.min(100,T.satt+15);gesicht('igitt',1600);sag('Bäh! Seetang! Na gut…');note('kruemel','Kräh! Seetang macht satt. Aber lecker ist anders.')}
+  else{T.satt=Math.min(100,T.satt+10*wunsch+5*anderes);gesicht('maulig',1600);sag(!wunsch?'Das wollte ich doch gar nicht!':'Das ist zu wenig!');note('kruemel',`Kräh! Lies nochmal genau. Es wollte ${n} ${n===1?F[2]:F[1]}.`)}
+  if(z.keks)setTimeout(()=>{if(fig.isConnected)note('kruemel','Kräh! He! Das sind MEINE Kekse!')},2200);
+  save();zeig();akt=null};
+ /* Spielen: so oft kitzeln, wie es sagt */
+ $('#t-s').onclick=()=>{if(akt||!wach())return;akt='spiel';const n=rand(4,8);let k=0;sag(`Kitzel mich ${n}-mal!`,60000);note('kruemel','Tippe auf dein Bordtier. Zähle mit!');
+  $('#tb').onpointerdown=e=>{if(akt!=='spiel')return;k++;gesicht('lachen',700,'thops');sfx('kraeh');fxBild(`<text x="${rand(-150,110)}" y="${rand(-170,-60)}" font-size="40" font-weight="700" fill="#8a5bb5">${k}</text>`,700);
+   if(k===n){akt='x';T.froh=Math.min(100,T.froh+30);T.pflege=(T.pflege||0)+1;save();setTimeout(()=>{gesicht('lachen',2000,'tdreh');sag('Hihihi! Nochmal! Nein, genug!');note('kruemel','Kräh! Genau richtig gezählt!');zeig();akt=null;wieder()},500)}}};
+ /* Waschen: Kleckse wegtippen und Tier schrubben */
+ $('#t-w').onclick=()=>{if(akt||!wach())return;akt='waschen';let s=0;sag('Nicht ins Auge!',3000);note('kruemel',(T.kleckse?'Tippe auf die Kleckse. ':'')+'Schrubbe dein Bordtier: Tippe fünfmal darauf.');
+  $('#tb').onpointerdown=e=>{if(akt!=='waschen'||e.target.closest('.tkl'))return;s++;fxBild([...Array(4)].map(()=>`<circle cx="${rand(-90,90)}" cy="${rand(-150,0)}" r="${rand(10,24)}" fill="#fff" opacity=".85" stroke="#7cc6e8" stroke-width="3"/>`).join(''),800);sfx('splash');gesicht('lachen',500);
+   if(s>=5&&!(T.kleckse>0)){akt=null;T.dreck=0;T.sauber=100;T.froh=Math.min(100,T.froh+5);T.pflege=(T.pflege||0)+1;save();zeig();sag('Blitzblank!');note('kruemel','Kräh! Jetzt glänzt es wie ein Goldstück!');wieder()}}};
+ $('#t-l').onclick=()=>{if(akt)return;if(!schlaeft){if(!tierNacht()&&T.froh>40){sag('Ich bin gar nicht müde!');return}schlaeft=true;note('kruemel','Pssst! Gute Nacht.');zeig()}else{schlaeft=false;zeig();sag('Guten Morgen!')}};
+ let zurueckFn=null;const zurueck=()=>zurueckFn&&zurueckFn();
+ const wieder=()=>{$('#tb').onpointerdown=tippen};const tippen=$('#tb').onpointerdown;
+ function bindKnoepfe(){$('#t-f').onclick=futter;$('#t-s').onclick=spiel;$('#t-w').onclick=wasch;$('#t-l').onclick=licht;$('#t-z').onclick=zurueck}
+ const futter=$('#t-f').onclick,spiel=$('#t-s').onclick,wasch=$('#t-w').onclick,licht=$('#t-l').onclick;
+ /* Wachsen: Stufe prüfen */
+ let stufeAlt=tierStufe();const wachs=setInterval(()=>{if(!fig.isConnected){clearInterval(wachs);return}const st=tierStufe();if(st!==stufeAlt){stufeAlt=st;sfx('fanfare');gesicht('lachen',2500,'tdreh');sag(st===1?'Ich bin jetzt ein Schiffsjunge!':'Arrr! Ich bin ein echter Pirat!',4000);note('kruemel','Kräh! Dein Bordtier ist gewachsen!');$('.ptitle span').textContent=`${['Baby','Schiffsjunge','Pirat'][st]} · ${TART[T.art][0]}`}},700);
+ await new Promise(res=>{zurueckFn=()=>{clearInterval(wachs);save();res()};$('#t-z').onclick=zurueck});}
+
 function build(){$('#scene').innerHTML=[HARBOR,PUB,HEXE,WERFT,TURM,HOEHLE,SEE,AFFEN,RIFF,NEBEL,STRAND,TEMPEL,FEST].map(leben).join('');setScene(SCN.includes(S.scene)?S.scene:'harbor');$$('.hot').forEach(h=>h.onclick=()=>act(h.dataset.act))}
 $('#b-ton').onclick=()=>{S.speak=!S.speak;if(!S.speak)hush();setTon();save()};
-$('#b-insel').onclick=insel;$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
+$('#b-insel').onclick=insel;$('#b-tier').onclick=bordtier;$('#b-home').onclick=()=>{if(!busy){hush();showTitle()}};
 let lastW=0,lastH=0;
 function fit(){const w=innerWidth,h=innerHeight;if(w===lastW&&h===lastH)return;lastW=w;lastH=h;
  const port=h>w,s=port?Math.min(h/1280,w/800):Math.min(w/1280,h/800);
