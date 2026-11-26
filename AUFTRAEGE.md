@@ -185,6 +185,14 @@ Waschen = Kleckse antippen und fünfmal schrubben. Nachts (21–7 Uhr) schläft 
 Baby → Schiffsjunge (Kopftuch, ab 12) → Pirat (Hut und Augenklappe, ab 40). Spielstand `S.tier`, Code `bordtier()`.
 Ideen für später: Kunststücke ab Stufe Pirat, Bordtier begleitet Moritz in die Szenen, Fotoalbum.
 
+## Piraten-Adventskalender, Stand 26.11.2026
+
+Knopf auf dem Startbildschirm (ab 14 Tage vor dem 1.12. mit Countdown, im Dezember leuchtend, solange das heutige
+Türchen zu ist; bis 6.1. sichtbar). 24 Türchen in gemischter Reihenfolge, jedes erst an seinem Tag (Gerätedatum),
+verpasste lassen sich nachholen. Je Türchen ein Bild (Figur + Emojis im Schnee) und eine gesprochene Piratenweisheit,
+**keine Aufgaben**, beim ersten Öffnen 2 Dublonen. Texte in `inhalte.js` → `advent` (genau 24). Spielstand `S.advent`.
+Zum Ausprobieren: `index.html?advent=24` tut so, als wäre der 24. Dezember.
+
 ## Stand der Klasse (Lernlandkarte, abgerufen 16.11.2026; Link bei Stephan, nicht ins Repo)
 
 Wird **jeden Sonntag um 6:47 Uhr** automatisch geprüft (geplante Aufgabe „Rechenbart: Lernlandkarte wöchentlich

@@ -284,6 +284,33 @@ const PAKETE=[
    ["Wie heißt ein Pirat, der immer zu spät kommt?", "Kapitän Gleich-da! Har har!"],
    ["Warum nehmen Piraten nie Kekse mit an Deck?", "Weil Krümel sonst alles wegfuttert! Har har!"]
   ],
+  /* Adventskalender: [wer spricht, Piratenweisheit, Figur im Bild oder "", Emojis im Bild]. Genau 24 Einträge, Tag 1 bis 24. */
+  advent:[
+   ["kapitaen","Jede große Reise beginnt mit einem kleinen Schritt. Heute ist Türchen Nummer eins!","kapitaen","⭐"],
+   ["kruemel","Ein echter Pirat teilt seine Kekse. Ich teile meine morgen. Kräh!","kruemel","🍪🍪"],
+   ["kapitaen","Fehler sind wie Wellen. Sie kommen und gehen. Und du segelst einfach weiter.","","⛵🌊"],
+   ["schildi","Blubb. Langsam ist auch schnell genug. Hauptsache, du kommst an.","schildi","🐚"],
+   ["kapitaen","Mut heißt nicht, keine Angst zu haben. Mut heißt, es trotzdem zu versuchen.","kapitaen","⚓"],
+   ["kapitaen","Heute ist Nikolaus! Hast du deine Stiefel geputzt? Meine riechen nach Fisch. Har har!","","👢🍫🍊"],
+   ["olga","Ein Freund an Bord ist mehr wert als eine Kiste voll Gold.","olga","💛"],
+   ["kapitaen","Übung macht den Meister. Und den Kapitän auch!","","📖✏️"],
+   ["hobel","Wenn der Wind nicht weht, nimm die Ruder. Gib nicht auf!","hobel","🔨"],
+   ["moki","Uh uh ah ah! Lachen ist das beste Segel. Damit kommst du überall hin!","moki","😄"],
+   ["strahl","Auch der kleinste Stern zeigt dir den Weg nach Hause.","strahl","⭐✨"],
+   ["kruemel","Sei freundlich zu allen. Sogar zu Möwen. Na gut, ein bisschen. Kräh!","kruemel","🎄"],
+   ["kapitaen","Ein Danke kostet nichts und macht alle froh.","","🎁"],
+   ["mixa","Hihi! Wer jeden Tag ein bisschen lernt, hat bald einen ganzen Schatz im Kopf.","mixa","🔮"],
+   ["kapitaen","Hilf anderen. Dann hilft dir auch jemand. So machen das Piraten.","kapitaen","🤝"],
+   ["olga","Ein warmer Kakao und eine Decke: Das ist auch ein Schatz.","olga","☕"],
+   ["koko","Uh uh! Eine gute Mannschaft hält zusammen. Allein ist es nur halb so lustig.","koko","🍌"],
+   ["kapitaen","Wenn du hinfällst: Aufstehen, Hut gerade rücken und lachen. Har har!","","⛄"],
+   ["schlotter","Buhuuu! Auch Gespenster haben mal Angst. Dann hilft eine Umarmung.","schlotter","🤗"],
+   ["kapitaen","Das Schönste an Geschenken ist das Schenken.","","🎁🎀"],
+   ["tuki","Tuki tuki! Heute ist die längste Nacht. Ab morgen wird jeder Tag ein bisschen heller.","tuki","🌙"],
+   ["kapitaen","Glaub an dich, Schiffsjunge. Ich glaube auch an dich!","kapitaen","💪"],
+   ["kruemel","Kräh! Morgen ist Heiligabend! Ich bin so aufgeregt, ich verliere Federn!","kruemel","🎄"],
+   ["kapitaen","Frohe Weihnachten, Moritz! Du bist der beste Schiffsjunge der Welt. Har har!","kapitaen","🎄⭐🎁"]
+  ],
   /* ===== Akt 3 (Kapitel 9 bis 11) ===== */
   /* Einmaleins: [Text mit {a} und {b}, feste Zahl für b oder 0]. {a} = Anzahl der Gruppen, {b} = so viele in jeder Gruppe.
      doppel: Verdoppeln bis 20, nur {a}. mal9 = Zweier und Zehner, mal10 = Fünfer, mal11 = alles gemischt. */

@@ -24,6 +24,10 @@
 "text": "Wann machen wir Pause? Schau auf die Uhr!"
 },
 {
+"who": "hobel",
+"text": "Wenn der Wind nicht weht, nimm die Ruder. Gib nicht auf!"
+},
+{
 "who": "kapitaen",
 "text": "Aber ich vergesse immer alles. Schreib die wichtigen Wörter in dein Logbuch!"
 },
@@ -57,6 +61,14 @@
 },
 {
 "who": "kapitaen",
+"text": "Das Schönste an Geschenken ist das Schenken."
+},
+{
+"who": "kapitaen",
+"text": "Der Adventskalender kommt im Dezember wieder. Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Der Tintenfisch. Der hat acht Arme zum Zählen! Har har!"
 },
 {
@@ -70,6 +82,10 @@
 {
 "who": "kapitaen",
 "text": "Du hast Dublonen! Geh zu Olga in die Kneipe."
+},
+{
+"who": "kapitaen",
+"text": "Ein Danke kostet nichts und macht alle froh."
 },
 {
 "who": "kapitaen",
@@ -98,6 +114,18 @@
 {
 "who": "kapitaen",
 "text": "Erst die Arbeit, Schiffsjunge! Proviant zählen, Wörter angeln und den Sturm überstehen."
+},
+{
+"who": "kapitaen",
+"text": "Fehler sind wie Wellen. Sie kommen und gehen. Und du segelst einfach weiter."
+},
+{
+"who": "kapitaen",
+"text": "Frohe Weihnachten, Moritz! Du bist der beste Schiffsjunge der Welt. Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Glaub an dich, Schiffsjunge. Ich glaube auch an dich!"
 },
 {
 "who": "kapitaen",
@@ -133,6 +161,10 @@
 },
 {
 "who": "kapitaen",
+"text": "Har har! Heute ist ein neues Türchen dran. Welches ist es?"
+},
+{
+"who": "kapitaen",
 "text": "Har har! Lust auf ein Wettrennen? Mixa fliegt auf ihrem Besen gegen uns!"
 },
 {
@@ -145,11 +177,27 @@
 },
 {
 "who": "kapitaen",
+"text": "Heute ist Nikolaus! Hast du deine Stiefel geputzt? Meine riechen nach Fisch. Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Hier kannst du alle offenen Türchen nochmal anschauen."
+},
+{
+"who": "kapitaen",
+"text": "Hilf anderen. Dann hilft dir auch jemand. So machen das Piraten."
+},
+{
+"who": "kapitaen",
 "text": "Ich habe meine Schatzkarte in fünf Stücke gerissen und gut versteckt. Zu gut! Ich weiß nicht mehr, wo."
 },
 {
 "who": "kapitaen",
 "text": "Im Miezhaus! Har har!"
+},
+{
+"who": "kapitaen",
+"text": "Jede große Reise beginnt mit einem kleinen Schritt. Heute ist Türchen Nummer eins!"
 },
 {
 "who": "kapitaen",
@@ -182,6 +230,10 @@
 {
 "who": "kapitaen",
 "text": "Mmmh, lecker! Und mein Kartenstück ist auch da!"
+},
+{
+"who": "kapitaen",
+"text": "Mut heißt nicht, keine Angst zu haben. Mut heißt, es trotzdem zu versuchen."
 },
 {
 "who": "kapitaen",
@@ -249,6 +301,10 @@
 },
 {
 "who": "kapitaen",
+"text": "Wenn du hinfällst: Aufstehen, Hut gerade rücken und lachen. Har har!"
+},
+{
+"who": "kapitaen",
 "text": "Wie heißt ein Pirat, der immer zu spät kommt?"
 },
 {
@@ -264,6 +320,10 @@
 "text": "Wo wohnen Katzen?"
 },
 {
+"who": "kapitaen",
+"text": "Übung macht den Meister. Und den Kapitän auch!"
+},
+{
 "who": "koko",
 "text": "Das ist mein Bananen-Automat. Er hat drei Schlösser. Lies jeden Zettel genau!"
 },
@@ -274,6 +334,10 @@
 {
 "who": "koko",
 "text": "Uh uh ah ah! Du bist klug wie ein Affe. Hier ist dein Orden und Proviant für die Reise!"
+},
+{
+"who": "koko",
+"text": "Uh uh! Eine gute Mannschaft hält zusammen. Allein ist es nur halb so lustig."
 },
 {
 "who": "koko",
@@ -422,6 +486,10 @@
 {
 "who": "kruemel",
 "text": "Diesmal läuft eine Sanduhr. Keine Sorge: Du hast viel Zeit. Alles klar, Käpt’n?"
+},
+{
+"who": "kruemel",
+"text": "Ein echter Pirat teilt seine Kekse. Ich teile meine morgen. Kräh!"
 },
 {
 "who": "kruemel",
@@ -777,6 +845,10 @@
 },
 {
 "who": "kruemel",
+"text": "Kräh! Morgen ist Heiligabend! Ich bin so aufgeregt, ich verliere Federn!"
+},
+{
+"who": "kruemel",
 "text": "Kräh! Na, wie geht es deinem Bordtier?"
 },
 {
@@ -842,6 +914,10 @@
 {
 "who": "kruemel",
 "text": "Kräh! Tippe zuerst auf eine Farbe."
+},
+{
+"who": "kruemel",
+"text": "Kräh! Und 2 Dublonen für dich. Bis morgen!"
 },
 {
 "who": "kruemel",
@@ -982,6 +1058,10 @@
 {
 "who": "kruemel",
 "text": "Schrubbe dein Bordtier: Tippe fünfmal darauf."
+},
+{
+"who": "kruemel",
+"text": "Sei freundlich zu allen. Sogar zu Möwen. Na gut, ein bisschen. Kräh!"
 },
 {
 "who": "kruemel",
@@ -2173,6 +2253,10 @@
 },
 {
 "who": "mixa",
+"text": "Hihi! Wer jeden Tag ein bisschen lernt, hat bald einen ganzen Schatz im Kopf."
+},
+{
+"who": "mixa",
 "text": "Ja, ich habe ein Stück von der Schatzkarte. Aber ich gebe es nur einem echten Rechen-Meister!"
 },
 {
@@ -2230,6 +2314,10 @@
 {
 "who": "moki",
 "text": "Uh uh ah ah! Ich bin Moki. Ich bin heimlich mitgefahren!"
+},
+{
+"who": "moki",
+"text": "Uh uh ah ah! Lachen ist das beste Segel. Damit kommst du überall hin!"
 },
 {
 "who": "moki",
@@ -2334,6 +2422,14 @@
 {
 "who": "olga",
 "text": "Die Keks-Flagge! Damit bist du ein echter Pirat."
+},
+{
+"who": "olga",
+"text": "Ein Freund an Bord ist mehr wert als eine Kiste voll Gold."
+},
+{
+"who": "olga",
+"text": "Ein warmer Kakao und eine Decke: Das ist auch ein Schatz."
 },
 {
 "who": "olga",
@@ -2449,6 +2545,10 @@
 },
 {
 "who": "schildi",
+"text": "Blubb. Langsam ist auch schnell genug. Hauptsache, du kommst an."
+},
+{
+"who": "schildi",
 "text": "Das hänge ich in mein Schneckenhaus. Äh, Schildkrötenhaus."
 },
 {
@@ -2474,6 +2574,10 @@
 {
 "who": "schlotter",
 "text": "Buhuhu! Gewonnen! Aber du darfst es nochmal versuchen."
+},
+{
+"who": "schlotter",
+"text": "Buhuuu! Auch Gespenster haben mal Angst. Dann hilft eine Umarmung."
 },
 {
 "who": "schlotter",
@@ -2514,6 +2618,10 @@
 {
 "who": "strahl",
 "text": "Ahoi da unten! Ich bin Wärter Strahlemann. Mein Leuchtturm braucht Hilfe."
+},
+{
+"who": "strahl",
+"text": "Auch der kleinste Stern zeigt dir den Weg nach Hause."
 },
 {
 "who": "strahl",
@@ -2574,5 +2682,9 @@
 {
 "who": "tuki",
 "text": "Tuki tuki! Halt! Wer will in meinen Tempel?"
+},
+{
+"who": "tuki",
+"text": "Tuki tuki! Heute ist die längste Nacht. Ab morgen wird jeder Tag ein bisschen heller."
 }
 ]

@@ -165,6 +165,7 @@ def sammeln():
         for t in (P.get('moki') or []): add('moki', t)
         # Akt 3: Lese-Aufgaben (Frau Pranger liest auf Wunsch vor), Rezepte (Olga)
         for t in (P.get('richtigFalsch') or []): add('lehrerin', t[0])
+        for w, t, *_ in (P.get('advent') or []): add(w, t)
         for liste in (P.get('bildsaetze') or {}).values():
             for t in liste: add('lehrerin', t)
         for sl in (P.get('silben') or []): add('lehrerin', sl[0] + sl[1])
